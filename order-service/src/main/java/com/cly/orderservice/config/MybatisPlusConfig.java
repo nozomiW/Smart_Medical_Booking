@@ -1,4 +1,4 @@
-package com.cly.userservice.config;
+package com.cly.orderservice.config;
 
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
@@ -24,7 +24,7 @@ public class MybatisPlusConfig {
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
         MybatisSqlSessionFactoryBean factoryBean = new MybatisSqlSessionFactoryBean();
         factoryBean.setDataSource(dataSource);
-        factoryBean.setTypeAliasesPackage("com.cly.userservice.entity");
+        factoryBean.setTypeAliasesPackage("com.cly.doctorservice.entity");
         // 加载 XML Mapper（classpath*:mapper/*.xml）
         factoryBean.setMapperLocations(
                 new PathMatchingResourcePatternResolver().getResources("classpath*:mapper/*.xml")

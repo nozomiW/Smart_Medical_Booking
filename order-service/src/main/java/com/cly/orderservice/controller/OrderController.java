@@ -20,7 +20,7 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @PostMapping("order/create")
+    @PostMapping("create")
     public Result createOrder(@RequestBody Map<String, Object> body) {
         Order order = com.alibaba.fastjson.JSON.parseObject(
                 com.alibaba.fastjson.JSON.toJSONString(body.get("order")), Order.class);

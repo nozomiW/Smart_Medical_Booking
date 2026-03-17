@@ -10,7 +10,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 1346798520
-    url: jdbc:mysql://172.17.0.2:3306/user_service
+    url: jdbc:mysql://localhost:3306/user_service
 
   data:
     redis:
@@ -24,9 +24,17 @@ spring:
           max-idle: 8
           min-idle: 0
 
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+
+
 mybatis:
   mapper-locations: classpath*:mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
+rocketmq:
+  producer:
+    group: "hospital-user-group"

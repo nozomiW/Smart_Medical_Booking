@@ -20,12 +20,12 @@ public class DoctorController {
         this.doctorService = doctorService;
     }
 
-    @GetMapping("search/doctors/online")
+    @GetMapping("search/online")
     public List<Doctor> searchDoctorsOnline() {
         return doctorService.searchOnline();
     }
 
-    @PostMapping("update/doctor/fee")
+    @PostMapping("update/fee")
     public Result updateDoctorFee(@RequestParam Long doctorId, @RequestParam BigDecimal fee) {
         return doctorService.updateFee(doctorId, fee);
     }
