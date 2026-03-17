@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cly.doctorservice.mapper.ScheduleMapper">
+
+    <!-- 查询某天某医生的号源 -->
+    <select id="findByDocAndDate" resultType="com.cly.doctorservice.entity.Schedule">
+        SELECT *
+        FROM yy_schedule
+        WHERE doc_id = #{docId}
+          AND work_date = #{workDate}
+    </select>
+
+    <!-- 查询某天某科室下所有医生的号源（联表） -->
+    <select id="findByDeptAndDate" resultType="com.cly.doctorservice.entity.Schedule">
+        SELECT s.*
+        FROM yy_schedule s
+                 JOIN yy_doctor d ON d.id = s.doc_id
+        WHERE d.dept_id = #{deptId}
+          AND s.work_date = #{workDate}
+        ORDER BY s.doc_id
+    </select>
+
+    <!-- 原子扣减号源：只在 available_num > 0 时扣减，避免扣成负数 -->
+    <update id="decreaseAvailableNum">
+        UPDATE yy_schedule
+        SET available_num = available_num - 1
+        WHERE id = #{id} AND available_num > 0
+    </update>
+
+    <!-- 批量插入号源 -->
+    <insert id="batchInsert">
+        INSERT INTO yy_schedule (id, doc_id, work_date, available_num, status)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id}, #{item.docId}, #{item.workDate}, #{item.availableNum}, #{item.status})
+        </foreach>
+    </insert>
+</mapper>
+

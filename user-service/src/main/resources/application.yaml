@@ -1,0 +1,32 @@
+server:
+  port: 9003
+
+spring:
+
+  application:
+    name: user-service
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 1346798520
+    url: jdbc:mysql://172.17.0.2:3306/user_service
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: 1346798520
+      lettuce:
+        pool:
+          max-active: 8
+          max-wait: -1ms
+          max-idle: 8
+          min-idle: 0
+
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+

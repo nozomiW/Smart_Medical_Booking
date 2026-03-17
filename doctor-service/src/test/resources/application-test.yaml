@@ -1,0 +1,32 @@
+spring:
+  # 测试环境使用 H2 内存库，保证用例可重复执行（不依赖外部 MySQL）。
+  datasource:
+    driver-class-name: org.h2.Driver
+    # MODE=MySQL: 尽量兼容 MySQL 方言；DB_CLOSE_DELAY=-1: JVM 不退出时不销毁内存库
+    url: jdbc:h2:mem:medical_doctor_service;MODE=MySQL;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false
+    username: sa
+    password:
+
+  sql:
+    init:
+      # 每次启动测试都初始化 schema/data
+      mode: always
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
+
+  # 测试时禁用外部依赖（避免尝试连接 Nacos/Redis 等服务）。
+  cloud:
+    discovery:
+      enabled: false
+    nacos:
+      discovery:
+        enabled: false
+
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
