@@ -1,0 +1,75 @@
+### 所有请求均通过网关 9001 端口转发
+### 登录后将返回的 token 填入下方变量
+
+@gateway = http://localhost:9001
+@token = 请替换为登录后返回的token
+
+### ==================== 用户服务 ====================
+
+### 注册用户
+POST {{gateway}}/user/register
+Content-Type: application/json
+
+{
+  "phone": "13800000001",
+  "password": "123456"
+}
+
+### 登录（成功后复制返回的 token 填入上方 @token）
+POST {{gateway}}/user/login
+Content-Type: application/json
+
+{
+  "phone": "13800000001",
+  "password": "123456"
+}
+
+### 登录失败 - 密码错误
+POST {{gateway}}/user/login
+Content-Type: application/json
+
+{
+  "phone": "13800000001",
+  "password": "wrong_password"
+}
+
+### ==================== 医生服务 ====================
+
+### 查询在线医生列表（需要 token）
+GET {{gateway}}/doctor/search/online
+Authorization: Bearer {{token}}
+
+### 更新医生费用（需要 token）
+POST {{gateway}}/doctor/update/fee?doctorId=1&fee=200.00
+Authorization: Bearer {{token}}
+
+### 无 token 访问（应返回 401）
+GET {{gateway}}/doctor/search/online
+
+### ==================== 订单服务 ====================
+
+### 创建订单（需要 token）
+POST {{gateway}}/order/create
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "order": {
+    "id": 1001,
+    "orderNo": "ORD20260318001",
+    "userId": 1,
+    "amount": 200.00,
+    "status": 0
+  },
+  "orderItem": {
+    "patientName": "张三",
+    "patientIdCard": "110101199001011234",
+    "patientPhone": "13900000001",
+    "scheduleId": 1,
+    "docId": 1,
+    "docName": "李医生",
+    "docTitle": "主任医师",
+    "deptName": "内科",
+    "workDate": "2026-03-20"
+  }
+}

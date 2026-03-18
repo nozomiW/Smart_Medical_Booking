@@ -1,0 +1,37 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+    gateway:
+      routes:
+        - id: user_route
+          uri: lb://user-service
+          predicates:
+            - Path=/user/**
+
+        - id: doctor_route
+          uri: lb://doctor-service
+          predicates:
+            - Path=/doctor/**
+
+        - id: order_route
+          uri: lb://order-service
+          predicates:
+            - Path=/order/**
+
+      # 不需要鉴权的白名单路径（由 AuthFilter GlobalFilter 处理）
+
+  main:
+    web-application-type: reactive
+
+# 白名单路径（供 AuthFilter 读取）
+auth:
+  white-list:
+    - /user/login
+    - /user/register
+  jwt-secret: hospital-demo-secret-key-for-hs256-must-be-32bytes

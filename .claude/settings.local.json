@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mvn spring-boot:run -q)",
+      "Bash(mvn spring-boot:run -DskipTests)",
+      "Bash(mvn spring-boot:run)",
+      "Bash(mvn dependency:tree -pl gateway-service)",
+      "Bash(mvn dependency:tree)",
+      "Bash(mvn dependency:resolve)"
+    ]
+  }
+}

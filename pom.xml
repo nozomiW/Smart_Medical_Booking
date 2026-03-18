@@ -22,6 +22,7 @@
         <module>doctor-service</module>
         <module>user-service</module>
         <module>order-service</module>
+        <module>gateway-service</module>
     </modules>
 
     <properties>
@@ -36,6 +37,7 @@
         <fastjson>1.2.83</fastjson>
         <rocketmq-spring-boot-starter>2.3.1</rocketmq-spring-boot-starter>
         <jjwt.version>0.11.5</jjwt.version>
+        <spring-cloud-starter-gateway.version>5.0.0</spring-cloud-starter-gateway.version>
     </properties>
 
     <dependencyManagement>
@@ -110,6 +112,11 @@
                 <artifactId>jjwt-jackson</artifactId>
                 <version>${jjwt.version}</version>
                 <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-gateway-server-webflux</artifactId>
+                <version>${spring-cloud-starter-gateway.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
