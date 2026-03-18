@@ -61,4 +61,10 @@ public class DoctorServiceImpl implements DoctorService {
         feeProducer.produceFeeUpdate(id, fee);
         return Result.SUCCESS;
     }
+
+    @Override
+    public Result insertDoctor(Doctor doctor) {
+        int rows = doctorMapper.insert(doctor);
+        return rows > 0 ? Result.SUCCESS : Result.FALSE;
+    }
 }

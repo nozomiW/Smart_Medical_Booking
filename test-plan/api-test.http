@@ -2,8 +2,7 @@
 ### 登录后将返回的 token 填入下方变量
 
 @gateway = http://localhost:9001
-@token = 请替换为登录后返回的token
-
+@token = eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIyMDM0MTA5ODY5MjYzMTM4ODE4IiwiaWF0IjoxNzczODI3NzA1LCJleHAiOjE3NzM5MTQxMDV9.WVK6eDHuY0i8GiH70qCiYxj0rdTt4q6o-EWuxXo7oigUVIuHESqJl6B6UgFjNjt8
 ### ==================== 用户服务 ====================
 
 ### 注册用户
@@ -37,6 +36,46 @@ Content-Type: application/json
 
 ### 查询在线医生列表（需要 token）
 GET {{gateway}}/doctor/search/online
+Authorization: Bearer {{token}}
+
+### 新增医生（需要 token）
+POST {{gateway}}/doctor/insert
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": 1,
+  "deptId": 10,
+  "name": "李医生",
+  "title": "主任医师",
+  "fee": 200.00,
+  "status": 1
+}
+
+### 新增排班规则 - 周一出诊30个号（需要 token）
+POST {{gateway}}/doctor/insert/schedule/rule
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "docId": 1,
+  "dayOfWeek": 1,
+  "maxCount": 30
+}
+
+### 新增排班规则 - 周四出诊20个号（需要 token）
+POST {{gateway}}/doctor/insert/schedule/rule
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "docId": 1,
+  "dayOfWeek": 4,
+  "maxCount": 20
+}
+
+### 按规则生成未来4周排班（需要 token）
+POST {{gateway}}/doctor/insert/schedule?docId=1&weeks=4
 Authorization: Bearer {{token}}
 
 ### 更新医生费用（需要 token）

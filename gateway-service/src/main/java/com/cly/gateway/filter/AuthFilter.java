@@ -13,6 +13,7 @@ import reactor.core.publisher.Mono;
 
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
+import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -22,14 +23,18 @@ public class AuthFilter implements GlobalFilter, Ordered {
     private String jwtSecret;
 
     @Value("${auth.white-list}")
-    private List<String> whiteList;
+    private String whiteListRaw;
+
+    private List<String> getWhiteList() {
+        return Arrays.asList(whiteListRaw.split(","));
+    }
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         String path = exchange.getRequest().getURI().getPath();
 
         // 白名单直接放行
-        if (whiteList.stream().anyMatch(path::startsWith)) {
+        if (getWhiteList().stream().anyMatch(path::startsWith)) {
             return chain.filter(exchange);
         }
 

@@ -6,7 +6,17 @@
       "Bash(mvn spring-boot:run)",
       "Bash(mvn dependency:tree -pl gateway-service)",
       "Bash(mvn dependency:tree)",
-      "Bash(mvn dependency:resolve)"
+      "Bash(mvn dependency:resolve)",
+      "Bash(curl:*)",
+      "Bash(fuser -k 9001/tcp)",
+      "Bash(mvn compile:*)",
+      "Bash(xargs -I{} jar tf {})",
+      "Bash(jar tf:*)",
+      "Bash(jar xf:*)",
+      "Bash(javap -c /tmp/gateway-extract/org/springframework/cloud/gateway/config/GatewayProperties.class)",
+      "Bash(javap -verbose org/springframework/cloud/gateway/config/GatewayProperties.class)",
+      "Bash(TOKEN=\"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMDM0MTA5ODY5MjYzMTM4ODE4IiwiaWF0IjoxNzczODA0NTY0LCJleHAiOjE3NzM4OTA5NjR9.VVAUuA4UKKTPtvzdeyIj2Y-1bi0mmmdVONVndRnaHVU\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(''''hosts:'''', len\\(d[''''hosts'''']\\)\\)\")"
     ]
   }
 }
