@@ -2,8 +2,7 @@
 ### 登录后将返回的 token 填入下方变量
 
 @gateway = http://localhost:9001
-@token = eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIyMDM0MTA5ODY5MjYzMTM4ODE4IiwiaWF0IjoxNzczODgzMzg1LCJleHAiOjE3NzM5Njk3ODV9.rD_yxfiL6k389k1T1U_IEW24Yctyo5AD00fmv0NdIkDc67LQNDyTXaIKvwkKLqpi
-
+@token = eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIyMDM0MTA5ODY5MjYzMTM4ODE4IiwiaWF0IjoxNzczODkxMDc0LCJleHAiOjE3NzM5Nzc0NzR9.8--4q9ybnPSK8PvpPfluoCvc1SQ4aHnm2aqtpkhsh3FPR2TwYHK7RIs31653Z3Ha
 ### ==================== 用户服务 ====================
 
 ### 注册用户
@@ -250,28 +249,22 @@ GET {{gateway}}/doctor/search/online
 
 ### ==================== 订单服务 ====================
 
-### 创建订单（需要 token）
-POST {{gateway}}/order/create
-Content-Type: application/json
+### 步骤1：查询病人列表，复制目标病人的 id 填入下方patientId
+GET {{gateway}}/user/patient/list
 Authorization: Bearer {{token}}
 
-{
-  "order": {
-    "id": 1001,
-    "orderNo": "ORD20260318001",
-    "userId": 1,
-    "amount": 200.00,
-    "status": 0
-  },
-  "orderItem": {
-    "patientName": "张三",
-    "patientIdCard": "110101199001011234",
-    "patientPhone": "13900000001",
-    "scheduleId": 1,
-    "docId": 1,
-    "docName": "李医生",
-    "docTitle": "主任医师",
-    "deptName": "内科",
-    "workDate": "2026-03-20"
-  }
-}
+### 步骤2：查询某天排班，复制目标排班的 scheduleId 填入下方scheduleId
+GET {{gateway}}/doctor/schedule/detail?workDate=2026-03-24
+Authorization: Bearer {{token}}
+
+### 步骤3：创建订单
+POST {{gateway}}/order/create?patientId=5035529022412894814&scheduleId=6663067118905523115&workDate=2026-03-24
+Authorization: Bearer {{token}}
+
+### 步骤4：查询当前用户订单列表，确认创建成功，复制 id 填入下方
+GET {{gateway}}/order/list
+Authorization: Bearer {{token}}
+
+### 步骤5：查询订单详情（用上方列表中的订单 id）
+GET {{gateway}}/order/detail?orderId=5934395337055932455
+Authorization: Bearer {{token}}

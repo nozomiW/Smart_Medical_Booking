@@ -38,6 +38,8 @@
         <rocketmq-spring-boot-starter>2.3.1</rocketmq-spring-boot-starter>
         <jjwt.version>0.11.5</jjwt.version>
         <spring-cloud-starter-gateway.version>5.0.0</spring-cloud-starter-gateway.version>
+        <spring-cloud-starter-openfeign>4.3.0</spring-cloud-starter-openfeign>
+        <spring-cloud-starter-loadbalance>5.0.0</spring-cloud-starter-loadbalance>
     </properties>
 
     <dependencyManagement>
@@ -117,6 +119,16 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-gateway-server-webflux</artifactId>
                 <version>${spring-cloud-starter-gateway.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+                <version>${spring-cloud-starter-openfeign}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+                <version>${spring-cloud-starter-loadbalance}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
