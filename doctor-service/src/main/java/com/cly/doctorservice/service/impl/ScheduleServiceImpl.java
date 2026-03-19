@@ -1,5 +1,7 @@
 package com.cly.doctorservice.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.cly.doctorservice.dto.ScheduleDetailDTO;
 import com.cly.doctorservice.entity.Schedule;
 import com.cly.doctorservice.entity.ScheduleRule;
 import com.cly.doctorservice.mapper.ScheduleMapper;
@@ -7,18 +9,23 @@ import com.cly.doctorservice.mapper.ScheduleRuleMapper;
 import com.cly.doctorservice.result.Result;
 import com.cly.doctorservice.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 @Service
 public class ScheduleServiceImpl implements ScheduleService {
 
     private ScheduleRuleMapper scheduleRuleMapper;
     private ScheduleMapper scheduleMapper;
+    private StringRedisTemplate stringRedisTemplate;
 
     @Autowired
     public void setScheduleRuleMapper(ScheduleRuleMapper scheduleRuleMapper) {
@@ -30,16 +37,17 @@ public class ScheduleServiceImpl implements ScheduleService {
         this.scheduleMapper = scheduleMapper;
     }
 
+    @Autowired
+    public void setStringRedisTemplate(StringRedisTemplate stringRedisTemplate) {
+        this.stringRedisTemplate = stringRedisTemplate;
+    }
+
     @Override
     public Result insertScheduleRule(ScheduleRule rule) {
         int rows = scheduleRuleMapper.insert(rule);
         return rows > 0 ? Result.SUCCESS : Result.FALSE;
     }
 
-    /**
-     * 根据医生已有的排班规则，向后生成 weeks 周的每日号源。
-     * 跳过已存在的日期（uk_doc_date 约束），避免重复插入。
-     */
     @Override
     public Result insertSchedule(Long docId, int weeks) {
         List<ScheduleRule> rules = scheduleRuleMapper.selectList(
@@ -53,7 +61,6 @@ public class ScheduleServiceImpl implements ScheduleService {
 
         List<Schedule> toInsert = new ArrayList<>();
         for (LocalDate date = today; date.isBefore(end); date = date.plusDays(1)) {
-            // LocalDate.getDayOfWeek().getValue() 返回 1(周一)~7(周日)
             int dow = date.getDayOfWeek().getValue();
             for (ScheduleRule rule : rules) {
                 if (rule.getDayOfWeek().equals(dow)) {
@@ -72,5 +79,25 @@ public class ScheduleServiceImpl implements ScheduleService {
 
         int rows = scheduleMapper.batchInsert(toInsert);
         return rows > 0 ? Result.SUCCESS : Result.FALSE;
+    }
+
+    @Override
+    public List<ScheduleDetailDTO> findDetailByDate(LocalDate workDate) {
+        String redisKey = "schedule:detail:" + workDate;
+
+        List<Object> cached = stringRedisTemplate.opsForHash().values(redisKey);
+        if (!cached.isEmpty())
+            return cached.stream()
+                    .map(o -> JSON.parseObject((String) o, ScheduleDetailDTO.class))
+                    .collect(Collectors.toList());
+
+        List<ScheduleDetailDTO> list = scheduleMapper.findDetailByDate(workDate);
+        if (!list.isEmpty()) {
+            Map<String, String> map = list.stream().collect(
+                    Collectors.toMap(d -> d.getScheduleId().toString(), JSON::toJSONString));
+            stringRedisTemplate.opsForHash().putAll(redisKey, map);
+            stringRedisTemplate.expire(redisKey, 2, TimeUnit.HOURS);
+        }
+        return list;
     }
 }

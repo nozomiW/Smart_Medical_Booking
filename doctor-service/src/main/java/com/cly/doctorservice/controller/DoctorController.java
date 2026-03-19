@@ -2,6 +2,7 @@ package com.cly.doctorservice.controller;
 
 import com.cly.doctorservice.entity.Doctor;
 import com.cly.doctorservice.entity.ScheduleRule;
+import com.cly.doctorservice.dto.ScheduleDetailDTO;
 import com.cly.doctorservice.result.Result;
 import com.cly.doctorservice.service.DoctorService;
 import com.cly.doctorservice.service.ScheduleService;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -50,6 +52,12 @@ public class DoctorController {
     public Result insertSchedule(@RequestParam Long docId,
                                  @RequestParam(defaultValue = "4") int weeks) {
         return scheduleService.insertSchedule(docId, weeks);
+    }
+
+    // 查询某天所有排班（含医生信息）
+    @GetMapping("schedule/detail")
+    public List<ScheduleDetailDTO> findScheduleDetail(@RequestParam String workDate) {
+        return scheduleService.findDetailByDate(LocalDate.parse(workDate));
     }
 
     @PostMapping("update/fee")

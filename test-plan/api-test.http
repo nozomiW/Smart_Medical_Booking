@@ -2,7 +2,8 @@
 ### 登录后将返回的 token 填入下方变量
 
 @gateway = http://localhost:9001
-@token = eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIyMDM0MTA5ODY5MjYzMTM4ODE4IiwiaWF0IjoxNzczODI3NzA1LCJleHAiOjE3NzM5MTQxMDV9.WVK6eDHuY0i8GiH70qCiYxj0rdTt4q6o-EWuxXo7oigUVIuHESqJl6B6UgFjNjt8
+@token = eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIyMDM0MTA5ODY5MjYzMTM4ODE4IiwiaWF0IjoxNzczODgzMzg1LCJleHAiOjE3NzM5Njk3ODV9.rD_yxfiL6k389k1T1U_IEW24Yctyo5AD00fmv0NdIkDc67LQNDyTXaIKvwkKLqpi
+
 ### ==================== 用户服务 ====================
 
 ### 注册用户
@@ -32,13 +33,30 @@ Content-Type: application/json
   "password": "wrong_password"
 }
 
+### 新增病人（需要 token）
+POST {{gateway}}/user/patient/insert
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "张三",
+  "idCard": "110101199001011234",
+  "gender": 1,
+  "birthDate": "1990-01-01",
+  "phone": "13900000001"
+}
+
+### 查询当前用户的病人列表（需要 token）
+GET {{gateway}}/user/patient/list
+Authorization: Bearer {{token}}
+
 ### ==================== 医生服务 ====================
 
 ### 查询在线医生列表（需要 token）
 GET {{gateway}}/doctor/search/online
 Authorization: Bearer {{token}}
 
-### 新增医生（需要 token）
+### ---- 新增医生 1：内科 李明（主任医师）----
 POST {{gateway}}/doctor/insert
 Content-Type: application/json
 Authorization: Bearer {{token}}
@@ -46,40 +64,185 @@ Authorization: Bearer {{token}}
 {
   "id": 1,
   "deptId": 10,
-  "name": "李医生",
+  "name": "李明",
   "title": "主任医师",
   "fee": 200.00,
   "status": 1
 }
 
-### 新增排班规则 - 周一出诊30个号（需要 token）
-POST {{gateway}}/doctor/insert/schedule/rule
+### ---- 新增医生 2：外科 王芳（副主任医师）----
+POST {{gateway}}/doctor/insert
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "docId": 1,
-  "dayOfWeek": 1,
-  "maxCount": 30
+  "id": 2,
+  "deptId": 11,
+  "name": "王芳",
+  "title": "副主任医师",
+  "fee": 150.00,
+  "status": 1
 }
 
-### 新增排班规则 - 周四出诊20个号（需要 token）
-POST {{gateway}}/doctor/insert/schedule/rule
+### ---- 新增医生 3：儿科 张伟（主治医师）----
+POST {{gateway}}/doctor/insert
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "docId": 1,
-  "dayOfWeek": 4,
-  "maxCount": 20
+  "id": 3,
+  "deptId": 12,
+  "name": "张伟",
+  "title": "主治医师",
+  "fee": 100.00,
+  "status": 1
 }
 
-### 按规则生成未来4周排班（需要 token）
+### ---- 新增医生 4：骨科 刘洋（主任医师）----
+POST {{gateway}}/doctor/insert
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": 4,
+  "deptId": 13,
+  "name": "刘洋",
+  "title": "主任医师",
+  "fee": 250.00,
+  "status": 1
+}
+
+### ---- 新增医生 5：皮肤科 陈静（主治医师）----
+POST {{gateway}}/doctor/insert
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": 5,
+  "deptId": 14,
+  "name": "陈静",
+  "title": "主治医师",
+  "fee": 120.00,
+  "status": 1
+}
+
+### ---- 医生1 排班规则：周一30号、周三25号、周五20号 ----
+POST {{gateway}}/doctor/insert/schedule/rule
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{"docId": 1, "dayOfWeek": 1, "maxCount": 30}
+
+###
+POST {{gateway}}/doctor/insert/schedule/rule
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{"docId": 1, "dayOfWeek": 3, "maxCount": 25}
+
+###
+POST {{gateway}}/doctor/insert/schedule/rule
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{"docId": 1, "dayOfWeek": 5, "maxCount": 20}
+
+### ---- 医生2 排班规则：周二30号、周四30号 ----
+POST {{gateway}}/doctor/insert/schedule/rule
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{"docId": 2, "dayOfWeek": 2, "maxCount": 30}
+
+###
+POST {{gateway}}/doctor/insert/schedule/rule
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{"docId": 2, "dayOfWeek": 4, "maxCount": 30}
+
+### ---- 医生3 排班规则：周一20号、周二20号、周三20号 ----
+POST {{gateway}}/doctor/insert/schedule/rule
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{"docId": 3, "dayOfWeek": 1, "maxCount": 20}
+
+###
+POST {{gateway}}/doctor/insert/schedule/rule
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{"docId": 3, "dayOfWeek": 2, "maxCount": 20}
+
+###
+POST {{gateway}}/doctor/insert/schedule/rule
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{"docId": 3, "dayOfWeek": 3, "maxCount": 20}
+
+### ---- 医生4 排班规则：周三15号、周五15号 ----
+POST {{gateway}}/doctor/insert/schedule/rule
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{"docId": 4, "dayOfWeek": 3, "maxCount": 15}
+
+###
+POST {{gateway}}/doctor/insert/schedule/rule
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{"docId": 4, "dayOfWeek": 5, "maxCount": 15}
+
+### ---- 医生5 排班规则：周一25号、周四25号、周六20号 ----
+POST {{gateway}}/doctor/insert/schedule/rule
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{"docId": 5, "dayOfWeek": 1, "maxCount": 25}
+
+###
+POST {{gateway}}/doctor/insert/schedule/rule
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{"docId": 5, "dayOfWeek": 4, "maxCount": 25}
+
+###
+POST {{gateway}}/doctor/insert/schedule/rule
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{"docId": 5, "dayOfWeek": 6, "maxCount": 20}
+
+### ---- 生成排班：医生1 未来4周 ----
 POST {{gateway}}/doctor/insert/schedule?docId=1&weeks=4
 Authorization: Bearer {{token}}
 
+### ---- 生成排班：医生2 未来4周 ----
+POST {{gateway}}/doctor/insert/schedule?docId=2&weeks=4
+Authorization: Bearer {{token}}
+
+### ---- 生成排班：医生3 未来4周 ----
+POST {{gateway}}/doctor/insert/schedule?docId=3&weeks=4
+Authorization: Bearer {{token}}
+
+### ---- 生成排班：医生4 未来4周 ----
+POST {{gateway}}/doctor/insert/schedule?docId=4&weeks=4
+Authorization: Bearer {{token}}
+
+### ---- 生成排班：医生5 未来4周 ----
+POST {{gateway}}/doctor/insert/schedule?docId=5&weeks=4
+Authorization: Bearer {{token}}
+
+### ---- 查询某天所有排班（含医生信息）----
+GET {{gateway}}/doctor/schedule/detail?workDate=2026-03-24
+Authorization: Bearer {{token}}
+
 ### 更新医生费用（需要 token）
-POST {{gateway}}/doctor/update/fee?doctorId=1&fee=200.00
+POST {{gateway}}/doctor/update/fee?doctorId=11&fee=160.00
 Authorization: Bearer {{token}}
 
 ### 无 token 访问（应返回 401）

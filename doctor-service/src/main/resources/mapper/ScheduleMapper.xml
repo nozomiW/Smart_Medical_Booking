@@ -37,5 +37,23 @@
             (#{item.id}, #{item.docId}, #{item.workDate}, #{item.availableNum}, #{item.status})
         </foreach>
     </insert>
+
+    <!-- 查询某天所有排班，联表带出医生信息 -->
+    <select id="findDetailByDate" resultType="com.cly.doctorservice.dto.ScheduleDetailDTO">
+        SELECT
+            s.id          AS scheduleId,
+            s.work_date   AS workDate,
+            s.available_num AS availableNum,
+            s.status      AS scheduleStatus,
+            d.id          AS docId,
+            d.name        AS docName,
+            d.title       AS docTitle,
+            d.fee         AS docFee,
+            d.dept_id     AS deptId
+        FROM yy_schedule s
+            JOIN yy_doctor d ON d.id = s.doc_id
+        WHERE s.work_date = #{workDate}
+        ORDER BY d.dept_id, d.id
+    </select>
 </mapper>
 

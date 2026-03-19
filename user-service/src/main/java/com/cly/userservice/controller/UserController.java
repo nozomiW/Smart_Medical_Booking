@@ -1,9 +1,12 @@
 package com.cly.userservice.controller;
 
+import com.cly.userservice.entity.Patient;
+import com.cly.userservice.service.PatientService;
 import com.cly.userservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -11,10 +14,16 @@ import java.util.Map;
 public class UserController {
 
     UserService userService;
+    PatientService patientService;
 
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
+    }
+
+    @Autowired
+    public void setPatientService(PatientService patientService) {
+        this.patientService = patientService;
     }
 
     @PostMapping("register")
@@ -27,4 +36,17 @@ public class UserController {
     public String login(@RequestBody Map<String, String> body) {
         return userService.login(body.get("phone"), body.get("password"));
     }
+
+    @PostMapping("patient/insert")
+    public String insertPatient(@RequestHeader("X-User-Id") Long userId,
+                                @RequestBody Patient patient) {
+        patientService.insertPatient(userId, patient);
+        return "添加成功";
+    }
+
+    @GetMapping("patient/list")
+    public List<Patient> getPatients(@RequestHeader("X-User-Id") Long userId) {
+        return patientService.getPatients(userId);
+    }
 }
+
