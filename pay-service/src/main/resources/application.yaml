@@ -1,0 +1,16 @@
+server:
+  port: 9005
+
+spring:
+  application:
+    name: pay-service
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://localhost:8848
+
+rocketmq:
+  name-server: localhost:9876
+  producer:
+    group: "hospital-pay-group"
