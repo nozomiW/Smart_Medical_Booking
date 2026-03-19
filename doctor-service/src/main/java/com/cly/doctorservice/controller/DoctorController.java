@@ -60,6 +60,17 @@ public class DoctorController {
         return scheduleService.findDetailByDate(LocalDate.parse(workDate));
     }
 
+    // 按排班ID查单条排班详情
+    @GetMapping("schedule/detail/id")
+    public ScheduleDetailDTO findScheduleDetailById(@RequestParam Long scheduleId) {
+        return scheduleService.findDetailById(scheduleId);
+    }
+
+    @PostMapping("schedule/deduct")
+    public Result deductAvailableNum(@RequestParam Long scheduleId) {
+        return scheduleService.deductAvailableNum(scheduleId);
+    }
+
     @PostMapping("update/fee")
     public Result updateDoctorFee(@RequestParam Long doctorId, @RequestParam BigDecimal fee) {
         return doctorService.updateFee(doctorId, fee);

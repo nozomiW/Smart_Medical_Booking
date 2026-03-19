@@ -2,7 +2,7 @@
 ### 登录后将返回的 token 填入下方变量
 
 @gateway = http://localhost:9001
-@token = eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIyMDM0MTA5ODY5MjYzMTM4ODE4IiwiaWF0IjoxNzczODkxMDc0LCJleHAiOjE3NzM5Nzc0NzR9.8--4q9ybnPSK8PvpPfluoCvc1SQ4aHnm2aqtpkhsh3FPR2TwYHK7RIs31653Z3Ha
+@token = eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIyMDM0NTg1NTU1MjA3NjgwMDAxIiwiaWF0IjoxNzczOTE3OTc2LCJleHAiOjE3NzQwMDQzNzZ9.sAgwxwdDhMGlJAjfK0gGB2jmj2faT1BoESsz-KaB5D167ZMHqQs1YVSaoH-9Mk-M
 ### ==================== 用户服务 ====================
 
 ### 注册用户
@@ -240,6 +240,10 @@ Authorization: Bearer {{token}}
 GET {{gateway}}/doctor/schedule/detail?workDate=2026-03-24
 Authorization: Bearer {{token}}
 
+### ---- 按排班ID查单条排班详情 ----
+GET {{gateway}}/doctor/schedule/detail/id?scheduleId=7130679877543136385
+Authorization: Bearer {{token}}
+
 ### 更新医生费用（需要 token）
 POST {{gateway}}/doctor/update/fee?doctorId=11&fee=160.00
 Authorization: Bearer {{token}}
@@ -254,11 +258,11 @@ GET {{gateway}}/user/patient/list
 Authorization: Bearer {{token}}
 
 ### 步骤2：查询某天排班，复制目标排班的 scheduleId 填入下方scheduleId
-GET {{gateway}}/doctor/schedule/detail?workDate=2026-03-24
+GET {{gateway}}/doctor/schedule/detail?workDate=2026-03-26
 Authorization: Bearer {{token}}
 
 ### 步骤3：创建订单
-POST {{gateway}}/order/create?patientId=5035529022412894814&scheduleId=6663067118905523115&workDate=2026-03-24
+POST {{gateway}}/order/create?patientId=4935213193722298120&scheduleId=2740830766718144079
 Authorization: Bearer {{token}}
 
 ### 步骤4：查询当前用户订单列表，确认创建成功，复制 id 填入下方
@@ -266,5 +270,19 @@ GET {{gateway}}/order/list
 Authorization: Bearer {{token}}
 
 ### 步骤5：查询订单详情（用上方列表中的订单 id）
-GET {{gateway}}/order/detail?orderId=5934395337055932455
+GET {{gateway}}/order/detail?orderId=3519788135548253944
+Authorization: Bearer {{token}}
+
+### ==================== 支付服务 ====================
+
+### 步骤6：发起支付（用上方订单 id）
+POST {{gateway}}/pay?orderId=3519788135548253944
+Authorization: Bearer {{token}}
+
+### 步骤7：再次查询订单详情，确认 status 已变为 1（已支付）
+GET {{gateway}}/order/detail?orderId=3519788135548253944
+Authorization: Bearer {{token}}
+
+### 步骤8：重复支付（应失败，status 已不为 0）
+POST {{gateway}}/pay?orderId=7275486217357859201
 Authorization: Bearer {{token}}

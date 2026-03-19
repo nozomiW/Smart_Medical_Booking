@@ -55,5 +55,22 @@
         WHERE s.work_date = #{workDate}
         ORDER BY d.dept_id, d.id
     </select>
+
+    <!-- 按排班ID查单条排班详情 -->
+    <select id="findDetailById" resultType="com.cly.doctorservice.dto.ScheduleDetailDTO">
+        SELECT
+            s.id          AS scheduleId,
+            s.work_date   AS workDate,
+            s.available_num AS availableNum,
+            s.status      AS scheduleStatus,
+            d.id          AS docId,
+            d.name        AS docName,
+            d.title       AS docTitle,
+            d.fee         AS docFee,
+            d.dept_id     AS deptId
+        FROM yy_schedule s
+            JOIN yy_doctor d ON d.id = s.doc_id
+        WHERE s.id = #{scheduleId}
+    </select>
 </mapper>
 

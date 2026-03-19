@@ -18,4 +18,7 @@ public interface ScheduleMapper extends BaseMapper<Schedule> {
 
     // 查询某天所有排班，联表带出医生信息
     List<ScheduleDetailDTO> findDetailByDate(@Param("workDate") LocalDate workDate);
+
+    // 按排班ID查单条排班详情
+    ScheduleDetailDTO findDetailById(@Param("scheduleId") Long scheduleId);
 }

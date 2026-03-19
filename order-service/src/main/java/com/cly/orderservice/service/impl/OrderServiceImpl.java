@@ -1,5 +1,6 @@
 package com.cly.orderservice.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.cly.orderservice.dto.OrderDetailDTO;
 import com.cly.orderservice.dto.PatientDTO;
@@ -14,11 +15,15 @@ import com.cly.orderservice.mq.producer.OrderProducer;
 import com.cly.orderservice.result.Result;
 import com.cly.orderservice.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -28,6 +33,7 @@ public class OrderServiceImpl implements OrderService {
     UserFeignClient userFeignClient;
     OrderMapper orderMapper;
     OrderItemMapper orderItemMapper;
+    StringRedisTemplate stringRedisTemplate;
 
     @Autowired
     public void setOrderProducer(OrderProducer orderProducer) {
@@ -54,8 +60,13 @@ public class OrderServiceImpl implements OrderService {
         this.orderItemMapper = orderItemMapper;
     }
 
+    @Autowired
+    public void setStringRedisTemplate(StringRedisTemplate stringRedisTemplate) {
+        this.stringRedisTemplate = stringRedisTemplate;
+    }
+
     @Override
-    public Result createOrder(Long userId, Long patientId, Long scheduleId, String workDate) {
+    public Result createOrder(Long userId, Long patientId, Long scheduleId) {
         // 1. 获取病人信息
         List<PatientDTO> patients = userFeignClient.getPatients(userId);
         PatientDTO patient = patients.stream()
@@ -63,14 +74,15 @@ public class OrderServiceImpl implements OrderService {
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("病人不存在"));
 
-        // 2. 按前端传入的 workDate 查排班，再按 scheduleId 匹配
-        List<ScheduleDetailDTO> schedules = doctorFeignClient.findScheduleDetail(workDate);
-        ScheduleDetailDTO schedule = schedules.stream()
-                .filter(s -> s.getScheduleId().equals(scheduleId))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("排班不存在"));
+        // 2. 按排班ID查排班
+        ScheduleDetailDTO schedule = doctorFeignClient.findScheduleDetailById(scheduleId);
+        if (schedule == null) throw new RuntimeException("排班不存在");
 
-        // 3. 组装 Order
+        // 3. Redis Lua 原子预扣号源
+        Result deductResult = doctorFeignClient.deductAvailableNum(scheduleId);
+        if (deductResult != Result.SUCCESS) throw new RuntimeException("号源不足");
+
+        // 4. 组装 Order
         Order order = new Order();
         order.setId(ThreadLocalRandom.current().nextLong(1, Long.MAX_VALUE));
         order.setOrderNo("ORD" + System.currentTimeMillis());
@@ -80,7 +92,7 @@ public class OrderServiceImpl implements OrderService {
         order.setCreateTime(LocalDateTime.now());
         order.setUpdateTime(LocalDateTime.now());
 
-        // 4. 组装 OrderItem
+        // 5. 组装 OrderItem
         OrderItem orderItem = new OrderItem();
         orderItem.setPatientName(patient.getName());
         orderItem.setPatientIdCard(patient.getIdCard());
@@ -92,24 +104,67 @@ public class OrderServiceImpl implements OrderService {
         orderItem.setWorkDate(schedule.getWorkDate());
 
         orderProducer.produceOrderCreate(order, orderItem);
+
+        // 创建订单后使该用户订单列表缓存失效
+        stringRedisTemplate.delete("order:index:" + userId);
+
         return Result.SUCCESS;
     }
 
     @Override
     public List<Order> getOrders(Long userId) {
-        return orderMapper.selectList(
+        String indexKey = "order:index:" + userId;
+        long now = System.currentTimeMillis();
+
+        Set<String> orderIds = stringRedisTemplate.opsForZSet()
+                .rangeByScore(indexKey, now, Double.MAX_VALUE);
+
+        if (orderIds != null && !orderIds.isEmpty()) {
+            List<String> itemKeys = orderIds.stream()
+                    .map(id -> "order:item:" + id)
+                    .collect(Collectors.toList());
+            List<String> values = stringRedisTemplate.opsForValue().multiGet(itemKeys);
+            if (values != null) {
+                List<Order> result = values.stream()
+                        .filter(v -> v != null) // Objects::nonNull triggers unused import warning; keep inline
+                        .map(v -> JSON.parseObject(v, Order.class))
+                        .collect(Collectors.toList());
+                if (!result.isEmpty()) return result;
+            }
+        }
+
+        List<Order> list = orderMapper.selectList(
                 new LambdaQueryWrapper<Order>().eq(Order::getUserId, userId));
+        if (!list.isEmpty()) {
+            long expireAt = now + TimeUnit.HOURS.toMillis(2);
+            for (Order o : list) {
+                stringRedisTemplate.opsForValue().set(
+                        "order:item:" + o.getId(), JSON.toJSONString(o), 2, TimeUnit.HOURS);
+                stringRedisTemplate.opsForZSet().add(indexKey, o.getId().toString(), expireAt);
+            }
+            stringRedisTemplate.expire(indexKey, 3, TimeUnit.HOURS);
+        }
+        return list;
     }
 
     @Override
     public OrderDetailDTO getOrderDetail(Long orderId) {
+        String redisKey = "order:detail:" + orderId;
+
+        String cached = stringRedisTemplate.opsForValue().get(redisKey);
+        if (cached != null)
+            return JSON.parseObject(cached, OrderDetailDTO.class);
+
         Order order = orderMapper.selectById(orderId);
         if (order == null) throw new RuntimeException("订单不存在");
         OrderItem orderItem = orderItemMapper.selectOne(
                 new LambdaQueryWrapper<OrderItem>().eq(OrderItem::getOrderId, orderId));
+
         OrderDetailDTO dto = new OrderDetailDTO();
         dto.setOrder(order);
         dto.setOrderItem(orderItem);
+
+        stringRedisTemplate.opsForValue().set(redisKey, JSON.toJSONString(dto), 2, TimeUnit.HOURS);
         return dto;
     }
 }

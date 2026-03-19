@@ -7,7 +7,7 @@ import com.cly.orderservice.result.Result;
 import java.util.List;
 
 public interface OrderService {
-    Result createOrder(Long userId, Long patientId, Long scheduleId, String workDate);
+    Result createOrder(Long userId, Long patientId, Long scheduleId);
     List<Order> getOrders(Long userId);
     OrderDetailDTO getOrderDetail(Long orderId);
 }

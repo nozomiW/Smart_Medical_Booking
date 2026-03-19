@@ -15,4 +15,8 @@ public interface ScheduleService {
 
     List<ScheduleDetailDTO> findDetailByDate(LocalDate workDate);
 
+    ScheduleDetailDTO findDetailById(Long scheduleId);
+
+    Result deductAvailableNum(Long scheduleId);
+
 }

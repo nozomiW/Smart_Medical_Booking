@@ -4,6 +4,12 @@ server:
 spring:
   application:
     name: gateway-service
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: 1346798520
+
   cloud:
     nacos:
       server-addr: 127.0.0.1:8848
@@ -25,6 +31,11 @@ spring:
               uri: lb://order-service
               predicates:
                 - Path=/order/**
+
+            - id: pay_route
+              uri: lb://pay-service
+              predicates:
+                - Path=/pay/**
 
           # 不需要鉴权的白名单路径（由 AuthFilter GlobalFilter 处理）
 
