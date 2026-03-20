@@ -21,8 +21,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,6 +33,8 @@ public class OrderServiceImpl implements OrderService {
     OrderMapper orderMapper;
     OrderItemMapper orderItemMapper;
     StringRedisTemplate stringRedisTemplate;
+
+    private final ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
 
     @Autowired
     public void setOrderProducer(OrderProducer orderProducer) {
@@ -103,10 +104,18 @@ public class OrderServiceImpl implements OrderService {
         orderItem.setDocTitle(schedule.getDocTitle());
         orderItem.setWorkDate(schedule.getWorkDate());
 
+        // 1. 第一次删除列表缓存
+        String indexKey = "order:index:" + userId;
+        stringRedisTemplate.delete(indexKey);
+
         orderProducer.produceOrderCreate(order, orderItem);
 
-        // 创建订单后使该用户订单列表缓存失效
-        stringRedisTemplate.delete("order:index:" + userId);
+        // 2. 延迟 500ms 后第二次删除（延迟双删）
+        executorService.schedule(
+                () -> stringRedisTemplate.delete(indexKey),
+                500,
+                TimeUnit.MILLISECONDS
+        );
 
         return Result.SUCCESS;
     }
@@ -126,7 +135,7 @@ public class OrderServiceImpl implements OrderService {
             List<String> values = stringRedisTemplate.opsForValue().multiGet(itemKeys);
             if (values != null) {
                 List<Order> result = values.stream()
-                        .filter(v -> v != null) // Objects::nonNull triggers unused import warning; keep inline
+                        .filter(v -> v != null)
                         .map(v -> JSON.parseObject(v, Order.class))
                         .collect(Collectors.toList());
                 if (!result.isEmpty()) return result;

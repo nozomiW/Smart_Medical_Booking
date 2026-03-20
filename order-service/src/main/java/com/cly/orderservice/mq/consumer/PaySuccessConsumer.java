@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.*;
+
 @Component
 @RocketMQMessageListener(
         topic = MQConstant.Topic.PAY_SUCCESS,
@@ -20,6 +22,8 @@ public class PaySuccessConsumer implements RocketMQListener<Long> {
 
     private OrderMapper orderMapper;
     private StringRedisTemplate stringRedisTemplate;
+
+    private final ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
 
     @Autowired
     public void setOrderMapper(OrderMapper orderMapper) {
@@ -33,13 +37,22 @@ public class PaySuccessConsumer implements RocketMQListener<Long> {
 
     @Override
     public void onMessage(Long orderId) {
+        // 1. 第一次删除缓存
+        String redisKey = "order:detail:" + orderId;
+        stringRedisTemplate.delete(redisKey);
+
         int rows = orderMapper.update(null, new LambdaUpdateWrapper<Order>()
                 .eq(Order::getId, orderId)
                 .eq(Order::getStatus, 0)
                 .set(Order::getStatus, 1));
 
         if (rows > 0) {
-            stringRedisTemplate.delete("order:detail:" + orderId);
+            // 2. 延迟 500ms 后第二次删除（延迟双删）
+            executorService.schedule(
+                    () -> stringRedisTemplate.delete(redisKey),
+                    500,
+                    TimeUnit.MILLISECONDS
+            );
             System.out.println("订单" + orderId + "支付成功");
         } else {
             System.out.println("订单" + orderId + "状态更新失败（已支付或不存在）");

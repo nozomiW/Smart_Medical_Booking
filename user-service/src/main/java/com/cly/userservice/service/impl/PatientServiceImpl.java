@@ -12,8 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,6 +20,8 @@ public class PatientServiceImpl implements PatientService {
 
     PatientMapper patientMapper;
     StringRedisTemplate stringRedisTemplate;
+
+    private final ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
 
     @Autowired
     public void setPatientMapper(PatientMapper patientMapper) {
@@ -43,10 +44,18 @@ public class PatientServiceImpl implements PatientService {
         patient.setCreateTime(LocalDateTime.now());
         patient.setUpdateTime(LocalDateTime.now());
 
+        // 1. 第一次删除缓存
+        String redisKey = "patient:list:" + userId;
+        stringRedisTemplate.delete(redisKey);
+
         patientMapper.insert(patient);
 
-        // 插入后使缓存失效，下次查询重建
-        stringRedisTemplate.delete("patient:list:" + userId);
+        // 2. 延迟 500ms 后第二次删除缓存（延迟双删）
+        executorService.schedule(
+                () -> stringRedisTemplate.delete(redisKey),
+                500,
+                TimeUnit.MILLISECONDS
+        );
     }
 
     @Override
