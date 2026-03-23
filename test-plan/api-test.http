@@ -140,7 +140,7 @@ GET {{gateway}}/doctor/schedule/detail/id?scheduleId=2740830766718144079
 Authorization: Bearer {{token}}
 
 ### 3.4 为某个排班放号 (补充库存)
-POST {{gateway}}/doctor/schedule/release?scheduleId=2740830766718144079&num=5
+POST {{gateway}}/doctor/schedule/release?scheduleId=2740830766718144079&num=30
 Authorization: Bearer {{token}}
 
 ### 3.5 [高并发架构] 创建挂号订单 (Redis 预扣 + MQ 异步落库)
