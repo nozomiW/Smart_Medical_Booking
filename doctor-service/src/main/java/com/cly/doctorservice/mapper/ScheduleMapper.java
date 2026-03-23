@@ -14,6 +14,7 @@ public interface ScheduleMapper extends BaseMapper<Schedule> {
     List<Schedule> findByDocAndDate(@Param("docId") Long docId, @Param("workDate") LocalDate workDate);
     List<Schedule> findByDeptAndDate(@Param("deptId") Long deptId, @Param("workDate") LocalDate workDate);
     int decreaseAvailableNum(@Param("id") Long id);
+    int increaseAvailableNum(@Param("id") Long id, @Param("num") int num);
     int batchInsert(@Param("list") List<Schedule> list);
 
     // 查询某天所有排班，联表带出医生信息

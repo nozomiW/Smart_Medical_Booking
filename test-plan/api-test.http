@@ -2,7 +2,7 @@
 ### 登录后将返回的 token 填入下方变量
 
 @gateway = http://localhost:9001
-@token = eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIyMDM0NTg1NTU1MjA3NjgwMDAxIiwiaWF0IjoxNzczOTE3OTc2LCJleHAiOjE3NzQwMDQzNzZ9.sAgwxwdDhMGlJAjfK0gGB2jmj2faT1BoESsz-KaB5D167ZMHqQs1YVSaoH-9Mk-M
+@token = eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIyMDM0NTg1NTU1MjA3NjgwMDAxIiwiaWF0IjoxNzc0MjMwODgyLCJleHAiOjE3NzQzMTcyODJ9.vfJT_PZQ_YzKozdms9SlH19ZsOiDj8l0k4C_bMJohGq98LKfmJaUPgYjqykwRD9R
 ### ==================== 用户服务 ====================
 
 ### 注册用户
@@ -237,11 +237,15 @@ POST {{gateway}}/doctor/insert/schedule?docId=5&weeks=4
 Authorization: Bearer {{token}}
 
 ### ---- 查询某天所有排班（含医生信息）----
-GET {{gateway}}/doctor/schedule/detail?workDate=2026-03-24
+GET {{gateway}}/doctor/schedule/detail?workDate=2026-03-26
 Authorization: Bearer {{token}}
 
 ### ---- 按排班ID查单条排班详情 ----
-GET {{gateway}}/doctor/schedule/detail/id?scheduleId=7130679877543136385
+GET {{gateway}}/doctor/schedule/detail/id?scheduleId=2740830766718144079
+Authorization: Bearer {{token}}
+
+### ---- 给指定排班放号 ----
+POST {{gateway}}/doctor/schedule/release?scheduleId=2740830766718144079&num=1
 Authorization: Bearer {{token}}
 
 ### 更新医生费用（需要 token）

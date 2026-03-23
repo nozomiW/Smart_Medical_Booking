@@ -29,6 +29,13 @@
         WHERE id = #{id} AND available_num > 0
     </update>
 
+    <!-- 增加号源 -->
+    <update id="increaseAvailableNum">
+        UPDATE yy_schedule
+        SET available_num = available_num + #{num}
+        WHERE id = #{id}
+    </update>
+
     <!-- 批量插入号源 -->
     <insert id="batchInsert">
         INSERT INTO yy_schedule (id, doc_id, work_date, available_num, status)

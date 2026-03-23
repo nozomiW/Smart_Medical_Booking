@@ -71,6 +71,11 @@ public class DoctorController {
         return scheduleService.deductAvailableNum(scheduleId);
     }
 
+    @PostMapping("schedule/release")
+    public Result releaseAvailableNum(@RequestParam Long scheduleId, @RequestParam(defaultValue = "1") int num) {
+        return scheduleService.releaseAvailableNum(scheduleId, num);
+    }
+
     @PostMapping("update/fee")
     public Result updateDoctorFee(@RequestParam Long doctorId, @RequestParam BigDecimal fee) {
         return doctorService.updateFee(doctorId, fee);

@@ -19,4 +19,6 @@ public interface ScheduleService {
 
     Result deductAvailableNum(Long scheduleId);
 
+    Result releaseAvailableNum(Long scheduleId, int num);
+
 }

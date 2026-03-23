@@ -161,4 +161,31 @@ public class ScheduleServiceImpl implements ScheduleService {
 
         return Result.SUCCESS;
     }
+
+    @Override
+    public Result releaseAvailableNum(Long scheduleId, int num) {
+        String numKey = "schedule:num:" + scheduleId;
+
+        // 1. 先更新数据库
+        int rows = scheduleMapper.increaseAvailableNum(scheduleId, num);
+        if (rows <= 0) {
+            return Result.FALSE;
+        }
+
+        // 2. 更新 Redis 中的号源缓存
+        if (Boolean.TRUE.equals(stringRedisTemplate.hasKey(numKey))) {
+            stringRedisTemplate.opsForValue().increment(numKey, num);
+        }
+
+        // 3. 更新 Redis 中对应日期的排班列表缓存，保持数据一致性
+        ScheduleDetailDTO detail = scheduleMapper.findDetailById(scheduleId);
+        if (detail != null) {
+            String listKey = "schedule:detail:" + detail.getWorkDate();
+            if (Boolean.TRUE.equals(stringRedisTemplate.hasKey(listKey))) {
+                stringRedisTemplate.opsForHash().put(listKey, scheduleId.toString(), JSON.toJSONString(detail));
+            }
+        }
+
+        return Result.SUCCESS;
+    }
 }
