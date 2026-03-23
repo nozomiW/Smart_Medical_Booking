@@ -3,9 +3,12 @@
 
 @gateway = http://localhost:9001
 @token = eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIyMDM0NTg1NTU1MjA3NjgwMDAxIiwiaWF0IjoxNzc0MjMwODgyLCJleHAiOjE3NzQzMTcyODJ9.vfJT_PZQ_YzKozdms9SlH19ZsOiDj8l0k4C_bMJohGq98LKfmJaUPgYjqykwRD9R
-### ==================== 用户服务 ====================
 
-### 注册用户
+### =========================================================
+###  1. 用户认证与基础信息
+### =========================================================
+
+### 1.1 注册用户
 POST {{gateway}}/user/register
 Content-Type: application/json
 
@@ -14,7 +17,7 @@ Content-Type: application/json
   "password": "123456"
 }
 
-### 登录（成功后复制返回的 token 填入上方 @token）
+### 1.2 登录（成功后复制返回的 token 填入上方 @token）
 POST {{gateway}}/user/login
 Content-Type: application/json
 
@@ -23,7 +26,7 @@ Content-Type: application/json
   "password": "123456"
 }
 
-### 登录失败 - 密码错误
+### 1.3 登录失败 - 密码错误
 POST {{gateway}}/user/login
 Content-Type: application/json
 
@@ -32,7 +35,10 @@ Content-Type: application/json
   "password": "wrong_password"
 }
 
-### 新增病人（需要 token）
+### 1.4 无 token 访问（应返回 401）
+GET {{gateway}}/doctor/search/online
+
+### 1.5 新增就诊人
 POST {{gateway}}/user/patient/insert
 Content-Type: application/json
 Authorization: Bearer {{token}}
@@ -45,248 +51,127 @@ Authorization: Bearer {{token}}
   "phone": "13900000001"
 }
 
-### 查询当前用户的病人列表（需要 token）
+### 1.6 查询当前用户的就诊人列表
 GET {{gateway}}/user/patient/list
 Authorization: Bearer {{token}}
 
-### ==================== 医生服务 ====================
 
-### 查询在线医生列表（需要 token）
+### =========================================================
+###  2. 基础数据准备 (医生、排班规则与生成)
+### =========================================================
+
+### 2.1 查询在线医生列表
 GET {{gateway}}/doctor/search/online
 Authorization: Bearer {{token}}
 
-### ---- 新增医生 1：内科 李明（主任医师）----
+### 2.2 更新医生挂号费
+POST {{gateway}}/doctor/update/fee?doctorId=11&fee=160.00
+Authorization: Bearer {{token}}
+
+### ---- 批量新增医生 ----
 POST {{gateway}}/doctor/insert
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
-{
-  "id": 1,
-  "deptId": 10,
-  "name": "李明",
-  "title": "主任医师",
-  "fee": 200.00,
-  "status": 1
-}
-
-### ---- 新增医生 2：外科 王芳（副主任医师）----
+{ "id": 1, "deptId": 10, "name": "李明", "title": "主任医师", "fee": 200.00, "status": 1 }
+###
 POST {{gateway}}/doctor/insert
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
-{
-  "id": 2,
-  "deptId": 11,
-  "name": "王芳",
-  "title": "副主任医师",
-  "fee": 150.00,
-  "status": 1
-}
-
-### ---- 新增医生 3：儿科 张伟（主治医师）----
+{ "id": 2, "deptId": 11, "name": "王芳", "title": "副主任医师", "fee": 150.00, "status": 1 }
+###
 POST {{gateway}}/doctor/insert
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
-{
-  "id": 3,
-  "deptId": 12,
-  "name": "张伟",
-  "title": "主治医师",
-  "fee": 100.00,
-  "status": 1
-}
+{ "id": 3, "deptId": 12, "name": "张伟", "title": "主治医师", "fee": 100.00, "status": 1 }
 
-### ---- 新增医生 4：骨科 刘洋（主任医师）----
-POST {{gateway}}/doctor/insert
-Content-Type: application/json
-Authorization: Bearer {{token}}
-
-{
-  "id": 4,
-  "deptId": 13,
-  "name": "刘洋",
-  "title": "主任医师",
-  "fee": 250.00,
-  "status": 1
-}
-
-### ---- 新增医生 5：皮肤科 陈静（主治医师）----
-POST {{gateway}}/doctor/insert
-Content-Type: application/json
-Authorization: Bearer {{token}}
-
-{
-  "id": 5,
-  "deptId": 14,
-  "name": "陈静",
-  "title": "主治医师",
-  "fee": 120.00,
-  "status": 1
-}
-
-### ---- 医生1 排班规则：周一30号、周三25号、周五20号 ----
+### ---- 批量设置排班规则 ----
 POST {{gateway}}/doctor/insert/schedule/rule
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {"docId": 1, "dayOfWeek": 1, "maxCount": 30}
-
 ###
 POST {{gateway}}/doctor/insert/schedule/rule
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {"docId": 1, "dayOfWeek": 3, "maxCount": 25}
-
 ###
-POST {{gateway}}/doctor/insert/schedule/rule
-Content-Type: application/json
-Authorization: Bearer {{token}}
-
-{"docId": 1, "dayOfWeek": 5, "maxCount": 20}
-
-### ---- 医生2 排班规则：周二30号、周四30号 ----
 POST {{gateway}}/doctor/insert/schedule/rule
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {"docId": 2, "dayOfWeek": 2, "maxCount": 30}
-
 ###
-POST {{gateway}}/doctor/insert/schedule/rule
-Content-Type: application/json
-Authorization: Bearer {{token}}
-
-{"docId": 2, "dayOfWeek": 4, "maxCount": 30}
-
-### ---- 医生3 排班规则：周一20号、周二20号、周三20号 ----
 POST {{gateway}}/doctor/insert/schedule/rule
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {"docId": 3, "dayOfWeek": 1, "maxCount": 20}
 
-###
-POST {{gateway}}/doctor/insert/schedule/rule
-Content-Type: application/json
-Authorization: Bearer {{token}}
-
-{"docId": 3, "dayOfWeek": 2, "maxCount": 20}
-
-###
-POST {{gateway}}/doctor/insert/schedule/rule
-Content-Type: application/json
-Authorization: Bearer {{token}}
-
-{"docId": 3, "dayOfWeek": 3, "maxCount": 20}
-
-### ---- 医生4 排班规则：周三15号、周五15号 ----
-POST {{gateway}}/doctor/insert/schedule/rule
-Content-Type: application/json
-Authorization: Bearer {{token}}
-
-{"docId": 4, "dayOfWeek": 3, "maxCount": 15}
-
-###
-POST {{gateway}}/doctor/insert/schedule/rule
-Content-Type: application/json
-Authorization: Bearer {{token}}
-
-{"docId": 4, "dayOfWeek": 5, "maxCount": 15}
-
-### ---- 医生5 排班规则：周一25号、周四25号、周六20号 ----
-POST {{gateway}}/doctor/insert/schedule/rule
-Content-Type: application/json
-Authorization: Bearer {{token}}
-
-{"docId": 5, "dayOfWeek": 1, "maxCount": 25}
-
-###
-POST {{gateway}}/doctor/insert/schedule/rule
-Content-Type: application/json
-Authorization: Bearer {{token}}
-
-{"docId": 5, "dayOfWeek": 4, "maxCount": 25}
-
-###
-POST {{gateway}}/doctor/insert/schedule/rule
-Content-Type: application/json
-Authorization: Bearer {{token}}
-
-{"docId": 5, "dayOfWeek": 6, "maxCount": 20}
-
-### ---- 生成排班：医生1 未来4周 ----
+### ---- 批量生成未来4周排班 ----
 POST {{gateway}}/doctor/insert/schedule?docId=1&weeks=4
 Authorization: Bearer {{token}}
-
-### ---- 生成排班：医生2 未来4周 ----
+###
 POST {{gateway}}/doctor/insert/schedule?docId=2&weeks=4
 Authorization: Bearer {{token}}
-
-### ---- 生成排班：医生3 未来4周 ----
+###
 POST {{gateway}}/doctor/insert/schedule?docId=3&weeks=4
 Authorization: Bearer {{token}}
 
-### ---- 生成排班：医生4 未来4周 ----
-POST {{gateway}}/doctor/insert/schedule?docId=4&weeks=4
-Authorization: Bearer {{token}}
 
-### ---- 生成排班：医生5 未来4周 ----
-POST {{gateway}}/doctor/insert/schedule?docId=5&weeks=4
-Authorization: Bearer {{token}}
+### =========================================================
+###  3. 核心业务流程 (查号 -> 挂号 -> 支付)
+### =========================================================
 
-### ---- 查询某天所有排班（含医生信息）----
-GET {{gateway}}/doctor/schedule/detail?workDate=2026-03-26
-Authorization: Bearer {{token}}
-
-### ---- 按排班ID查单条排班详情 ----
-GET {{gateway}}/doctor/schedule/detail/id?scheduleId=2740830766718144079
-Authorization: Bearer {{token}}
-
-### ---- 给指定排班放号 ----
-POST {{gateway}}/doctor/schedule/release?scheduleId=2740830766718144079&num=1
-Authorization: Bearer {{token}}
-
-### 更新医生费用（需要 token）
-POST {{gateway}}/doctor/update/fee?doctorId=11&fee=160.00
-Authorization: Bearer {{token}}
-
-### 无 token 访问（应返回 401）
-GET {{gateway}}/doctor/search/online
-
-### ==================== 订单服务 ====================
-
-### 步骤1：查询病人列表，复制目标病人的 id 填入下方patientId
+### 3.1 获取目标病人 ID (填入下方 patientId)
 GET {{gateway}}/user/patient/list
 Authorization: Bearer {{token}}
 
-### 步骤2：查询某天排班，复制目标排班的 scheduleId 填入下方scheduleId
+### 3.2 查询某日所有排班号源 (Redis 缓存架构，填入下方 scheduleId)
 GET {{gateway}}/doctor/schedule/detail?workDate=2026-03-26
 Authorization: Bearer {{token}}
 
-### 步骤3：创建订单
+### 3.3 查看某个具体排班的实时库存和详情
+GET {{gateway}}/doctor/schedule/detail/id?scheduleId=2740830766718144079
+Authorization: Bearer {{token}}
+
+### 3.4 为某个排班放号 (补充库存)
+POST {{gateway}}/doctor/schedule/release?scheduleId=2740830766718144079&num=5
+Authorization: Bearer {{token}}
+
+### 3.5 [高并发架构] 创建挂号订单 (Redis 预扣 + MQ 异步落库)
 POST {{gateway}}/order/create?patientId=4935213193722298120&scheduleId=2740830766718144079
 Authorization: Bearer {{token}}
 
-### 步骤4：查询当前用户订单列表，确认创建成功，复制 id 填入下方
+### 3.6 查询当前用户订单列表 (确认是否出单成功，填入下方 orderId)
 GET {{gateway}}/order/list
 Authorization: Bearer {{token}}
 
-### 步骤5：查询订单详情（用上方列表中的订单 id）
+### 3.7 查看具体订单详情
 GET {{gateway}}/order/detail?orderId=3519788135548253944
 Authorization: Bearer {{token}}
 
-### ==================== 支付服务 ====================
-
-### 步骤6：发起支付（用上方订单 id）
+### 3.8 对订单发起支付
 POST {{gateway}}/pay?orderId=3519788135548253944
 Authorization: Bearer {{token}}
 
-### 步骤7：再次查询订单详情，确认 status 已变为 1（已支付）
-GET {{gateway}}/order/detail?orderId=3519788135548253944
+### 3.9 重复支付测试（应失败，status 已不为 0）
+POST {{gateway}}/pay?orderId=3519788135548253944
 Authorization: Bearer {{token}}
 
-### 步骤8：重复支付（应失败，status 已不为 0）
-POST {{gateway}}/pay?orderId=7275486217357859201
+
+### =========================================================
+###  4. 压力测试对照组 (Baseline：纯 DB 同步架构)
+### =========================================================
+
+### 4.1 [Baseline] 纯 DB 多表联查当日排班列表
+GET {{gateway}}/doctor/schedule/detail/db?workDate=2026-03-26
+Authorization: Bearer {{token}}
+
+### 4.2 [Baseline] 纯 DB 行锁同步扣减与下单
+POST {{gateway}}/order/create/db?patientId=4935213193722298120&scheduleId=2740830766718144079
 Authorization: Bearer {{token}}

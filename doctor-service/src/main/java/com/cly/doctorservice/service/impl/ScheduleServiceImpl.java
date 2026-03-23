@@ -103,14 +103,14 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public List<ScheduleDetailDTO> findDetailByDate(LocalDate workDate) {
+    public String findDetailByDate(LocalDate workDate) {
         String redisKey = "schedule:detail:" + workDate;
 
         List<Object> cached = stringRedisTemplate.opsForHash().values(redisKey);
-        if (!cached.isEmpty())
-            return cached.stream()
-                    .map(o -> JSON.parseObject((String) o, ScheduleDetailDTO.class))
-                    .collect(Collectors.toList());
+        if (!cached.isEmpty()) {
+            // 直接将 Redis 里的 JSON 字符串拼接成 JSON 数组返回，省去高昂的反序列化和再序列化开销
+            return "[" + cached.stream().map(Object::toString).collect(Collectors.joining(",")) + "]";
+        }
 
         List<ScheduleDetailDTO> list = scheduleMapper.findDetailByDate(workDate);
         if (!list.isEmpty()) {
@@ -126,13 +126,32 @@ public class ScheduleServiceImpl implements ScheduleService {
                             String.valueOf(d.getAvailableNum()), 2, TimeUnit.HOURS);
                 }
             }
+            return JSON.toJSONString(list);
         }
-        return list;
+        return "[]";
+    }
+
+    @Override
+    public List<ScheduleDetailDTO> findDetailByDateDb(LocalDate workDate) {
+        return scheduleMapper.findDetailByDate(workDate);
     }
 
     @Override
     public ScheduleDetailDTO findDetailById(Long scheduleId) {
-        return scheduleMapper.findDetailById(scheduleId);
+        // 先尝试从缓存中获取基本信息，需要先找到该排班的日期
+        // 由于这里只有ID没有日期，为了保持风格一致并提升性能，我们可以单独为排班详情做一层简单的缓存
+        // 实际上在订单服务中我们查询排班时会频繁调用此接口
+        String redisKey = "schedule:detail:id:" + scheduleId;
+        String cached = stringRedisTemplate.opsForValue().get(redisKey);
+        if (cached != null) {
+            return JSON.parseObject(cached, ScheduleDetailDTO.class);
+        }
+
+        ScheduleDetailDTO detail = scheduleMapper.findDetailById(scheduleId);
+        if (detail != null) {
+            stringRedisTemplate.opsForValue().set(redisKey, JSON.toJSONString(detail), 2, TimeUnit.HOURS);
+        }
+        return detail;
     }
 
     @Override
@@ -163,6 +182,12 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
+    public Result deductAvailableNumDb(Long scheduleId) {
+        int rows = scheduleMapper.decreaseAvailableNum(scheduleId);
+        return rows > 0 ? Result.SUCCESS : Result.FALSE;
+    }
+
+    @Override
     public Result releaseAvailableNum(Long scheduleId, int num) {
         String numKey = "schedule:num:" + scheduleId;
 
@@ -177,12 +202,17 @@ public class ScheduleServiceImpl implements ScheduleService {
             stringRedisTemplate.opsForValue().increment(numKey, num);
         }
 
-        // 3. 更新 Redis 中对应日期的排班列表缓存，保持数据一致性
+        // 3. 更新 Redis 中对应日期的排班列表缓存和单条详情缓存，保持数据一致性
         ScheduleDetailDTO detail = scheduleMapper.findDetailById(scheduleId);
         if (detail != null) {
             String listKey = "schedule:detail:" + detail.getWorkDate();
             if (Boolean.TRUE.equals(stringRedisTemplate.hasKey(listKey))) {
                 stringRedisTemplate.opsForHash().put(listKey, scheduleId.toString(), JSON.toJSONString(detail));
+            }
+            
+            String idKey = "schedule:detail:id:" + scheduleId;
+            if (Boolean.TRUE.equals(stringRedisTemplate.hasKey(idKey))) {
+                stringRedisTemplate.opsForValue().set(idKey, JSON.toJSONString(detail), 2, TimeUnit.HOURS);
             }
         }
 

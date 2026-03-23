@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface OrderService {
     Result createOrder(Long userId, Long patientId, Long scheduleId);
+    Result createOrderDb(Long userId, Long patientId, Long scheduleId);
     List<Order> getOrders(Long userId);
     OrderDetailDTO getOrderDetail(Long orderId);
 }

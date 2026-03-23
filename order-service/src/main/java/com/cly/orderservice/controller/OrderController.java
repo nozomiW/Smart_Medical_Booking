@@ -27,6 +27,13 @@ public class OrderController {
         return orderService.createOrder(userId, patientId, scheduleId);
     }
 
+    @PostMapping("create/db")
+    public Result createOrderDb(@RequestHeader("X-User-Id") Long userId,
+                                @RequestParam Long patientId,
+                                @RequestParam Long scheduleId) {
+        return orderService.createOrderDb(userId, patientId, scheduleId);
+    }
+
     @GetMapping("list")
     public List<Order> getOrders(@RequestHeader("X-User-Id") Long userId) {
         return orderService.getOrders(userId);

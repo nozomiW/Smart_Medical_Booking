@@ -55,9 +55,15 @@ public class DoctorController {
     }
 
     // 查询某天所有排班（含医生信息）
-    @GetMapping("schedule/detail")
-    public List<ScheduleDetailDTO> findScheduleDetail(@RequestParam String workDate) {
+    @GetMapping(value = "schedule/detail", produces = "application/json;charset=utf-8")
+    public String findScheduleDetail(@RequestParam String workDate) {
         return scheduleService.findDetailByDate(LocalDate.parse(workDate));
+    }
+
+    // Baseline: 纯 DB 查询某天所有排班
+    @GetMapping("schedule/detail/db")
+    public List<ScheduleDetailDTO> findScheduleDetailDb(@RequestParam String workDate) {
+        return scheduleService.findDetailByDateDb(LocalDate.parse(workDate));
     }
 
     // 按排班ID查单条排班详情
@@ -69,6 +75,11 @@ public class DoctorController {
     @PostMapping("schedule/deduct")
     public Result deductAvailableNum(@RequestParam Long scheduleId) {
         return scheduleService.deductAvailableNum(scheduleId);
+    }
+
+    @PostMapping("schedule/deduct/db")
+    public Result deductAvailableNumDb(@RequestParam Long scheduleId) {
+        return scheduleService.deductAvailableNumDb(scheduleId);
     }
 
     @PostMapping("schedule/release")

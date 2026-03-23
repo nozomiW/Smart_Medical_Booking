@@ -1,0 +1,50 @@
+{
+  "号源查询请求-基线" : {
+    "transaction" : "号源查询请求-基线",
+    "sampleCount" : 100000,
+    "errorCount" : 0,
+    "errorPct" : 0.0,
+    "meanResTime" : 351.30689000000064,
+    "medianResTime" : 387.0,
+    "minResTime" : 2.0,
+    "maxResTime" : 1377.0,
+    "pct1ResTime" : 748.0,
+    "pct2ResTime" : 874.0,
+    "pct3ResTime" : 1005.9900000000016,
+    "throughput" : 2321.693907875186,
+    "receivedKBytesPerSec" : 1111.2790384051702,
+    "sentKBytesPerSec" : 809.4186768666418
+  },
+  "Total" : {
+    "transaction" : "Total",
+    "sampleCount" : 200000,
+    "errorCount" : 0,
+    "errorPct" : 0.0,
+    "meanResTime" : 325.62121499999824,
+    "medianResTime" : 355.0,
+    "minResTime" : 2.0,
+    "maxResTime" : 1377.0,
+    "pct1ResTime" : 523.0,
+    "pct2ResTime" : 563.0,
+    "pct3ResTime" : 639.0,
+    "throughput" : 2667.876103833738,
+    "receivedKBytesPerSec" : 1270.2864230742937,
+    "sentKBytesPerSec" : 926.201127844623
+  },
+  "号源查询请求-优化" : {
+    "transaction" : "号源查询请求-优化",
+    "sampleCount" : 100000,
+    "errorCount" : 0,
+    "errorPct" : 0.0,
+    "meanResTime" : 299.9355400000008,
+    "medianResTime" : 355.0,
+    "minResTime" : 2.0,
+    "maxResTime" : 825.0,
+    "pct1ResTime" : 523.0,
+    "pct2ResTime" : 563.0,
+    "pct3ResTime" : 639.0,
+    "throughput" : 3072.0078643401325,
+    "receivedKBytesPerSec" : 1455.0037248095355,
+    "sentKBytesPerSec" : 1062.00271872696
+  }
+}

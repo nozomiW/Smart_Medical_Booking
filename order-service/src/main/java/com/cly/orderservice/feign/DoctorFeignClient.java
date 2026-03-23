@@ -16,11 +16,14 @@ public interface DoctorFeignClient {
     List<DoctorDTO> searchOnline();
 
     @GetMapping("/doctor/schedule/detail")
-    List<com.cly.orderservice.dto.ScheduleDetailDTO> findScheduleDetail(@RequestParam("workDate") String workDate);
+    String findScheduleDetail(@RequestParam("workDate") String workDate);
 
     @GetMapping("/doctor/schedule/detail/id")
     com.cly.orderservice.dto.ScheduleDetailDTO findScheduleDetailById(@RequestParam("scheduleId") Long scheduleId);
 
     @PostMapping("/doctor/schedule/deduct")
     Result deductAvailableNum(@RequestParam("scheduleId") Long scheduleId);
+
+    @PostMapping("/doctor/schedule/deduct/db")
+    Result deductAvailableNumDb(@RequestParam("scheduleId") Long scheduleId);
 }

@@ -3,6 +3,7 @@ package com.cly.gateway.filter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.Ordered;
 import org.springframework.data.redis.core.ReactiveStringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
@@ -14,6 +15,7 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 
 @Component
+@ConditionalOnProperty(name = "gateway.rate-limit.enabled", havingValue = "true", matchIfMissing = true)
 public class RateLimitFilter implements GlobalFilter, Ordered {
 
     // 令牌桶 Lua：capacity=桶容量，rate=每秒补充令牌数

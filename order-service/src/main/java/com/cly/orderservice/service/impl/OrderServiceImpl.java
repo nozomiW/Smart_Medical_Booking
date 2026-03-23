@@ -9,6 +9,7 @@ import com.cly.orderservice.entity.Order;
 import com.cly.orderservice.entity.OrderItem;
 import com.cly.orderservice.feign.DoctorFeignClient;
 import com.cly.orderservice.feign.UserFeignClient;
+import com.cly.orderservice.handler.OrderHandler;
 import com.cly.orderservice.mapper.OrderMapper;
 import com.cly.orderservice.mapper.OrderItemMapper;
 import com.cly.orderservice.mq.producer.OrderProducer;
@@ -33,6 +34,7 @@ public class OrderServiceImpl implements OrderService {
     OrderMapper orderMapper;
     OrderItemMapper orderItemMapper;
     StringRedisTemplate stringRedisTemplate;
+    OrderHandler orderHandler;
 
     private final ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
 
@@ -64,6 +66,11 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     public void setStringRedisTemplate(StringRedisTemplate stringRedisTemplate) {
         this.stringRedisTemplate = stringRedisTemplate;
+    }
+
+    @Autowired
+    public void setOrderHandler(OrderHandler orderHandler) {
+        this.orderHandler = orderHandler;
     }
 
     @Override
@@ -116,6 +123,53 @@ public class OrderServiceImpl implements OrderService {
                 500,
                 TimeUnit.MILLISECONDS
         );
+
+        return Result.SUCCESS;
+    }
+
+    @Override
+    public Result createOrderDb(Long userId, Long patientId, Long scheduleId) {
+        // 1. 获取病人信息
+        List<PatientDTO> patients = userFeignClient.getPatients(userId);
+        PatientDTO patient = patients.stream()
+                .filter(p -> p.getId().equals(patientId))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("病人不存在"));
+
+        // 2. 按排班ID查排班
+        ScheduleDetailDTO schedule = doctorFeignClient.findScheduleDetailById(scheduleId);
+        if (schedule == null) throw new RuntimeException("排班不存在");
+
+        // 3. DB 直接预扣号源
+        Result deductResult = doctorFeignClient.deductAvailableNumDb(scheduleId);
+        if (deductResult != Result.SUCCESS) throw new RuntimeException("号源不足");
+
+        // 4. 组装 Order
+        Order order = new Order();
+        order.setId(ThreadLocalRandom.current().nextLong(1, Long.MAX_VALUE));
+        order.setOrderNo("ORD" + System.currentTimeMillis());
+        order.setUserId(userId);
+        order.setAmount(schedule.getDocFee());
+        order.setStatus(0);
+        order.setCreateTime(LocalDateTime.now());
+        order.setUpdateTime(LocalDateTime.now());
+
+        // 5. 组装 OrderItem
+        OrderItem orderItem = new OrderItem();
+        orderItem.setPatientName(patient.getName());
+        orderItem.setPatientIdCard(patient.getIdCard());
+        orderItem.setPatientPhone(patient.getPhone());
+        orderItem.setScheduleId(scheduleId);
+        orderItem.setDocId(schedule.getDocId());
+        orderItem.setDocName(schedule.getDocName());
+        orderItem.setDocTitle(schedule.getDocTitle());
+        orderItem.setWorkDate(schedule.getWorkDate());
+
+        // 6. 同步写入 DB
+        Result createResult = orderHandler.createOrder(order, orderItem);
+        if (createResult != Result.SUCCESS) {
+            throw new RuntimeException("订单创建失败");
+        }
 
         return Result.SUCCESS;
     }

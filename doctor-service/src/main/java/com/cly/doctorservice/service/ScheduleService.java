@@ -13,11 +13,15 @@ public interface ScheduleService {
 
     Result insertSchedule(Long docId, int weeks);
 
-    List<ScheduleDetailDTO> findDetailByDate(LocalDate workDate);
+    String findDetailByDate(LocalDate workDate);
+
+    List<ScheduleDetailDTO> findDetailByDateDb(LocalDate workDate);
 
     ScheduleDetailDTO findDetailById(Long scheduleId);
 
     Result deductAvailableNum(Long scheduleId);
+
+    Result deductAvailableNumDb(Long scheduleId);
 
     Result releaseAvailableNum(Long scheduleId, int num);
 
