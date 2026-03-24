@@ -1,0 +1,81 @@
+version: '3.8'
+
+services:
+  # MySQL: 存储用户、医生和订单数据
+  mysql:
+    image: mysql:8.0
+    container_name: smb-mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=1346798520
+    volumes:
+      - ./dataset:/docker-entrypoint-initdb.d # 自动执行初始化 SQL
+      - smb-mysql-data:/var/lib/mysql
+    networks:
+      - smb-network
+
+  # Redis: 缓存号源、详情及分布式锁
+  redis:
+    image: redis:7.0
+    container_name: smb-redis
+    ports:
+      - "6379:6379"
+    command: redis-server --requirepass 1346798520
+    volumes:
+      - smb-redis-data:/data
+    networks:
+      - smb-network
+
+  # Nacos: 服务注册与发现
+  nacos:
+    image: nacos/nacos-server:v2.3.2
+    container_name: smb-nacos
+    environment:
+      - MODE=standalone
+      - SPRING_DATASOURCE_PLATFORM=derby
+    ports:
+      - "8848:8848"
+      - "9848:9848" # gRPC 端口 (Nacos 2.x)
+      - "9849:9849"
+    networks:
+      - smb-network
+
+  # RocketMQ NameServer
+  rmqnamesrv:
+    image: apache/rocketmq:5.3.0
+    container_name: smb-rmqnamesrv
+    ports:
+      - "9876:9876"
+    environment:
+      - MAX_POSSIBLE_HEAP=128M
+    command: sh mqnamesrv
+    networks:
+      - smb-network
+
+  # RocketMQ Broker
+  rmqbroker:
+    image: apache/rocketmq:5.1.4
+    container_name: smb-rmqbroker
+    ports:
+      - "10909:10909"
+      - "10911:10911"
+      - "10912:10912"
+    environment:
+      - NAMESRV_ADDR=rmqnamesrv:9876
+      - MAX_POSSIBLE_HEAP=256M
+    volumes:
+      - ./rocketmq/conf/broker.conf:/home/rocketmq/rocketmq-5.1.4/conf/broker.conf
+    command: sh mqbroker -c /home/rocketmq/rocketmq-5.1.4/conf/broker.conf
+    depends_on:
+      - rmqnamesrv
+    networks:
+      - smb-network
+
+networks:
+  smb-network:
+    driver: bridge
+
+volumes:
+  smb-mysql-data:
+  smb-redis-data:

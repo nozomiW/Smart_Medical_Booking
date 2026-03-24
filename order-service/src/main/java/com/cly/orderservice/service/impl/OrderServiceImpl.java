@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
+import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
@@ -75,25 +76,26 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Result createOrder(Long userId, Long patientId, Long scheduleId) {
-        // 1. 获取病人信息
+
+        // 1. Redis Lua 原子预扣号源
+        Result deductResult = doctorFeignClient.deductAvailableNum(scheduleId);
+        if (deductResult != Result.SUCCESS) throw new RuntimeException("号源不足");
+
+        // 2. 获取病人信息
         List<PatientDTO> patients = userFeignClient.getPatients(userId);
         PatientDTO patient = patients.stream()
                 .filter(p -> p.getId().equals(patientId))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("病人不存在"));
 
-        // 2. 按排班ID查排班
+        // 3. 按排班ID查排班
         ScheduleDetailDTO schedule = doctorFeignClient.findScheduleDetailById(scheduleId);
         if (schedule == null) throw new RuntimeException("排班不存在");
-
-        // 3. Redis Lua 原子预扣号源
-        Result deductResult = doctorFeignClient.deductAvailableNum(scheduleId);
-        if (deductResult != Result.SUCCESS) throw new RuntimeException("号源不足");
 
         // 4. 组装 Order
         Order order = new Order();
         order.setId(ThreadLocalRandom.current().nextLong(1, Long.MAX_VALUE));
-        order.setOrderNo("ORD" + System.currentTimeMillis());
+        order.setOrderNo("ORD" + IdWorker.getIdStr());
         order.setUserId(userId);
         order.setAmount(schedule.getDocFee());
         order.setStatus(0);
@@ -147,7 +149,7 @@ public class OrderServiceImpl implements OrderService {
         // 4. 组装 Order
         Order order = new Order();
         order.setId(ThreadLocalRandom.current().nextLong(1, Long.MAX_VALUE));
-        order.setOrderNo("ORD" + System.currentTimeMillis());
+        order.setOrderNo("ORD" + IdWorker.getIdStr());
         order.setUserId(userId);
         order.setAmount(schedule.getDocFee());
         order.setStatus(0);

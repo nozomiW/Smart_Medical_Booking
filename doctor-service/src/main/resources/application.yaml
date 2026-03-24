@@ -17,6 +17,17 @@ spring:
           max-idle: 8
           min-idle: 0
 
+  # Redisson 官方格式配置 (将被 RedissonConfig 加载)
+  redisson:
+    config: |
+      singleServerConfig:
+        address: "redis://localhost:6379"
+        password: "1346798520"
+        connectionMinimumIdleSize: 8
+        idleConnectionTimeout: 10000
+        connectTimeout: 10000
+        timeout: 3000
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
