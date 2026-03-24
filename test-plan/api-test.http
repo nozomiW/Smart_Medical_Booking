@@ -132,7 +132,11 @@ GET {{gateway}}/user/patient/list
 Authorization: Bearer {{token}}
 
 ### 3.2 查询某日所有排班号源 (Redis 缓存架构，填入下方 scheduleId)
-GET {{gateway}}/doctor/schedule/detail?workDate=2026-03-25
+GET {{gateway}}/doctor/schedule/detail?workDate=2026-03-26
+Authorization: Bearer {{token}}
+
+### 3.2 查询某日所有排班号源 (Redis 缓存架构，填入下方 scheduleId)
+GET {{gateway}}/doctor/schedule/detail?workDate=2026-04-08
 Authorization: Bearer {{token}}
 
 ### 3.3 查看某个具体排班的实时库存和详情

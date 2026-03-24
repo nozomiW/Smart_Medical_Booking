@@ -79,18 +79,19 @@ public class OrderServiceImpl implements OrderService {
 
         // 1. Redis Lua 原子预扣号源
         Result deductResult = doctorFeignClient.deductAvailableNum(scheduleId);
-        if (deductResult != Result.SUCCESS) throw new RuntimeException("号源不足");
+        if (deductResult != Result.SUCCESS) return Result.FALSE;
 
         // 2. 获取病人信息
         List<PatientDTO> patients = userFeignClient.getPatients(userId);
         PatientDTO patient = patients.stream()
                 .filter(p -> p.getId().equals(patientId))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("病人不存在"));
+                .orElse(null);
+        if (patient == null) return Result.FALSE;
 
         // 3. 按排班ID查排班
         ScheduleDetailDTO schedule = doctorFeignClient.findScheduleDetailById(scheduleId);
-        if (schedule == null) throw new RuntimeException("排班不存在");
+        if (schedule == null) return Result.FALSE;
 
         // 4. 组装 Order
         Order order = new Order();
@@ -131,20 +132,22 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Result createOrderDb(Long userId, Long patientId, Long scheduleId) {
-        // 1. 获取病人信息
+
+        // 1. DB 直接预扣号源
+        Result deductResult = doctorFeignClient.deductAvailableNumDb(scheduleId);
+        if (deductResult != Result.SUCCESS) return Result.FALSE;
+
+        // 2. 获取病人信息
         List<PatientDTO> patients = userFeignClient.getPatients(userId);
         PatientDTO patient = patients.stream()
                 .filter(p -> p.getId().equals(patientId))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("病人不存在"));
+                .orElse(null);
+        if (patient == null) return Result.FALSE;
 
-        // 2. 按排班ID查排班
+        // 3. 按排班ID查排班
         ScheduleDetailDTO schedule = doctorFeignClient.findScheduleDetailById(scheduleId);
-        if (schedule == null) throw new RuntimeException("排班不存在");
-
-        // 3. DB 直接预扣号源
-        Result deductResult = doctorFeignClient.deductAvailableNumDb(scheduleId);
-        if (deductResult != Result.SUCCESS) throw new RuntimeException("号源不足");
+        if (schedule == null) return Result.FALSE;
 
         // 4. 组装 Order
         Order order = new Order();
@@ -170,7 +173,7 @@ public class OrderServiceImpl implements OrderService {
         // 6. 同步写入 DB
         Result createResult = orderHandler.createOrder(order, orderItem);
         if (createResult != Result.SUCCESS) {
-            throw new RuntimeException("订单创建失败");
+            return Result.FALSE;
         }
 
         return Result.SUCCESS;

@@ -79,5 +79,10 @@
             JOIN yy_doctor d ON d.id = s.doc_id
         WHERE s.id = #{scheduleId}
     </select>
+
+    <!-- 查询所有已有的排班日期（布隆过滤器预热用） -->
+    <select id="selectAllWorkDates" resultType="java.time.LocalDate">
+        SELECT DISTINCT work_date FROM yy_schedule
+    </select>
 </mapper>
 

@@ -22,4 +22,7 @@ public interface ScheduleMapper extends BaseMapper<Schedule> {
 
     // 按排班ID查单条排班详情
     ScheduleDetailDTO findDetailById(@Param("scheduleId") Long scheduleId);
+
+    // 查询所有已有的排班日期（布隆过滤器预热用）
+    List<LocalDate> selectAllWorkDates();
 }

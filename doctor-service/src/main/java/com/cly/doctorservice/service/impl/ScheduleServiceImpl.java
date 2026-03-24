@@ -9,7 +9,9 @@ import com.cly.doctorservice.mapper.ScheduleRuleMapper;
 import com.cly.doctorservice.mq.constant.MQConstant;
 import com.cly.doctorservice.result.Result;
 import com.cly.doctorservice.service.ScheduleService;
+import jakarta.annotation.PostConstruct;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.redisson.api.RBloomFilter;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,14 +33,16 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     private static final String DEDUCT_LUA =
             "local val = redis.call('GET', KEYS[1])\n" +
-            "if val == false then return -1 end\n" +
-            "local num = tonumber(val)\n" +
-            "if num <= 0 then return 0 end\n" +
-            "redis.call('DECR', KEYS[1])\n" +
-            "return num"; // 返回扣减前的旧值
+                    "if val == false then return -1 end\n" +
+                    "local num = tonumber(val)\n" +
+                    "if num <= 0 then return 0 end\n" +
+                    "redis.call('DECR', KEYS[1])\n" +
+                    "return num"; // 返回扣减前的旧值
 
     private static final DefaultRedisScript<Long> DEDUCT_SCRIPT =
             new DefaultRedisScript<>(DEDUCT_LUA, Long.class);
+
+    private static final String BLOOM_KEY = "schedule:date:bloom";
 
     private ScheduleRuleMapper scheduleRuleMapper;
     private ScheduleMapper scheduleMapper;
@@ -77,6 +81,16 @@ public class ScheduleServiceImpl implements ScheduleService {
         return rows > 0 ? Result.SUCCESS : Result.FALSE;
     }
 
+    @PostConstruct
+    public void initBloomFilter() {
+        RBloomFilter<String> bloomFilter = redissonClient.getBloomFilter(BLOOM_KEY);
+        bloomFilter.tryInit(100_000L, 0.01);
+        List<LocalDate> dates = scheduleMapper.selectAllWorkDates();
+        for (LocalDate date : dates) {
+            bloomFilter.add(date.toString());
+        }
+    }
+
     @Override
     public Result insertSchedule(Long docId, int weeks) {
         List<ScheduleRule> rules = scheduleRuleMapper.selectList(
@@ -107,11 +121,22 @@ public class ScheduleServiceImpl implements ScheduleService {
         if (toInsert.isEmpty()) return Result.FALSE;
 
         int rows = scheduleMapper.batchInsert(toInsert);
-        return rows > 0 ? Result.SUCCESS : Result.FALSE;
+        if (rows > 0) {
+            RBloomFilter<String> bloomFilter = redissonClient.getBloomFilter(BLOOM_KEY);
+            toInsert.stream().map(s -> s.getWorkDate().toString()).distinct().forEach(bloomFilter::add);
+            return Result.SUCCESS;
+        }
+        return Result.FALSE;
     }
 
     @Override
     public String findDetailByDate(LocalDate workDate) {
+        // 0. 布隆过滤器拦截不存在的日期，防止缓存穿透
+        RBloomFilter<String> bloomFilter = redissonClient.getBloomFilter(BLOOM_KEY);
+        if (!bloomFilter.contains(workDate.toString())) {
+            return "[]";
+        }
+
         String redisKey = "schedule:detail:" + workDate;
 
         // 1. 尝试从缓存获取详情列表 (Hash 结构)
@@ -160,9 +185,8 @@ public class ScheduleServiceImpl implements ScheduleService {
                 if (lock.isHeldByCurrentThread()) lock.unlock();
             }
         }
-
         // 3. 【核心步骤：动态合并实时库存】
-        if (list != null && !list.isEmpty()) {
+        if (!list.isEmpty()) {
             List<String> numKeys = list.stream()
                     .map(d -> "schedule:num:" + d.getScheduleId())
                     .toList();
@@ -177,7 +201,6 @@ public class ScheduleServiceImpl implements ScheduleService {
                 }
             }
         }
-
         return JSON.toJSONString(list);
     }
 
