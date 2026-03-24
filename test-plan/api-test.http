@@ -131,11 +131,11 @@ Authorization: Bearer {{token}}
 GET {{gateway}}/user/patient/list
 Authorization: Bearer {{token}}
 
-### 3.2 查询某日所有排班号源 (Redis 缓存架构，填入下方 scheduleId) 一致性不足
+### 3.2 查询某日所有排班号源 (Redis 缓存架构，填入下方 scheduleId)
 GET {{gateway}}/doctor/schedule/detail?workDate=2026-03-25
 Authorization: Bearer {{token}}
 
-### 3.3 查看某个具体排班的实时库存和详情  一致性不足
+### 3.3 查看某个具体排班的实时库存和详情
 GET {{gateway}}/doctor/schedule/detail/id?scheduleId=9032908943567911718
 Authorization: Bearer {{token}}
 

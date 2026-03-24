@@ -173,7 +173,7 @@ $(document).ready(function() {
     });
 
     // Creates APDEX table
-    createTable($("#apdexTable"), {"supportsControllersDiscrimination": true, "overall": {"data": [0.0245, 500, 1500, "Total"], "isController": false}, "titles": ["Apdex", "T (Toleration threshold)", "F (Frustration threshold)", "Label"], "items": [{"data": [0.0245, 500, 1500, "抢号请求-优化"], "isController": false}]}, function(index, item){
+    createTable($("#apdexTable"), {"supportsControllersDiscrimination": true, "overall": {"data": [0.0265, 500, 1500, "Total"], "isController": false}, "titles": ["Apdex", "T (Toleration threshold)", "F (Frustration threshold)", "Label"], "items": [{"data": [0.0265, 500, 1500, "抢号请求-优化"], "isController": false}]}, function(index, item){
         switch(index){
             case 0:
                 item = item.toFixed(3);
@@ -187,7 +187,7 @@ $(document).ready(function() {
     }, [[0, 0]], 3);
 
     // Create statistics table
-    createTable($("#statisticsTable"), {"supportsControllersDiscrimination": true, "overall": {"data": ["Total", 1000, 970, 97.0, 606.4930000000002, 89, 1247, 592.5, 944.9, 1064.85, 1227.94, 792.3930269413629, 193.7880720087163, 362.05861232171156], "isController": false}, "titles": ["Label", "#Samples", "FAIL", "Error %", "Average", "Min", "Max", "Median", "90th pct", "95th pct", "99th pct", "Transactions/s", "Received", "Sent"], "items": [{"data": ["抢号请求-优化", 1000, 970, 97.0, 606.4930000000002, 89, 1247, 592.5, 944.9, 1064.85, 1227.94, 792.3930269413629, 193.7880720087163, 362.05861232171156], "isController": false}]}, function(index, item){
+    createTable($("#statisticsTable"), {"supportsControllersDiscrimination": true, "overall": {"data": ["Total", 1000, 970, 97.0, 510.50700000000035, 175, 1254, 486.0, 709.5999999999999, 862.6999999999996, 1184.8300000000002, 773.9938080495357, 189.2883489744582, 353.6516785990712], "isController": false}, "titles": ["Label", "#Samples", "FAIL", "Error %", "Average", "Min", "Max", "Median", "90th pct", "95th pct", "99th pct", "Transactions/s", "Received", "Sent"], "items": [{"data": ["抢号请求-优化", 1000, 970, 97.0, 510.50700000000035, 175, 1254, 486.0, 709.5999999999999, 862.6999999999996, 1184.8300000000002, 773.9938080495357, 189.2883489744582, 353.6516785990712], "isController": false}]}, function(index, item){
         switch(index){
             // Errors pct
             case 3:
