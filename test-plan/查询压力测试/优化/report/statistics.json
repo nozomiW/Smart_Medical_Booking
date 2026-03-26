@@ -1,0 +1,34 @@
+{
+  "Total" : {
+    "transaction" : "Total",
+    "sampleCount" : 482836,
+    "errorCount" : 0,
+    "errorPct" : 0.0,
+    "meanResTime" : 67.85314268198708,
+    "medianResTime" : 66.0,
+    "minResTime" : 1.0,
+    "maxResTime" : 349.0,
+    "pct1ResTime" : 121.0,
+    "pct2ResTime" : 138.0,
+    "pct3ResTime" : 174.0,
+    "throughput" : 2683.64477150702,
+    "receivedKBytesPerSec" : 41457.18205112016,
+    "sentKBytesPerSec" : 906.778409122489
+  },
+  "号源查询请求-优化" : {
+    "transaction" : "号源查询请求-优化",
+    "sampleCount" : 482836,
+    "errorCount" : 0,
+    "errorPct" : 0.0,
+    "meanResTime" : 67.85314268198708,
+    "medianResTime" : 66.0,
+    "minResTime" : 1.0,
+    "maxResTime" : 349.0,
+    "pct1ResTime" : 121.0,
+    "pct2ResTime" : 138.0,
+    "pct3ResTime" : 174.0,
+    "throughput" : 2683.64477150702,
+    "receivedKBytesPerSec" : 41457.18205112016,
+    "sentKBytesPerSec" : 906.778409122489
+  }
+}

@@ -1,0 +1,741 @@
+2026-03-26 15:37:57,978 INFO o.a.j.u.JMeterUtils: Setting Locale to en_EN
+2026-03-26 15:37:57,993 INFO o.a.j.JMeter: Loading user properties from: /home/future/apache-jmeter-5.6.3/bin/user.properties
+2026-03-26 15:37:57,993 INFO o.a.j.JMeter: Loading system properties from: /home/future/apache-jmeter-5.6.3/bin/system.properties
+2026-03-26 15:37:57,997 INFO o.a.j.JMeter: Copyright (c) 1998-2024 The Apache Software Foundation
+2026-03-26 15:37:57,998 INFO o.a.j.JMeter: Version 5.6.3
+2026-03-26 15:37:57,998 INFO o.a.j.JMeter: java.version=17.0.18
+2026-03-26 15:37:57,998 INFO o.a.j.JMeter: java.vm.name=OpenJDK 64-Bit Server VM
+2026-03-26 15:37:57,998 INFO o.a.j.JMeter: os.name=Linux
+2026-03-26 15:37:57,998 INFO o.a.j.JMeter: os.arch=amd64
+2026-03-26 15:37:57,998 INFO o.a.j.JMeter: os.version=6.17.0-19-generic
+2026-03-26 15:37:57,998 INFO o.a.j.JMeter: file.encoding=UTF-8
+2026-03-26 15:37:57,998 INFO o.a.j.JMeter: java.awt.headless=true
+2026-03-26 15:37:57,998 INFO o.a.j.JMeter: Max memory     =1073741824
+2026-03-26 15:37:57,998 INFO o.a.j.JMeter: Available Processors =12
+2026-03-26 15:37:58,005 INFO o.a.j.JMeter: Default Locale=English (EN)
+2026-03-26 15:37:58,006 INFO o.a.j.JMeter: JMeter  Locale=English (EN)
+2026-03-26 15:37:58,006 INFO o.a.j.JMeter: JMeterHome=/home/future/apache-jmeter-5.6.3
+2026-03-26 15:37:58,006 INFO o.a.j.JMeter: user.dir  =/media/future/My Passport/progrom/Smart_Medical_Booking/test-plan/查询压力测试/优化
+2026-03-26 15:37:58,006 INFO o.a.j.JMeter: PWD       =/media/future/My Passport/progrom/Smart_Medical_Booking/test-plan/查询压力测试/优化
+2026-03-26 15:37:58,007 INFO o.a.j.JMeter: IP: 127.0.1.1 Name: future-OMEN-Laptop-15-ek0xxx FullName: future-OMEN-Laptop-15-ek0xxx
+2026-03-26 15:37:58,016 INFO o.a.j.JMeter: Setting property 'jmeter.reportgenerator.outputdir' to:'/media/future/My Passport/progrom/Smart_Medical_Booking/test-plan/查询压力测试/优化/./report'
+2026-03-26 15:37:58,018 INFO o.a.j.s.FileServer: Default base='/media/future/My Passport/progrom/Smart_Medical_Booking/test-plan/查询压力测试/优化'
+2026-03-26 15:37:58,019 INFO o.a.j.s.FileServer: Set new base='/media/future/My Passport/progrom/Smart_Medical_Booking/test-plan/查询压力测试/优化'
+2026-03-26 15:37:58,154 INFO o.a.j.s.SaveService: Testplan (JMX) version: 2.2. Testlog (JTL) version: 2.2
+2026-03-26 15:37:58,172 INFO o.a.j.s.SaveService: Using SaveService properties version 5.0
+2026-03-26 15:37:58,174 INFO o.a.j.s.SaveService: Using SaveService properties file encoding UTF-8
+2026-03-26 15:37:58,176 INFO o.a.j.s.SaveService: Loading file: 查询压力测试.jmx
+2026-03-26 15:37:58,211 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/html is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2026-03-26 15:37:58,211 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xhtml+xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2026-03-26 15:37:58,211 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2026-03-26 15:37:58,211 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2026-03-26 15:37:58,211 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/vnd.wap.wml is org.apache.jmeter.protocol.http.parser.RegexpHTMLParser
+2026-03-26 15:37:58,211 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/css is org.apache.jmeter.protocol.http.parser.CssParser
+2026-03-26 15:37:58,241 INFO o.a.j.JMeter: Creating summariser <summary>
+2026-03-26 15:37:58,244 INFO o.a.j.r.d.ReportGenerator: ReportGenerator will use for Parsing the separator: ','
+2026-03-26 15:37:58,244 INFO o.a.j.r.d.ReportGenerator: Will generate report at end of test from  results file: result.jlt
+2026-03-26 15:37:58,244 INFO o.a.j.r.d.ReportGenerator: Reading report generator properties from: /home/future/apache-jmeter-5.6.3/bin/reportgenerator.properties
+2026-03-26 15:37:58,245 INFO o.a.j.r.d.ReportGenerator: Merging with JMeter properties
+2026-03-26 15:37:58,248 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.temp_dir' not found, using default value 'temp' instead.
+2026-03-26 15:37:58,250 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.apdex_per_transaction' not found, using default value 'null' instead.
+2026-03-26 15:37:58,250 INFO o.a.j.r.c.ReportGeneratorConfiguration: apdex_per_transaction is empty, not APDEX per transaction customization
+2026-03-26 15:37:58,250 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.sample_filter' not found, using default value 'null' instead.
+2026-03-26 15:37:58,250 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.report_title' not found, using default value 'null' instead.
+2026-03-26 15:37:58,250 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.start_date' not found, using default value 'null' instead.
+2026-03-26 15:37:58,250 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.end_date' not found, using default value 'null' instead.
+2026-03-26 15:37:58,250 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.date_format' not found, using default value 'null' instead.
+2026-03-26 15:37:58,250 INFO o.a.j.r.c.ReportGeneratorConfiguration: Will use date range start date: null, end date: null
+2026-03-26 15:37:58,253 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.totalTPS.exclude_controllers' not found, using default value 'false' instead.
+2026-03-26 15:37:58,253 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.activeThreadsOverTime.exclude_controllers' not found, using default value 'false' instead.
+2026-03-26 15:37:58,254 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.timeVsThreads.exclude_controllers' not found, using default value 'false' instead.
+2026-03-26 15:37:58,254 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.responseTimeDistribution.exclude_controllers' not found, using default value 'false' instead.
+2026-03-26 15:37:58,254 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.transactionsPerSecond.exclude_controllers' not found, using default value 'false' instead.
+2026-03-26 15:37:58,254 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.responseTimePercentiles.exclude_controllers' not found, using default value 'false' instead.
+2026-03-26 15:37:58,254 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.responseTimePercentilesOverTime.exclude_controllers' not found, using default value 'false' instead.
+2026-03-26 15:37:58,254 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.responseTimesOverTime.exclude_controllers' not found, using default value 'false' instead.
+2026-03-26 15:37:58,254 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.connectTimeOverTime.exclude_controllers' not found, using default value 'false' instead.
+2026-03-26 15:37:58,254 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.latenciesOverTime.exclude_controllers' not found, using default value 'false' instead.
+2026-03-26 15:37:58,255 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.exporter.json.filters_only_sample_series' not found, using default value 'true' instead.
+2026-03-26 15:37:58,255 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.exporter.json.series_filter' not found, using default value '' instead.
+2026-03-26 15:37:58,255 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.exporter.json.show_controllers_only' not found, using default value 'false' instead.
+2026-03-26 15:37:58,255 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.exporter.html.filters_only_sample_series' not found, using default value 'true' instead.
+2026-03-26 15:37:58,255 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.exporter.html.series_filter' not found, using default value '' instead.
+2026-03-26 15:37:58,256 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.exporter.html.show_controllers_only' not found, using default value 'false' instead.
+2026-03-26 15:37:58,264 INFO o.a.j.e.StandardJMeterEngine: Running the test!
+2026-03-26 15:37:58,265 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2026-03-26 15:37:58,265 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2026-03-26 15:37:58,269 INFO o.a.j.e.u.CompoundVariable: Note: Function class names must contain the string: '.functions.'
+2026-03-26 15:37:58,269 INFO o.a.j.e.u.CompoundVariable: Note: Function class names must not contain the string: '.gui.'
+2026-03-26 15:37:58,318 INFO o.a.j.JMeter: Running test (1774510678318)
+2026-03-26 15:37:58,331 INFO o.a.j.e.StandardJMeterEngine: Starting ThreadGroup: 1 : 号源查询
+2026-03-26 15:37:58,331 INFO o.a.j.e.StandardJMeterEngine: Starting 200 threads for group 号源查询.
+2026-03-26 15:37:58,331 INFO o.a.j.e.StandardJMeterEngine: Thread will continue on error
+2026-03-26 15:37:58,331 INFO o.a.j.t.ThreadGroup: Starting thread group... number=1 threads=200 ramp-up=30 delayedStart=false
+2026-03-26 15:37:58,397 INFO o.a.j.t.ThreadGroup: Started thread group number 1
+2026-03-26 15:37:58,398 INFO o.a.j.e.StandardJMeterEngine: All thread groups have been started
+2026-03-26 15:37:58,433 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-1
+2026-03-26 15:37:58,435 INFO o.a.j.s.FileServer: Stored: /media/future/My Passport/progrom/Smart_Medical_Booking/test-plan/work_dates.csv
+2026-03-26 15:37:58,444 INFO o.a.j.s.FileServer: Stored: /media/future/My Passport/progrom/Smart_Medical_Booking/test-plan/tokens.csv
+2026-03-26 15:37:58,459 INFO o.a.j.p.h.s.HTTPHCAbstractImpl: Local host = future-OMEN-Laptop-15-ek0xxx
+2026-03-26 15:37:58,464 INFO o.a.j.p.h.s.HTTPHC4Impl: HTTP request retry count = 0
+2026-03-26 15:37:58,466 INFO o.a.j.s.SampleResult: Note: Sample TimeStamps are START times
+2026-03-26 15:37:58,466 INFO o.a.j.s.SampleResult: sampleresult.default.encoding is set to UTF-8
+2026-03-26 15:37:58,466 INFO o.a.j.s.SampleResult: sampleresult.useNanoTime=true
+2026-03-26 15:37:58,466 INFO o.a.j.s.SampleResult: sampleresult.nanoThreadSleep=5000
+2026-03-26 15:37:58,580 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-2
+2026-03-26 15:37:58,729 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-3
+2026-03-26 15:37:58,879 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-4
+2026-03-26 15:37:59,031 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-5
+2026-03-26 15:37:59,181 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-6
+2026-03-26 15:37:59,329 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-7
+2026-03-26 15:37:59,479 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-8
+2026-03-26 15:37:59,631 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-9
+2026-03-26 15:37:59,780 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-10
+2026-03-26 15:37:59,930 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-11
+2026-03-26 15:38:00,015 INFO o.a.j.r.Summariser: summary +   1253 in 00:00:02 =  744.1/s Avg:     6 Min:     1 Max:    39 Err:     0 (0.00%) Active: 11 Started: 11 Finished: 0
+2026-03-26 15:38:00,078 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-12
+2026-03-26 15:38:00,229 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-13
+2026-03-26 15:38:00,376 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-14
+2026-03-26 15:38:00,525 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-15
+2026-03-26 15:38:00,678 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-16
+2026-03-26 15:38:00,830 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-17
+2026-03-26 15:38:00,980 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-18
+2026-03-26 15:38:01,126 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-19
+2026-03-26 15:38:01,275 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-20
+2026-03-26 15:38:01,425 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-21
+2026-03-26 15:38:01,571 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-22
+2026-03-26 15:38:01,720 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-23
+2026-03-26 15:38:01,872 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-24
+2026-03-26 15:38:02,025 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-25
+2026-03-26 15:38:02,171 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-26
+2026-03-26 15:38:02,319 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-27
+2026-03-26 15:38:02,473 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-28
+2026-03-26 15:38:02,625 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-29
+2026-03-26 15:38:02,770 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-30
+2026-03-26 15:38:02,919 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-31
+2026-03-26 15:38:03,072 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-32
+2026-03-26 15:38:03,223 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-33
+2026-03-26 15:38:03,370 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-34
+2026-03-26 15:38:03,523 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-35
+2026-03-26 15:38:03,668 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-36
+2026-03-26 15:38:03,816 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-37
+2026-03-26 15:38:03,965 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-38
+2026-03-26 15:38:04,115 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-39
+2026-03-26 15:38:04,267 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-40
+2026-03-26 15:38:04,417 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-41
+2026-03-26 15:38:04,565 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-42
+2026-03-26 15:38:04,718 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-43
+2026-03-26 15:38:04,869 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-44
+2026-03-26 15:38:05,014 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-45
+2026-03-26 15:38:05,166 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-46
+2026-03-26 15:38:05,317 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-47
+2026-03-26 15:38:05,462 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-48
+2026-03-26 15:38:05,619 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-49
+2026-03-26 15:38:05,769 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-50
+2026-03-26 15:38:05,913 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-51
+2026-03-26 15:38:06,065 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-52
+2026-03-26 15:38:06,218 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-53
+2026-03-26 15:38:06,368 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-54
+2026-03-26 15:38:06,512 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-55
+2026-03-26 15:38:06,663 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-56
+2026-03-26 15:38:06,812 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-57
+2026-03-26 15:38:06,964 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-58
+2026-03-26 15:38:07,114 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-59
+2026-03-26 15:38:07,259 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-60
+2026-03-26 15:38:07,416 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-61
+2026-03-26 15:38:07,561 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-62
+2026-03-26 15:38:07,715 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-63
+2026-03-26 15:38:07,860 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-64
+2026-03-26 15:38:08,011 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-65
+2026-03-26 15:38:08,158 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-66
+2026-03-26 15:38:08,311 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-67
+2026-03-26 15:38:08,465 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-68
+2026-03-26 15:38:08,610 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-69
+2026-03-26 15:38:08,761 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-70
+2026-03-26 15:38:08,914 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-71
+2026-03-26 15:38:09,064 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-72
+2026-03-26 15:38:09,210 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-73
+2026-03-26 15:38:09,362 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-74
+2026-03-26 15:38:09,513 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-75
+2026-03-26 15:38:09,663 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-76
+2026-03-26 15:38:09,808 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-77
+2026-03-26 15:38:09,962 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-78
+2026-03-26 15:38:10,105 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-79
+2026-03-26 15:38:10,262 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-80
+2026-03-26 15:38:10,412 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-81
+2026-03-26 15:38:10,555 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-82
+2026-03-26 15:38:10,704 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-83
+2026-03-26 15:38:10,857 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-84
+2026-03-26 15:38:11,005 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-85
+2026-03-26 15:38:11,161 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-86
+2026-03-26 15:38:11,305 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-87
+2026-03-26 15:38:11,453 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-88
+2026-03-26 15:38:11,606 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-89
+2026-03-26 15:38:11,759 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-90
+2026-03-26 15:38:11,903 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-91
+2026-03-26 15:38:12,058 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-92
+2026-03-26 15:38:12,205 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-93
+2026-03-26 15:38:12,353 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-94
+2026-03-26 15:38:12,502 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-95
+2026-03-26 15:38:12,653 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-96
+2026-03-26 15:38:12,801 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-97
+2026-03-26 15:38:12,955 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-98
+2026-03-26 15:38:13,109 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-99
+2026-03-26 15:38:13,253 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-100
+2026-03-26 15:38:13,405 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-101
+2026-03-26 15:38:13,553 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-102
+2026-03-26 15:38:13,702 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-103
+2026-03-26 15:38:13,854 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-104
+2026-03-26 15:38:14,001 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-105
+2026-03-26 15:38:14,151 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-106
+2026-03-26 15:38:14,303 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-107
+2026-03-26 15:38:14,449 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-108
+2026-03-26 15:38:14,604 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-109
+2026-03-26 15:38:14,748 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-110
+2026-03-26 15:38:14,897 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-111
+2026-03-26 15:38:15,051 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-112
+2026-03-26 15:38:15,197 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-113
+2026-03-26 15:38:15,348 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-114
+2026-03-26 15:38:15,502 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-115
+2026-03-26 15:38:15,654 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-116
+2026-03-26 15:38:15,802 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-117
+2026-03-26 15:38:15,950 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-118
+2026-03-26 15:38:16,098 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-119
+2026-03-26 15:38:16,250 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-120
+2026-03-26 15:38:16,398 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-121
+2026-03-26 15:38:16,549 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-122
+2026-03-26 15:38:16,698 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-123
+2026-03-26 15:38:16,845 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-124
+2026-03-26 15:38:16,996 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-125
+2026-03-26 15:38:17,146 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-126
+2026-03-26 15:38:17,296 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-127
+2026-03-26 15:38:17,445 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-128
+2026-03-26 15:38:17,595 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-129
+2026-03-26 15:38:17,746 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-130
+2026-03-26 15:38:17,897 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-131
+2026-03-26 15:38:18,047 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-132
+2026-03-26 15:38:18,197 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-133
+2026-03-26 15:38:18,344 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-134
+2026-03-26 15:38:18,494 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-135
+2026-03-26 15:38:18,645 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-136
+2026-03-26 15:38:18,797 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-137
+2026-03-26 15:38:18,941 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-138
+2026-03-26 15:38:19,097 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-139
+2026-03-26 15:38:19,246 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-140
+2026-03-26 15:38:19,394 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-141
+2026-03-26 15:38:19,546 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-142
+2026-03-26 15:38:19,696 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-143
+2026-03-26 15:38:19,843 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-144
+2026-03-26 15:38:19,993 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-145
+2026-03-26 15:38:20,142 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-146
+2026-03-26 15:38:20,287 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-147
+2026-03-26 15:38:20,440 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-148
+2026-03-26 15:38:20,585 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-149
+2026-03-26 15:38:20,735 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-150
+2026-03-26 15:38:20,887 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-151
+2026-03-26 15:38:21,041 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-152
+2026-03-26 15:38:21,185 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-153
+2026-03-26 15:38:21,335 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-154
+2026-03-26 15:38:21,485 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-155
+2026-03-26 15:38:21,634 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-156
+2026-03-26 15:38:21,784 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-157
+2026-03-26 15:38:21,938 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-158
+2026-03-26 15:38:22,083 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-159
+2026-03-26 15:38:22,238 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-160
+2026-03-26 15:38:22,384 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-161
+2026-03-26 15:38:22,532 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-162
+2026-03-26 15:38:22,682 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-163
+2026-03-26 15:38:22,832 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-164
+2026-03-26 15:38:22,987 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-165
+2026-03-26 15:38:23,136 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-166
+2026-03-26 15:38:23,284 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-167
+2026-03-26 15:38:23,436 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-168
+2026-03-26 15:38:23,577 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-169
+2026-03-26 15:38:23,727 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-170
+2026-03-26 15:38:23,874 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-171
+2026-03-26 15:38:24,043 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-172
+2026-03-26 15:38:24,182 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-173
+2026-03-26 15:38:24,327 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-174
+2026-03-26 15:38:24,475 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-175
+2026-03-26 15:38:24,629 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-176
+2026-03-26 15:38:24,774 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-177
+2026-03-26 15:38:24,924 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-178
+2026-03-26 15:38:25,072 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-179
+2026-03-26 15:38:25,224 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-180
+2026-03-26 15:38:25,378 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-181
+2026-03-26 15:38:25,529 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-182
+2026-03-26 15:38:25,677 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-183
+2026-03-26 15:38:25,829 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-184
+2026-03-26 15:38:25,972 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-185
+2026-03-26 15:38:26,124 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-186
+2026-03-26 15:38:26,271 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-187
+2026-03-26 15:38:26,422 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-188
+2026-03-26 15:38:26,571 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-189
+2026-03-26 15:38:26,722 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-190
+2026-03-26 15:38:26,872 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-191
+2026-03-26 15:38:27,021 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-192
+2026-03-26 15:38:27,170 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-193
+2026-03-26 15:38:27,323 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-194
+2026-03-26 15:38:27,472 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-195
+2026-03-26 15:38:27,620 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-196
+2026-03-26 15:38:27,771 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-197
+2026-03-26 15:38:27,921 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-198
+2026-03-26 15:38:28,070 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-199
+2026-03-26 15:38:28,221 INFO o.a.j.t.JMeterThread: Thread started: 号源查询 1-200
+2026-03-26 15:38:30,001 INFO o.a.j.r.Summariser: summary +  76945 in 00:00:30 = 2565.0/s Avg:    42 Min:     2 Max:   349 Err:     0 (0.00%) Active: 200 Started: 200 Finished: 0
+2026-03-26 15:38:30,003 INFO o.a.j.r.Summariser: summary =  78198 in 00:00:32 = 2468.1/s Avg:    42 Min:     1 Max:   349 Err:     0 (0.00%)
+2026-03-26 15:39:00,001 INFO o.a.j.r.Summariser: summary +  83441 in 00:00:30 = 2781.5/s Avg:    71 Min:     3 Max:   280 Err:     0 (0.00%) Active: 200 Started: 200 Finished: 0
+2026-03-26 15:39:00,001 INFO o.a.j.r.Summariser: summary = 161639 in 00:01:02 = 2620.5/s Avg:    57 Min:     1 Max:   349 Err:     0 (0.00%)
+2026-03-26 15:39:30,006 INFO o.a.j.r.Summariser: summary +  81121 in 00:00:30 = 2704.1/s Avg:    73 Min:     2 Max:   342 Err:     0 (0.00%) Active: 200 Started: 200 Finished: 0
+2026-03-26 15:39:30,006 INFO o.a.j.r.Summariser: summary = 242760 in 00:01:32 = 2647.8/s Avg:    62 Min:     1 Max:   349 Err:     0 (0.00%)
+2026-03-26 15:40:00,001 INFO o.a.j.r.Summariser: summary +  79774 in 00:00:30 = 2659.1/s Avg:    74 Min:     4 Max:   304 Err:     0 (0.00%) Active: 200 Started: 200 Finished: 0
+2026-03-26 15:40:00,002 INFO o.a.j.r.Summariser: summary = 322534 in 00:02:02 = 2650.6/s Avg:    65 Min:     1 Max:   349 Err:     0 (0.00%)
+2026-03-26 15:40:30,003 INFO o.a.j.r.Summariser: summary +  82287 in 00:00:30 = 2742.8/s Avg:    72 Min:     3 Max:   337 Err:     0 (0.00%) Active: 200 Started: 200 Finished: 0
+2026-03-26 15:40:30,005 INFO o.a.j.r.Summariser: summary = 404821 in 00:02:32 = 2668.9/s Avg:    67 Min:     1 Max:   349 Err:     0 (0.00%)
+2026-03-26 15:40:58,342 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-5
+2026-03-26 15:40:58,343 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-5
+2026-03-26 15:40:58,345 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-21
+2026-03-26 15:40:58,345 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-21
+2026-03-26 15:40:58,345 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-13
+2026-03-26 15:40:58,346 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-13
+2026-03-26 15:40:58,350 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-6
+2026-03-26 15:40:58,350 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-6
+2026-03-26 15:40:58,350 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-10
+2026-03-26 15:40:58,350 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-10
+2026-03-26 15:40:58,355 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-8
+2026-03-26 15:40:58,355 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-8
+2026-03-26 15:40:58,355 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-60
+2026-03-26 15:40:58,355 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-60
+2026-03-26 15:40:58,357 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-16
+2026-03-26 15:40:58,357 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-2
+2026-03-26 15:40:58,357 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-16
+2026-03-26 15:40:58,357 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-2
+2026-03-26 15:40:58,358 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-35
+2026-03-26 15:40:58,358 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-35
+2026-03-26 15:40:58,358 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-9
+2026-03-26 15:40:58,358 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-9
+2026-03-26 15:40:58,358 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-28
+2026-03-26 15:40:58,358 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-28
+2026-03-26 15:40:58,360 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-26
+2026-03-26 15:40:58,360 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-26
+2026-03-26 15:40:58,361 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-19
+2026-03-26 15:40:58,361 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-45
+2026-03-26 15:40:58,361 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-67
+2026-03-26 15:40:58,361 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-45
+2026-03-26 15:40:58,361 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-67
+2026-03-26 15:40:58,361 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-85
+2026-03-26 15:40:58,362 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-85
+2026-03-26 15:40:58,362 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-59
+2026-03-26 15:40:58,362 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-27
+2026-03-26 15:40:58,362 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-7
+2026-03-26 15:40:58,362 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-59
+2026-03-26 15:40:58,362 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-27
+2026-03-26 15:40:58,362 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-7
+2026-03-26 15:40:58,362 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-23
+2026-03-26 15:40:58,362 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-77
+2026-03-26 15:40:58,362 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-23
+2026-03-26 15:40:58,362 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-77
+2026-03-26 15:40:58,362 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-19
+2026-03-26 15:40:58,363 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-92
+2026-03-26 15:40:58,364 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-92
+2026-03-26 15:40:58,364 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-86
+2026-03-26 15:40:58,364 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-86
+2026-03-26 15:40:58,364 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-50
+2026-03-26 15:40:58,364 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-50
+2026-03-26 15:40:58,365 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-66
+2026-03-26 15:40:58,365 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-82
+2026-03-26 15:40:58,365 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-82
+2026-03-26 15:40:58,365 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-66
+2026-03-26 15:40:58,365 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-68
+2026-03-26 15:40:58,365 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-68
+2026-03-26 15:40:58,366 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-76
+2026-03-26 15:40:58,366 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-76
+2026-03-26 15:40:58,366 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-38
+2026-03-26 15:40:58,366 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-38
+2026-03-26 15:40:58,366 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-84
+2026-03-26 15:40:58,366 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-84
+2026-03-26 15:40:58,367 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-3
+2026-03-26 15:40:58,367 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-3
+2026-03-26 15:40:58,367 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-65
+2026-03-26 15:40:58,367 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-65
+2026-03-26 15:40:58,372 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-134
+2026-03-26 15:40:58,372 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-117
+2026-03-26 15:40:58,373 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-117
+2026-03-26 15:40:58,373 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-114
+2026-03-26 15:40:58,373 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-39
+2026-03-26 15:40:58,373 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-134
+2026-03-26 15:40:58,373 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-108
+2026-03-26 15:40:58,373 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-114
+2026-03-26 15:40:58,373 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-110
+2026-03-26 15:40:58,373 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-29
+2026-03-26 15:40:58,373 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-110
+2026-03-26 15:40:58,373 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-141
+2026-03-26 15:40:58,373 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-88
+2026-03-26 15:40:58,373 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-141
+2026-03-26 15:40:58,374 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-88
+2026-03-26 15:40:58,374 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-80
+2026-03-26 15:40:58,373 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-29
+2026-03-26 15:40:58,373 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-108
+2026-03-26 15:40:58,374 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-70
+2026-03-26 15:40:58,374 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-70
+2026-03-26 15:40:58,374 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-39
+2026-03-26 15:40:58,375 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-47
+2026-03-26 15:40:58,374 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-80
+2026-03-26 15:40:58,375 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-47
+2026-03-26 15:40:58,375 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-109
+2026-03-26 15:40:58,375 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-74
+2026-03-26 15:40:58,375 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-74
+2026-03-26 15:40:58,375 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-109
+2026-03-26 15:40:58,375 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-58
+2026-03-26 15:40:58,375 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-78
+2026-03-26 15:40:58,375 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-58
+2026-03-26 15:40:58,375 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-12
+2026-03-26 15:40:58,376 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-12
+2026-03-26 15:40:58,376 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-52
+2026-03-26 15:40:58,376 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-52
+2026-03-26 15:40:58,376 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-4
+2026-03-26 15:40:58,376 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-112
+2026-03-26 15:40:58,376 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-4
+2026-03-26 15:40:58,376 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-44
+2026-03-26 15:40:58,376 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-34
+2026-03-26 15:40:58,375 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-78
+2026-03-26 15:40:58,377 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-94
+2026-03-26 15:40:58,376 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-36
+2026-03-26 15:40:58,378 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-36
+2026-03-26 15:40:58,378 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-94
+2026-03-26 15:40:58,378 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-34
+2026-03-26 15:40:58,378 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-15
+2026-03-26 15:40:58,378 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-95
+2026-03-26 15:40:58,378 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-15
+2026-03-26 15:40:58,378 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-83
+2026-03-26 15:40:58,378 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-95
+2026-03-26 15:40:58,378 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-83
+2026-03-26 15:40:58,379 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-37
+2026-03-26 15:40:58,379 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-37
+2026-03-26 15:40:58,376 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-44
+2026-03-26 15:40:58,379 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-112
+2026-03-26 15:40:58,380 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-57
+2026-03-26 15:40:58,380 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-57
+2026-03-26 15:40:58,381 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-96
+2026-03-26 15:40:58,381 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-133
+2026-03-26 15:40:58,382 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-14
+2026-03-26 15:40:58,382 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-133
+2026-03-26 15:40:58,382 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-14
+2026-03-26 15:40:58,382 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-96
+2026-03-26 15:40:58,384 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-25
+2026-03-26 15:40:58,384 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-25
+2026-03-26 15:40:58,384 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-69
+2026-03-26 15:40:58,385 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-161
+2026-03-26 15:40:58,385 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-161
+2026-03-26 15:40:58,385 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-17
+2026-03-26 15:40:58,385 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-17
+2026-03-26 15:40:58,385 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-69
+2026-03-26 15:40:58,385 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-116
+2026-03-26 15:40:58,386 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-116
+2026-03-26 15:40:58,386 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-43
+2026-03-26 15:40:58,386 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-43
+2026-03-26 15:40:58,386 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-89
+2026-03-26 15:40:58,387 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-54
+2026-03-26 15:40:58,387 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-103
+2026-03-26 15:40:58,386 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-49
+2026-03-26 15:40:58,387 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-49
+2026-03-26 15:40:58,388 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-73
+2026-03-26 15:40:58,388 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-41
+2026-03-26 15:40:58,388 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-73
+2026-03-26 15:40:58,388 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-41
+2026-03-26 15:40:58,388 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-118
+2026-03-26 15:40:58,388 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-118
+2026-03-26 15:40:58,385 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-30
+2026-03-26 15:40:58,387 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-142
+2026-03-26 15:40:58,388 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-30
+2026-03-26 15:40:58,388 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-142
+2026-03-26 15:40:58,386 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-153
+2026-03-26 15:40:58,388 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-129
+2026-03-26 15:40:58,387 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-103
+2026-03-26 15:40:58,389 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-129
+2026-03-26 15:40:58,389 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-89
+2026-03-26 15:40:58,389 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-54
+2026-03-26 15:40:58,390 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-127
+2026-03-26 15:40:58,390 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-127
+2026-03-26 15:40:58,390 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-123
+2026-03-26 15:40:58,390 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-123
+2026-03-26 15:40:58,388 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-153
+2026-03-26 15:40:58,392 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-156
+2026-03-26 15:40:58,392 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-156
+2026-03-26 15:40:58,394 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-144
+2026-03-26 15:40:58,394 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-179
+2026-03-26 15:40:58,394 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-144
+2026-03-26 15:40:58,394 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-188
+2026-03-26 15:40:58,395 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-188
+2026-03-26 15:40:58,395 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-179
+2026-03-26 15:40:58,395 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-136
+2026-03-26 15:40:58,395 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-136
+2026-03-26 15:40:58,395 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-22
+2026-03-26 15:40:58,395 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-22
+2026-03-26 15:40:58,397 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-176
+2026-03-26 15:40:58,397 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-101
+2026-03-26 15:40:58,397 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-101
+2026-03-26 15:40:58,398 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-107
+2026-03-26 15:40:58,398 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-121
+2026-03-26 15:40:58,398 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-107
+2026-03-26 15:40:58,398 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-121
+2026-03-26 15:40:58,398 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-126
+2026-03-26 15:40:58,398 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-120
+2026-03-26 15:40:58,398 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-186
+2026-03-26 15:40:58,399 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-120
+2026-03-26 15:40:58,399 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-186
+2026-03-26 15:40:58,399 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-99
+2026-03-26 15:40:58,399 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-126
+2026-03-26 15:40:58,399 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-98
+2026-03-26 15:40:58,399 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-98
+2026-03-26 15:40:58,399 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-99
+2026-03-26 15:40:58,399 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-130
+2026-03-26 15:40:58,399 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-130
+2026-03-26 15:40:58,399 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-187
+2026-03-26 15:40:58,399 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-187
+2026-03-26 15:40:58,399 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-176
+2026-03-26 15:40:58,400 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-182
+2026-03-26 15:40:58,400 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-182
+2026-03-26 15:40:58,400 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-100
+2026-03-26 15:40:58,400 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-154
+2026-03-26 15:40:58,400 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-11
+2026-03-26 15:40:58,400 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-154
+2026-03-26 15:40:58,400 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-31
+2026-03-26 15:40:58,400 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-115
+2026-03-26 15:40:58,400 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-31
+2026-03-26 15:40:58,400 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-115
+2026-03-26 15:40:58,400 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-75
+2026-03-26 15:40:58,401 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-173
+2026-03-26 15:40:58,400 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-100
+2026-03-26 15:40:58,401 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-119
+2026-03-26 15:40:58,401 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-119
+2026-03-26 15:40:58,401 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-184
+2026-03-26 15:40:58,401 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-102
+2026-03-26 15:40:58,401 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-194
+2026-03-26 15:40:58,400 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-160
+2026-03-26 15:40:58,402 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-194
+2026-03-26 15:40:58,402 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-102
+2026-03-26 15:40:58,402 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-160
+2026-03-26 15:40:58,402 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-197
+2026-03-26 15:40:58,402 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-184
+2026-03-26 15:40:58,402 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-197
+2026-03-26 15:40:58,402 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-106
+2026-03-26 15:40:58,402 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-24
+2026-03-26 15:40:58,402 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-105
+2026-03-26 15:40:58,402 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-24
+2026-03-26 15:40:58,402 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-105
+2026-03-26 15:40:58,402 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-33
+2026-03-26 15:40:58,403 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-33
+2026-03-26 15:40:58,403 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-147
+2026-03-26 15:40:58,403 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-147
+2026-03-26 15:40:58,403 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-146
+2026-03-26 15:40:58,403 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-146
+2026-03-26 15:40:58,403 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-128
+2026-03-26 15:40:58,403 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-128
+2026-03-26 15:40:58,404 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-90
+2026-03-26 15:40:58,404 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-172
+2026-03-26 15:40:58,404 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-90
+2026-03-26 15:40:58,404 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-106
+2026-03-26 15:40:58,404 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-172
+2026-03-26 15:40:58,404 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-124
+2026-03-26 15:40:58,400 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-11
+2026-03-26 15:40:58,404 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-162
+2026-03-26 15:40:58,404 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-162
+2026-03-26 15:40:58,402 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-145
+2026-03-26 15:40:58,402 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-91
+2026-03-26 15:40:58,401 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-125
+2026-03-26 15:40:58,401 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-173
+2026-03-26 15:40:58,404 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-91
+2026-03-26 15:40:58,404 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-125
+2026-03-26 15:40:58,404 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-139
+2026-03-26 15:40:58,404 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-189
+2026-03-26 15:40:58,405 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-139
+2026-03-26 15:40:58,405 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-189
+2026-03-26 15:40:58,405 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-55
+2026-03-26 15:40:58,405 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-135
+2026-03-26 15:40:58,405 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-55
+2026-03-26 15:40:58,405 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-135
+2026-03-26 15:40:58,401 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-75
+2026-03-26 15:40:58,405 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-145
+2026-03-26 15:40:58,406 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-97
+2026-03-26 15:40:58,406 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-137
+2026-03-26 15:40:58,406 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-137
+2026-03-26 15:40:58,406 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-63
+2026-03-26 15:40:58,406 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-63
+2026-03-26 15:40:58,406 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-195
+2026-03-26 15:40:58,407 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-195
+2026-03-26 15:40:58,407 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-170
+2026-03-26 15:40:58,407 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-97
+2026-03-26 15:40:58,404 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-124
+2026-03-26 15:40:58,407 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-64
+2026-03-26 15:40:58,407 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-177
+2026-03-26 15:40:58,407 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-169
+2026-03-26 15:40:58,407 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-64
+2026-03-26 15:40:58,407 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-170
+2026-03-26 15:40:58,406 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-191
+2026-03-26 15:40:58,407 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-87
+2026-03-26 15:40:58,407 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-87
+2026-03-26 15:40:58,406 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-149
+2026-03-26 15:40:58,407 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-149
+2026-03-26 15:40:58,405 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-42
+2026-03-26 15:40:58,408 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-42
+2026-03-26 15:40:58,408 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-152
+2026-03-26 15:40:58,408 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-56
+2026-03-26 15:40:58,408 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-56
+2026-03-26 15:40:58,407 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-191
+2026-03-26 15:40:58,408 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-1
+2026-03-26 15:40:58,408 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-1
+2026-03-26 15:40:58,408 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-93
+2026-03-26 15:40:58,407 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-177
+2026-03-26 15:40:58,408 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-93
+2026-03-26 15:40:58,407 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-198
+2026-03-26 15:40:58,409 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-198
+2026-03-26 15:40:58,409 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-169
+2026-03-26 15:40:58,409 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-152
+2026-03-26 15:40:58,409 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-32
+2026-03-26 15:40:58,409 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-32
+2026-03-26 15:40:58,409 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-61
+2026-03-26 15:40:58,409 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-61
+2026-03-26 15:40:58,409 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-200
+2026-03-26 15:40:58,409 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-200
+2026-03-26 15:40:58,410 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-183
+2026-03-26 15:40:58,410 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-183
+2026-03-26 15:40:58,410 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-40
+2026-03-26 15:40:58,410 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-40
+2026-03-26 15:40:58,411 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-46
+2026-03-26 15:40:58,411 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-79
+2026-03-26 15:40:58,411 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-163
+2026-03-26 15:40:58,411 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-62
+2026-03-26 15:40:58,411 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-180
+2026-03-26 15:40:58,411 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-46
+2026-03-26 15:40:58,411 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-79
+2026-03-26 15:40:58,411 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-62
+2026-03-26 15:40:58,411 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-131
+2026-03-26 15:40:58,411 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-180
+2026-03-26 15:40:58,411 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-163
+2026-03-26 15:40:58,411 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-131
+2026-03-26 15:40:58,411 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-48
+2026-03-26 15:40:58,411 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-192
+2026-03-26 15:40:58,412 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-48
+2026-03-26 15:40:58,412 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-192
+2026-03-26 15:40:58,412 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-181
+2026-03-26 15:40:58,412 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-181
+2026-03-26 15:40:58,414 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-53
+2026-03-26 15:40:58,415 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-53
+2026-03-26 15:40:58,416 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-178
+2026-03-26 15:40:58,416 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-178
+2026-03-26 15:40:58,418 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-157
+2026-03-26 15:40:58,418 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-20
+2026-03-26 15:40:58,418 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-157
+2026-03-26 15:40:58,418 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-20
+2026-03-26 15:40:58,418 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-18
+2026-03-26 15:40:58,418 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-18
+2026-03-26 15:40:58,418 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-166
+2026-03-26 15:40:58,418 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-81
+2026-03-26 15:40:58,418 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-166
+2026-03-26 15:40:58,418 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-81
+2026-03-26 15:40:58,419 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-155
+2026-03-26 15:40:58,419 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-199
+2026-03-26 15:40:58,419 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-155
+2026-03-26 15:40:58,419 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-51
+2026-03-26 15:40:58,419 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-199
+2026-03-26 15:40:58,419 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-174
+2026-03-26 15:40:58,419 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-51
+2026-03-26 15:40:58,419 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-174
+2026-03-26 15:40:58,419 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-190
+2026-03-26 15:40:58,419 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-190
+2026-03-26 15:40:58,420 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-164
+2026-03-26 15:40:58,420 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-164
+2026-03-26 15:40:58,421 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-113
+2026-03-26 15:40:58,421 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-113
+2026-03-26 15:40:58,421 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-150
+2026-03-26 15:40:58,421 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-167
+2026-03-26 15:40:58,421 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-150
+2026-03-26 15:40:58,421 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-167
+2026-03-26 15:40:58,421 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-132
+2026-03-26 15:40:58,421 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-132
+2026-03-26 15:40:58,422 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-158
+2026-03-26 15:40:58,422 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-158
+2026-03-26 15:40:58,423 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-104
+2026-03-26 15:40:58,423 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-71
+2026-03-26 15:40:58,423 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-175
+2026-03-26 15:40:58,423 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-175
+2026-03-26 15:40:58,423 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-71
+2026-03-26 15:40:58,423 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-111
+2026-03-26 15:40:58,423 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-104
+2026-03-26 15:40:58,423 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-111
+2026-03-26 15:40:58,423 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-151
+2026-03-26 15:40:58,423 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-151
+2026-03-26 15:40:58,423 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-193
+2026-03-26 15:40:58,423 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-122
+2026-03-26 15:40:58,423 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-193
+2026-03-26 15:40:58,423 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-122
+2026-03-26 15:40:58,423 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-185
+2026-03-26 15:40:58,423 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-185
+2026-03-26 15:40:58,423 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-140
+2026-03-26 15:40:58,423 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-196
+2026-03-26 15:40:58,423 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-72
+2026-03-26 15:40:58,423 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-143
+2026-03-26 15:40:58,423 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-196
+2026-03-26 15:40:58,423 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-143
+2026-03-26 15:40:58,424 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-138
+2026-03-26 15:40:58,424 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-138
+2026-03-26 15:40:58,423 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-140
+2026-03-26 15:40:58,423 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-72
+2026-03-26 15:40:58,424 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-148
+2026-03-26 15:40:58,424 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-148
+2026-03-26 15:40:58,424 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-168
+2026-03-26 15:40:58,424 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-168
+2026-03-26 15:40:58,425 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-171
+2026-03-26 15:40:58,425 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-171
+2026-03-26 15:40:58,425 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-159
+2026-03-26 15:40:58,425 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-159
+2026-03-26 15:40:58,426 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 号源查询 1-165
+2026-03-26 15:40:58,426 INFO o.a.j.t.JMeterThread: Thread finished: 号源查询 1-165
+2026-03-26 15:40:58,426 INFO o.a.j.e.StandardJMeterEngine: Notifying test listeners of end of test
+2026-03-26 15:40:58,426 INFO o.a.j.s.FileServer: Close: /media/future/My Passport/progrom/Smart_Medical_Booking/test-plan/tokens.csv
+2026-03-26 15:40:58,426 INFO o.a.j.s.FileServer: Close: /media/future/My Passport/progrom/Smart_Medical_Booking/test-plan/work_dates.csv
+2026-03-26 15:40:58,427 INFO o.a.j.r.Summariser: summary +  78015 in 00:00:28 = 2744.6/s Avg:    72 Min:     2 Max:   343 Err:     0 (0.00%) Active: 0 Started: 200 Finished: 200
+2026-03-26 15:40:58,427 INFO o.a.j.r.Summariser: summary = 482836 in 00:03:00 = 2680.8/s Avg:    67 Min:     1 Max:   349 Err:     0 (0.00%)
+2026-03-26 15:40:58,427 INFO o.a.j.JMeter: Generating Dashboard
+2026-03-26 15:40:58,427 INFO o.a.j.r.d.ReportGenerator: Flushing result collector before report Generation
+2026-03-26 15:40:58,800 INFO o.a.j.r.p.NormalizerSampleConsumer: Using format, 'ms', to parse timeStamp field
+2026-03-26 15:41:05,590 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.AggregateConsumer#stopProducing(): beginDate produced 0 samples
+2026-03-26 15:41:05,590 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.AggregateConsumer#stopProducing(): endDate produced 0 samples
+2026-03-26 15:41:05,591 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.ApdexSummaryConsumer#stopProducing(): apdexSummary produced 0 samples
+2026-03-26 15:41:05,591 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.RequestsSummaryConsumer#stopProducing(): requestsSummary produced 0 samples
+2026-03-26 15:41:05,599 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.StatisticsSummaryConsumer#stopProducing(): statisticsSummary produced 0 samples
+2026-03-26 15:41:05,600 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.Top5ErrorsBySamplerConsumer#stopProducing(): top5ErrorsBySampler produced 0 samples
+2026-03-26 15:41:05,600 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.ErrorsSummaryConsumer#stopProducing(): errorsSummary produced 0 samples
+2026-03-26 15:41:05,600 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.HitsPerSecondGraphConsumer#stopProducing(): hitsPerSecond produced 0 samples
+2026-03-26 15:41:07,379 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.LatencyVSRequestGraphConsumer#stopProducing(): latencyVsRequest produced 0 samples
+2026-03-26 15:41:07,391 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.SyntheticResponseTimeDistributionGraphConsumer#stopProducing(): syntheticResponseTimeDistribution produced 0 samples
+2026-03-26 15:41:07,392 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.BytesThroughputGraphConsumer#stopProducing(): bytesThroughputOverTime produced 0 samples
+2026-03-26 15:41:07,392 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.CodesPerSecondGraphConsumer#stopProducing(): codesPerSecond produced 0 samples
+2026-03-26 15:41:09,108 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.ResponseTimeVSRequestGraphConsumer#stopProducing(): responseTimeVsRequest produced 0 samples
+2026-03-26 15:41:09,115 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.FilterConsumer#stopProducing(): startIntervalControlerFilter produced 3379852 samples
+2026-03-26 15:41:09,115 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.TotalTPSGraphConsumer#stopProducing(): totalTPS produced 0 samples
+2026-03-26 15:41:09,115 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.ActiveThreadsGraphConsumer#stopProducing(): activeThreadsOverTime produced 0 samples
+2026-03-26 15:41:09,115 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.TimeVSThreadGraphConsumer#stopProducing(): timeVsThreads produced 0 samples
+2026-03-26 15:41:09,115 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.ResponseTimeDistributionGraphConsumer#stopProducing(): responseTimeDistribution produced 0 samples
+2026-03-26 15:41:09,115 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.TransactionsPerSecondGraphConsumer#stopProducing(): transactionsPerSecond produced 0 samples
+2026-03-26 15:41:09,116 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.ResponseTimePercentilesGraphConsumer#stopProducing(): responseTimePercentiles produced 0 samples
+2026-03-26 15:41:09,116 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.ResponseTimePercentilesOverTimeGraphConsumer#stopProducing(): responseTimePercentilesOverTime produced 0 samples
+2026-03-26 15:41:09,118 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.ResponseTimeOverTimeGraphConsumer#stopProducing(): responseTimesOverTime produced 0 samples
+2026-03-26 15:41:09,118 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.ConnectTimeOverTimeGraphConsumer#stopProducing(): connectTimeOverTime produced 0 samples
+2026-03-26 15:41:09,118 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.LatencyOverTimeGraphConsumer#stopProducing(): latenciesOverTime produced 0 samples
+2026-03-26 15:41:09,118 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.FilterConsumer#stopProducing(): nameFilter produced 7242540 samples
+2026-03-26 15:41:09,118 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.FilterConsumer#stopProducing(): dateRangeFilter produced 1448508 samples
+2026-03-26 15:41:09,118 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.NormalizerSampleConsumer#stopProducing(): normalizer produced 482836 samples
+2026-03-26 15:41:09,119 INFO o.a.j.r.p.CsvFileSampleSource: produce(): 482836 samples produced in 10s 303 ms on channel 0
+2026-03-26 15:41:09,119 INFO o.a.j.r.d.ReportGenerator: Exporting data using exporter:'json' of className:'org.apache.jmeter.report.dashboard.JsonExporter'
+2026-03-26 15:41:09,164 INFO o.a.j.r.d.JsonExporter: Found data for consumer statisticsSummary in context
+2026-03-26 15:41:09,165 INFO o.a.j.r.d.JsonExporter: Creating statistics for overall
+2026-03-26 15:41:09,165 INFO o.a.j.r.d.JsonExporter: Creating statistics for other transactions
+2026-03-26 15:41:09,165 INFO o.a.j.r.d.JsonExporter: Checking output folder
+2026-03-26 15:41:09,165 INFO o.a.j.r.d.JsonExporter: Writing statistics JSON to /media/future/My Passport/progrom/Smart_Medical_Booking/test-plan/查询压力测试/优化/./report/statistics.json
+2026-03-26 15:41:09,189 INFO o.a.j.r.d.ReportGenerator: Exporting data using exporter:'html' of className:'org.apache.jmeter.report.dashboard.HtmlTemplateExporter'
+2026-03-26 15:41:09,191 INFO o.a.j.r.d.HtmlTemplateExporter: Will generate dashboard in folder: /media/future/My Passport/progrom/Smart_Medical_Booking/test-plan/查询压力测试/优化/./report
+2026-03-26 15:41:09,256 INFO o.a.j.r.d.HtmlTemplateExporter: Report will be generated in: /media/future/My Passport/progrom/Smart_Medical_Booking/test-plan/查询压力测试/优化/./report, creating folder structure
+2026-03-26 15:41:09,258 INFO o.a.j.r.d.TemplateVisitor: Copying folder from '/home/future/apache-jmeter-5.6.3/bin/report-template' to '/media/future/My Passport/progrom/Smart_Medical_Booking/test-plan/查询压力测试/优化/./report', got message: /media/future/My Passport/progrom/Smart_Medical_Booking/test-plan/查询压力测试/优化/./report, found non empty folder with following content [/media/future/My Passport/progrom/Smart_Medical_Booking/test-plan/查询压力测试/优化/./report/statistics.json], will be ignored
+2026-03-26 15:41:09,377 INFO o.a.j.JMeter: Dashboard generated

@@ -1,0 +1,34 @@
+{
+  "号源查询请求-基线" : {
+    "transaction" : "号源查询请求-基线",
+    "sampleCount" : 263499,
+    "errorCount" : 0,
+    "errorPct" : 0.0,
+    "meanResTime" : 124.61256399454881,
+    "medianResTime" : 129.0,
+    "minResTime" : 2.0,
+    "maxResTime" : 839.0,
+    "pct1ResTime" : 244.0,
+    "pct2ResTime" : 261.0,
+    "pct3ResTime" : 364.0,
+    "throughput" : 1463.6963054720786,
+    "receivedKBytesPerSec" : 22900.610469955576,
+    "sentKBytesPerSec" : 498.85743223608927
+  },
+  "Total" : {
+    "transaction" : "Total",
+    "sampleCount" : 263499,
+    "errorCount" : 0,
+    "errorPct" : 0.0,
+    "meanResTime" : 124.61256399454881,
+    "medianResTime" : 129.0,
+    "minResTime" : 2.0,
+    "maxResTime" : 839.0,
+    "pct1ResTime" : 244.0,
+    "pct2ResTime" : 261.0,
+    "pct3ResTime" : 364.0,
+    "throughput" : 1463.6963054720786,
+    "receivedKBytesPerSec" : 22900.610469955576,
+    "sentKBytesPerSec" : 498.85743223608927
+  }
+}
