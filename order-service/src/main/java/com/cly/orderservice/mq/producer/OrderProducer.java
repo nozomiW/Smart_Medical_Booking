@@ -37,4 +37,13 @@ public class OrderProducer {
         String destination = MQConstant.Topic.ORDER_CREATE + ":" + MQConstant.Tag.CREATE;
         return rocketMQTemplate.syncSend(destination, message);
     }
+
+    public void produceOrderCacheDelete(String key) {
+        Message<String> message = MessageBuilder
+                .withPayload(key)
+                .build();
+        String destination = MQConstant.Topic.ORDER_CACHE_DELETE + ":" + MQConstant.Tag.DELETE_LATER;
+        // Delay level 1 = 1s
+        rocketMQTemplate.syncSend(destination, message, 3000, 1);
+    }
 }

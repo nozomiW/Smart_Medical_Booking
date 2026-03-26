@@ -2,7 +2,7 @@
 ### 登录后将返回的 token 填入下方变量
 
 @gateway = http://localhost:9001
-@token = eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIyMDM2MjY4NzgwMDE5NzI4Mzg1IiwiaWF0IjoxNzc0MzE5Mjg4LCJleHAiOjE3NzQ0MDU2ODh9.72jZSl0DMQhmmmjzgN4YwBLGtyzt8Lg3MhJseY-KU5CWvbYNYVl7OtlvwwpVYBBk
+@token = eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIyMDM3MDY5ODk2NjIxOTkzOTg2IiwiaWF0IjoxNzc0NTEwMjkwLCJleHAiOjE3NzQ1OTY2OTB9.Ge4oKoCwqt6WBY2vP7TkDLuLrPSOmWeoz3iNdUMyHn23xy_5M03mBeLn72WMhGBh
 
 ### =========================================================
 ###  1. 用户认证与基础信息
@@ -136,19 +136,19 @@ GET {{gateway}}/doctor/schedule/detail?workDate=2026-03-26
 Authorization: Bearer {{token}}
 
 ### 3.2 查询某日所有排班号源 (Redis 缓存架构，填入下方 scheduleId)
-GET {{gateway}}/doctor/schedule/detail?workDate=2026-04-08
+GET {{gateway}}/doctor/schedule/detail?workDate=2026-04-09
 Authorization: Bearer {{token}}
 
 ### 3.3 查看某个具体排班的实时库存和详情
-GET {{gateway}}/doctor/schedule/detail/id?scheduleId=9032908943567911718
+GET {{gateway}}/doctor/schedule/detail/id?scheduleId=202603262043
 Authorization: Bearer {{token}}
 
 ### 3.4 为某个排班放号 (补充库存)
-POST {{gateway}}/doctor/schedule/release?scheduleId=9032908943567911718&num=30
+POST {{gateway}}/doctor/schedule/release?scheduleId=202603262043&num=100
 Authorization: Bearer {{token}}
 
 ### 3.5 [高并发架构] 创建挂号订单 (Redis 预扣 + MQ 异步落库)
-POST {{gateway}}/order/create?patientId=1039337112648786920&scheduleId=9032908943567911718
+POST {{gateway}}/order/create?patientId=8036749917898462810&scheduleId=202603262043
 Authorization: Bearer {{token}}
 
 ### 3.6 查询当前用户订单列表 (确认是否出单成功，填入下方 orderId)
@@ -173,9 +173,12 @@ Authorization: Bearer {{token}}
 ### =========================================================
 
 ### 4.1 [Baseline] 纯 DB 多表联查当日排班列表
-GET {{gateway}}/doctor/schedule/detail/db?workDate=2026-03-26
+GET {{gateway}}/doctor/schedule/detail/db?workDate=2026-04-01
 Authorization: Bearer {{token}}
 
 ### 4.2 [Baseline] 纯 DB 行锁同步扣减与下单
-POST {{gateway}}/order/create/db?patientId=4935213193722298120&scheduleId=2740830766718144079
+POST {{gateway}}/order/create/db?patientId=8036749917898462810&scheduleId=202604082094
+Authorization: Bearer {{token}}
+### 3.4 为某个排班放号 (补充库存)
+POST {{gateway}}/doctor/schedule/release?scheduleId=202604082094&num=100
 Authorization: Bearer {{token}}

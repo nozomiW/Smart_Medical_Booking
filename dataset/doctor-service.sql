@@ -83,7 +83,7 @@ BEGIN
 
             -- 3. 生成未来 7 天的具体号源 (yy_schedule)
             SET day_idx = 0;
-            WHILE day_idx < 7 DO
+            WHILE day_idx < 30 DO
                     SET @target_date = DATE_ADD(base_date, INTERVAL day_idx DAY);
                     SET @target_week_day = DAYOFWEEK(@target_date) - 1;
                     IF @target_week_day = 0 THEN SET @target_week_day = 7; END IF;

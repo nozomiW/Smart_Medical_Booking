@@ -20,6 +20,8 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
@@ -36,8 +38,6 @@ public class OrderServiceImpl implements OrderService {
     OrderItemMapper orderItemMapper;
     StringRedisTemplate stringRedisTemplate;
     OrderHandler orderHandler;
-
-    private final ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
 
     @Autowired
     public void setOrderProducer(OrderProducer orderProducer) {
@@ -81,7 +81,6 @@ public class OrderServiceImpl implements OrderService {
         Result deductResult = doctorFeignClient.deductAvailableNum(scheduleId);
         if (deductResult != Result.SUCCESS) return Result.FALSE;
 
-        // 2. 获取病人信息
         List<PatientDTO> patients = userFeignClient.getPatients(userId);
         PatientDTO patient = patients.stream()
                 .filter(p -> p.getId().equals(patientId))
@@ -89,7 +88,7 @@ public class OrderServiceImpl implements OrderService {
                 .orElse(null);
         if (patient == null) return Result.FALSE;
 
-        // 3. 按排班ID查排班
+        // 3. 按排班ID查排班 (压测时固定)
         ScheduleDetailDTO schedule = doctorFeignClient.findScheduleDetailById(scheduleId);
         if (schedule == null) return Result.FALSE;
 
@@ -120,12 +119,8 @@ public class OrderServiceImpl implements OrderService {
 
         orderProducer.produceOrderCreate(order, orderItem);
 
-        // 2. 延迟 500ms 后第二次删除（延迟双删）
-        executorService.schedule(
-                () -> stringRedisTemplate.delete(indexKey),
-                500,
-                TimeUnit.MILLISECONDS
-        );
+        // 2. 发送延迟消息，用于后续的缓存删除
+        orderProducer.produceOrderCacheDelete(indexKey);
 
         return Result.SUCCESS;
     }
