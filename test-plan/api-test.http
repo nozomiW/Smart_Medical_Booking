@@ -140,7 +140,7 @@ GET {{gateway}}/doctor/schedule/detail?workDate=2026-04-09
 Authorization: Bearer {{token}}
 
 ### 3.3 查看某个具体排班的实时库存和详情
-GET {{gateway}}/doctor/schedule/detail/id?scheduleId=202604092005
+GET {{gateway}}/doctor/schedule/detail/id?scheduleId=202603262043
 Authorization: Bearer {{token}}
 
 ### 3.4 为某个排班放号 (补充库存)
@@ -177,7 +177,7 @@ GET {{gateway}}/doctor/schedule/detail/db?workDate=2026-04-01
 Authorization: Bearer {{token}}
 
 ### 4.2 [Baseline] 纯 DB 行锁同步扣减与下单
-POST {{gateway}}/order/create/db?patientId=8036749917898462810&scheduleId=202604092005
+POST {{gateway}}/order/create/db?patientId=8036749917898462810&scheduleId=202604082094
 Authorization: Bearer {{token}}
 ### 3.4 为某个排班放号 (补充库存)
 POST {{gateway}}/doctor/schedule/release?scheduleId=202604082094&num=100
