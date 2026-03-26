@@ -1,0 +1,34 @@
+{
+  "Total" : {
+    "transaction" : "Total",
+    "sampleCount" : 10000,
+    "errorCount" : 0,
+    "errorPct" : 0.0,
+    "meanResTime" : 445.07190000000026,
+    "medianResTime" : 441.0,
+    "minResTime" : 9.0,
+    "maxResTime" : 1415.0,
+    "pct1ResTime" : 730.0,
+    "pct2ResTime" : 814.0,
+    "pct3ResTime" : 1033.0,
+    "throughput" : 1449.4854326714017,
+    "receivedKBytesPerSec" : 188.29155493549789,
+    "sentKBytesPerSec" : 652.3921605486303
+  },
+  "抢号请求-优化" : {
+    "transaction" : "抢号请求-优化",
+    "sampleCount" : 10000,
+    "errorCount" : 0,
+    "errorPct" : 0.0,
+    "meanResTime" : 445.07190000000026,
+    "medianResTime" : 441.0,
+    "minResTime" : 9.0,
+    "maxResTime" : 1415.0,
+    "pct1ResTime" : 730.0,
+    "pct2ResTime" : 814.0,
+    "pct3ResTime" : 1033.0,
+    "throughput" : 1449.4854326714017,
+    "receivedKBytesPerSec" : 188.29155493549789,
+    "sentKBytesPerSec" : 652.3921605486303
+  }
+}

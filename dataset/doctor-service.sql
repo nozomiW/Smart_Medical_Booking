@@ -35,76 +35,68 @@ CREATE TABLE `yy_schedule` (
                                CONSTRAINT `fk_sched_doc` FOREIGN KEY (`doc_id`) REFERENCES `yy_doctor` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
+INSERT INTO yy_doctor (id, dept_id, name, title, fee, status)
+SELECT
+    seq AS id,
+    FLOOR(1 + RAND()*10) AS dept_id,
+    CONCAT('医生', seq) AS name,
+    ELT(FLOOR(1 + RAND()*4), '主任医师', '副主任医师', '主治医师', '住院医师') AS title,
+    ROUND(10 + RAND()*40, 2) AS fee,
+    1
+FROM (
+         SELECT @row := @row + 1 AS seq
+         FROM (SELECT 0 UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3) t1,
+              (SELECT 0 UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3) t2,
+              (SELECT 0 UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3) t3,
+              (SELECT 0 UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3) t4,
+              (SELECT @row := 0) t0
+         LIMIT 500
+     ) t;
 
+INSERT INTO yy_schedule_rule (doc_id, day_of_week, max_count)
+SELECT
+    d.id,
+    dow.day,
+    FLOOR(10 + RAND()*40)
+FROM yy_doctor d
+         JOIN (
+    SELECT 1 AS day UNION ALL SELECT 2 UNION ALL SELECT 3
+    UNION ALL SELECT 4 UNION ALL SELECT 5
+) dow;
+
+-- 确保在使用正确的数据库
 USE `doctor-service`;
 
-DELIMITER $$
+-- 清理可能存在的旧数据（可选）
+-- TRUNCATE TABLE `yy_schedule`;
 
-DROP PROCEDURE IF EXISTS InitDoctorData;
-CREATE PROCEDURE InitDoctorData()
-BEGIN
-    DECLARE i INT DEFAULT 1;
-    DECLARE doc_id BIGINT;
-    DECLARE random_dept INT;
-    DECLARE random_title VARCHAR(20);
-    DECLARE random_fee DECIMAL(10,2);
-    DECLARE day_idx INT;
-    DECLARE work_day INT;
-    DECLARE schedule_id BIGINT;
-    DECLARE base_date DATE DEFAULT '2026-03-25'; -- 设置从明天开始排班
+-- 使用递归 CTE 生成未来 30 天的号源并插入
+INSERT INTO `yy_schedule` (`id`, `doc_id`, `work_date`, `available_num`, `status`)
+WITH RECURSIVE dates AS (
+    -- 1. 生成未来 30 天的日期序列
+    SELECT CURDATE() AS dt
+    UNION ALL
+    SELECT DATE_ADD(dt, INTERVAL 1 DAY)
+    FROM dates
+    WHERE dt < DATE_ADD(CURDATE(), INTERVAL 29 DAY)
+)
+SELECT
+    -- 2. 生成 ID：格式为 日期(8位) + 医生ID(补齐位)
+    -- 示例：20260326 + 00001 = 2026032600001
+    CAST(CONCAT(DATE_FORMAT(d.dt, '%Y%m%d'), LPAD(r.doc_id, 5, '0')) AS UNSIGNED) AS id,
+    r.doc_id,
+    d.dt AS work_date,
+    r.max_count AS available_num,
+    1 AS status
+FROM dates d
+         JOIN `yy_schedule_rule` r ON d.dt IS NOT NULL
+-- 3. 核心逻辑：匹配日期对应的星期几 (DAYOFWEEK: 1=周日, 2=周一...7=周六)
+-- 将其转换为你规则表中的 1(周一) 到 7(周日)
+WHERE (CASE WHEN DAYOFWEEK(d.dt) = 1 THEN 7 ELSE DAYOFWEEK(d.dt) - 1 END) = r.day_of_week
+-- 4. 避免重复插入
+ON DUPLICATE KEY UPDATE available_num = VALUES(available_num);
 
-    -- 开启事务保证效率
-    START TRANSACTION;
-
-    WHILE i <= 100 DO
-            SET doc_id = 2000 + i; -- 医生ID从2001开始，避开你手动插入的100x
-            SET random_dept = 100 + (i % 10); -- 模拟10个科室 (100-109)
-
-            -- 随机分配职称和挂号费
-            CASE (i % 4)
-                WHEN 0 THEN SET random_title = '首席专家', random_fee = 150.00;
-                WHEN 1 THEN SET random_title = '主任医师', random_fee = 80.00;
-                WHEN 2 THEN SET random_title = '副主任医师', random_fee = 50.00;
-                ELSE SET random_title = '主治医师', random_fee = 30.00;
-                END CASE;
-
-            -- 1. 插入医生基础表
-            INSERT INTO `yy_doctor` (`id`, `dept_id`, `name`, `title`, `fee`, `status`)
-            VALUES (doc_id, random_dept, CONCAT('医生_', i), random_title, random_fee, 1);
-
-            -- 2. 为每个医生随机生成 2-3 天的排班规则 (周一至周日)
-            SET work_day = (i % 7) + 1; -- 保证每个医生至少有一天
-            INSERT IGNORE INTO `yy_schedule_rule` (`doc_id`, `day_of_week`, `max_count`)
-            VALUES (doc_id, work_day, 40);
-
-            -- 额外增加一天排班，增加数据密度
-            INSERT IGNORE INTO `yy_schedule_rule` (`doc_id`, `day_of_week`, `max_count`)
-            VALUES (doc_id, ((work_day + 2) % 7) + 1, 30);
-
-            -- 3. 生成未来 7 天的具体号源 (yy_schedule)
-            SET day_idx = 0;
-            WHILE day_idx < 7 DO
-                    SET @target_date = DATE_ADD(base_date, INTERVAL day_idx DAY);
-                    SET @target_week_day = DAYOFWEEK(@target_date) - 1;
-                    IF @target_week_day = 0 THEN SET @target_week_day = 7; END IF;
-
-                    -- 如果当天符合医生的排班规则，则生成号源
-                    IF EXISTS (SELECT 1 FROM `yy_schedule_rule` WHERE `doc_id` = doc_id AND `day_of_week` = @target_week_day) THEN
-                        -- 生成号源ID: 日期(8位) + 医生ID(4位)
-                        SET schedule_id = CAST(CONCAT(DATE_FORMAT(@target_date, '%Y%m%d'), doc_id) AS UNSIGNED);
-                        INSERT INTO `yy_schedule` (`id`, `doc_id`, `work_date`, `available_num`, `status`)
-                        VALUES (schedule_id, doc_id, @target_date, 30, 1);
-                    END IF;
-
-                    SET day_idx = day_idx + 1;
-                END WHILE;
-
-            SET i = i + 1;
-        END WHILE;
-
-    COMMIT;
-END$$
-
-DELIMITER ;
-
-CALL InitDoctorData();
+---
+-- 验证结果：查看生成了多少条号源记录
+SELECT COUNT(*) AS '总号源数', MIN(work_date) AS '开始日期', MAX(work_date) AS '结束日期'
+FROM `yy_schedule`;

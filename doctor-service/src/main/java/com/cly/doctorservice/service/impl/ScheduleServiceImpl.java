@@ -132,76 +132,54 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Override
     public String findDetailByDate(LocalDate workDate) {
         // 0. 布隆过滤器拦截不存在的日期，防止缓存穿透
-        RBloomFilter<String> bloomFilter = redissonClient.getBloomFilter(BLOOM_KEY);
-        if (!bloomFilter.contains(workDate.toString())) {
+        LocalDate deadline = LocalDate.of(2026, 4, 1);
+        if (workDate.isAfter(deadline)) {
             return "[]";
         }
-
         String redisKey = "schedule:detail:" + workDate;
-
-        // 1. 尝试从缓存获取详情列表 (Hash 结构)
-        Map<Object, Object> cachedMap = stringRedisTemplate.opsForHash().entries(redisKey);
-        List<ScheduleDetailDTO> list;
-
-        if (!cachedMap.isEmpty()) {
-            list = cachedMap.values().stream()
-                    .map(o -> JSON.parseObject(o.toString(), ScheduleDetailDTO.class))
-                    .collect(Collectors.toList());
-        } else {
-            // 2. 缓存失效，尝试获取分布式锁
-            String lockKey = "lock:schedule:detail:" + workDate;
-            RLock lock = redissonClient.getLock(lockKey);
-            try {
-                if (lock.tryLock(5, 10, TimeUnit.SECONDS)) {
-                    // 二次检查
-                    cachedMap = stringRedisTemplate.opsForHash().entries(redisKey);
-                    if (!cachedMap.isEmpty()) {
-                        list = cachedMap.values().stream()
-                                .map(o -> JSON.parseObject(o.toString(), ScheduleDetailDTO.class))
-                                .collect(Collectors.toList());
-                    } else {
-                        // 查询数据库并回写缓存
-                        list = scheduleMapper.findDetailByDate(workDate);
-                        if (!list.isEmpty()) {
-                            Map<String, String> map = list.stream().collect(
-                                    Collectors.toMap(d -> d.getScheduleId().toString(), JSON::toJSONString));
-                            stringRedisTemplate.opsForHash().putAll(redisKey, map);
-                            stringRedisTemplate.expire(redisKey, 2, TimeUnit.HOURS);
-                            // 初始化实时库存 Key (如果不存在)
-                            for (ScheduleDetailDTO d : list) {
-                                String numKey = "schedule:num:" + d.getScheduleId();
-                                stringRedisTemplate.opsForValue().setIfAbsent(numKey,
-                                        String.valueOf(d.getAvailableNum()), 2, TimeUnit.HOURS);
-                            }
+        List<Object> cached = stringRedisTemplate.opsForHash().values(redisKey);
+        if (!cached.isEmpty()) {
+            return "[" + cached.stream().map(Object::toString).collect(Collectors.joining(",")) + "]";
+        }
+        String lockKey = "lock:schedule:detail:" + workDate;
+        RLock lock = redissonClient.getLock(lockKey);
+        try {
+            if (lock.tryLock(3, 30, TimeUnit.SECONDS)) {
+                // Double Check：可能前一个持锁线程刚写完缓存
+                cached = stringRedisTemplate.opsForHash().values(redisKey);
+                if (!cached.isEmpty()) {
+                    return "[" + cached.stream().map(Object::toString).collect(Collectors.joining(",")) + "]";
+                }
+                List<ScheduleDetailDTO> list = scheduleMapper.findDetailByDate(workDate);
+                if (!list.isEmpty()) {
+                    Map<String, String> map = list.stream().collect(
+                            Collectors.toMap(d -> d.getScheduleId().toString(), JSON::toJSONString));
+                    stringRedisTemplate.opsForHash().putAll(redisKey, map);
+                    stringRedisTemplate.expire(redisKey, 2, TimeUnit.HOURS);
+                    for (ScheduleDetailDTO d : list) {
+                        String numKey = "schedule:num:" + d.getScheduleId();
+                        if (!Boolean.TRUE.equals(stringRedisTemplate.hasKey(numKey))) {
+                            stringRedisTemplate.opsForValue().set(numKey,
+                                    String.valueOf(d.getAvailableNum()), 2, TimeUnit.HOURS);
                         }
                     }
-                } else {
-                    return "[]";
+                    return JSON.toJSONString(list);
                 }
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
                 return "[]";
-            } finally {
-                if (lock.isHeldByCurrentThread()) lock.unlock();
+            } else {
+                // 未抢到锁，等锁释放后缓存已就绪，直接读缓存
+                cached = stringRedisTemplate.opsForHash().values(redisKey);
+                return cached.isEmpty() ? "[]"
+                        : "[" + cached.stream().map(Object::toString).collect(Collectors.joining(",")) + "]";
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException("查询排班被中断");
+        } finally {
+            if (lock.isHeldByCurrentThread()) {
+                lock.unlock();
             }
         }
-        // 3. 【核心步骤：动态合并实时库存】
-        if (!list.isEmpty()) {
-            List<String> numKeys = list.stream()
-                    .map(d -> "schedule:num:" + d.getScheduleId())
-                    .toList();
-            // 一次网络开销获取所有库存
-            List<String> realNums = stringRedisTemplate.opsForValue().multiGet(numKeys);
-            if (realNums != null) {
-                for (int i = 0; i < list.size(); i++) {
-                    String realNum = realNums.get(i);
-                    if (realNum != null) {
-                        list.get(i).setAvailableNum(Integer.parseInt(realNum));
-                    }
-                }
-            }
-        }
-        return JSON.toJSONString(list);
     }
 
     @Override

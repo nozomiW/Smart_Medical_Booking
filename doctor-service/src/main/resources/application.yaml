@@ -12,7 +12,7 @@ spring:
       password: 1346798520
       lettuce:
         pool:
-          max-active: 8
+          max-active: 16
           max-wait: -1ms
           max-idle: 8
           min-idle: 0
