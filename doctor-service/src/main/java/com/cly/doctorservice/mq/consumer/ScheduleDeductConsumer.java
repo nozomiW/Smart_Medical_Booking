@@ -2,11 +2,13 @@ package com.cly.doctorservice.mq.consumer;
 
 import com.cly.doctorservice.mapper.ScheduleMapper;
 import com.cly.doctorservice.mq.constant.MQConstant;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 @RocketMQMessageListener(
         topic = MQConstant.Topic.SCHEDULE_DEDUCT,
@@ -26,7 +28,7 @@ public class ScheduleDeductConsumer implements RocketMQListener<String> {
     public void onMessage(String scheduleId) {
         int rows = scheduleMapper.decreaseAvailableNum(scheduleId);
         if (rows <= 0) {
-            System.err.println("Critical Error: DB deduct failed for scheduleId=" + scheduleId + ". Possible over-sell in memory!");
+            log.error("Critical Error: DB deduct failed for scheduleId={}. Possible over-sell in memory!", scheduleId);
         }
     }
 }

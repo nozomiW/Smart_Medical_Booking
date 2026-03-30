@@ -44,37 +44,12 @@ public class BusinessLogAspect {
         String uri = request != null ? request.getRequestURI() : "unknown";
         String methodType = request != null ? request.getMethod() : "unknown";
 
-        // 【优化】只在 DEBUG 级别打印详细参数，减少序列化开销
-        if (log.isDebugEnabled()) {
-            log.debug("========== 业务操作开始 ==========");
-            log.debug("时间：{}", LocalDateTime.now().format(formatter));
-            log.debug("接口：{} {}", methodType, uri);
-            log.debug("类名：{}.{}", 
-                    joinPoint.getTarget().getClass().getSimpleName(), 
-                    signature.getName());
-            log.debug("业务描述：{}", businessLog.value());
-            log.debug("业务类型：{}", businessLog.type());
-
-            // 记录请求参数
-            if (businessLog.recordParams()) {
-                Object[] args = joinPoint.getArgs();
-                if (args != null && args.length > 0) {
-                    try {
-                        String params = JSON.toJSONString(args);
-                        log.debug("请求参数：{}", params);
-                    } catch (Exception e) {
-                        log.warn("参数序列化失败：{}", e.getMessage());
-                    }
-                }
-            }
-        } else {
-            // INFO 级别只打印关键信息
-            log.info("[业务] {} - {}.{} - {}", 
-                    businessLog.type(),
-                    joinPoint.getTarget().getClass().getSimpleName(),
-                    signature.getName(),
-                    businessLog.value());
-        }
+        // INFO 级别打印关键业务信息
+        log.info("[业务] {} - {}.{} - {}", 
+                businessLog.type(),
+                joinPoint.getTarget().getClass().getSimpleName(),
+                signature.getName(),
+                businessLog.value());
 
         long startTime = System.currentTimeMillis();
         Object result = null;
@@ -90,9 +65,9 @@ public class BusinessLogAspect {
         } finally {
             long endTime = System.currentTimeMillis();
             
-            // 【优化】耗时超过阈值才打印详细日志
+            // 耗时超过阈值才打印日志
             long duration = endTime - startTime;
-            if (duration > 100 || log.isDebugEnabled()) {
+            if (duration > 100) {
                 log.info("[业务完成] 耗时：{}ms - 状态：{}", duration, success ? "成功" : "失败");
             }
         }

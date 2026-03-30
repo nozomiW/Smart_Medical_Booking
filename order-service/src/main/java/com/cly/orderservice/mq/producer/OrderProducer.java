@@ -3,6 +3,7 @@ package com.cly.orderservice.mq.producer;
 import com.cly.orderservice.entity.Order;
 import com.cly.orderservice.entity.OrderItem;
 import com.cly.orderservice.mq.constant.MQConstant;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.apache.rocketmq.spring.support.RocketMQHeaders;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @Component
 public class OrderProducer {
 
@@ -39,23 +41,11 @@ public class OrderProducer {
             String destination = MQConstant.Topic.ORDER_CREATE + ":" + MQConstant.Tag.CREATE;
             SendResult result = rocketMQTemplate.syncSend(destination, message);
             
-            // 打印发送成功日志
-            System.out.println("\n[订单 Producer] ✓ 订单消息发送成功");
-            System.out.println("  - 订单号：" + order.getOrderNo());
-            System.out.println("  - Topic: " + MQConstant.Topic.ORDER_CREATE);
-            System.out.println("  - Tag: " + MQConstant.Tag.CREATE);
-            System.out.println("  - MessageId: " + result.getMsgId());
-            System.out.println("  - SendStatus: " + result.getSendStatus());
-            System.out.println("====================================\n");
+            log.info("订单消息发送成功 - orderNo: {}, messageId: {}", order.getOrderNo(), result.getMsgId());
             
             return result;
         } catch (Exception e) {
-            System.err.println("\n========== [订单 Producer] 消息发送失败 ==========");
-            System.err.println("订单号：" + order.getOrderNo());
-            System.err.println("异常：" + e.getClass().getName());
-            System.err.println("信息：" + e.getMessage());
-            System.err.println("=================================================\n");
-            e.printStackTrace();
+            log.error("订单消息发送失败 - orderNo: {}", order.getOrderNo(), e);
             throw e;
         }
     }
@@ -85,10 +75,5 @@ public class OrderProducer {
         String destination = MQConstant.Topic.ORDER_TIMEOUT_CANCEL + ":" + MQConstant.Tag.CANCEL;
         // Delay level 16 = 30 分钟
         rocketMQTemplate.syncSend(destination, message, 3000, 16);
-
-        System.out.println("\n[发送延迟消息] 订单超时取消");
-        System.out.println("  - orderId: " + orderId);
-        System.out.println("  - orderNo: " + orderNo);
-        System.out.println("  - 延迟时间：30 分钟\n");
     }
 }

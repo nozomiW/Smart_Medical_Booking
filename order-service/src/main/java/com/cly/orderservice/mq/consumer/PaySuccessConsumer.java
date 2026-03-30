@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.cly.orderservice.entity.Order;
 import com.cly.orderservice.mapper.OrderMapper;
 import com.cly.orderservice.mq.constant.MQConstant;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.concurrent.*;
 
+@Slf4j
 @Component
 @RocketMQMessageListener(
         topic = MQConstant.Topic.PAY_SUCCESS,
@@ -40,7 +42,7 @@ public class PaySuccessConsumer implements RocketMQListener<String> {
         // 获取订单以得到 userId
         Order order = orderMapper.selectById(orderId);
         if (order == null) {
-            System.out.println("订单" + orderId + "不存在，忽略支付成功消息");
+            log.warn("订单不存在，忽略支付成功消息 - orderId: {}", orderId);
             return;
         }
         
@@ -67,9 +69,9 @@ public class PaySuccessConsumer implements RocketMQListener<String> {
                     500,
                     TimeUnit.MILLISECONDS
             );
-            System.out.println("订单" + orderId + "支付成功");
+            log.info("订单支付成功 - orderId: {}", orderId);
         } else {
-            System.out.println("订单" + orderId + "状态更新失败（已支付或不存在）");
+            log.warn("订单状态更新失败（已支付或不存在）- orderId: {}", orderId);
         }
     }
 }

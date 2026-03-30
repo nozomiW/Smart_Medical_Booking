@@ -445,19 +445,19 @@ public class OrderServiceImpl implements OrderService {
         // 1. 查询订单
         Order order = orderMapper.selectById(orderId);
         if (order == null) {
-            System.err.println("[cancelOrder] 订单不存在: " + orderId);
+            log.error("订单不存在 - orderId: {}", orderId);
             return Result.FALSE;
         }
 
         // 2. 权限校验
         if (!order.getUserId().equals(userId)) {
-            System.err.println("[cancelOrder] 无权限取消他人订单: orderId=" + orderId + ", userId=" + userId);
+            log.error("无权限取消他人订单 - orderId: {}, userId: {}", orderId, userId);
             return Result.FALSE;
         }
 
         // 3. 只能取消待支付订单
         if (order.getStatus() != 0) {
-            System.err.println("[cancelOrder] 订单状态不允许取消: status=" + order.getStatus());
+            log.error("订单状态不允许取消 - status: {}", order.getStatus());
             return Result.FALSE;
         }
 
@@ -466,7 +466,7 @@ public class OrderServiceImpl implements OrderService {
         order.setUpdateTime(LocalDateTime.now());
         int rows = orderMapper.updateById(order);
         if (rows <= 0) {
-            System.err.println("[cancelOrder] 更新订单状态失败");
+            log.error("更新订单状态失败 - orderId: {}", orderId);
             return Result.FALSE;
         }
 
@@ -476,16 +476,16 @@ public class OrderServiceImpl implements OrderService {
                     new LambdaQueryWrapper<OrderItem>().eq(OrderItem::getOrderId, orderId));
             if (orderItem != null && orderItem.getScheduleId() != null) {
                 doctorFeignClient.releaseAvailableNum(orderItem.getScheduleId(), 1);
-                System.out.println("[cancelOrder] 已释放号源: scheduleId=" + orderItem.getScheduleId());
+                log.info("已释放号源 - scheduleId: {}", orderItem.getScheduleId());
             }
         } catch (Exception e) {
-            System.err.println("[cancelOrder] 释放号源失败: " + e.getMessage());
+            log.error("释放号源失败", e);
         }
 
         // 6. 清除缓存
         stringRedisTemplate.delete("order:index:" + userId);
         stringRedisTemplate.delete("order:detail:" + orderId);
-        System.out.println("[cancelOrder] 订单已取消: orderId=" + orderId);
+        log.info("订单已取消 - orderId: {}", orderId);
         return Result.SUCCESS;
     }
 }

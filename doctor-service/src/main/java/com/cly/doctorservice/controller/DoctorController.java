@@ -6,6 +6,7 @@ import com.cly.doctorservice.dto.ScheduleDetailDTO;
 import com.cly.doctorservice.result.Result;
 import com.cly.doctorservice.service.DoctorService;
 import com.cly.doctorservice.service.ScheduleService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("doctor")
 public class DoctorController {
@@ -87,10 +89,6 @@ public class DoctorController {
             @RequestHeader(value = "X-User-Id", required = false) String userId,
             @RequestParam String scheduleId,
             @RequestParam(defaultValue = "1") int num) {
-        System.out.println("\n[Controller] 释放号源请求");
-        System.out.println("  - userId: " + userId);
-        System.out.println("  - scheduleId: " + scheduleId);
-        System.out.println("  - num: " + num);
         return scheduleService.releaseAvailableNum(scheduleId, num);
     }
 

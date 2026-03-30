@@ -240,7 +240,7 @@ public class ScheduleServiceImpl implements ScheduleService {
                 try {
                     numMap.put(scheduleId, Integer.parseInt(numStr));
                 } catch (NumberFormatException e) {
-                    System.err.println("解析号源数量失败：" + numStr);
+                    log.warn("解析号源数量失败 - scheduleId: {}, value: {}", scheduleId, numStr);
                 }
             }
         }
