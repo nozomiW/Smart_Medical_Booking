@@ -12382,3 +12382,4 @@ Caused by: com.mysql.cj.jdbc.exceptions.MysqlDataTruncation: Data truncation: Da
 2026-03-30T16:17:57.626+08:00  INFO 34780 --- [order-service] [http-nio-9004-exec-5] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
 2026-03-30T16:17:57.626+08:00  INFO 34780 --- [order-service] [http-nio-9004-exec-5] c.c.o.aspect.BusinessLogAspect           : 执行耗时：43ms
 2026-03-30T16:17:57.626+08:00  INFO 34780 --- [order-service] [http-nio-9004-exec-5] c.c.o.aspect.BusinessLogAspect           : 执行状态：成功
+2026-03-30T16:41:05.721+08:00  INFO 6492 --- [doctor-service] [http-nio-9002-exec-2] c.c.d.aspect.BusinessLogAspect           : [业务] 订单取消 - ScheduleServiceImpl.releaseAvailableNum - 释放号源库存
