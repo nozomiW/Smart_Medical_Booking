@@ -1,0 +1,20 @@
+    const fetchPatients = async () => {
+      try {
+        const response = await userAPI.getPatients()
+        patients.value = response || []
+      } catch (error) {
+        console.error('获取就诊人列表失败:', error)
+      }
+    }
+    
+    const confirmBooking = async (patient) => {
+      if (!selectedDoctor.value) return
+      try {
+        await orderAPI.create(patient.id, selectedDoctor.value.scheduleId)
+        alert('预约成功!')
+        closePatientModal()
+        await fetchDoctors()
+      } catch (error) {
+        alert('预约失败:' + (error.response?.data || error.message))
+      }
+    }
