@@ -25,17 +25,39 @@ public class OrderProducer {
     }
 
     public SendResult produceOrderCreate(Order order, OrderItem orderItem) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("order", order);
-        body.put("orderItem", orderItem);
+        try {
+            // 组装消息体
+            Map<String, Object> body = new HashMap<>();
+            body.put("order", order);
+            body.put("orderItem", orderItem);
 
-        Message<Map<String, Object>> message = MessageBuilder
-                .withPayload(body)
-                .setHeader(RocketMQHeaders.KEYS, order.getOrderNo())
-                .build();
+            Message<Map<String, Object>> message = MessageBuilder
+                    .withPayload(body)
+                    .setHeader(RocketMQHeaders.KEYS, order.getOrderNo())
+                    .build();
 
-        String destination = MQConstant.Topic.ORDER_CREATE + ":" + MQConstant.Tag.CREATE;
-        return rocketMQTemplate.syncSend(destination, message);
+            String destination = MQConstant.Topic.ORDER_CREATE + ":" + MQConstant.Tag.CREATE;
+            SendResult result = rocketMQTemplate.syncSend(destination, message);
+            
+            // 打印发送成功日志
+            System.out.println("\n[订单 Producer] ✓ 订单消息发送成功");
+            System.out.println("  - 订单号：" + order.getOrderNo());
+            System.out.println("  - Topic: " + MQConstant.Topic.ORDER_CREATE);
+            System.out.println("  - Tag: " + MQConstant.Tag.CREATE);
+            System.out.println("  - MessageId: " + result.getMsgId());
+            System.out.println("  - SendStatus: " + result.getSendStatus());
+            System.out.println("====================================\n");
+            
+            return result;
+        } catch (Exception e) {
+            System.err.println("\n========== [订单 Producer] 消息发送失败 ==========");
+            System.err.println("订单号：" + order.getOrderNo());
+            System.err.println("异常：" + e.getClass().getName());
+            System.err.println("信息：" + e.getMessage());
+            System.err.println("=================================================\n");
+            e.printStackTrace();
+            throw e;
+        }
     }
 
     public void produceOrderCacheDelete(String key) {
@@ -48,9 +70,7 @@ public class OrderProducer {
     }
     
     /**
-     * 发送订单超时取消延迟消息
-     * @param orderId 订单 ID
-     * @param orderNo 订单号
+     * 发送订单超时取消延迟消息（30 分钟）
      */
     public void produceOrderTimeoutCancel(String orderId, String orderNo) {
         Map<String, Object> body = new HashMap<>();

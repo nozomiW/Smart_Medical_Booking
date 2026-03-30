@@ -27,11 +27,17 @@ public class OrderHandler {
 
     @Transactional
     public Result createOrder(Order order, OrderItem orderItem) {
+        // 插入订单主表
         int row = orderMapper.insert(order);
         if (row != 1) return Result.FALSE;
+        
+        // 设置关联 ID
         orderItem.setOrderId(order.getId());
+        
+        // 插入订单详情表
         int itemRow = orderItemMapper.insert(orderItem);
         if (itemRow != 1) return Result.FALSE;
+        
         return Result.SUCCESS;
     }
 }

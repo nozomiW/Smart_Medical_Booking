@@ -16,6 +16,7 @@ import com.cly.orderservice.mapper.OrderItemMapper;
 import com.cly.orderservice.mq.producer.OrderProducer;
 import com.cly.orderservice.result.Result;
 import com.cly.orderservice.service.OrderService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,7 @@ import java.util.Set;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class OrderServiceImpl implements OrderService {
 
@@ -81,74 +83,36 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @BusinessLog(value = "创建订单（MQ 异步）", type = "订单管理")
     public Result createOrder(String userId, String patientId, String scheduleId) {
-            
-        System.out.println("\n========== [订单 Service] 开始创建订单 ==========");
-        System.out.println("userId: " + userId);
-        System.out.println("patientId: " + patientId);
-        System.out.println("scheduleId: " + scheduleId);
+        log.info("开始创建订单 - userId: {}, patientId: {}, scheduleId: {}", userId, patientId, scheduleId);
         
-        // ========== 步骤 1: Redis 预扣减号源 ==========
-        System.out.println("\n[步骤 1] 开始扣减 Redis 号源...");
+        // 步骤 1: Redis 预扣减号源
         Result deductResult = doctorFeignClient.deductAvailableNum(scheduleId);
         if (deductResult != Result.SUCCESS) {
-            System.err.println("\n========== [订单创建失败] ==========");
-            System.err.println("失败原因：扣减号源失败");
-            System.err.println("scheduleId: " + scheduleId);
-            System.err.println("可能原因:");
-            System.err.println("  1. Redis 中号源 key 不存在（未初始化）");
-            System.err.println("  2. 号源已用完（available_num = 0）");
-            System.err.println("  3. 排班信息不存在");
-            System.err.println("====================================\n");
+            log.error("扣减号源失败 - scheduleId: {}", scheduleId);
             return Result.FALSE;
         }
-        System.out.println("[步骤 1] ✓ 号源扣减成功");
     
-        // ========== 步骤 2: 获取就诊人信息并验证 ==========
+        // 步骤 2: 获取就诊人信息并验证
         List<PatientDTO> patients = userFeignClient.getPatients(userId);
-            
-        // 记录获取到的所有就诊人信息（用于排查问题）
-        StringBuilder patientListInfo = new StringBuilder();
-        if (patients != null && !patients.isEmpty()) {
-            for (PatientDTO p : patients) {
-                patientListInfo.append("\n  - ID: ").append(p.getId())
-                    .append(", 姓名：").append(p.getName());
-            }
-        }
-            
-        // 查找匹配的就诊人
         PatientDTO patient = patients.stream()
                 .filter(p -> p.getId().equals(patientId))
                 .findFirst()
                 .orElse(null);
-            
-        // 详细记录患者验证结果
+        
         if (patient == null) {
-            System.err.println("\n========== 订单创建失败 - 就诊人验证不通过 ==========");
-            System.err.println("时间：" + LocalDateTime.now());
-            System.err.println("接口：POST /order/create");
-            System.err.println("请求参数:");
-            System.err.println("  - userId: " + userId);
-            System.err.println("  - patientId: " + patientId + " ⚠️ 未找到匹配");
-            System.err.println("  - scheduleId: " + scheduleId);
-            System.err.println("当前用户可用的就诊人列表:" + (patientListInfo.length() > 0 ? patientListInfo : "  无"));
-            System.err.println("可能原因:");
-            System.err.println("  1. patientId 参数错误（前端传递了错误的 ID）");
-            System.err.println("  2. 该就诊人不属于当前用户（userId 与 patientId 不匹配）");
-            System.err.println("  3. 就诊人数据已被删除");
-            System.err.println("======================================================\n");
+            log.error("就诊人验证不通过 - userId: {}, patientId: {}", userId, patientId);
             return Result.FALSE;
         }
     
-        // ========== 步骤 3: 获取排班信息 ==========
+        // 步骤 3: 获取排班信息
         ScheduleDetailDTO schedule = doctorFeignClient.findScheduleDetailById(scheduleId);
         if (schedule == null) {
-            System.err.println("[订单创建失败] 原因：排班信息不存在 | scheduleId: " + scheduleId);
+            log.error("排班信息不存在 - scheduleId: {}", scheduleId);
             return Result.FALSE;
         }
     
-        // ========== 步骤 4: 组装订单数据 ==========
+        // 步骤 4: 组装订单数据
         Order order = new Order();
-        // 使用雪花算法生成唯一 ID，存储为字符串，彻底避免前端精度丢失
         order.setId(IdWorker.getIdStr());
         order.setOrderNo("ORD" + IdWorker.getIdStr());
         order.setUserId(userId);
@@ -177,16 +141,8 @@ public class OrderServiceImpl implements OrderService {
         // 发送订单超时取消延迟消息（30 分钟后检查支付状态）
         orderProducer.produceOrderTimeoutCancel(order.getId(), order.getOrderNo());
 
-        orderProducer.produceOrderCacheDelete(indexKey);
-
-        System.out.println("\n========== 订单创建成功 ==========");
-        System.out.println("订单号：" + order.getOrderNo());
-        System.out.println("用户 ID: " + userId);
-        System.out.println("就诊人：" + patient.getName());
-        System.out.println("医生：" + schedule.getDocName());
-        System.out.println("排班日期：" + schedule.getWorkDate());
-        System.out.println("挂号费：¥" + schedule.getDocFee());
-        System.out.println("====================================\n");
+        log.info("订单创建成功 - orderNo: {}, userId: {}, docName: {}, amount: {}", 
+                order.getOrderNo(), userId, schedule.getDocName(), schedule.getDocFee());
     
         return Result.SUCCESS;
     }
@@ -214,7 +170,7 @@ public class OrderServiceImpl implements OrderService {
         }
     }
     
-    // ========== 压力测试基线接口（已注释） ==========
+    // 压力测试基线接口（已注释）
     // @Override
     // @BusinessLog(value = "创建订单（DB 同步）", type = "订单管理")
     // public Result createOrderDb(Long userId, Long patientId, Long scheduleId) {
@@ -266,7 +222,7 @@ public class OrderServiceImpl implements OrderService {
     //
     //     return Result.SUCCESS;
     // }
-    // ===============================================
+    // ============================
     
     @Override
     @BusinessLog(value = "查询用户订单列表", type = "订单查询")
@@ -404,7 +360,7 @@ public class OrderServiceImpl implements OrderService {
                 try {
                     scheduleNumMap.put(scheduleId, Integer.parseInt(numStr));
                 } catch (NumberFormatException e) {
-                    System.err.println("解析号源数量失败：" + numStr);
+                    log.warn("解析号源数量失败 - scheduleId: {}, value: {}", scheduleId, numStr);
                 }
             }
         }
@@ -427,7 +383,7 @@ public class OrderServiceImpl implements OrderService {
             try {
                 return Integer.parseInt(numStr);
             } catch (NumberFormatException e) {
-                System.err.println("解析号源数量失败：" + numStr);
+                log.warn("解析号源数量失败 - scheduleId: {}, value: {}", scheduleId, numStr);
                 return null;
             }
         }
@@ -438,21 +394,19 @@ public class OrderServiceImpl implements OrderService {
     
     @Override
     public void cancelUnpaidOrder(String orderId) {
-        System.out.println("\n[cancelUnpaidOrder] 开始检查订单支付状态...");
-        System.out.println("  - orderId: " + orderId);
+        log.info("开始检查订单支付状态 - orderId: {}", orderId);
 
         Order order = orderMapper.selectById(orderId);
         if (order == null) {
-            System.err.println("  - 订单不存在");
+            log.error("订单不存在 - orderId: {}", orderId);
             return;
         }
 
-        System.out.println("  - orderNo: " + order.getOrderNo());
-        System.out.println("  - status: " + order.getStatus());
+        log.info("订单信息 - orderNo: {}, status: {}", order.getOrderNo(), order.getStatus());
 
         // 只取消待支付订单
         if (order.getStatus() != 0) {
-            System.out.println("  - 订单已支付或已取消，无需处理");
+            log.info("订单已支付或已取消，无需处理 - orderId: {}", orderId);
             return;
         }
 
@@ -462,7 +416,7 @@ public class OrderServiceImpl implements OrderService {
         int rows = orderMapper.updateById(order);
 
         if (rows > 0) {
-            System.out.println("  - 订单状态已更新为 -1（已取消）");
+            log.info("订单状态已更新为 -1（已取消）- orderId: {}", orderId);
 
             // 释放号源
             try {
@@ -470,19 +424,19 @@ public class OrderServiceImpl implements OrderService {
                         new LambdaQueryWrapper<OrderItem>().eq(OrderItem::getOrderId, orderId));
                 if (orderItem != null && orderItem.getScheduleId() != null) {
                     doctorFeignClient.releaseAvailableNum(orderItem.getScheduleId(), 1);
-                    System.out.println("  - 已释放号源：scheduleId=" + orderItem.getScheduleId());
+                    log.info("已释放号源 - scheduleId: {}", orderItem.getScheduleId());
                 }
             } catch (Exception e) {
-                System.err.println("  - 释放号源失败：" + e.getMessage());
+                log.error("释放号源失败", e);
             }
 
             // 清除缓存
             stringRedisTemplate.delete("order:index:" + order.getUserId());
             stringRedisTemplate.delete("order:detail:" + orderId);
-            System.out.println("  - 已清除订单缓存");
-            System.out.println("[cancelUnpaidOrder] 订单取消完成\n");
+            log.info("已清除订单缓存 - orderId: {}", orderId);
+            log.info("订单取消完成 - orderId: {}\n", orderId);
         } else {
-            System.err.println("  - 订单状态更新失败");
+            log.error("订单状态更新失败 - orderId: {}", orderId);
         }
     }
     
