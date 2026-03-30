@@ -54,7 +54,7 @@
               <span v-else>🤖</span>
             </div>
             <div class="message-content">
-              <div class="message-text">{{ message.content }}</div>
+              <div class="message-text" v-html="renderMarkdown(message.content)"></div>
               <div class="message-time">{{ message.time }}</div>
             </div>
           </div>
@@ -107,6 +107,7 @@
 import { ref, nextTick, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { aiAPI } from '../api'
+import { marked } from 'marked'
 
 export default {
   name: 'AIChat',
@@ -231,6 +232,12 @@ export default {
         }
       })
     })
+
+    // 渲染 Markdown
+    const renderMarkdown = (text) => {
+      if (!text) return ''
+      return marked.parse(text)
+    }
 
     return {
       messageListRef,
