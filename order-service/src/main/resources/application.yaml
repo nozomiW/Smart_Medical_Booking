@@ -33,3 +33,12 @@ rocketmq:
 
 mybatis:
   mapper-locations: classpath*:mapper/*.xml
+
+# 日志配置
+logging:
+  level:
+    root: INFO
+    com.cly.orderservice: DEBUG
+    com.cly.orderservice.aspect: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"

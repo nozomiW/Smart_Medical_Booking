@@ -37,9 +37,20 @@ public class PaySuccessConsumer implements RocketMQListener<Long> {
 
     @Override
     public void onMessage(Long orderId) {
+        // 获取订单以得到 userId
+        Order order = orderMapper.selectById(orderId);
+        if (order == null) {
+            System.out.println("订单" + orderId + "不存在，忽略支付成功消息");
+            return;
+        }
+        
+        Long userId = order.getUserId();
+        String indexKey = "order:index:" + userId;
+        
         // 1. 第一次删除缓存
         String redisKey = "order:detail:" + orderId;
         stringRedisTemplate.delete(redisKey);
+        stringRedisTemplate.delete(indexKey); // 删除列表缓存
 
         int rows = orderMapper.update(null, new LambdaUpdateWrapper<Order>()
                 .eq(Order::getId, orderId)
@@ -49,7 +60,10 @@ public class PaySuccessConsumer implements RocketMQListener<Long> {
         if (rows > 0) {
             // 2. 延迟 500ms 后第二次删除（延迟双删）
             executorService.schedule(
-                    () -> stringRedisTemplate.delete(redisKey),
+                    () -> {
+                        stringRedisTemplate.delete(redisKey);
+                        stringRedisTemplate.delete(indexKey);
+                    },
                     500,
                     TimeUnit.MILLISECONDS
             );

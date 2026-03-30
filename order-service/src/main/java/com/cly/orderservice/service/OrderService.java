@@ -8,7 +8,11 @@ import java.util.List;
 
 public interface OrderService {
     Result createOrder(Long userId, Long patientId, Long scheduleId);
-    Result createOrderDb(Long userId, Long patientId, Long scheduleId);
-    List<Order> getOrders(Long userId);
+    
+    // ========== 压力测试基线接口（已注释） ==========
+    // Result createOrderDb(Long userId, Long patientId, Long scheduleId);
+    // ===============================================
+    
+    List<OrderDetailDTO> getOrders(Long userId);
     OrderDetailDTO getOrderDetail(Long orderId);
 }

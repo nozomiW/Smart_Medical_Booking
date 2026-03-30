@@ -2,7 +2,7 @@
 ### 登录后将返回的 token 填入下方变量
 
 @gateway = http://localhost:9001
-@token = eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIyMDM3MDY5ODk2NjIxOTkzOTg2IiwiaWF0IjoxNzc0NTEwMjkwLCJleHAiOjE3NzQ1OTY2OTB9.Ge4oKoCwqt6WBY2vP7TkDLuLrPSOmWeoz3iNdUMyHn23xy_5M03mBeLn72WMhGBh
+@token = eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIyMDM4MjQ0OTg4NjMwNTgxMjQ5IiwiaWF0IjoxNzc0Nzk5NzA1LCJleHAiOjE3NzQ4ODYxMDV9.ASrW2zYLGQeSaBRdTA6w2emtFN_ffpotbBcG0DDi7QJsFne2gDgqlN_GkzrQbdCH
 
 ### =========================================================
 ###  1. 用户认证与基础信息
@@ -13,7 +13,7 @@ POST {{gateway}}/user/register
 Content-Type: application/json
 
 {
-  "phone": "13800000001",
+  "phone": "13542748103",
   "password": "123456"
 }
 
@@ -22,8 +22,8 @@ POST {{gateway}}/user/login
 Content-Type: application/json
 
 {
-  "phone": "13800000001",
-  "password": "123456"
+  "phone": "13542748103",
+  "password": "1346798520"
 }
 
 ### 1.3 登录失败 - 密码错误
@@ -140,15 +140,15 @@ GET {{gateway}}/doctor/schedule/detail?workDate=2026-04-09
 Authorization: Bearer {{token}}
 
 ### 3.3 查看某个具体排班的实时库存和详情
-GET {{gateway}}/doctor/schedule/detail/id?scheduleId=202603262043
+GET {{gateway}}/doctor/schedule/detail/id?scheduleId=202604092099
 Authorization: Bearer {{token}}
 
 ### 3.4 为某个排班放号 (补充库存)
-POST {{gateway}}/doctor/schedule/release?scheduleId=202603262043&num=100
+POST {{gateway}}/doctor/schedule/release?scheduleId=202604092099&num=100
 Authorization: Bearer {{token}}
 
 ### 3.5 [高并发架构] 创建挂号订单 (Redis 预扣 + MQ 异步落库)
-POST {{gateway}}/order/create?patientId=8036749917898462810&scheduleId=202603262043
+POST {{gateway}}/order/create?patientId=409525316297859870&scheduleId=202604092099
 Authorization: Bearer {{token}}
 
 ### 3.6 查询当前用户订单列表 (确认是否出单成功，填入下方 orderId)
@@ -169,16 +169,16 @@ Authorization: Bearer {{token}}
 
 
 ### =========================================================
-###  4. 压力测试对照组 (Baseline：纯 DB 同步架构)
+###  4. 压力测试对照组 (Baseline：纯 DB 同步架构) [已注释]
 ### =========================================================
 
 ### 4.1 [Baseline] 纯 DB 多表联查当日排班列表
-GET {{gateway}}/doctor/schedule/detail/db?workDate=2026-04-01
-Authorization: Bearer {{token}}
+# GET {{gateway}}/doctor/schedule/detail/db?workDate=2026-04-01
+# Authorization: Bearer {{token}}
 
 ### 4.2 [Baseline] 纯 DB 行锁同步扣减与下单
-POST {{gateway}}/order/create/db?patientId=8036749917898462810&scheduleId=202604082094
-Authorization: Bearer {{token}}
+# POST {{gateway}}/order/create/db?patientId=8036749917898462810&scheduleId=202604082094
+# Authorization: Bearer {{token}}
 ### 3.4 为某个排班放号 (补充库存)
-POST {{gateway}}/doctor/schedule/release?scheduleId=202604082094&num=100
-Authorization: Bearer {{token}}
+# POST {{gateway}}/doctor/schedule/release?scheduleId=202604082094&num=100
+# Authorization: Bearer {{token}}

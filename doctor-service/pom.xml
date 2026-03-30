@@ -81,6 +81,12 @@
             <scope>compile</scope>
         </dependency>
 
+        <!-- AOP for business logging -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

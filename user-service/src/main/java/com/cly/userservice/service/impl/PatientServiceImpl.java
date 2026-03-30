@@ -2,6 +2,8 @@ package com.cly.userservice.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.IdWorker;
+import com.cly.userservice.annotation.BusinessLog;
 import com.cly.userservice.entity.Patient;
 import com.cly.userservice.mapper.PatientMapper;
 import com.cly.userservice.service.PatientService;
@@ -34,11 +36,13 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
+    @BusinessLog(value = "添加就诊人", type = "就诊人管理")
     public void insertPatient(Long userId, Patient patient) {
         Long count = patientMapper.selectCount(
                 new LambdaQueryWrapper<Patient>().eq(Patient::getUserId, userId));
 
-        patient.setId(ThreadLocalRandom.current().nextLong(1, Long.MAX_VALUE));
+        // 使用雪花算法生成唯一 ID，避免随机数冲突风险
+        patient.setId(IdWorker.getId());
         patient.setUserId(userId);
         patient.setIsDefault(count == 0 ? 1 : 0);
         patient.setCreateTime(LocalDateTime.now());
@@ -59,6 +63,7 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
+    @BusinessLog(value = "查询就诊人列表", type = "就诊人管理")
     public List<Patient> getPatients(Long userId) {
         String redisKey = "patient:list:" + userId;
 

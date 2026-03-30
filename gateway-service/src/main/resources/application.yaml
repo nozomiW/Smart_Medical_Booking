@@ -52,3 +52,12 @@ spring:
 auth:
   white-list: /user/login,/user/register
   jwt-secret: hospital-demo-secret-key-for-hs256-must-be-32bytes
+
+# 日志配置
+logging:
+  level:
+    root: INFO
+    com.cly.gateway: DEBUG
+    com.cly.gateway.filter: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"

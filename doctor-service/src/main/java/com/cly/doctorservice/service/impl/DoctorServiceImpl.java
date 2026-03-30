@@ -1,6 +1,7 @@
 package com.cly.doctorservice.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.cly.doctorservice.annotation.BusinessLog;
 import com.cly.doctorservice.entity.Doctor;
 import com.cly.doctorservice.mapper.DoctorMapper;
 import com.cly.doctorservice.mq.producer.FeeProducer;
@@ -37,6 +38,7 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
+    @BusinessLog(value = "查询在线医生列表", type = "医生查询")
     public List<Doctor> searchOnline() {
 
         List<Object> doctorsOnline = stringRedisTemplate.opsForHash().values("doctor:online");
@@ -57,12 +59,14 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
+    @BusinessLog(value = "更新医生挂号费", type = "医生管理")
     public Result updateFee(Long id, BigDecimal fee) {
         feeProducer.produceFeeUpdate(id, fee);
         return Result.SUCCESS;
     }
 
     @Override
+    @BusinessLog(value = "新增医生信息", type = "医生管理")
     public Result insertDoctor(Doctor doctor) {
         int rows = doctorMapper.insert(doctor);
         return rows > 0 ? Result.SUCCESS : Result.FALSE;

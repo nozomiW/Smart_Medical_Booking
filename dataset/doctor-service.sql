@@ -1,3 +1,5 @@
+SET NAMES utf8mb4;
+SET CHARACTER SET utf8mb4;
 -- 创建数据库
 CREATE DATABASE IF NOT EXISTS `doctor-service` CHARACTER SET utf8mb4;
 USE `doctor-service`;

@@ -1,5 +1,6 @@
 package com.cly.payservice.service.impl;
 
+import com.cly.payservice.annotation.BusinessLog;
 import com.cly.payservice.dto.OrderDetailDTO;
 import com.cly.payservice.feign.OrderFeignClient;
 import com.cly.payservice.mq.producer.PayProducer;
@@ -35,6 +36,7 @@ public class PayServiceImpl implements PayService {
     }
 
     @Override
+    @BusinessLog(value = "订单支付", type = "支付管理")
     public Result pay(Long orderId) {
         // 1. 预检查订单状态
         OrderDetailDTO detail = orderFeignClient.getOrderDetail(orderId);

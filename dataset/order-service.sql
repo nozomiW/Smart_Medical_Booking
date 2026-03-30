@@ -1,3 +1,5 @@
+SET NAMES utf8mb4;
+SET CHARACTER SET utf8mb4;
 -- 创建数据库
 CREATE DATABASE IF NOT EXISTS order_service CHARACTER SET utf8mb4;
 USE order_service;

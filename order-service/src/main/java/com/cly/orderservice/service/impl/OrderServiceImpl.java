@@ -2,6 +2,7 @@ package com.cly.orderservice.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.cly.orderservice.annotation.BusinessLog;
 import com.cly.orderservice.dto.OrderDetailDTO;
 import com.cly.orderservice.dto.PatientDTO;
 import com.cly.orderservice.dto.ScheduleDetailDTO;
@@ -23,7 +24,10 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
@@ -75,34 +79,71 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @BusinessLog(value = "创建订单（MQ 异步）", type = "订单管理")
     public Result createOrder(Long userId, Long patientId, Long scheduleId) {
-
-        // 1. Redis Lua 原子预扣号源
+            
+        // ========== 步骤 1: Redis 预扣减号源 ==========
         Result deductResult = doctorFeignClient.deductAvailableNum(scheduleId);
-        if (deductResult != Result.SUCCESS) return Result.FALSE;
-
+        if (deductResult != Result.SUCCESS) {
+            System.err.println("[订单创建失败] 原因：扣减号源失败 | scheduleId: " + scheduleId);
+            return Result.FALSE;
+        }
+    
+        // ========== 步骤 2: 获取就诊人信息并验证 ==========
         List<PatientDTO> patients = userFeignClient.getPatients(userId);
+            
+        // 记录获取到的所有就诊人信息（用于排查问题）
+        StringBuilder patientListInfo = new StringBuilder();
+        if (patients != null && !patients.isEmpty()) {
+            for (PatientDTO p : patients) {
+                patientListInfo.append("\n  - ID: ").append(p.getId())
+                    .append(", 姓名：").append(p.getName());
+            }
+        }
+            
+        // 查找匹配的就诊人
         PatientDTO patient = patients.stream()
                 .filter(p -> p.getId().equals(patientId))
                 .findFirst()
                 .orElse(null);
-        if (patient == null) return Result.FALSE;
-
-        // 3. 按排班ID查排班 (压测时固定)
+            
+        // 详细记录患者验证结果
+        if (patient == null) {
+            System.err.println("\n========== 订单创建失败 - 就诊人验证不通过 ==========");
+            System.err.println("时间：" + LocalDateTime.now());
+            System.err.println("接口：POST /order/create");
+            System.err.println("请求参数:");
+            System.err.println("  - userId: " + userId);
+            System.err.println("  - patientId: " + patientId + " ⚠️ 未找到匹配");
+            System.err.println("  - scheduleId: " + scheduleId);
+            System.err.println("当前用户可用的就诊人列表:" + (patientListInfo.length() > 0 ? patientListInfo : "  无"));
+            System.err.println("可能原因:");
+            System.err.println("  1. patientId 参数错误（前端传递了错误的 ID）");
+            System.err.println("  2. 该就诊人不属于当前用户（userId 与 patientId 不匹配）");
+            System.err.println("  3. 就诊人数据已被删除");
+            System.err.println("======================================================\n");
+            return Result.FALSE;
+        }
+    
+        // ========== 步骤 3: 获取排班信息 ==========
         ScheduleDetailDTO schedule = doctorFeignClient.findScheduleDetailById(scheduleId);
-        if (schedule == null) return Result.FALSE;
-
-        // 4. 组装 Order
+        if (schedule == null) {
+            System.err.println("[订单创建失败] 原因：排班信息不存在 | scheduleId: " + scheduleId);
+            return Result.FALSE;
+        }
+    
+        // ========== 步骤 4: 组装订单数据 ==========
         Order order = new Order();
-        order.setId(ThreadLocalRandom.current().nextLong(1, Long.MAX_VALUE));
+        // 使用雪花算法生成唯一 ID，避免随机数冲突风险
+        // 注意：雪花算法生成的 ID 可能超过 JavaScript 安全整数范围，但仅用于数据库主键，前端展示使用 orderNo
+        order.setId(IdWorker.getId());
         order.setOrderNo("ORD" + IdWorker.getIdStr());
         order.setUserId(userId);
         order.setAmount(schedule.getDocFee());
         order.setStatus(0);
         order.setCreateTime(LocalDateTime.now());
         order.setUpdateTime(LocalDateTime.now());
-
-        // 5. 组装 OrderItem
+    
         OrderItem orderItem = new OrderItem();
         orderItem.setPatientName(patient.getName());
         orderItem.setPatientIdCard(patient.getIdCard());
@@ -112,70 +153,109 @@ public class OrderServiceImpl implements OrderService {
         orderItem.setDocName(schedule.getDocName());
         orderItem.setDocTitle(schedule.getDocTitle());
         orderItem.setWorkDate(schedule.getWorkDate());
+        String deptName = getDeptNameByDeptId(schedule.getDeptId());
+        orderItem.setDeptName(deptName);
 
-        // 1. 第一次删除列表缓存
         String indexKey = "order:index:" + userId;
         stringRedisTemplate.delete(indexKey);
 
         orderProducer.produceOrderCreate(order, orderItem);
 
-        // 2. 发送延迟消息，用于后续的缓存删除
         orderProducer.produceOrderCacheDelete(indexKey);
 
+        System.out.println("\n========== 订单创建成功 ==========");
+        System.out.println("订单号：" + order.getOrderNo());
+        System.out.println("用户 ID: " + userId);
+        System.out.println("就诊人：" + patient.getName());
+        System.out.println("医生：" + schedule.getDocName());
+        System.out.println("排班日期：" + schedule.getWorkDate());
+        System.out.println("挂号费：¥" + schedule.getDocFee());
+        System.out.println("====================================\n");
+    
         return Result.SUCCESS;
     }
 
-    @Override
-    public Result createOrderDb(Long userId, Long patientId, Long scheduleId) {
-
-        // 1. DB 直接预扣号源
-        Result deductResult = doctorFeignClient.deductAvailableNumDb(scheduleId);
-        if (deductResult != Result.SUCCESS) return Result.FALSE;
-
-        // 2. 获取病人信息
-        List<PatientDTO> patients = userFeignClient.getPatients(userId);
-        PatientDTO patient = patients.stream()
-                .filter(p -> p.getId().equals(patientId))
-                .findFirst()
-                .orElse(null);
-        if (patient == null) return Result.FALSE;
-
-        // 3. 按排班ID查排班
-        ScheduleDetailDTO schedule = doctorFeignClient.findScheduleDetailById(scheduleId);
-        if (schedule == null) return Result.FALSE;
-
-        // 4. 组装 Order
-        Order order = new Order();
-        order.setId(ThreadLocalRandom.current().nextLong(1, Long.MAX_VALUE));
-        order.setOrderNo("ORD" + IdWorker.getIdStr());
-        order.setUserId(userId);
-        order.setAmount(schedule.getDocFee());
-        order.setStatus(0);
-        order.setCreateTime(LocalDateTime.now());
-        order.setUpdateTime(LocalDateTime.now());
-
-        // 5. 组装 OrderItem
-        OrderItem orderItem = new OrderItem();
-        orderItem.setPatientName(patient.getName());
-        orderItem.setPatientIdCard(patient.getIdCard());
-        orderItem.setPatientPhone(patient.getPhone());
-        orderItem.setScheduleId(scheduleId);
-        orderItem.setDocId(schedule.getDocId());
-        orderItem.setDocName(schedule.getDocName());
-        orderItem.setDocTitle(schedule.getDocTitle());
-        orderItem.setWorkDate(schedule.getWorkDate());
-
-        // 6. 同步写入 DB
-        Result createResult = orderHandler.createOrder(order, orderItem);
-        if (createResult != Result.SUCCESS) {
-            return Result.FALSE;
+    
+    /**
+     * 根据科室 ID 映射科室名称
+     * @param deptId 科室 ID
+     * @return 科室名称
+     */
+    private String getDeptNameByDeptId(Long deptId) {
+        if (deptId == null) return "未知科室";
+        // 根据实际科室 ID 映射（这里硬编码，实际应该从字典表或配置中读取）
+        switch (deptId.intValue()) {
+            case 100: return "内科";
+            case 101: return "外科";
+            case 102: return "儿科";
+            case 103: return "妇产科";
+            case 104: return "眼科";
+            case 105: return "口腔科";
+            case 106: return "耳鼻喉科";
+            case 107: return "皮肤科";
+            case 108: return "中医科";
+            case 109: return "骨科";
+            default: return "其他科室";
         }
-
-        return Result.SUCCESS;
     }
-
+    
+    // ========== 压力测试基线接口（已注释） ==========
+    // @Override
+    // @BusinessLog(value = "创建订单（DB 同步）", type = "订单管理")
+    // public Result createOrderDb(Long userId, Long patientId, Long scheduleId) {
+    //
+    //     // 1. DB 直接预扣号源
+    //     Result deductResult = doctorFeignClient.deductAvailableNumDb(scheduleId);
+    //     if (deductResult != Result.SUCCESS) return Result.FALSE;
+    //
+    //     // 2. 获取病人信息
+    //     List<PatientDTO> patients = userFeignClient.getPatients(userId);
+    //     PatientDTO patient = patients.stream()
+    //             .filter(p -> p.getId().equals(patientId))
+    //             .findFirst()
+    //             .orElse(null);
+    //     if (patient == null) return Result.FALSE;
+    //
+    //     // 3. 按排班 ID 查排班
+    //     ScheduleDetailDTO schedule = doctorFeignClient.findScheduleDetailById(scheduleId);
+    //     if (schedule == null) return Result.FALSE;
+    //
+    //     // 4. 组装 Order
+    //     Order order = new Order();
+    //     // 使用较小的随机数范围，避免超过 JavaScript Number.MAX_SAFE_INTEGER (9007199254740991)
+    //     order.setId(ThreadLocalRandom.current().nextLong(1, 9007199254740991L));
+    //     order.setOrderNo("ORD" + IdWorker.getIdStr());
+    //     order.setUserId(userId);
+    //     order.setAmount(schedule.getDocFee());
+    //     order.setStatus(0);
+    //     order.setCreateTime(LocalDateTime.now());
+    //     order.setUpdateTime(LocalDateTime.now());
+    //
+    //     // 5. 组装 OrderItem
+    //     OrderItem orderItem = new OrderItem();
+    //     orderItem.setPatientName(patient.getName());
+    //     orderItem.setPatientIdCard(patient.getIdCard());
+    //     orderItem.setPatientPhone(patient.getPhone());
+    //     orderItem.setScheduleId(scheduleId);
+    //     orderItem.setDocId(schedule.getDocId());
+    //     orderItem.setDocName(schedule.getDocName());
+    //     orderItem.setDocTitle(schedule.getDocTitle());
+    //     orderItem.setWorkDate(schedule.getWorkDate());
+    //     orderItem.setDeptName(getDeptNameByDeptId(schedule.getDeptId()));
+    //
+    //     // 6. 同步写入 DB
+    //     Result createResult = orderHandler.createOrder(order, orderItem);
+    //     if (createResult != Result.SUCCESS) {
+    //         return Result.FALSE;
+    //     }
+    //
+    //     return Result.SUCCESS;
+    // }
+    // ===============================================
+    
     @Override
-    public List<Order> getOrders(Long userId) {
+    @BusinessLog(value = "查询用户订单列表", type = "订单查询")
+    public List<OrderDetailDTO> getOrders(Long userId) {
         String indexKey = "order:index:" + userId;
         long now = System.currentTimeMillis();
 
@@ -183,51 +263,161 @@ public class OrderServiceImpl implements OrderService {
                 .rangeByScore(indexKey, now, Double.MAX_VALUE);
 
         if (orderIds != null && !orderIds.isEmpty()) {
-            List<String> itemKeys = orderIds.stream()
-                    .map(id -> "order:item:" + id)
+            List<String> detailKeys = orderIds.stream()
+                    .map(id -> "order:detail:" + id)
                     .collect(Collectors.toList());
-            List<String> values = stringRedisTemplate.opsForValue().multiGet(itemKeys);
+            List<String> values = stringRedisTemplate.opsForValue().multiGet(detailKeys);
             if (values != null) {
-                List<Order> result = values.stream()
+                List<OrderDetailDTO> result = values.stream()
                         .filter(v -> v != null)
-                        .map(v -> JSON.parseObject(v, Order.class))
+                        .map(v -> JSON.parseObject(v, OrderDetailDTO.class))
                         .collect(Collectors.toList());
                 if (!result.isEmpty()) return result;
             }
         }
 
-        List<Order> list = orderMapper.selectList(
+        // 从数据库查询并组装数据
+        List<Order> orders = orderMapper.selectList(
                 new LambdaQueryWrapper<Order>().eq(Order::getUserId, userId));
-        if (!list.isEmpty()) {
+        
+        if (!orders.isEmpty()) {
+            List<OrderDetailDTO> resultList = new ArrayList<>();
             long expireAt = now + TimeUnit.HOURS.toMillis(2);
-            for (Order o : list) {
+            
+            // 先收集所有的 scheduleId
+            List<Long> scheduleIds = new ArrayList<>();
+            Map<Long, OrderItem> orderItemMap = new HashMap<>();
+            
+            for (Order o : orders) {
+                OrderItem orderItem = orderItemMapper.selectOne(
+                        new LambdaQueryWrapper<OrderItem>().eq(OrderItem::getOrderId, o.getId()));
+                
+                if (orderItem != null && orderItem.getScheduleId() != null) {
+                    scheduleIds.add(orderItem.getScheduleId());
+                    orderItemMap.put(o.getId(), orderItem);
+                }
+            }
+            
+            // 批量从 Redis 获取所有号源数量（一次 MGET）
+            Map<Long, Integer> availableNumMap = getAvailableNumBatchFromRedis(scheduleIds);
+            
+            // 组装结果
+            for (Order o : orders) {
+                OrderItem orderItem = orderItemMap.get(o.getId());
+                if (orderItem == null) continue;
+                
+                Integer availableNum = availableNumMap.get(o.getId());
+                
+                OrderDetailDTO dto = new OrderDetailDTO();
+                dto.setOrder(o);
+                dto.setOrderItem(orderItem);
+                dto.setAvailableNum(availableNum);
+                resultList.add(dto);
+                
+                // 缓存订单详情（包含实时库存）
                 stringRedisTemplate.opsForValue().set(
-                        "order:item:" + o.getId(), JSON.toJSONString(o), 2, TimeUnit.HOURS);
+                        "order:detail:" + o.getId(), JSON.toJSONString(dto), 2, TimeUnit.HOURS);
                 stringRedisTemplate.opsForZSet().add(indexKey, o.getId().toString(), expireAt);
             }
             stringRedisTemplate.expire(indexKey, 3, TimeUnit.HOURS);
+            return resultList;
         }
-        return list;
+        
+        return new ArrayList<>();
     }
 
     @Override
+    @BusinessLog(value = "查询订单详情", type = "订单查询")
     public OrderDetailDTO getOrderDetail(Long orderId) {
         String redisKey = "order:detail:" + orderId;
 
         String cached = stringRedisTemplate.opsForValue().get(redisKey);
-        if (cached != null)
-            return JSON.parseObject(cached, OrderDetailDTO.class);
+        if (cached != null) {
+            OrderDetailDTO cachedDto = JSON.parseObject(cached, OrderDetailDTO.class);
+            // 从 Redis 获取最新库存（缓存中的库存可能过期）
+            if (cachedDto.getOrderItem() != null && cachedDto.getOrderItem().getScheduleId() != null) {
+                Integer latestAvailableNum = getAvailableNumFromRedis(cachedDto.getOrderItem().getScheduleId());
+                cachedDto.setAvailableNum(latestAvailableNum);
+            }
+            return cachedDto;
+        }
 
         Order order = orderMapper.selectById(orderId);
         if (order == null) throw new RuntimeException("订单不存在");
         OrderItem orderItem = orderItemMapper.selectOne(
                 new LambdaQueryWrapper<OrderItem>().eq(OrderItem::getOrderId, orderId));
 
+        // 从 Redis 获取实时号源数量
+        Integer availableNum = getAvailableNumFromRedis(orderItem.getScheduleId());
+
         OrderDetailDTO dto = new OrderDetailDTO();
         dto.setOrder(order);
         dto.setOrderItem(orderItem);
+        dto.setAvailableNum(availableNum);
 
         stringRedisTemplate.opsForValue().set(redisKey, JSON.toJSONString(dto), 2, TimeUnit.HOURS);
         return dto;
+    }
+    
+    /**
+     * 批量从 Redis 获取排班的实时号源数量（使用 MGET 优化）
+     * @param scheduleIds 排班 ID 列表
+     * @return Map<orderId, availableNum>  orderId -> 剩余号源数量的映射
+     */
+    private Map<Long, Integer> getAvailableNumBatchFromRedis(List<Long> scheduleIds) {
+        Map<Long, Integer> resultMap = new HashMap<>();
+        
+        if (scheduleIds == null || scheduleIds.isEmpty()) {
+            return resultMap;
+        }
+        
+        // 构建所有的 key
+        List<String> keys = scheduleIds.stream()
+                .map(id -> "schedule:num:" + id)
+                .collect(Collectors.toList());
+        
+        // 一次 MGET 获取所有值
+        List<String> values = stringRedisTemplate.opsForValue().multiGet(keys);
+        
+        // 建立 scheduleId -> availableNum 的映射
+        Map<Long, Integer> scheduleNumMap = new HashMap<>();
+        for (int i = 0; i < scheduleIds.size(); i++) {
+            Long scheduleId = scheduleIds.get(i);
+            String numStr = (values != null && i < values.size()) ? values.get(i) : null;
+            
+            if (numStr != null) {
+                try {
+                    scheduleNumMap.put(scheduleId, Integer.parseInt(numStr));
+                } catch (NumberFormatException e) {
+                    System.err.println("解析号源数量失败：" + numStr);
+                }
+            }
+        }
+        
+        return scheduleNumMap;
+    }
+    
+    /**
+     * 从 Redis 获取排班的实时号源数量
+     * @param scheduleId 排班 ID
+     * @return 剩余号源数量
+     */
+    private Integer getAvailableNumFromRedis(Long scheduleId) {
+        if (scheduleId == null) return null;
+        
+        String numKey = "schedule:num:" + scheduleId;
+        String numStr = stringRedisTemplate.opsForValue().get(numKey);
+        
+        if (numStr != null) {
+            try {
+                return Integer.parseInt(numStr);
+            } catch (NumberFormatException e) {
+                System.err.println("解析号源数量失败：" + numStr);
+                return null;
+            }
+        }
+        
+        // 如果 Redis 中没有，返回 null（或者可以从 DB 查询）
+        return null;
     }
 }

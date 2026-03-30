@@ -38,3 +38,12 @@ mybatis:
 rocketmq:
   producer:
     group: "hospital-user-group"
+
+# 日志配置
+logging:
+  level:
+    root: INFO
+    com.cly.userservice: DEBUG
+    com.cly.userservice.aspect: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"

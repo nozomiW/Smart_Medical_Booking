@@ -8,4 +8,9 @@ import lombok.Data;
 public class OrderDetailDTO {
     private Order order;
     private OrderItem orderItem;
+    
+    /**
+     * 实时号源数量（从 Redis 获取）
+     */
+    private Integer availableNum;
 }

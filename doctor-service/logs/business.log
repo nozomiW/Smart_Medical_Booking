@@ -1,0 +1,2 @@
+2026-03-29T16:18:14.660+08:00  INFO 284649 --- [doctor-service] [http-nio-9002-exec-1] c.c.d.aspect.BusinessLogAspect           : [业务] 医生查询 - DoctorServiceImpl.searchOnline - 查询在线医生列表
+2026-03-29T16:18:14.974+08:00  INFO 284649 --- [doctor-service] [http-nio-9002-exec-1] c.c.d.aspect.BusinessLogAspect           : [业务完成] 耗时：312ms - 状态：成功

@@ -37,3 +37,12 @@ rocketmq:
   name-server: localhost:9876
   producer:
     group: "hospital-pay-group"
+
+# 日志配置
+logging:
+  level:
+    root: INFO
+    com.cly.payservice: DEBUG
+    com.cly.payservice.aspect: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"

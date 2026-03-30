@@ -1,6 +1,7 @@
 package com.cly.userservice.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.cly.userservice.annotation.BusinessLog;
 import com.cly.userservice.entity.User;
 import com.cly.userservice.mapper.UserMapper;
 import com.cly.userservice.service.UserService;
@@ -19,6 +20,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @BusinessLog(value = "用户登录", type = "用户认证")
     public String login(String phone, String password) {
         User user = userMapper.selectOne(new LambdaQueryWrapper<User>()
                 .eq(User::getPhone, phone)
@@ -31,6 +33,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @BusinessLog(value = "用户注册", type = "用户认证")
     public void register(String phone, String password) {
         Long count = userMapper.selectCount(new LambdaQueryWrapper<User>()
                 .eq(User::getPhone, phone));

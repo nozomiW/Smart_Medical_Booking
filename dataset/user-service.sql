@@ -1,3 +1,5 @@
+SET NAMES utf8mb4;
+SET CHARACTER SET utf8mb4;
 CREATE DATABASE IF NOT EXISTS user_service CHARACTER SET utf8mb4;
 USE user_service;
 
