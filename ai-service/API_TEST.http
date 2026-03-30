@@ -3,9 +3,11 @@
 ### API 提供商：硅基流动 (SiliconFlow) - OpenAI 兼容格式
 
 @ai_service = http://localhost:9006
+@gateway = http://localhost:9001
+@token = eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIyMDM4MjQ0OTg4NjMwNTgxMjQ5IiwiaWF0IjoxNzc0Nzk5NzA1LCJleHAiOjE3NzQ4ODYxMDV9.ASrW2zYLGQeSaBRdTA6w2emtFN_ffpotbBcG0DDi7QJsFne2gDgqlN_GkzrQbdCH
 
 ### =========================================================
-###  1. 健康检查
+###  1. 健康检查（直接访问服务）
 ### =========================================================
 
 ### 1.1 测试服务是否正常
@@ -69,3 +71,35 @@ Content-Type: application/json
 {
   "message": "测试消息"
 }
+
+### =========================================================
+###  3. 通过网关访问（需要鉴权）
+### =========================================================
+
+### 3.1 通过网关测试接口（需要 token）
+GET {{gateway}}/ai/test
+Authorization: Bearer {{token}}
+
+### 3.2 通过网关简单对话
+POST {{gateway}}/ai/chat
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "message": "你好，我想预约医生",
+  "sessionId": "user-001"
+}
+
+### 3.3 通过网关带系统提示词的对话
+POST {{gateway}}/ai/chat
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "message": "我最近经常头痛，应该挂什么科？",
+  "sessionId": "user-002",
+  "systemPrompt": "你是一个专业的医疗分诊助手，根据患者症状推荐合适的科室。请用简洁专业的语言回答。"
+}
+
+### 3.4 无 token 访问（应返回 401）
+GET {{gateway}}/ai/chat

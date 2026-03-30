@@ -6,6 +6,7 @@ import Bookings from '../pages/Bookings.vue'
 import Patients from '../pages/Patients.vue'
 import Login from '../pages/Login.vue'
 import Register from '../pages/Register.vue'
+import AIChat from '../pages/AIChat.vue'
 
 const routes = [
   {
@@ -45,6 +46,12 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: Register
+  },
+  {
+    path: '/ai-chat',
+    name: 'AIChat',
+    component: AIChat,
+    meta: { requiresAuth: true }
   }
 ]
 

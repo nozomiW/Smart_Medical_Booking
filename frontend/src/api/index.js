@@ -76,4 +76,12 @@ export const payAPI = {
   pay: (orderId) => api.post('/pay', null, { params: { orderId } })
 }
 
+/**
+ * AI 服务 API  /ai-service:9006 (通过网关访问)
+ */
+export const aiAPI = {
+  chat: (data) => api.post('/ai/chat', data),
+  test: () => api.get('/ai/test')
+}
+
 export default api

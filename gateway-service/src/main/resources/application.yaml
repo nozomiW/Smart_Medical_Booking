@@ -43,6 +43,11 @@ spring:
               predicates:
                 - Path=/pay/**
 
+            - id: ai_route
+              uri: lb://ai-service
+              predicates:
+                - Path=/ai/**
+
           # 不需要鉴权的白名单路径（由 AuthFilter GlobalFilter 处理）
 
   main:
@@ -50,7 +55,7 @@ spring:
 
 # 白名单路径（供 AuthFilter 读取）
 auth:
-  white-list: /user/login,/user/register
+  white-list: /user/login,/user/register,/ai/test
   jwt-secret: hospital-demo-secret-key-for-hs256-must-be-32bytes
 
 # 日志配置

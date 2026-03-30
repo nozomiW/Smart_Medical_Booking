@@ -12383,3 +12383,26 @@ Caused by: com.mysql.cj.jdbc.exceptions.MysqlDataTruncation: Data truncation: Da
 2026-03-30T16:17:57.626+08:00  INFO 34780 --- [order-service] [http-nio-9004-exec-5] c.c.o.aspect.BusinessLogAspect           : 执行耗时：43ms
 2026-03-30T16:17:57.626+08:00  INFO 34780 --- [order-service] [http-nio-9004-exec-5] c.c.o.aspect.BusinessLogAspect           : 执行状态：成功
 2026-03-30T16:41:05.721+08:00  INFO 6492 --- [doctor-service] [http-nio-9002-exec-2] c.c.d.aspect.BusinessLogAspect           : [业务] 订单取消 - ScheduleServiceImpl.releaseAvailableNum - 释放号源库存
+2026-03-30T16:46:38.996+08:00  INFO 6492 --- [doctor-service] [http-nio-9002-exec-4] c.c.d.aspect.BusinessLogAspect           : [业务] 排班查询 - ScheduleServiceImpl.findDetailByDate - 查询排班详情（缓存优化）
+2026-03-30T16:46:39.479+08:00  INFO 6492 --- [doctor-service] [http-nio-9002-exec-4] c.c.d.aspect.BusinessLogAspect           : [业务完成] 耗时：483ms - 状态：成功
+2026-03-30T16:46:40.234+08:00  INFO 34780 --- [order-service] [http-nio-9004-exec-7] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-03-30T16:46:40.234+08:00  INFO 34780 --- [order-service] [http-nio-9004-exec-7] c.c.o.aspect.BusinessLogAspect           : 时间：2026-03-30 16:46:40.234
+2026-03-30T16:46:40.234+08:00  INFO 34780 --- [order-service] [http-nio-9004-exec-7] c.c.o.aspect.BusinessLogAspect           : 接口：GET /order/list
+2026-03-30T16:46:40.234+08:00  INFO 34780 --- [order-service] [http-nio-9004-exec-7] c.c.o.aspect.BusinessLogAspect           : 类名：OrderServiceImpl.getOrders
+2026-03-30T16:46:40.234+08:00  INFO 34780 --- [order-service] [http-nio-9004-exec-7] c.c.o.aspect.BusinessLogAspect           : 业务描述：查询用户订单列表
+2026-03-30T16:46:40.234+08:00  INFO 34780 --- [order-service] [http-nio-9004-exec-7] c.c.o.aspect.BusinessLogAspect           : 业务类型：订单查询
+2026-03-30T16:46:40.234+08:00  INFO 34780 --- [order-service] [http-nio-9004-exec-7] c.c.o.aspect.BusinessLogAspect           : 请求参数：["2038503974361616385"]
+2026-03-30T16:46:40.278+08:00  INFO 34780 --- [order-service] [http-nio-9004-exec-7] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-03-30T16:46:40.278+08:00  INFO 34780 --- [order-service] [http-nio-9004-exec-7] c.c.o.aspect.BusinessLogAspect           : 执行耗时：44ms
+2026-03-30T16:46:40.278+08:00  INFO 34780 --- [order-service] [http-nio-9004-exec-7] c.c.o.aspect.BusinessLogAspect           : 执行状态：成功
+2026-03-30T16:47:56.250+08:00  INFO 6492 --- [doctor-service] [http-nio-9002-exec-8] c.c.d.aspect.BusinessLogAspect           : [业务] 订单取消 - ScheduleServiceImpl.releaseAvailableNum - 释放号源库存
+2026-03-30T16:55:34.750+08:00  INFO 34780 --- [order-service] [http-nio-9004-exec-9] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-03-30T16:55:34.750+08:00  INFO 34780 --- [order-service] [http-nio-9004-exec-9] c.c.o.aspect.BusinessLogAspect           : 时间：2026-03-30 16:55:34.750
+2026-03-30T16:55:34.750+08:00  INFO 34780 --- [order-service] [http-nio-9004-exec-9] c.c.o.aspect.BusinessLogAspect           : 接口：GET /order/list
+2026-03-30T16:55:34.750+08:00  INFO 34780 --- [order-service] [http-nio-9004-exec-9] c.c.o.aspect.BusinessLogAspect           : 类名：OrderServiceImpl.getOrders
+2026-03-30T16:55:34.750+08:00  INFO 34780 --- [order-service] [http-nio-9004-exec-9] c.c.o.aspect.BusinessLogAspect           : 业务描述：查询用户订单列表
+2026-03-30T16:55:34.750+08:00  INFO 34780 --- [order-service] [http-nio-9004-exec-9] c.c.o.aspect.BusinessLogAspect           : 业务类型：订单查询
+2026-03-30T16:55:34.750+08:00  INFO 34780 --- [order-service] [http-nio-9004-exec-9] c.c.o.aspect.BusinessLogAspect           : 请求参数：["2038503974361616385"]
+2026-03-30T16:55:34.811+08:00  INFO 34780 --- [order-service] [http-nio-9004-exec-9] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-03-30T16:55:34.811+08:00  INFO 34780 --- [order-service] [http-nio-9004-exec-9] c.c.o.aspect.BusinessLogAspect           : 执行耗时：61ms
+2026-03-30T16:55:34.811+08:00  INFO 34780 --- [order-service] [http-nio-9004-exec-9] c.c.o.aspect.BusinessLogAspect           : 执行状态：成功

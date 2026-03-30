@@ -53,6 +53,15 @@
               <span>我的就诊人</span>
             </router-link>
           </li>
+          <li v-if="isLoggedIn">
+            <router-link to="/ai-chat" class="nav-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+              <span>AI 助手</span>
+            </router-link>
+          </li>
         </ul>
         <div class="user-actions">
           <template v-if="!isLoggedIn">
