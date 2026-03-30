@@ -161,6 +161,9 @@ public class OrderServiceImpl implements OrderService {
 
         orderProducer.produceOrderCreate(order, orderItem);
 
+        // 发送订单超时取消延迟消息（30 分钟后检查支付状态）
+        orderProducer.produceOrderTimeoutCancel(order.getId(), order.getOrderNo());
+
         orderProducer.produceOrderCacheDelete(indexKey);
 
         System.out.println("\n========== 订单创建成功 ==========");
@@ -419,5 +422,104 @@ public class OrderServiceImpl implements OrderService {
         
         // 如果 Redis 中没有，返回 null（或者可以从 DB 查询）
         return null;
+    }
+    
+    @Override
+    public void cancelUnpaidOrder(Long orderId) {
+        System.out.println("\n[cancelUnpaidOrder] 开始检查订单支付状态...");
+        System.out.println("  - orderId: " + orderId);
+
+        Order order = orderMapper.selectById(orderId);
+        if (order == null) {
+            System.err.println("  - 订单不存在");
+            return;
+        }
+
+        System.out.println("  - orderNo: " + order.getOrderNo());
+        System.out.println("  - status: " + order.getStatus());
+
+        // 只取消待支付订单
+        if (order.getStatus() != 0) {
+            System.out.println("  - 订单已支付或已取消，无需处理");
+            return;
+        }
+
+        // 标记状态为 -1（已取消）
+        order.setStatus(-1);
+        order.setUpdateTime(LocalDateTime.now());
+        int rows = orderMapper.updateById(order);
+
+        if (rows > 0) {
+            System.out.println("  - 订单状态已更新为 -1（已取消）");
+
+            // 释放号源
+            try {
+                OrderItem orderItem = orderItemMapper.selectOne(
+                        new LambdaQueryWrapper<OrderItem>().eq(OrderItem::getOrderId, orderId));
+                if (orderItem != null && orderItem.getScheduleId() != null) {
+                    doctorFeignClient.releaseAvailableNum(orderItem.getScheduleId(), 1);
+                    System.out.println("  - 已释放号源：scheduleId=" + orderItem.getScheduleId());
+                }
+            } catch (Exception e) {
+                System.err.println("  - 释放号源失败：" + e.getMessage());
+            }
+
+            // 清除缓存
+            stringRedisTemplate.delete("order:index:" + order.getUserId());
+            stringRedisTemplate.delete("order:detail:" + orderId);
+            System.out.println("  - 已清除订单缓存");
+            System.out.println("[cancelUnpaidOrder] 订单取消完成\n");
+        } else {
+            System.err.println("  - 订单状态更新失败");
+        }
+    }
+    
+    @Override
+    public Result cancelOrder(Long userId, Long orderId) {
+        // 1. 查询订单
+        Order order = orderMapper.selectById(orderId);
+        if (order == null) {
+            System.err.println("[cancelOrder] 订单不存在: " + orderId);
+            return Result.FALSE;
+        }
+
+        // 2. 权限校验
+        if (!order.getUserId().equals(userId)) {
+            System.err.println("[cancelOrder] 无权限取消他人订单: orderId=" + orderId + ", userId=" + userId);
+            return Result.FALSE;
+        }
+
+        // 3. 只能取消待支付订单
+        if (order.getStatus() != 0) {
+            System.err.println("[cancelOrder] 订单状态不允许取消: status=" + order.getStatus());
+            return Result.FALSE;
+        }
+
+        // 4. 标记状态为 -1（已取消）
+        order.setStatus(-1);
+        order.setUpdateTime(LocalDateTime.now());
+        int rows = orderMapper.updateById(order);
+        if (rows <= 0) {
+            System.err.println("[cancelOrder] 更新订单状态失败");
+            return Result.FALSE;
+        }
+
+        // 5. 释放号源
+        try {
+            OrderItem orderItem = orderItemMapper.selectOne(
+                    new LambdaQueryWrapper<OrderItem>().eq(OrderItem::getOrderId, orderId));
+            if (orderItem != null && orderItem.getScheduleId() != null) {
+                doctorFeignClient.releaseAvailableNum(orderItem.getScheduleId(), 1);
+                System.out.println("[cancelOrder] 已释放号源: scheduleId=" + orderItem.getScheduleId());
+            }
+        } catch (Exception e) {
+            System.err.println("[cancelOrder] 释放号源失败: " + e.getMessage());
+        }
+
+        // 6. 清除缓存
+        stringRedisTemplate.delete("order:index:" + userId);
+        stringRedisTemplate.delete("order:detail:" + orderId);
+        System.out.println("[cancelOrder] 订单已取消: orderId=" + orderId);
+        return Result.SUCCESS;
     }
 }

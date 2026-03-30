@@ -1,7 +1,6 @@
 package com.cly.orderservice.controller;
 
 import com.cly.orderservice.dto.OrderDetailDTO;
-import com.cly.orderservice.entity.Order;
 import com.cly.orderservice.result.Result;
 import com.cly.orderservice.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +43,16 @@ public class OrderController {
     @GetMapping("detail")
     public OrderDetailDTO getOrderDetail(@RequestParam Long orderId) {
         return orderService.getOrderDetail(orderId);
+    }
+
+    /**
+     * 取消订单 - 将订单状态标记为 -1（已取消）
+     */
+    @PostMapping("cancel")
+    public Result cancelOrder(
+            @RequestHeader("X-User-Id") Long userId,
+            @RequestParam Long orderId) {
+        return orderService.cancelOrder(userId, orderId);
     }
 
 }

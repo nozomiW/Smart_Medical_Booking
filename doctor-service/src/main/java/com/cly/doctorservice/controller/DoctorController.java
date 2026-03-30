@@ -83,7 +83,20 @@ public class DoctorController {
     }
 
     @PostMapping("schedule/release")
-    public Result releaseAvailableNum(@RequestParam Long scheduleId, @RequestParam(defaultValue = "1") int num) {
+    public Result releaseAvailableNum(
+            @RequestHeader(value = "X-User-Id", required = false) Long userId,
+            @RequestParam Long scheduleId, 
+            @RequestParam(defaultValue = "1") int num) {
+        
+        // 权限控制：只有管理员才能释放号源
+        // TODO: 实现基于角色的权限检查（RBAC）
+        // 示例：if (!userService.isAdmin(userId)) return Result.FALSE;
+        
+        System.out.println("\n[Controller] 释放号源请求");
+        System.out.println("  - userId: " + userId);
+        System.out.println("  - scheduleId: " + scheduleId);
+        System.out.println("  - num: " + num);
+        
         return scheduleService.releaseAvailableNum(scheduleId, num);
     }
 

@@ -237,7 +237,7 @@ export default {
     const pendingOrders = computed(() => orders.value.filter(o => o.orderStatus === 0))
     const paidOrders = computed(() => orders.value.filter(o => o.orderStatus === 1))
     const completedOrders = computed(() => orders.value.filter(o => o.orderStatus === 2))
-    const cancelledOrders = computed(() => orders.value.filter(o => o.orderStatus === 3))
+    const cancelledOrders = computed(() => orders.value.filter(o => o.orderStatus === -1))
 
     const formatPrice = (price) => {
       if (typeof price === 'number') {
@@ -251,13 +251,13 @@ export default {
       error.value = ''
       try {
         const response = await orderAPI.getList()
-        // 适配后端返回的数据结构：{ order: {...}, orderItem: {...} }
+        // 适配后端返回的数据结构，使用 BigInt 处理 ID
         orders.value = (response || []).map(item => {
           const order = item.order || {}
           const orderItem = item.orderItem || {}
-              
+          
           return {
-            id: String(order.id),
+            id: BigInt(order.id),  // 使用 BigInt 避免精度丢失
             doctorName: orderItem.docName || '未知医生',
             deptName: orderItem.deptName || '未知科室',
             reserveDate: orderItem.workDate || '',
@@ -265,7 +265,7 @@ export default {
             fee: Number(order.amount || 0),
             orderStatus: Number(order.status || 0),
             patientName: orderItem.patientName || '',
-            scheduleId: orderItem.scheduleId || ''
+            scheduleId: BigInt(orderItem.scheduleId || 0)
           }
         })
       } catch (err) {
@@ -295,8 +295,11 @@ export default {
       if (!confirm('确定要取消此预约吗？')) return
       cancelingId.value = id
       try {
-        alert('取消功能开发中，请联系客服')
+        await orderAPI.cancel(String(id))
+        alert('预约已取消')
+        await fetchOrders()
       } catch (err) {
+        console.error('取消失败详情:', err)
         alert('取消失败，请重试')
       } finally {
         cancelingId.value = null
@@ -318,9 +321,9 @@ export default {
         0: '待支付',
         1: '已支付',
         2: '已完成',
-        3: '已取消'
+        '-1': '已取消'
       }
-      return statusMap[status] || '未知'
+      return statusMap[String(status)] || '未知'
     }
 
     const getStatusClass = (status) => {
@@ -328,9 +331,9 @@ export default {
         0: 'pending',
         1: 'paid',
         2: 'completed',
-        3: 'cancelled'
+        '-1': 'cancelled'
       }
-      return classMap[status] || ''
+      return classMap[String(status)] || ''
     }
 
     onMounted(() => {

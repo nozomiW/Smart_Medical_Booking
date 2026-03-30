@@ -498,7 +498,11 @@ export default {
     const fetchPatients = async () => {
       try {
         const response = await userAPI.getPatients()
-        patients.value = response || []
+        // 使用 BigInt 处理 ID，避免精度丢失
+        patients.value = (response || []).map(patient => ({
+          ...patient,
+          id: BigInt(patient.id)
+        }))
       } catch (error) {
         console.error('获取就诊人列表失败:', error)
       }

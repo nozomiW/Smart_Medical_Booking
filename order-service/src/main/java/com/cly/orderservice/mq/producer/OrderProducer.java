@@ -46,4 +46,29 @@ public class OrderProducer {
         // Delay level 1 = 1s
         rocketMQTemplate.syncSend(destination, message, 3000, 1);
     }
+    
+    /**
+     * 发送订单超时取消延迟消息
+     * @param orderId 订单 ID
+     * @param orderNo 订单号
+     */
+    public void produceOrderTimeoutCancel(Long orderId, String orderNo) {
+        Map<String, Object> body = new HashMap<>();
+        body.put("orderId", orderId);
+        body.put("orderNo", orderNo);
+
+        Message<Map<String, Object>> message = MessageBuilder
+                .withPayload(body)
+                .setHeader(RocketMQHeaders.KEYS, orderNo)
+                .build();
+
+        String destination = MQConstant.Topic.ORDER_TIMEOUT_CANCEL + ":" + MQConstant.Tag.CANCEL;
+        // Delay level 16 = 30 分钟
+        rocketMQTemplate.syncSend(destination, message, 3000, 16);
+
+        System.out.println("\n[发送延迟消息] 订单超时取消");
+        System.out.println("  - orderId: " + orderId);
+        System.out.println("  - orderNo: " + orderNo);
+        System.out.println("  - 延迟时间：30 分钟\n");
+    }
 }

@@ -26,4 +26,13 @@ public interface DoctorFeignClient {
 
     @PostMapping("/doctor/schedule/deduct/db")
     Result deductAvailableNumDb(@RequestParam("scheduleId") Long scheduleId);
+    
+    /**
+     * 释放号源（订单取消时回滚）
+     * @param scheduleId 排班 ID
+     * @param num 释放数量
+     * @return 释放结果
+     */
+    @PostMapping("/doctor/schedule/release")
+    Result releaseAvailableNum(@RequestParam("scheduleId") Long scheduleId, @RequestParam("num") int num);
 }
