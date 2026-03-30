@@ -1,0 +1,71 @@
+### AI 服务 API 测试
+### 注意：AI 服务直接访问 9006 端口（不经过网关）
+### API 提供商：硅基流动 (SiliconFlow) - OpenAI 兼容格式
+
+@ai_service = http://localhost:9006
+
+### =========================================================
+###  1. 健康检查
+### =========================================================
+
+### 1.1 测试服务是否正常
+GET {{ai_service}}/ai/test
+
+### =========================================================
+###  2. 对话接口
+### =========================================================
+
+### 2.1 简单对话
+POST {{ai_service}}/ai/chat
+Content-Type: application/json
+
+{
+  "message": "你好，我想预约医生",
+  "sessionId": "user-001"
+}
+
+### 2.2 多轮对话（使用相同 sessionId）
+POST {{ai_service}}/ai/chat
+Content-Type: application/json
+
+{
+  "message": "帮我推荐一位心内科的专家",
+  "sessionId": "user-001"
+}
+
+### 2.3 带系统提示词的对话
+POST {{ai_service}}/ai/chat
+Content-Type: application/json
+
+{
+  "message": "我最近经常头痛，应该挂什么科？",
+  "sessionId": "user-002",
+  "systemPrompt": "你是一个专业的医疗分诊助手，根据患者症状推荐合适的科室。请用简洁专业的语言回答。"
+}
+
+### 2.4 医疗咨询场景
+POST {{ai_service}}/ai/chat
+Content-Type: application/json
+
+{
+  "message": "我发烧 38.5 度，需要去医院吗？",
+  "sessionId": "user-003",
+  "systemPrompt": "你是一个医疗健康顾问，提供初步的健康建议，但会提醒用户必要时就医。"
+}
+
+### 2.5 空消息测试（应返回错误）
+POST {{ai_service}}/ai/chat
+Content-Type: application/json
+
+{
+  "message": "",
+  "sessionId": "user-004"
+}
+
+### 2.6 缺少 sessionId 测试
+POST {{ai_service}}/ai/chat
+Content-Type: application/json
+
+{
+  "message": "测试消息"
+}

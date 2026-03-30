@@ -1,0 +1,29 @@
+server:
+  port: 9006
+
+spring:
+  application:
+    name: ai-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+
+# AI 配置 - 硅基流动 (SiliconFlow)
+ai:
+  # SiliconFlow API Key
+  api-key: sk-xqfeedlachvcovfxcztkgxnzdottviyqatnsuwthluqpuxwe
+  # SiliconFlow API Base URL
+  base-url: https://api.siliconflow.cn/v1
+  # 模型名称（根据您的余额和可用模型选择）
+  model: Qwen/Qwen2.5-7B-Instruct
+  # 超时时间（毫秒）
+  timeout: 30000
+
+# 日志配置
+logging:
+  level:
+    root: INFO
+    com.cly.aiservice: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
