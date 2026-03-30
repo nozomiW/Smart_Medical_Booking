@@ -12533,3 +12533,4 @@ Caused by: com.mysql.cj.jdbc.exceptions.MysqlDataTruncation: Data truncation: Da
 2026-03-30T17:04:23.417+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-8] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
 2026-03-30T17:04:23.417+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-8] c.c.u.aspect.BusinessLogAspect           : 执行耗时：3ms
 2026-03-30T17:04:23.417+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-8] c.c.u.aspect.BusinessLogAspect           : 执行状态：成功
+2026-03-30T17:07:06.917+08:00  INFO 26324 --- [doctor-service] [http-nio-9002-exec-9] c.c.d.aspect.BusinessLogAspect           : [业务] 排班查询 - ScheduleServiceImpl.findDetailByDate - 查询排班详情（缓存优化）

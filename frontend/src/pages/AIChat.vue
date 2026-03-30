@@ -247,7 +247,8 @@ export default {
       loading,
       sendSuggestion,
       sendMessage,
-      clearChat
+      clearChat,
+      renderMarkdown
     }
   }
 }
@@ -429,6 +430,74 @@ export default {
   border-radius: 16px;
   line-height: 1.6;
   word-break: break-word;
+}
+
+.message-text :deep(p) {
+  margin: 0 0 12px 0;
+}
+
+.message-text :deep(p:last-child) {
+  margin-bottom: 0;
+}
+
+.message-text :deep(h1),
+.message-text :deep(h2),
+.message-text :deep(h3),
+.message-text :deep(h4),
+.message-text :deep(h5),
+.message-text :deep(h6) {
+  margin: 16px 0 8px 0;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.message-text :deep(h1) { font-size: 1.5em; }
+.message-text :deep(h2) { font-size: 1.3em; }
+.message-text :deep(h3) { font-size: 1.1em; }
+
+.message-text :deep(ul),
+.message-text :deep(ol) {
+  margin: 8px 0;
+  padding-left: 24px;
+}
+
+.message-text :deep(li) {
+  margin: 4px 0;
+}
+
+.message-text :deep(code) {
+  background: rgba(0, 0, 0, 0.06);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 0.9em;
+}
+
+.message-text :deep(pre) {
+  background: #f7fafc;
+  padding: 12px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 8px 0;
+}
+
+.message-text :deep(pre code) {
+  background: transparent;
+  padding: 0;
+}
+
+.message-text :deep(blockquote) {
+  border-left: 4px solid #667eea;
+  padding-left: 16px;
+  margin: 12px 0;
+  color: #718096;
+  font-style: italic;
+}
+
+.message-text :deep(hr) {
+  border: none;
+  border-top: 1px solid #e2e8f0;
+  margin: 16px 0;
 }
 
 .message.ai .message-text {
