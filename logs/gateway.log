@@ -5475,3 +5475,763 @@
 2026-03-30T15:28:13.392+08:00  INFO 26728 --- [gateway-service] [reactor-http-nio-9] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
 2026-03-30T15:28:13.392+08:00  INFO 26728 --- [gateway-service] [reactor-http-nio-9] com.cly.gateway.filter.GlobalLogFilter   : 耗时：17ms
 2026-03-30T15:28:13.392+08:00  INFO 26728 --- [gateway-service] [reactor-http-nio-9] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:49:38.989+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:49:38.989+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:49:38.988
+2026-03-30T15:49:38.989+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /user/patient/list
+2026-03-30T15:49:38.989+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:49:39.109+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:49:39.109+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:49:39.108
+2026-03-30T15:49:39.109+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /order/list
+2026-03-30T15:49:39.109+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:49:40.088+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:49:40.088+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:49:40.088+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 耗时：979ms
+2026-03-30T15:49:40.088+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:49:40.237+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:49:40.237+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:49:40.237+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：1248ms
+2026-03-30T15:49:40.237+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:49:43.506+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:49:43.506+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:49:43.506
+2026-03-30T15:49:43.506+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T15:49:43.506+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:49:44.087+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:49:44.087+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:49:44.087+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：581ms
+2026-03-30T15:49:44.087+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:49:44.973+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:49:44.973+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:49:44.973
+2026-03-30T15:49:44.973+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /user/patient/list
+2026-03-30T15:49:44.973+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:49:44.994+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:49:44.994+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:49:44.994+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：21ms
+2026-03-30T15:49:44.994+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:49:45.675+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:49:45.675+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:49:45.675
+2026-03-30T15:49:45.675+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：POST /order/create
+2026-03-30T15:49:45.675+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:49:46.614+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:49:46.614+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:49:46.614+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：939ms
+2026-03-30T15:49:46.614+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:49:47.399+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:49:47.399+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:49:47.399
+2026-03-30T15:49:47.399+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T15:49:47.399+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:49:47.434+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:49:47.434+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:49:47.434+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：35ms
+2026-03-30T15:49:47.434+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:49:48.169+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:49:48.169+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:49:48.169
+2026-03-30T15:49:48.169+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /order/list
+2026-03-30T15:49:48.169+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:49:48.877+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:49:48.877+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:49:48.877+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：708ms
+2026-03-30T15:49:48.877+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:50:21.933+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:50:21.933+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:50:21.933
+2026-03-30T15:50:21.933+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T15:50:21.933+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:50:21.964+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:50:21.964+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:50:21.964+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：31ms
+2026-03-30T15:50:21.964+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:50:22.829+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:50:22.829+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:50:22.828
+2026-03-30T15:50:22.829+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /user/patient/list
+2026-03-30T15:50:22.829+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:50:22.844+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:50:22.844+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:50:22.845+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：15ms
+2026-03-30T15:50:22.845+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:50:23.393+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:50:23.393+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:50:23.393
+2026-03-30T15:50:23.393+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：POST /order/create
+2026-03-30T15:50:23.393+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:50:23.441+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:50:23.441+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:50:23.441+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：48ms
+2026-03-30T15:50:23.441+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:50:24.453+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:50:24.453+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:50:24.453
+2026-03-30T15:50:24.453+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T15:50:24.453+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:50:24.476+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:50:24.476+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:50:24.476+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：23ms
+2026-03-30T15:50:24.476+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:50:32.314+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:50:32.314+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:50:32.314
+2026-03-30T15:50:32.314+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /order/list
+2026-03-30T15:50:32.314+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:50:32.447+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:50:32.447+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:50:32.447+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：133ms
+2026-03-30T15:50:32.447+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:50:36.989+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:50:36.989+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:50:36.989
+2026-03-30T15:50:36.989+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T15:50:36.989+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:50:37.110+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:50:37.110+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:50:37.110+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：121ms
+2026-03-30T15:50:37.110+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:50:39.066+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:50:39.066+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:50:39.066
+2026-03-30T15:50:39.066+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /user/patient/list
+2026-03-30T15:50:39.066+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:50:39.079+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:50:39.079+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:50:39.079+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：13ms
+2026-03-30T15:50:39.079+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:50:39.640+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:50:39.640+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:50:39.640
+2026-03-30T15:50:39.640+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：POST /order/create
+2026-03-30T15:50:39.640+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:50:39.708+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:50:39.708+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:50:39.708+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：68ms
+2026-03-30T15:50:39.709+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:50:40.280+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:50:40.280+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:50:40.280
+2026-03-30T15:50:40.280+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T15:50:40.281+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:50:40.302+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:50:40.302+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:50:40.302+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：21ms
+2026-03-30T15:50:40.302+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:50:41.116+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:50:41.116+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:50:41.116
+2026-03-30T15:50:41.116+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /order/list
+2026-03-30T15:50:41.116+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:50:41.241+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:50:41.241+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:50:41.241+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：125ms
+2026-03-30T15:50:41.241+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:50:49.866+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:50:49.866+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:50:49.866
+2026-03-30T15:50:49.866+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /user/patient/list
+2026-03-30T15:50:49.866+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:50:49.884+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:50:49.884+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:50:49.884+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：18ms
+2026-03-30T15:50:49.884+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:50:50.771+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:50:50.771+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:50:50.771
+2026-03-30T15:50:50.771+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T15:50:50.771+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:50:50.797+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:50:50.797+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:50:50.797+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：26ms
+2026-03-30T15:50:50.797+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:50:54.288+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:50:54.288+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:50:54.288
+2026-03-30T15:50:54.288+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /user/patient/list
+2026-03-30T15:50:54.288+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:50:54.304+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:50:54.304+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:50:54.304+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：16ms
+2026-03-30T15:50:54.304+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:50:54.834+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:50:54.834+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:50:54.834
+2026-03-30T15:50:54.834+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：POST /order/create
+2026-03-30T15:50:54.834+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:50:54.900+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:50:54.900+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:50:54.900+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：66ms
+2026-03-30T15:50:54.900+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:50:55.469+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:50:55.469+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:50:55.469
+2026-03-30T15:50:55.469+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T15:50:55.469+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:50:55.498+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:50:55.498+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:50:55.498+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：29ms
+2026-03-30T15:50:55.498+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:50:56.359+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:50:56.359+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:50:56.358
+2026-03-30T15:50:56.359+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /order/list
+2026-03-30T15:50:56.359+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:50:56.499+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:50:56.499+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:50:56.499+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：140ms
+2026-03-30T15:50:56.499+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:51:07.403+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:51:07.403+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:51:07.403
+2026-03-30T15:51:07.403+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /order/list
+2026-03-30T15:51:07.403+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:51:07.533+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:51:07.533+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:51:07.533+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：130ms
+2026-03-30T15:51:07.533+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:51:18.699+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:51:18.699+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:51:18.699
+2026-03-30T15:51:18.699+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /order/list
+2026-03-30T15:51:18.699+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:51:18.719+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:51:18.719+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:51:18.719+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：20ms
+2026-03-30T15:51:18.719+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:51:25.187+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:51:25.187+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:51:25.187
+2026-03-30T15:51:25.187+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T15:51:25.187+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:51:25.207+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:51:25.207+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:51:25.207+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：20ms
+2026-03-30T15:51:25.207+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:51:27.045+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:51:27.045+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:51:27.045
+2026-03-30T15:51:27.045+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /user/patient/list
+2026-03-30T15:51:27.045+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:51:27.055+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:51:27.055+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:51:27.055+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：10ms
+2026-03-30T15:51:27.055+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:51:27.664+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:51:27.664+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:51:27.664
+2026-03-30T15:51:27.664+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：POST /order/create
+2026-03-30T15:51:27.664+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:51:27.724+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:51:27.724+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:51:27.724+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：60ms
+2026-03-30T15:51:27.724+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:51:28.374+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:51:28.374+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:51:28.374
+2026-03-30T15:51:28.374+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T15:51:28.374+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:51:28.393+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:51:28.393+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:51:28.393+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：19ms
+2026-03-30T15:51:28.393+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:51:41.327+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:51:41.327+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:51:41.327
+2026-03-30T15:51:41.327+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /order/list
+2026-03-30T15:51:41.327+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:51:41.427+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:51:41.427+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:51:41.427+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：100ms
+2026-03-30T15:51:41.427+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:56:10.671+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:56:10.671+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:56:10.671
+2026-03-30T15:56:10.671+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /order/list
+2026-03-30T15:56:10.671+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:56:10.691+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:56:10.691+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:56:10.691+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 耗时：20ms
+2026-03-30T15:56:10.691+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:56:14.405+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:56:14.405+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:56:14.405
+2026-03-30T15:56:14.405+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T15:56:14.405+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:56:14.427+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:56:14.427+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:56:14.427+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 耗时：22ms
+2026-03-30T15:56:14.427+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:56:17.436+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:56:17.436+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:56:17.436
+2026-03-30T15:56:17.436+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /user/patient/list
+2026-03-30T15:56:17.436+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:56:17.460+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:56:17.460+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:56:17.460+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 耗时：24ms
+2026-03-30T15:56:17.460+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:56:18.158+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:56:18.158+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:56:18.158
+2026-03-30T15:56:18.158+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 路径：POST /order/create
+2026-03-30T15:56:18.158+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:56:18.222+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:56:18.222+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:56:18.222+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 耗时：64ms
+2026-03-30T15:56:18.222+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:56:18.926+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:56:18.926+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:56:18.926
+2026-03-30T15:56:18.926+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T15:56:18.926+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:56:18.951+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:56:18.951+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:56:18.951+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 耗时：25ms
+2026-03-30T15:56:18.951+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:56:21.403+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:56:21.403+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:56:21.402
+2026-03-30T15:56:21.403+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T15:56:21.403+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:56:21.419+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:56:21.419+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:56:21.419+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 耗时：16ms
+2026-03-30T15:56:21.419+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:56:22.302+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:56:22.302+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:56:22.302
+2026-03-30T15:56:22.302+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T15:56:22.302+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:56:22.323+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:56:22.323+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:56:22.323+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 耗时：21ms
+2026-03-30T15:56:22.323+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:56:22.940+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:56:22.940+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:56:22.940
+2026-03-30T15:56:22.940+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /user/patient/list
+2026-03-30T15:56:22.940+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:56:22.949+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:56:22.949+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:56:22.949+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 耗时：9ms
+2026-03-30T15:56:22.949+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:56:23.631+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:56:23.631+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:56:23.631
+2026-03-30T15:56:23.631+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 路径：POST /order/create
+2026-03-30T15:56:23.631+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:56:23.676+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:56:23.676+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:56:23.676+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 耗时：45ms
+2026-03-30T15:56:23.676+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:56:24.627+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:56:24.627+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:56:24.627
+2026-03-30T15:56:24.627+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T15:56:24.627+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:56:24.646+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:56:24.646+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:56:24.646+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 耗时：19ms
+2026-03-30T15:56:24.646+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:56:26.363+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:56:26.363+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:56:26.363
+2026-03-30T15:56:26.363+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T15:56:26.363+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:56:26.384+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:56:26.384+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:56:26.384+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 耗时：21ms
+2026-03-30T15:56:26.384+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:56:27.255+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:56:27.255+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:56:27.255
+2026-03-30T15:56:27.255+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /user/patient/list
+2026-03-30T15:56:27.255+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:56:27.267+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:56:27.267+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:56:27.267+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 耗时：12ms
+2026-03-30T15:56:27.267+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:56:28.173+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:56:28.173+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:56:28.173
+2026-03-30T15:56:28.173+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /order/list
+2026-03-30T15:56:28.173+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:56:28.349+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:56:28.349+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:56:28.349+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 耗时：176ms
+2026-03-30T15:56:28.349+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:56:55.649+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:56:55.649+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:56:55.649
+2026-03-30T15:56:55.649+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /user/patient/list
+2026-03-30T15:56:55.649+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:56:55.664+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:56:55.664+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:56:55.665+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 耗时：15ms
+2026-03-30T15:56:55.665+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:56:56.404+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:56:56.404+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:56:56.404
+2026-03-30T15:56:56.404+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /order/list
+2026-03-30T15:56:56.404+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:56:56.420+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:56:56.420+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:56:56.420+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 耗时：16ms
+2026-03-30T15:56:56.420+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:56:56.871+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:56:56.871+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:56:56.871
+2026-03-30T15:56:56.871+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T15:56:56.871+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:56:56.894+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:56:56.894+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:56:56.894+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 耗时：23ms
+2026-03-30T15:56:56.894+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:56:57.608+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:56:57.608+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:56:57.608
+2026-03-30T15:56:57.608+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /order/list
+2026-03-30T15:56:57.608+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:56:57.622+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:56:57.622+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:56:57.622+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 耗时：14ms
+2026-03-30T15:56:57.622+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:56:58.327+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:56:58.327+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:56:58.327
+2026-03-30T15:56:58.327+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T15:56:58.327+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:56:58.350+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:56:58.350+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:56:58.350+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 耗时：23ms
+2026-03-30T15:56:58.350+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:56:59.338+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:56:59.338+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:56:59.337
+2026-03-30T15:56:59.338+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /order/list
+2026-03-30T15:56:59.338+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:56:59.649+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:56:59.649+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:56:59.649+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 耗时：311ms
+2026-03-30T15:56:59.649+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:58:43.415+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:58:43.415+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:58:43.415
+2026-03-30T15:58:43.416+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /order/list
+2026-03-30T15:58:43.416+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:58:43.446+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:58:43.446+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:58:43.446+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 耗时：30ms
+2026-03-30T15:58:43.446+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T15:58:44.329+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T15:58:44.329+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 15:58:44.329
+2026-03-30T15:58:44.329+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /order/list
+2026-03-30T15:58:44.329+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T15:58:44.357+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T15:58:44.357+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T15:58:44.357+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 耗时：28ms
+2026-03-30T15:58:44.357+08:00  INFO 38232 --- [gateway-service] [reactor-http-nio-3] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:09:08.897+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:09:08.897+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:09:08.897
+2026-03-30T16:09:08.897+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /order/list
+2026-03-30T16:09:08.897+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:09:09.731+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:09:09.731+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:09:09.731+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：834ms
+2026-03-30T16:09:09.731+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:09:11.118+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:09:11.118+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:09:11.118
+2026-03-30T16:09:11.119+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /user/patient/list
+2026-03-30T16:09:11.119+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:09:11.512+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:09:11.512+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:09:11.512
+2026-03-30T16:09:11.512+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T16:09:11.512+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:09:12.146+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:09:12.146+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:09:12.146+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：1027ms
+2026-03-30T16:09:12.146+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:09:12.254+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:09:12.254+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:09:12.254+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 耗时：742ms
+2026-03-30T16:09:12.254+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:09:13.291+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:09:13.291+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:09:13.291
+2026-03-30T16:09:13.291+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /order/list
+2026-03-30T16:09:13.291+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:09:13.310+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:09:13.311+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:09:13.311+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 耗时：19ms
+2026-03-30T16:09:13.311+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:09:15.080+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:09:15.080+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:09:15.080
+2026-03-30T16:09:15.080+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T16:09:15.080+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:09:15.128+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:09:15.128+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:09:15.128+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 耗时：48ms
+2026-03-30T16:09:15.128+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:09:15.803+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:09:15.803+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:09:15.803
+2026-03-30T16:09:15.804+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /user/patient/list
+2026-03-30T16:09:15.804+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:09:15.821+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:09:15.821+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:09:15.822+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 耗时：17ms
+2026-03-30T16:09:15.822+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:09:16.367+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:09:16.367+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:09:16.367
+2026-03-30T16:09:16.367+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 路径：POST /order/create
+2026-03-30T16:09:16.367+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:09:17.308+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:09:17.308+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:09:17.308+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 耗时：941ms
+2026-03-30T16:09:17.308+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:09:17.965+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:09:17.965+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:09:17.965
+2026-03-30T16:09:17.965+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T16:09:17.965+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:09:18.009+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:09:18.009+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:09:18.009+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 耗时：44ms
+2026-03-30T16:09:18.009+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:09:18.720+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:09:18.721+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:09:18.720
+2026-03-30T16:09:18.721+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /order/list
+2026-03-30T16:09:18.721+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:09:19.432+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:09:19.432+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:09:19.432+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 耗时：711ms
+2026-03-30T16:09:19.432+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:09:22.308+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:09:22.309+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:09:22.308
+2026-03-30T16:09:22.309+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T16:09:22.309+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:09:22.339+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:09:22.339+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:09:22.339+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 耗时：30ms
+2026-03-30T16:09:22.339+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:09:41.925+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:09:41.925+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:09:41.925
+2026-03-30T16:09:41.925+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T16:09:41.925+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:09:41.954+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:09:41.954+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:09:41.954+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 耗时：29ms
+2026-03-30T16:09:41.954+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:09:43.198+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:09:43.198+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:09:43.198
+2026-03-30T16:09:43.198+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /order/list
+2026-03-30T16:09:43.198+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:09:43.223+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:09:43.223+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:09:43.223+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 耗时：25ms
+2026-03-30T16:09:43.223+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:09:44.336+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:09:44.336+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:09:44.336
+2026-03-30T16:09:44.336+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /order/list
+2026-03-30T16:09:44.336+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:09:44.358+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:09:44.358+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:09:44.358+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 耗时：22ms
+2026-03-30T16:09:44.358+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:10:03.969+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:10:03.969+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:10:03.969
+2026-03-30T16:10:03.969+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /user/patient/list
+2026-03-30T16:10:03.969+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:10:03.987+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:10:03.987+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:10:03.987+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 耗时：18ms
+2026-03-30T16:10:03.988+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:10:04.706+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:10:04.706+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:10:04.706
+2026-03-30T16:10:04.706+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /order/list
+2026-03-30T16:10:04.706+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:10:04.722+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:10:04.722+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:10:04.722+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 耗时：16ms
+2026-03-30T16:10:04.722+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:10:05.119+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:10:05.119+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:10:05.119
+2026-03-30T16:10:05.119+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T16:10:05.119+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:10:05.149+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:10:05.149+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:10:05.149+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 耗时：30ms
+2026-03-30T16:10:05.149+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:10:05.781+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:10:05.781+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:10:05.781
+2026-03-30T16:10:05.781+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /order/list
+2026-03-30T16:10:05.781+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:10:05.798+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:10:05.798+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:10:05.798+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 耗时：17ms
+2026-03-30T16:10:05.798+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:10:36.843+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:10:36.843+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:10:36.843
+2026-03-30T16:10:36.843+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T16:10:36.843+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:10:36.866+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:10:36.866+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:10:36.866+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 耗时：23ms
+2026-03-30T16:10:36.866+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:10:37.522+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:10:37.522+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:10:37.522
+2026-03-30T16:10:37.522+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /order/list
+2026-03-30T16:10:37.522+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:10:37.537+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:10:37.538+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:10:37.538+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 耗时：15ms
+2026-03-30T16:10:37.538+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:10:39.164+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:10:39.164+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:10:39.163
+2026-03-30T16:10:39.164+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /order/list
+2026-03-30T16:10:39.164+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:10:39.182+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:10:39.182+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:10:39.182+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 耗时：18ms
+2026-03-30T16:10:39.182+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:10:39.710+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:10:39.710+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:10:39.710
+2026-03-30T16:10:39.710+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T16:10:39.710+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:10:39.728+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:10:39.728+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:10:39.728+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 耗时：18ms
+2026-03-30T16:10:39.728+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:10:40.950+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:10:40.950+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:10:40.950
+2026-03-30T16:10:40.950+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /user/patient/list
+2026-03-30T16:10:40.950+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:10:40.965+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:10:40.965+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:10:40.965+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 耗时：15ms
+2026-03-30T16:10:40.965+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:10:41.707+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:10:41.707+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:10:41.707
+2026-03-30T16:10:41.707+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 路径：POST /order/create
+2026-03-30T16:10:41.707+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:10:41.762+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:10:41.762+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:10:41.762+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 耗时：55ms
+2026-03-30T16:10:41.762+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:10:43.024+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:10:43.024+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:10:43.024
+2026-03-30T16:10:43.024+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T16:10:43.024+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:10:43.051+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:10:43.051+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:10:43.051+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 耗时：27ms
+2026-03-30T16:10:43.051+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:10:43.724+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:10:43.724+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:10:43.724
+2026-03-30T16:10:43.724+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /order/list
+2026-03-30T16:10:43.724+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:10:43.754+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:10:43.754+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:10:43.754+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 耗时：30ms
+2026-03-30T16:10:43.754+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:10:47.170+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:10:47.170+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:10:47.170
+2026-03-30T16:10:47.170+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T16:10:47.170+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:10:47.189+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:10:47.189+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:10:47.189+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 耗时：19ms
+2026-03-30T16:10:47.189+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:10:48.179+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:10:48.179+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:10:48.179
+2026-03-30T16:10:48.179+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /user/patient/list
+2026-03-30T16:10:48.179+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:10:48.191+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:10:48.191+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:10:48.191+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 耗时：12ms
+2026-03-30T16:10:48.191+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:10:48.937+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:10:48.937+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:10:48.937
+2026-03-30T16:10:48.937+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 路径：POST /order/create
+2026-03-30T16:10:48.937+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:10:49.016+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:10:49.016+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:10:49.016+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 耗时：79ms
+2026-03-30T16:10:49.016+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:10:49.717+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:10:49.717+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:10:49.717
+2026-03-30T16:10:49.717+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T16:10:49.717+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:10:49.745+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:10:49.745+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:10:49.745+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 耗时：28ms
+2026-03-30T16:10:49.745+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:10:50.621+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:10:50.621+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:10:50.621
+2026-03-30T16:10:50.621+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /order/list
+2026-03-30T16:10:50.621+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:10:50.658+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:10:50.658+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:10:50.658+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 耗时：37ms
+2026-03-30T16:10:50.658+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-11] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:10:58.517+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:10:58.517+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:10:58.517
+2026-03-30T16:10:58.517+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：POST /pay
+2026-03-30T16:10:58.517+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:10:59.170+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:10:59.170+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:10:59.170+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：653ms
+2026-03-30T16:10:59.170+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:10:59.891+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:10:59.891+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:10:59.891
+2026-03-30T16:10:59.891+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /order/list
+2026-03-30T16:10:59.891+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:10:59.931+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:10:59.931+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:10:59.931+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：40ms
+2026-03-30T16:10:59.931+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:11:01.366+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:11:01.366+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:11:01.366
+2026-03-30T16:11:01.366+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：POST /order/cancel
+2026-03-30T16:11:01.366+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:11:01.449+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:11:01.449+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:11:01.449+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：83ms
+2026-03-30T16:11:01.449+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:11:02.102+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:11:02.102+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:11:02.102
+2026-03-30T16:11:02.102+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /order/list
+2026-03-30T16:11:02.102+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:11:02.130+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:11:02.130+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:11:02.130+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：28ms
+2026-03-30T16:11:02.130+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:11:03.492+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:11:03.492+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:11:03.492
+2026-03-30T16:11:03.492+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T16:11:03.492+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:11:03.513+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:11:03.513+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:11:03.513+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：21ms
+2026-03-30T16:11:03.513+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:11:04.948+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:11:04.948+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:11:04.948
+2026-03-30T16:11:04.948+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /user/patient/list
+2026-03-30T16:11:04.948+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:11:04.958+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:11:04.958+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:11:04.958+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：10ms
+2026-03-30T16:11:04.958+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:11:05.569+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:11:05.569+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:11:05.569
+2026-03-30T16:11:05.569+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：POST /order/create
+2026-03-30T16:11:05.569+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:11:05.620+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:11:05.620+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:11:05.620+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：51ms
+2026-03-30T16:11:05.620+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:11:06.373+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:11:06.373+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:11:06.373
+2026-03-30T16:11:06.373+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T16:11:06.373+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:11:06.395+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:11:06.395+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:11:06.395+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：22ms
+2026-03-30T16:11:06.395+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:11:07.129+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:11:07.129+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:11:07.129
+2026-03-30T16:11:07.129+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /order/list
+2026-03-30T16:11:07.129+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:11:07.170+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:11:07.170+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:11:07.170+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 耗时：41ms
+2026-03-30T16:11:07.170+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-2] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:17:52.930+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:17:52.930+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:17:52.930
+2026-03-30T16:17:52.930+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T16:17:52.930+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:17:52.954+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:17:52.954+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:17:52.954+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : 耗时：24ms
+2026-03-30T16:17:52.954+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:17:55.289+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:17:55.289+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:17:55.289
+2026-03-30T16:17:55.289+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /user/patient/list
+2026-03-30T16:17:55.289+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:17:55.304+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:17:55.305+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:17:55.305+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : 耗时：15ms
+2026-03-30T16:17:55.305+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:17:56.127+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:17:56.127+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:17:56.127
+2026-03-30T16:17:56.127+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : 路径：POST /order/create
+2026-03-30T16:17:56.127+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:17:56.189+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:17:56.189+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:17:56.189+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : 耗时：62ms
+2026-03-30T16:17:56.189+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:17:56.769+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:17:56.769+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:17:56.769
+2026-03-30T16:17:56.769+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /doctor/schedule/detail
+2026-03-30T16:17:56.769+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:17:56.789+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:17:56.789+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:17:56.789+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : 耗时：20ms
+2026-03-30T16:17:56.789+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : 成功：是
+2026-03-30T16:17:57.577+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求开始 ==========
+2026-03-30T16:17:57.577+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : 时间：2026-03-30 16:17:57.577
+2026-03-30T16:17:57.577+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : 路径：GET /order/list
+2026-03-30T16:17:57.577+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : 用户 ID: 13542748103
+2026-03-30T16:17:57.628+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : ========== 网关请求结束 ==========
+2026-03-30T16:17:57.628+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : 状态码：200
+2026-03-30T16:17:57.628+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : 耗时：51ms
+2026-03-30T16:17:57.628+08:00  INFO 33348 --- [gateway-service] [reactor-http-nio-7] com.cly.gateway.filter.GlobalLogFilter   : 成功：是

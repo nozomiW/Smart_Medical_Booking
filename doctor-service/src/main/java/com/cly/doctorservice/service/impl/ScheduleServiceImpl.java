@@ -12,6 +12,7 @@ import com.cly.doctorservice.mq.constant.MQConstant;
 import com.cly.doctorservice.result.Result;
 import com.cly.doctorservice.service.ScheduleService;
 import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.redisson.api.RBloomFilter;
 import org.redisson.api.RLock;
@@ -27,6 +28,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class ScheduleServiceImpl implements ScheduleService {
 

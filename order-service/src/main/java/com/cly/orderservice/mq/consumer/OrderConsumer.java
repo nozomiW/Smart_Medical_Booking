@@ -48,8 +48,7 @@ public class OrderConsumer implements RocketMQListener<Map<String, Object>> {
                 throw new RuntimeException("订单写库返回 FALSE，触发 MQ 重试：" + order.getOrderNo());
             }
         } catch (Exception e) {
-            log.error("订单创建异常 - orderNo: {}", 
-                    JSON.parseObject(JSON.toJSONString(message.get("order")), Order.class).getOrderNo(), e);
+            log.error("订单创建异常", e);
             // 重新抛出异常，让 RocketMQ 触发重试，避免订单丢失
             throw new RuntimeException("订单创建失败，触发 MQ 重试", e);
         }
