@@ -12406,3 +12406,57 @@ Caused by: com.mysql.cj.jdbc.exceptions.MysqlDataTruncation: Data truncation: Da
 2026-03-30T16:55:34.811+08:00  INFO 34780 --- [order-service] [http-nio-9004-exec-9] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
 2026-03-30T16:55:34.811+08:00  INFO 34780 --- [order-service] [http-nio-9004-exec-9] c.c.o.aspect.BusinessLogAspect           : 执行耗时：61ms
 2026-03-30T16:55:34.811+08:00  INFO 34780 --- [order-service] [http-nio-9004-exec-9] c.c.o.aspect.BusinessLogAspect           : 执行状态：成功
+2026-03-30T17:02:16.499+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-03-30T17:02:16.499+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 时间：2026-03-30 17:02:16.499
+2026-03-30T17:02:16.500+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 接口：GET /user/patient/list
+2026-03-30T17:02:16.500+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 类名：PatientServiceImpl.getPatients
+2026-03-30T17:02:16.500+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 业务描述：查询就诊人列表
+2026-03-30T17:02:16.500+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 业务类型：就诊人管理
+2026-03-30T17:02:16.504+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 请求参数：["2038503974361616385"]
+2026-03-30T17:02:17.505+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-03-30T17:02:17.505+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 执行耗时：1001ms
+2026-03-30T17:02:17.506+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 执行状态：成功
+2026-03-30T17:02:18.628+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-2] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-03-30T17:02:18.628+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-2] c.c.u.aspect.BusinessLogAspect           : 时间：2026-03-30 17:02:18.628
+2026-03-30T17:02:18.628+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-2] c.c.u.aspect.BusinessLogAspect           : 接口：GET /user/patient/list
+2026-03-30T17:02:18.628+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-2] c.c.u.aspect.BusinessLogAspect           : 类名：PatientServiceImpl.getPatients
+2026-03-30T17:02:18.628+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-2] c.c.u.aspect.BusinessLogAspect           : 业务描述：查询就诊人列表
+2026-03-30T17:02:18.628+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-2] c.c.u.aspect.BusinessLogAspect           : 业务类型：就诊人管理
+2026-03-30T17:02:18.628+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-2] c.c.u.aspect.BusinessLogAspect           : 请求参数：["2038503974361616385"]
+2026-03-30T17:02:18.658+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-2] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-03-30T17:02:18.658+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-2] c.c.u.aspect.BusinessLogAspect           : 执行耗时：30ms
+2026-03-30T17:02:18.658+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-2] c.c.u.aspect.BusinessLogAspect           : 执行状态：成功
+2026-03-30T17:02:19.396+08:00  INFO 36548 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-03-30T17:02:19.396+08:00  INFO 36548 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : 时间：2026-03-30 17:02:19.396
+2026-03-30T17:02:19.396+08:00  INFO 36548 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : 接口：GET /order/list
+2026-03-30T17:02:19.397+08:00  INFO 36548 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : 类名：OrderServiceImpl.getOrders
+2026-03-30T17:02:19.397+08:00  INFO 36548 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : 业务描述：查询用户订单列表
+2026-03-30T17:02:19.397+08:00  INFO 36548 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : 业务类型：订单查询
+2026-03-30T17:02:19.397+08:00  INFO 36548 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : 请求参数：["2038503974361616385"]
+2026-03-30T17:02:19.816+08:00  INFO 36548 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-03-30T17:02:19.816+08:00  INFO 36548 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : 执行耗时：419ms
+2026-03-30T17:02:19.816+08:00  INFO 36548 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : 执行状态：成功
+2026-03-30T17:02:20.564+08:00  INFO 26324 --- [doctor-service] [http-nio-9002-exec-1] c.c.d.aspect.BusinessLogAspect           : [业务] 排班查询 - ScheduleServiceImpl.findDetailByDate - 查询排班详情（缓存优化）
+2026-03-30T17:02:20.886+08:00  INFO 26324 --- [doctor-service] [http-nio-9002-exec-1] c.c.d.aspect.BusinessLogAspect           : [业务完成] 耗时：321ms - 状态：成功
+2026-03-30T17:02:21.449+08:00  INFO 26324 --- [doctor-service] [http-nio-9002-exec-2] c.c.d.aspect.BusinessLogAspect           : [业务] 排班查询 - ScheduleServiceImpl.findDetailByDate - 查询排班详情（缓存优化）
+2026-03-30T17:03:29.804+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-5] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-03-30T17:03:29.804+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-5] c.c.u.aspect.BusinessLogAspect           : 时间：2026-03-30 17:03:29.804
+2026-03-30T17:03:29.805+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-5] c.c.u.aspect.BusinessLogAspect           : 接口：GET /user/patient/list
+2026-03-30T17:03:29.805+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-5] c.c.u.aspect.BusinessLogAspect           : 类名：PatientServiceImpl.getPatients
+2026-03-30T17:03:29.805+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-5] c.c.u.aspect.BusinessLogAspect           : 业务描述：查询就诊人列表
+2026-03-30T17:03:29.805+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-5] c.c.u.aspect.BusinessLogAspect           : 业务类型：就诊人管理
+2026-03-30T17:03:29.805+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-5] c.c.u.aspect.BusinessLogAspect           : 请求参数：["2038503974361616385"]
+2026-03-30T17:03:29.808+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-5] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-03-30T17:03:29.808+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-5] c.c.u.aspect.BusinessLogAspect           : 执行耗时：3ms
+2026-03-30T17:03:29.808+08:00  INFO 41480 --- [user-service] [http-nio-9003-exec-5] c.c.u.aspect.BusinessLogAspect           : 执行状态：成功
+2026-03-30T17:03:30.479+08:00  INFO 36548 --- [order-service] [http-nio-9004-exec-5] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-03-30T17:03:30.479+08:00  INFO 36548 --- [order-service] [http-nio-9004-exec-5] c.c.o.aspect.BusinessLogAspect           : 时间：2026-03-30 17:03:30.479
+2026-03-30T17:03:30.479+08:00  INFO 36548 --- [order-service] [http-nio-9004-exec-5] c.c.o.aspect.BusinessLogAspect           : 接口：GET /order/list
+2026-03-30T17:03:30.479+08:00  INFO 36548 --- [order-service] [http-nio-9004-exec-5] c.c.o.aspect.BusinessLogAspect           : 类名：OrderServiceImpl.getOrders
+2026-03-30T17:03:30.479+08:00  INFO 36548 --- [order-service] [http-nio-9004-exec-5] c.c.o.aspect.BusinessLogAspect           : 业务描述：查询用户订单列表
+2026-03-30T17:03:30.479+08:00  INFO 36548 --- [order-service] [http-nio-9004-exec-5] c.c.o.aspect.BusinessLogAspect           : 业务类型：订单查询
+2026-03-30T17:03:30.479+08:00  INFO 36548 --- [order-service] [http-nio-9004-exec-5] c.c.o.aspect.BusinessLogAspect           : 请求参数：["2038503974361616385"]
+2026-03-30T17:03:30.484+08:00  INFO 36548 --- [order-service] [http-nio-9004-exec-5] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-03-30T17:03:30.484+08:00  INFO 36548 --- [order-service] [http-nio-9004-exec-5] c.c.o.aspect.BusinessLogAspect           : 执行耗时：5ms
+2026-03-30T17:03:30.484+08:00  INFO 36548 --- [order-service] [http-nio-9004-exec-5] c.c.o.aspect.BusinessLogAspect           : 执行状态：成功
+2026-03-30T17:03:31.036+08:00  INFO 26324 --- [doctor-service] [http-nio-9002-exec-4] c.c.d.aspect.BusinessLogAspect           : [业务] 排班查询 - ScheduleServiceImpl.findDetailByDate - 查询排班详情（缓存优化）
