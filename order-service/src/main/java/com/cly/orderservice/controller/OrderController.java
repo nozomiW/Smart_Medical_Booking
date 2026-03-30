@@ -20,9 +20,9 @@ public class OrderController {
     }
 
     @PostMapping("create")
-    public Result createOrder(@RequestHeader("X-User-Id") Long userId,
-                              @RequestParam Long patientId,
-                              @RequestParam Long scheduleId) {
+    public Result createOrder(@RequestHeader("X-User-Id") String userId,
+                              @RequestParam String patientId,
+                              @RequestParam String scheduleId) {
         return orderService.createOrder(userId, patientId, scheduleId);
     }
 
@@ -36,12 +36,12 @@ public class OrderController {
     // ===============================================
 
     @GetMapping("list")
-    public List<OrderDetailDTO> getOrders(@RequestHeader("X-User-Id") Long userId) {
+    public List<OrderDetailDTO> getOrders(@RequestHeader("X-User-Id") String userId) {
         return orderService.getOrders(userId);
     }
 
     @GetMapping("detail")
-    public OrderDetailDTO getOrderDetail(@RequestParam Long orderId) {
+    public OrderDetailDTO getOrderDetail(@RequestParam String orderId) {
         return orderService.getOrderDetail(orderId);
     }
 
@@ -50,8 +50,8 @@ public class OrderController {
      */
     @PostMapping("cancel")
     public Result cancelOrder(
-            @RequestHeader("X-User-Id") Long userId,
-            @RequestParam Long orderId) {
+            @RequestHeader("X-User-Id") String userId,
+            @RequestParam String orderId) {
         return orderService.cancelOrder(userId, orderId);
     }
 

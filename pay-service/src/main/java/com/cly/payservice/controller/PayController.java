@@ -20,7 +20,7 @@ public class PayController {
     }
 
     @PostMapping
-    public Result pay(@RequestParam Long orderId) {
+    public Result pay(@RequestParam String orderId) {
         return payService.pay(orderId);
     }
 }

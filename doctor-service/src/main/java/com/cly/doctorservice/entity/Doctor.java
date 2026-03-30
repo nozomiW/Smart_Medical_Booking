@@ -11,10 +11,10 @@ import java.math.BigDecimal;
 public class Doctor {
 
     @TableId("id")
-    private Long id;
+    private String id;
 
     @TableField("dept_id")
-    private Long deptId;
+    private String deptId;
 
     private String name;
 

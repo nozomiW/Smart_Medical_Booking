@@ -29,16 +29,16 @@ public class FeeHandler {
     }
 
     @Transactional
-    public Result updateFee(Long id, BigDecimal fee) {
+    public Result updateFee(String id, BigDecimal fee) {
         // 第一次删除缓存
-        stringRedisTemplate.opsForHash().delete("doctor:online", id.toString());
+        stringRedisTemplate.opsForHash().delete("doctor:online", id);
 
         int row = doctorMapper.updateFeeById(id, fee);
         if (row != 1) return Result.FALSE;
 
         // 延迟双删：500ms 后再删一次，防止并发读写导致脏数据回填
         executorService.schedule(
-                () -> stringRedisTemplate.opsForHash().delete("doctor:online", id.toString()),
+                () -> stringRedisTemplate.opsForHash().delete("doctor:online", id),
                 500,
                 TimeUnit.MILLISECONDS
         );

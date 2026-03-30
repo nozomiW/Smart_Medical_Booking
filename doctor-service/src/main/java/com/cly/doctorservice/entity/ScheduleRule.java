@@ -10,10 +10,10 @@ import lombok.Data;
 public class ScheduleRule {
 
     @TableId("id")
-    private Long id;
+    private String id;
 
     @TableField("doc_id")
-    private Long docId;
+    private String docId;
 
     @TableField("day_of_week")
     private Integer dayOfWeek;

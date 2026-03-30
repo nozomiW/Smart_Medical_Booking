@@ -24,16 +24,14 @@ public class FeeProducer {
     }
 
 
-    public SendResult produceFeeUpdate(Long doctorId, BigDecimal fee) {
-        String tag = "UPDATE";
-
+    public SendResult produceFeeUpdate(String doctorId, BigDecimal fee) {
         Map<String, Object> body = new HashMap<>();
         body.put("id", doctorId);
         body.put("fee", fee);
 
         Message<Map<String, Object>> message = MessageBuilder
                 .withPayload(body)
-                .setHeader(RocketMQHeaders.KEYS, doctorId.toString())
+                .setHeader(RocketMQHeaders.KEYS, doctorId)
                 .build();
         String destination = MQConstant.Topic.DOCTOR_FEE + ":" + MQConstant.Tag.UPDATE;
         return rocketMQTemplate.syncSend(destination, message);

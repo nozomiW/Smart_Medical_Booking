@@ -41,16 +41,9 @@ api.interceptors.response.use(
  * 用户服务 API  /user-service:8081
  */
 export const userAPI = {
-  // POST /user/login
   login: (phone, password) => api.post('/user/login', { phone, password }),
-
-  // POST /user/register
   register: (phone, password) => api.post('/user/register', { phone, password }),
-
-  // POST /user/patient/insert  请求头: X-User-Id
   insertPatient: (patient) => api.post('/user/patient/insert', patient),
-
-  // GET /user/patient/list  请求头: X-User-Id
   getPatients: () => api.get('/user/patient/list')
 }
 
@@ -58,45 +51,29 @@ export const userAPI = {
  * 医生服务 API  /doctor-service:8082
  */
 export const doctorAPI = {
-  // GET /doctor/search/online
   searchOnline: () => api.get('/doctor/search/online'),
-
-  // GET /doctor/schedule/detail?workDate=YYYY-MM-DD
   getScheduleDetail: (workDate) => api.get('/doctor/schedule/detail', { params: { workDate } }),
-
-  // GET /doctor/schedule/detail/id?scheduleId=xxx
-  getScheduleDetailById: (scheduleId) => api.get('/doctor/schedule/detail/id', { params: { scheduleId: String(scheduleId) } })
+  getScheduleDetailById: (scheduleId) => api.get('/doctor/schedule/detail/id', { params: { scheduleId } })
 }
 
 /**
  * 订单服务 API  /order-service:8083
- * 注意: 所有 ID 用字符串传输，避免 JS Number 精度丢失
+ * ID 均为字符串，后端存储为 VARCHAR，无精度丢失问题
  */
 export const orderAPI = {
-  // POST /order/create?patientId=xxx&scheduleId=xxx  请求头: X-User-Id
   create: (patientId, scheduleId) => api.post('/order/create', null, {
-    params: {
-      patientId: String(patientId),
-      scheduleId: String(scheduleId)
-    }
+    params: { patientId, scheduleId }
   }),
-
-  // GET /order/list  请求头: X-User-Id
   getList: () => api.get('/order/list'),
-
-  // GET /order/detail?orderId=xxx
-  getDetail: (orderId) => api.get('/order/detail', { params: { orderId: String(orderId) } }),
-
-  // POST /order/cancel?orderId=xxx  请求头: X-User-Id  状态标记为 -1
-  cancel: (orderId) => api.post('/order/cancel', null, { params: { orderId: String(orderId) } })
+  getDetail: (orderId) => api.get('/order/detail', { params: { orderId } }),
+  cancel: (orderId) => api.post('/order/cancel', null, { params: { orderId } })
 }
 
 /**
  * 支付服务 API  /pay-service:8084
  */
 export const payAPI = {
-  // POST /pay?orderId=xxx  请求头: X-User-Id
-  pay: (orderId) => api.post('/pay', null, { params: { orderId: BigInt(orderId).toString() } })
+  pay: (orderId) => api.post('/pay', null, { params: { orderId } })
 }
 
 export default api

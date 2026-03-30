@@ -11,5 +11,5 @@ import java.util.List;
 @Mapper
 public interface DoctorMapper extends BaseMapper<Doctor> {
     List<Doctor> selectDoctorByStatus(@Param("status") Integer status);
-    int updateFeeById(@Param("id")Long id, @Param("fee")BigDecimal fee);
+    int updateFeeById(@Param("id") String id, @Param("fee") BigDecimal fee);
 }

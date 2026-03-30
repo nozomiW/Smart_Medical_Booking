@@ -19,10 +19,10 @@ public class PayProducer {
         this.rocketMQTemplate = rocketMQTemplate;
     }
 
-    public SendResult producePaySuccess(Long orderId) {
-        Message<Long> message = MessageBuilder
+    public SendResult producePaySuccess(String orderId) {
+        Message<String> message = MessageBuilder
                 .withPayload(orderId)
-                .setHeader(RocketMQHeaders.KEYS, orderId.toString())
+                .setHeader(RocketMQHeaders.KEYS, orderId)
                 .build();
         return rocketMQTemplate.syncSend(
                 MQConstant.Topic.PAY_SUCCESS + ":" + MQConstant.Tag.SUCCESS,

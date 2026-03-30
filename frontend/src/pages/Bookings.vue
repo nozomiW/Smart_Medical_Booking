@@ -251,13 +251,13 @@ export default {
       error.value = ''
       try {
         const response = await orderAPI.getList()
-        // 适配后端返回的数据结构，使用 BigInt 处理 ID
+        // 适配后端返回的数据结构
         orders.value = (response || []).map(item => {
           const order = item.order || {}
           const orderItem = item.orderItem || {}
           
           return {
-            id: BigInt(order.id),  // 使用 BigInt 避免精度丢失
+            id: String(order.id),
             doctorName: orderItem.docName || '未知医生',
             deptName: orderItem.deptName || '未知科室',
             reserveDate: orderItem.workDate || '',
@@ -265,7 +265,7 @@ export default {
             fee: Number(order.amount || 0),
             orderStatus: Number(order.status || 0),
             patientName: orderItem.patientName || '',
-            scheduleId: BigInt(orderItem.scheduleId || 0)
+            scheduleId: String(orderItem.scheduleId || 0)
           }
         })
       } catch (err) {
@@ -280,7 +280,7 @@ export default {
       if (!confirm('确认支付此预约？')) return
       payingId.value = id
       try {
-        await payAPI.pay(String(id))  // 转换为字符串
+        await payAPI.pay(id)
         alert('支付成功')
         await fetchOrders()
       } catch (err) {

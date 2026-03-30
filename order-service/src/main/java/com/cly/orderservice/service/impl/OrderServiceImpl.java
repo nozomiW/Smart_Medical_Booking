@@ -80,14 +80,28 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @BusinessLog(value = "创建订单（MQ 异步）", type = "订单管理")
-    public Result createOrder(Long userId, Long patientId, Long scheduleId) {
+    public Result createOrder(String userId, String patientId, String scheduleId) {
             
+        System.out.println("\n========== [订单 Service] 开始创建订单 ==========");
+        System.out.println("userId: " + userId);
+        System.out.println("patientId: " + patientId);
+        System.out.println("scheduleId: " + scheduleId);
+        
         // ========== 步骤 1: Redis 预扣减号源 ==========
+        System.out.println("\n[步骤 1] 开始扣减 Redis 号源...");
         Result deductResult = doctorFeignClient.deductAvailableNum(scheduleId);
         if (deductResult != Result.SUCCESS) {
-            System.err.println("[订单创建失败] 原因：扣减号源失败 | scheduleId: " + scheduleId);
+            System.err.println("\n========== [订单创建失败] ==========");
+            System.err.println("失败原因：扣减号源失败");
+            System.err.println("scheduleId: " + scheduleId);
+            System.err.println("可能原因:");
+            System.err.println("  1. Redis 中号源 key 不存在（未初始化）");
+            System.err.println("  2. 号源已用完（available_num = 0）");
+            System.err.println("  3. 排班信息不存在");
+            System.err.println("====================================\n");
             return Result.FALSE;
         }
+        System.out.println("[步骤 1] ✓ 号源扣减成功");
     
         // ========== 步骤 2: 获取就诊人信息并验证 ==========
         List<PatientDTO> patients = userFeignClient.getPatients(userId);
@@ -134,9 +148,8 @@ public class OrderServiceImpl implements OrderService {
     
         // ========== 步骤 4: 组装订单数据 ==========
         Order order = new Order();
-        // 使用雪花算法生成唯一 ID，避免随机数冲突风险
-        // 注意：雪花算法生成的 ID 可能超过 JavaScript 安全整数范围，但仅用于数据库主键，前端展示使用 orderNo
-        order.setId(IdWorker.getId());
+        // 使用雪花算法生成唯一 ID，存储为字符串，彻底避免前端精度丢失
+        order.setId(IdWorker.getIdStr());
         order.setOrderNo("ORD" + IdWorker.getIdStr());
         order.setUserId(userId);
         order.setAmount(schedule.getDocFee());
@@ -184,20 +197,19 @@ public class OrderServiceImpl implements OrderService {
      * @param deptId 科室 ID
      * @return 科室名称
      */
-    private String getDeptNameByDeptId(Long deptId) {
+    private String getDeptNameByDeptId(String deptId) {
         if (deptId == null) return "未知科室";
-        // 根据实际科室 ID 映射（这里硬编码，实际应该从字典表或配置中读取）
-        switch (deptId.intValue()) {
-            case 100: return "内科";
-            case 101: return "外科";
-            case 102: return "儿科";
-            case 103: return "妇产科";
-            case 104: return "眼科";
-            case 105: return "口腔科";
-            case 106: return "耳鼻喉科";
-            case 107: return "皮肤科";
-            case 108: return "中医科";
-            case 109: return "骨科";
+        switch (deptId) {
+            case "100": return "内科";
+            case "101": return "外科";
+            case "102": return "儿科";
+            case "103": return "妇产科";
+            case "104": return "眼科";
+            case "105": return "口腔科";
+            case "106": return "耳鼻喉科";
+            case "107": return "皮肤科";
+            case "108": return "中医科";
+            case "109": return "骨科";
             default: return "其他科室";
         }
     }
@@ -258,7 +270,7 @@ public class OrderServiceImpl implements OrderService {
     
     @Override
     @BusinessLog(value = "查询用户订单列表", type = "订单查询")
-    public List<OrderDetailDTO> getOrders(Long userId) {
+    public List<OrderDetailDTO> getOrders(String userId) {
         String indexKey = "order:index:" + userId;
         long now = System.currentTimeMillis();
 
@@ -288,8 +300,8 @@ public class OrderServiceImpl implements OrderService {
             long expireAt = now + TimeUnit.HOURS.toMillis(2);
             
             // 先收集所有的 scheduleId
-            List<Long> scheduleIds = new ArrayList<>();
-            Map<Long, OrderItem> orderItemMap = new HashMap<>();
+            List<String> scheduleIds = new ArrayList<>();
+            Map<String, OrderItem> orderItemMap = new HashMap<>();
             
             for (Order o : orders) {
                 OrderItem orderItem = orderItemMapper.selectOne(
@@ -302,14 +314,14 @@ public class OrderServiceImpl implements OrderService {
             }
             
             // 批量从 Redis 获取所有号源数量（一次 MGET）
-            Map<Long, Integer> availableNumMap = getAvailableNumBatchFromRedis(scheduleIds);
+            Map<String, Integer> availableNumMap = getAvailableNumBatchFromRedis(scheduleIds);
             
             // 组装结果
             for (Order o : orders) {
                 OrderItem orderItem = orderItemMap.get(o.getId());
                 if (orderItem == null) continue;
                 
-                Integer availableNum = availableNumMap.get(o.getId());
+                Integer availableNum = availableNumMap.get(orderItem.getScheduleId());
                 
                 OrderDetailDTO dto = new OrderDetailDTO();
                 dto.setOrder(o);
@@ -331,7 +343,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @BusinessLog(value = "查询订单详情", type = "订单查询")
-    public OrderDetailDTO getOrderDetail(Long orderId) {
+    public OrderDetailDTO getOrderDetail(String orderId) {
         String redisKey = "order:detail:" + orderId;
 
         String cached = stringRedisTemplate.opsForValue().get(redisKey);
@@ -365,10 +377,10 @@ public class OrderServiceImpl implements OrderService {
     /**
      * 批量从 Redis 获取排班的实时号源数量（使用 MGET 优化）
      * @param scheduleIds 排班 ID 列表
-     * @return Map<orderId, availableNum>  orderId -> 剩余号源数量的映射
+     * @return Map<scheduleId, availableNum>  scheduleId -> 剩余号源数量的映射
      */
-    private Map<Long, Integer> getAvailableNumBatchFromRedis(List<Long> scheduleIds) {
-        Map<Long, Integer> resultMap = new HashMap<>();
+    private Map<String, Integer> getAvailableNumBatchFromRedis(List<String> scheduleIds) {
+        Map<String, Integer> resultMap = new HashMap<>();
         
         if (scheduleIds == null || scheduleIds.isEmpty()) {
             return resultMap;
@@ -383,9 +395,9 @@ public class OrderServiceImpl implements OrderService {
         List<String> values = stringRedisTemplate.opsForValue().multiGet(keys);
         
         // 建立 scheduleId -> availableNum 的映射
-        Map<Long, Integer> scheduleNumMap = new HashMap<>();
+        Map<String, Integer> scheduleNumMap = new HashMap<>();
         for (int i = 0; i < scheduleIds.size(); i++) {
-            Long scheduleId = scheduleIds.get(i);
+            String scheduleId = scheduleIds.get(i);
             String numStr = (values != null && i < values.size()) ? values.get(i) : null;
             
             if (numStr != null) {
@@ -405,7 +417,7 @@ public class OrderServiceImpl implements OrderService {
      * @param scheduleId 排班 ID
      * @return 剩余号源数量
      */
-    private Integer getAvailableNumFromRedis(Long scheduleId) {
+    private Integer getAvailableNumFromRedis(String scheduleId) {
         if (scheduleId == null) return null;
         
         String numKey = "schedule:num:" + scheduleId;
@@ -425,7 +437,7 @@ public class OrderServiceImpl implements OrderService {
     }
     
     @Override
-    public void cancelUnpaidOrder(Long orderId) {
+    public void cancelUnpaidOrder(String orderId) {
         System.out.println("\n[cancelUnpaidOrder] 开始检查订单支付状态...");
         System.out.println("  - orderId: " + orderId);
 
@@ -475,7 +487,7 @@ public class OrderServiceImpl implements OrderService {
     }
     
     @Override
-    public Result cancelOrder(Long userId, Long orderId) {
+    public Result cancelOrder(String userId, String orderId) {
         // 1. 查询订单
         Order order = orderMapper.selectById(orderId);
         if (order == null) {

@@ -37,7 +37,7 @@ public class PayServiceImpl implements PayService {
 
     @Override
     @BusinessLog(value = "订单支付", type = "支付管理")
-    public Result pay(Long orderId) {
+    public Result pay(String orderId) {
         // 1. 预检查订单状态
         OrderDetailDTO detail = orderFeignClient.getOrderDetail(orderId);
         if (detail == null || detail.getOrder() == null) throw new RuntimeException("订单不存在");

@@ -11,18 +11,18 @@ public interface ScheduleService {
 
     Result insertScheduleRule(ScheduleRule rule);
 
-    Result insertSchedule(Long docId, int weeks);
+    Result insertSchedule(String docId, int weeks);
 
     String findDetailByDate(LocalDate workDate);
 
     List<ScheduleDetailDTO> findDetailByDateDb(LocalDate workDate);
 
-    ScheduleDetailDTO findDetailById(Long scheduleId);
+    ScheduleDetailDTO findDetailById(String scheduleId);
 
-    Result deductAvailableNum(Long scheduleId);
+    Result deductAvailableNum(String scheduleId);
 
-    Result deductAvailableNumDb(Long scheduleId);
+    Result deductAvailableNumDb(String scheduleId);
 
-    Result releaseAvailableNum(Long scheduleId, int num);
+    Result releaseAvailableNum(String scheduleId, int num);
 
 }

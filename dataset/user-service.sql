@@ -4,7 +4,7 @@ CREATE DATABASE IF NOT EXISTS user_service CHARACTER SET utf8mb4;
 USE user_service;
 
 CREATE TABLE `uc_user` (
-                           `id` BIGINT PRIMARY KEY COMMENT '用户账户ID',
+                           `id` VARCHAR(50) PRIMARY KEY COMMENT '用户账户 ID',
                            `phone` VARCHAR(11) NOT NULL COMMENT '手机号(主要登录凭证)',
                            `password` VARCHAR(100) COMMENT '密码(如采用验证码登录可为空)',
                            `status` TINYINT NOT NULL DEFAULT 1 COMMENT '账号状态：0-冻结(黑名单), 1-正常',
@@ -14,8 +14,8 @@ CREATE TABLE `uc_user` (
 ) ENGINE=InnoDB COMMENT='用户账户表';
 
 CREATE TABLE `uc_patient` (
-                              `id` BIGINT PRIMARY KEY COMMENT '就诊人ID(档案号)',
-                              `user_id` BIGINT NOT NULL COMMENT '所属账户ID(关联 yy_user.id)',
+                              `id` VARCHAR(50) PRIMARY KEY COMMENT '就诊人 ID(档案号)',
+                              `user_id` VARCHAR(50) NOT NULL COMMENT '所属账户 ID(关联 yy_user.id)',
                               `name` VARCHAR(50) NOT NULL COMMENT '真实姓名',
                               `id_card` VARCHAR(18) NOT NULL COMMENT '身份证号',
                               `gender` TINYINT COMMENT '性别：0-女, 1-男',

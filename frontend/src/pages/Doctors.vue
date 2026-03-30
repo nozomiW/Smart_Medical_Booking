@@ -8,7 +8,7 @@
         <input 
           v-model="searchQuery" 
           type="text" 
-          placeholder="搜索医生名称..."
+          placeholder="搜索医生姓名..."
           @input="handleSearch"
         >
         <div class="date-picker-wrapper">
@@ -60,7 +60,6 @@
               <div class="date-picker-weekday">四</div>
               <div class="date-picker-weekday">五</div>
               <div class="date-picker-weekday">六</div>
-              
               <div 
                 v-for="day in calendarDays" 
                 :key="day.dateStr"
@@ -103,7 +102,7 @@
       <div v-else class="doctor-list">
         <div v-for="doctor in filteredDoctors" :key="doctor.scheduleId || doctor.docId" class="doctor-card card">
           <div class="doctor-header">
-            <div class="avatar">{{ doctor.docName ? doctor.docName.charAt(0) : '医' }}</div>
+            <div class="avatar">{{ doctor.docName ? doctor.docName.charAt(0) : '?' }}</div>
             <div class="doctor-info">
               <h3>{{ doctor.docName || '未知医生' }}</h3>
               <p class="department">{{ doctor.deptId ? '科室' + doctor.deptId : '科室' }}</p>
@@ -209,7 +208,7 @@
               @click="confirmBooking(patient)"
               class="patient-item"
             >
-              <div class="patient-avatar">{{ patient.name ? patient.name.charAt(0) : '就' }}</div>
+              <div class="patient-avatar">{{ patient.name ? patient.name.charAt(0) : '患' }}</div>
               <div class="patient-info">
                 <div class="patient-name">{{ patient.name || '未知患者' }}</div>
                 <div class="patient-detail">{{ patient.idCard }} · {{ patient.gender === 1 ? '男' : (patient.gender === 0 ? '女' : '未知') }}</div>
@@ -253,15 +252,14 @@ export default {
     const showDatePicker = ref(false)
     const selectedDoctor = ref(null)
     const patients = ref([])
+    const showPatientModal = ref(false)
     const pickerMonth = ref(new Date().getMonth())
     const pickerYear = ref(new Date().getFullYear())
 
     const isLoggedIn = computed(() => !!localStorage.getItem('token'))
-    
+
     const filteredDoctors = computed(() => {
-      return doctors.value.filter(doctor => {
-        return doctor && doctor.docName && doctor.docName.includes(searchQuery.value)
-      })
+      return doctors.value.filter(doctor => doctor && doctor.docName && doctor.docName.includes(searchQuery.value))
     })
 
     const currentDateDisplay = computed(() => {
@@ -269,25 +267,15 @@ export default {
       const today = new Date()
       const tomorrow = new Date(today)
       tomorrow.setDate(tomorrow.getDate() + 1)
-      
-      if (date.toDateString() === today.toDateString()) {
-        return '今天 (' + formatDate(today) + ')'
-      } else if (date.toDateString() === tomorrow.toDateString()) {
-        return '明天 (' + formatDate(tomorrow) + ')'
-      }
-      
+      if (date.toDateString() === today.toDateString()) return '今天 (' + formatDate(today) + ')'
+      if (date.toDateString() === tomorrow.toDateString()) return '明天 (' + formatDate(tomorrow) + ')'
       const weekDays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
-      return `${date.getMonth() + 1}月${date.getDate()}日 ${weekDays[date.getDay()]} (${formatDate(date)})`
+      return date.getMonth() + 1 + '月' + date.getDate() + '日 ' + weekDays[date.getDay()] + ' (' + formatDate(date) + ')'
     })
 
-    const currentMonthTitle = computed(() => {
-      return `${pickerYear.value}年${pickerMonth.value + 1}月`
-    })
+    const currentMonthTitle = computed(() => pickerYear.value + '年' + (pickerMonth.value + 1) + '月')
 
-    const isToday = computed(() => {
-      const today = new Date()
-      return currentDate.value.toDateString() === today.toDateString()
-    })
+    const isToday = computed(() => currentDate.value.toDateString() === new Date().toDateString())
 
     const isCurrentMonth = computed(() => {
       const now = new Date()
@@ -299,95 +287,35 @@ export default {
       const month = pickerMonth.value
       const today = new Date()
       today.setHours(0, 0, 0, 0)
-      
-      // 获取当月第一天
-      const firstDay = new Date(year, month, 1)
-      // 获取当月最后一天
-      const lastDay = new Date(year, month + 1, 0)
-      // 获取第一天是星期几
-      const firstDayWeek = firstDay.getDay()
-      // 获取当月天数
-      const daysInMonth = lastDay.getDate()
-      
-      const days = []
-      const weekDays = ['', '日', '一', '二', '三', '四', '五', '六']
-      
-      // 添加上个月的日期
+      const firstDayWeek = new Date(year, month, 1).getDay()
+      const daysInMonth = new Date(year, month + 1, 0).getDate()
       const prevMonthLastDay = new Date(year, month, 0).getDate()
+      const days = []
       for (let i = firstDayWeek - 1; i >= 0; i--) {
         const day = prevMonthLastDay - i
-        const dateStr = formatDate(new Date(year, month - 1, day))
-        days.push({
-          day,
-          label: '',
-          isToday: false,
-          isSelected: false,
-          isPast: true,
-          isFuture: false,
-          isWeekend: false,
-          dateStr
-        })
+        days.push({ day, label: '', isToday: false, isPast: true, isFuture: false, isWeekend: false, dateStr: formatDate(new Date(year, month - 1, day)) })
       }
-      
-      // 添加当月的日期
       for (let day = 1; day <= daysInMonth; day++) {
         const date = new Date(year, month, day)
-        const dateStr = formatDate(date)
-        const isToday = date.toDateString() === today.toDateString()
-        const isSelected = currentDate.value.toDateString() === date.toDateString()
+        const isTodayFlag = date.toDateString() === today.toDateString()
         const isPast = date < today
-        const isWeekend = date.getDay() === 0 || date.getDay() === 6
-        
-        let label = ''
-        if (isToday) label = '今天'
-        else if (day === 2) label = '初二'
-        else if (day === 8) label = '初八'
-        // 简化版，实际可以使用农历库
-        
-        days.push({
-          day,
-          label,
-          isToday,
-          isSelected,
-          isPast,
-          isFuture: false,
-          isWeekend,
-          dateStr
-        })
+        days.push({ day, label: isTodayFlag ? '今天' : '', isToday: isTodayFlag, isPast, isFuture: false, isWeekend: date.getDay() === 0 || date.getDay() === 6, dateStr: formatDate(date) })
       }
-      
-      // 添加下个月的日期，确保总共有 42 天（6 行），并且能显示未来 4 周的日期
       const remaining = 42 - days.length
       for (let i = 1; i <= remaining; i++) {
         const date = new Date(year, month + 1, i)
-        const dateStr = formatDate(date)
         const isPast = date < today
-        const isWeekend = date.getDay() === 0 || date.getDay() === 6
-        
-        days.push({
-          day: i,
-          label: '',
-          isToday: false,
-          isSelected: false,
-          isPast,
-          isFuture: !isPast,
-          isWeekend,
-          dateStr
-        })
+        days.push({ day: i, label: '', isToday: false, isPast, isFuture: !isPast, isWeekend: date.getDay() === 0 || date.getDay() === 6, dateStr: formatDate(date) })
       }
-      
       return days
     })
 
-    const formatDate = (date) => {
-      return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
-    }
+    const formatDate = (date) => date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0')
 
     const fetchDoctors = async () => {
       loading.value = true
       try {
-        const workDate = formatDate(currentDate.value)
-        const response = await doctorAPI.getScheduleDetail(workDate)
+        const response = await doctorAPI.getScheduleDetail(formatDate(currentDate.value))
         doctors.value = response || []
       } catch (error) {
         console.error('获取医生排班失败:', error)
@@ -399,13 +327,10 @@ export default {
     const changeDate = (days) => {
       const newDate = new Date(currentDate.value)
       newDate.setDate(newDate.getDate() + days)
-      
-      // 不能选择过去的日期
       const today = new Date()
       today.setHours(0, 0, 0, 0)
       if (newDate >= today) {
         currentDate.value = newDate
-        // 更新日历面板的年月
         pickerYear.value = newDate.getFullYear()
         pickerMonth.value = newDate.getMonth()
         fetchDoctors()
@@ -413,26 +338,18 @@ export default {
     }
 
     const isPastDate = (days) => {
-      const targetDate = new Date(currentDate.value)
-      targetDate.setDate(targetDate.getDate() + days)
+      const target = new Date(currentDate.value)
+      target.setDate(target.getDate() + days)
       const today = new Date()
       today.setHours(0, 0, 0, 0)
-      return targetDate < today
+      return target < today
     }
 
     const changeMonth = (months) => {
       let newMonth = pickerMonth.value + months
       let newYear = pickerYear.value
-      
-      if (newMonth > 11) {
-        newMonth = 0
-        newYear++
-      } else if (newMonth < 0) {
-        newMonth = 11
-        newYear--
-      }
-      
-      // 不能选择过去的月份
+      if (newMonth > 11) { newMonth = 0; newYear++ }
+      else if (newMonth < 0) { newMonth = 11; newYear-- }
       const now = new Date()
       if (newYear > now.getFullYear() || (newYear === now.getFullYear() && newMonth >= now.getMonth())) {
         pickerMonth.value = newMonth
@@ -442,16 +359,12 @@ export default {
 
     const selectDate = (day) => {
       if (day.isPast || day.isFuture) return
-      
-      const selectedDate = new Date(day.dateStr)
-      currentDate.value = selectedDate
+      currentDate.value = new Date(day.dateStr)
       showDatePicker.value = false
       fetchDoctors()
     }
 
-    const isSelectedDate = (day) => {
-      return currentDate.value.toDateString() === day.dateStr
-    }
+    const isSelectedDate = (day) => currentDate.value.toDateString() === new Date(day.dateStr).toDateString()
 
     const selectToday = () => {
       const today = new Date()
@@ -462,26 +375,30 @@ export default {
       fetchDoctors()
     }
 
-    const handleSearch = () => {
-      // 搜索由计算属性处理
-    }
+    const handleSearch = () => {}
+    const getAvailableNum = (doctor) => doctor.availableNum || 0
 
     const getStatusClass = (doctor) => {
-      const availableNum = getAvailableNum(doctor)
-      if (availableNum > 10) return 'status-available'
-      if (availableNum > 0) return 'status-sufficient'
+      const n = getAvailableNum(doctor)
+      if (n > 10) return 'status-available'
+      if (n > 0) return 'status-sufficient'
       return 'status-full'
     }
 
     const getStatusText = (doctor) => {
-      const availableNum = getAvailableNum(doctor)
-      if (availableNum > 10) return '充足'
-      if (availableNum > 0) return '紧张'
+      const n = getAvailableNum(doctor)
+      if (n > 10) return '充足'
+      if (n > 0) return '紧张'
       return '已满'
     }
 
-    const getAvailableNum = (doctor) => {
-      return doctor.availableNum || 0
+    const fetchPatients = async () => {
+      try {
+        const response = await userAPI.getPatients()
+        patients.value = response || []
+      } catch (error) {
+        console.error('获取就诊人列表失败:', error)
+      }
     }
 
     const selectDoctor = (doctor) => {
@@ -489,112 +406,48 @@ export default {
       fetchPatients()
       showPatientModal.value = true
     }
-    
+
     const closePatientModal = () => {
       showPatientModal.value = false
       selectedDoctor.value = null
     }
-    
-    const fetchPatients = async () => {
-      try {
-        const response = await userAPI.getPatients()
-        // 使用 BigInt 处理 ID，避免精度丢失
-        patients.value = (response || []).map(patient => ({
-          ...patient,
-          id: BigInt(patient.id)
-        }))
-      } catch (error) {
-        console.error('获取就诊人列表失败:', error)
-      }
-    }
-    
+
     const confirmBooking = async (patient) => {
       if (!selectedDoctor.value) return
-      
-      console.log('\n[confirmBooking] 开始预约...')
-      console.log('  - patientId:', patient.id)
-      console.log('  - scheduleId:', selectedDoctor.value.scheduleId)
-      console.log('  - patientName:', patient.name)
-              
       try {
-        // 不要转换为字符串，保持原始数字类型让 Axios 处理
         await orderAPI.create(patient.id, selectedDoctor.value.scheduleId)
-        console.log('  - 预约成功!')
         alert('预约成功!')
         closePatientModal()
-        
-        console.log('  - 准备刷新排班数据...')
-        await fetchDoctors() // 刷新号源信息
-        console.log('[confirmBooking] 完成\n')
+        await fetchDoctors()
       } catch (error) {
-        console.error('预约失败详情:', {
-          error,
-          response: error.response,
-          data: error.response?.data,
-          status: error.response?.status
-        })
         alert('预约失败:' + (error.response?.data || error.message))
       }
     }
 
     const goToAddPatient = () => {
-      router.push('/patients/add')
+      router.push('/patients')
       closePatientModal()
     }
 
-    onMounted(() => {
-      fetchDoctors()
-    })
-
-    const showPatientModal = ref(false)
+    onMounted(() => { fetchDoctors() })
 
     return {
-      doctors,
-      loading,
-      searchQuery,
-      filteredDoctors,
-      handleSearch,
-      currentDate,
-      currentDateDisplay,
-      isToday,
-      changeDate,
-      isLoggedIn,
-      showPatientModal,
-      patients,
-      selectDoctor,
-      closePatientModal,
-      getStatusClass,
-      getStatusText,
-      getAvailableNum,
-      confirmBooking,
-      goToAddPatient,
-      isPastDate,
-      showDatePicker,
-      pickerMonth,
-      pickerYear,
-      currentMonthTitle,
-      isCurrentMonth,
-      calendarDays,
-      selectDate,
-      isSelectedDate,
-      selectToday,
-      changeMonth,
-      formatDate
+      doctors, loading, searchQuery, filteredDoctors, handleSearch,
+      currentDate, currentDateDisplay, isToday, changeDate, isLoggedIn,
+      showPatientModal, patients, selectDoctor, closePatientModal,
+      getStatusClass, getStatusText, getAvailableNum,
+      confirmBooking, goToAddPatient, isPastDate,
+      showDatePicker, pickerMonth, pickerYear, currentMonthTitle,
+      isCurrentMonth, calendarDays, selectDate, isSelectedDate,
+      selectToday, changeMonth, formatDate
     }
   }
 }
 </script>
 
 <style scoped>
-.doctors {
-  padding: 40px 0;
-}
-
-.doctors h2 {
-  font-size: 28px;
-  color: #2d3748;
-  margin-bottom: 24px;
-}
+.doctors { padding: 40px 0; }
+.doctors h2 { font-size: 28px; color: #2d3748; margin-bottom: 24px; }
 
 .filters {
   display: flex;
@@ -605,9 +458,8 @@ export default {
   background: white;
   padding: 20px 24px;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
-
 .filters input {
   flex: 1;
   min-width: 200px;
@@ -617,27 +469,18 @@ export default {
   font-size: 15px;
   transition: all 0.3s ease;
 }
+.filters input:focus { outline: none; border-color: #667eea; box-shadow: 0 0 0 3px rgba(102,126,234,0.1); }
 
-.filters input:focus {
-  outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-}
-
-.date-picker-wrapper {
-  position: relative;
-}
-
+.date-picker-wrapper { position: relative; }
 .date-nav {
   display: flex;
   align-items: center;
   gap: 12px;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+  background: linear-gradient(135deg,rgba(102,126,234,0.05) 0%,rgba(118,75,162,0.05) 100%);
   padding: 8px 16px;
   border-radius: 10px;
   border: 1px solid #e2e8f0;
 }
-
 .current-date-display {
   display: flex;
   align-items: center;
@@ -651,23 +494,9 @@ export default {
   min-width: 180px;
   justify-content: space-between;
 }
-
-.current-date-display:hover {
-  border-color: #667eea;
-  background: rgba(102, 126, 234, 0.05);
-}
-
-.current-date-display svg {
-  width: 18px;
-  height: 18px;
-  color: #667eea;
-}
-
-.current-date-display span {
-  font-weight: 600;
-  color: #2d3748;
-  font-size: 14px;
-}
+.current-date-display:hover { border-color: #667eea; background: rgba(102,126,234,0.05); }
+.current-date-display svg { width: 18px; height: 18px; color: #667eea; }
+.current-date-display span { font-weight: 600; color: #2d3748; font-size: 14px; }
 
 .date-picker-panel {
   position: absolute;
@@ -676,650 +505,180 @@ export default {
   width: 320px;
   background: white;
   border-radius: 16px;
-  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 48px rgba(0,0,0,0.15);
   border: 1px solid #e2e8f0;
   padding: 20px;
   z-index: 1000;
   animation: datePickerSlideIn 0.3s ease-out;
 }
-
 @keyframes datePickerSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-
-.date-picker-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
+.date-picker-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
 .btn-month-nav {
-  width: 32px;
-  height: 32px;
+  width: 32px; height: 32px;
   border-radius: 8px;
   border: 1px solid #e2e8f0;
   background: white;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   transition: all 0.3s ease;
 }
+.btn-month-nav:hover:not(:disabled) { border-color: #667eea; color: #667eea; }
+.btn-month-nav:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-month-nav svg { width: 18px; height: 18px; }
+.month-title { font-weight: 600; color: #2d3748; font-size: 16px; }
 
-.btn-month-nav:hover:not(:disabled) {
-  border-color: #667eea;
-  color: #667eea;
-  transform: scale(1.05);
-}
-
-.btn-month-nav:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-.btn-month-nav svg {
-  width: 18px;
-  height: 18px;
-}
-
-.month-title {
-  font-weight: 600;
-  color: #2d3748;
-  font-size: 16px;
-}
-
-.date-picker-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 4px;
-  margin-bottom: 16px;
-}
-
-.date-picker-weekday {
-  text-align: center;
-  font-size: 12px;
-  color: #718096;
-  padding: 8px 0;
-  font-weight: 500;
-}
-
+.date-picker-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 4px; margin-bottom: 16px; }
+.date-picker-weekday { text-align: center; font-size: 12px; color: #718096; padding: 8px 0; font-weight: 500; }
 .date-picker-day {
   aspect-ratio: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.3s ease;
-  position: relative;
   border: 2px solid transparent;
 }
-
-.date-picker-day:hover:not(.is-disabled) {
-  background: rgba(102, 126, 234, 0.1);
-  transform: scale(1.05);
-}
-
-.date-picker-day.is-today {
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-  border-color: #667eea;
-}
-
-.date-picker-day.is-selected {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-}
-
-.date-picker-day.is-disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-.date-picker-day.is-disabled:hover {
-  background: transparent;
-  transform: none;
-}
-
-.date-picker-day.is-weekend:not(.is-disabled) {
-  color: #ef4444;
-}
-
-.day-num {
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.day-label {
-  font-size: 10px;
-  opacity: 0.8;
-  margin-top: 2px;
-}
-
-.date-picker-footer {
-  text-align: center;
-  padding-top: 12px;
-  border-top: 1px solid #e2e8f0;
-}
-
+.date-picker-day:hover:not(.is-disabled) { background: rgba(102,126,234,0.1); transform: scale(1.05); }
+.date-picker-day.is-today { background: linear-gradient(135deg,rgba(102,126,234,0.1) 0%,rgba(118,75,162,0.1) 100%); border-color: #667eea; }
+.date-picker-day.is-selected { background: linear-gradient(135deg,#667eea 0%,#764ba2 100%); color: white; box-shadow: 0 4px 12px rgba(102,126,234,0.3); }
+.date-picker-day.is-disabled { opacity: 0.4; cursor: not-allowed; }
+.date-picker-day.is-disabled:hover { background: transparent; transform: none; }
+.date-picker-day.is-weekend:not(.is-disabled) { color: #ef4444; }
+.day-num { font-size: 14px; font-weight: 600; }
+.day-label { font-size: 10px; opacity: 0.8; margin-top: 2px; }
+.date-picker-footer { text-align: center; padding-top: 12px; border-top: 1px solid #e2e8f0; }
 .btn-today {
   padding: 8px 24px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+  color: white; border: none; border-radius: 8px;
+  font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.3s ease;
 }
-
-.btn-today:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
-}
-
-.date-selector {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
-  padding: 8px 16px;
-  border-radius: 10px;
-  border: 1px solid #e2e8f0;
-}
+.btn-today:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(102,126,234,0.4); }
 
 .btn-date-nav {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  border: 1px solid #e2e8f0;
-  background: white;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
+  width: 36px; height: 36px;
+  border-radius: 8px; border: 1px solid #e2e8f0; background: white;
+  cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;
 }
+.btn-date-nav:hover:not(:disabled) { border-color: #667eea; color: #667eea; transform: scale(1.05); }
+.btn-date-nav:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-date-nav svg { width: 20px; height: 20px; }
 
-.btn-date-nav:hover:not(:disabled) {
-  border-color: #667eea;
-  color: #667eea;
-  transform: scale(1.05);
-}
-
-.btn-date-nav:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-.btn-date-nav svg {
-  width: 20px;
-  height: 20px;
-}
-
-.current-date {
-  font-weight: 600;
-  color: #2d3748;
-  min-width: 200px;
-  text-align: center;
-  font-size: 15px;
-}
-
-.loading-container {
-  text-align: center;
-  padding: 60px 20px;
-}
-
+.loading-container { text-align: center; padding: 60px 20px; }
 .loading-spinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid #e2e8f0;
-  border-top-color: #667eea;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-  margin: 0 auto;
+  width: 40px; height: 40px;
+  border: 3px solid #e2e8f0; border-top-color: #667eea;
+  border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto;
 }
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-container p { margin-top: 16px; color: #718096; }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
+.empty-state { text-align: center; padding: 60px 20px; color: #718096; }
+.empty-state svg { width: 64px; height: 64px; margin: 0 auto 16px; opacity: 0.3; }
 
-.loading-container p {
-  margin-top: 16px;
-  color: #718096;
-}
-
-.empty-state {
-  text-align: center;
-  padding: 60px 20px;
-  color: #718096;
-}
-
-.empty-state svg {
-  width: 64px;
-  height: 64px;
-  margin: 0 auto 16px;
-  opacity: 0.3;
-}
-
-.doctor-list {
-  display: grid;
-  gap: 20px;
-}
-
+.doctor-list { display: grid; gap: 20px; }
 .doctor-card {
-  background: white;
-  padding: 24px;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-  border: 1px solid #e2e8f0;
+  background: white; padding: 24px; border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: all 0.3s ease; border: 1px solid #e2e8f0;
 }
-
-.doctor-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.15);
-}
-
-.doctor-header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 20px;
-}
-
+.doctor-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(102,126,234,0.15); }
+.doctor-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
 .avatar {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  font-weight: bold;
-  flex-shrink: 0;
+  width: 64px; height: 64px; border-radius: 50%;
+  background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+  color: white; display: flex; align-items: center; justify-content: center;
+  font-size: 24px; font-weight: bold; flex-shrink: 0;
 }
-
-.doctor-info {
-  flex: 1;
-}
-
-.doctor-info h3 {
-  font-size: 20px;
-  color: #2d3748;
-  margin: 0 0 6px 0;
-}
-
-.department {
-  color: #667eea;
-  font-weight: 500;
-  font-size: 14px;
-  margin: 0;
-}
-
-.title {
-  color: #718096;
-  font-size: 13px;
-  margin: 0;
-}
-
+.doctor-info { flex: 1; }
+.doctor-info h3 { font-size: 20px; color: #2d3748; margin: 0 0 6px 0; }
+.department { color: #667eea; font-weight: 500; font-size: 14px; margin: 0; }
+.title { color: #718096; font-size: 13px; margin: 0; }
 .fee-tag {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: flex; flex-direction: column; align-items: center;
   padding: 12px 20px;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
-  border-radius: 12px;
-  border: 1px solid rgba(102, 126, 234, 0.2);
+  background: linear-gradient(135deg,rgba(102,126,234,0.05) 0%,rgba(118,75,162,0.05) 100%);
+  border-radius: 12px; border: 1px solid rgba(102,126,234,0.2);
 }
-
-.fee-tag .label {
-  font-size: 12px;
-  color: #718096;
-  margin-bottom: 4px;
-}
-
-.fee-tag .amount {
-  font-size: 20px;
-  font-weight: 700;
-  color: #667eea;
-}
-
-.schedule-status {
-  margin-bottom: 20px;
-}
-
-.status-badge {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
-  border-radius: 10px;
-}
-
-.status-available {
-  background: rgba(16, 185, 129, 0.1);
-  border: 1px solid rgba(16, 185, 129, 0.3);
-}
-
-.status-sufficient {
-  background: rgba(245, 158, 11, 0.1);
-  border: 1px solid rgba(245, 158, 11, 0.3);
-}
-
-.status-full {
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.3);
-}
-
-.badge-icon {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.badge-icon svg {
-  width: 24px;
-  height: 24px;
-}
-
-.status-available .badge-icon {
-  color: #10b981;
-}
-
-.status-sufficient .badge-icon {
-  color: #f59e0b;
-}
-
-.status-full .badge-icon {
-  color: #ef4444;
-}
-
-.badge-text {
-  display: flex;
-  flex-direction: column;
-}
-
-.status-text {
-  font-weight: 600;
-  font-size: 14px;
-  margin-bottom: 2px;
-}
-
-.num-text {
-  font-size: 12px;
-  color: #718096;
-}
-
-.doctor-actions {
-  display: flex;
-  gap: 12px;
-}
-
+.fee-tag .label { font-size: 12px; color: #718096; margin-bottom: 4px; }
+.fee-tag .amount { font-size: 20px; font-weight: 700; color: #667eea; }
+.schedule-status { margin-bottom: 20px; }
+.status-badge { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 10px; }
+.status-available { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); }
+.status-sufficient { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3); }
+.status-full { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); }
+.badge-icon { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; }
+.badge-icon svg { width: 24px; height: 24px; }
+.status-available .badge-icon { color: #10b981; }
+.status-sufficient .badge-icon { color: #f59e0b; }
+.status-full .badge-icon { color: #ef4444; }
+.badge-text { display: flex; flex-direction: column; }
+.status-text { font-weight: 600; font-size: 14px; margin-bottom: 2px; }
+.num-text { font-size: 12px; color: #718096; }
+.doctor-actions { display: flex; gap: 12px; }
 .btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 12px 24px;
-  border-radius: 10px;
-  font-weight: 600;
-  font-size: 15px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border: none;
-  text-decoration: none;
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 8px; padding: 12px 24px; border-radius: 10px;
+  font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.3s ease;
+  border: none; text-decoration: none;
 }
+.btn svg { width: 20px; height: 20px; }
+.btn-primary { background: linear-gradient(135deg,#667eea 0%,#764ba2 100%); color: white; box-shadow: 0 4px 12px rgba(102,126,234,0.3); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(102,126,234,0.4); }
+.btn-outline { background: transparent; color: #667eea; border: 2px solid #667eea; }
+.btn-outline:hover { background: linear-gradient(135deg,#667eea 0%,#764ba2 100%); color: white; }
+.btn-disabled { background: #e2e8f0; color: #a0aec0; cursor: not-allowed; }
 
-.btn svg {
-  width: 20px;
-  height: 20px;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-}
-
-.btn-outline {
-  background: transparent;
-  color: #667eea;
-  border: 2px solid #667eea;
-}
-
-.btn-outline:hover {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-}
-
-.btn-disabled {
-  background: #e2e8f0;
-  color: #a0aec0;
-  cursor: not-allowed;
-}
-
-/* Modal Styles */
 .modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  backdrop-filter: blur(4px);
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center;
+  z-index: 1000; backdrop-filter: blur(4px);
 }
-
 .modal {
-  background: white;
-  border-radius: 16px;
-  width: 90%;
-  max-width: 500px;
-  max-height: 80vh;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  background: white; border-radius: 16px;
+  width: 90%; max-width: 500px; max-height: 80vh;
+  overflow: hidden; display: flex; flex-direction: column;
   animation: modalSlideIn 0.3s ease-out;
 }
-
 @keyframes modalSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 24px;
-  border-bottom: 1px solid #e2e8f0;
-}
-
-.modal-header h3 {
-  font-size: 20px;
-  color: #2d3748;
-  margin: 0;
-}
-
-.btn-close {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-}
-
-.btn-close:hover {
-  background: #edf2f7;
-}
-
-.btn-close svg {
-  width: 20px;
-  height: 20px;
-  color: #718096;
-}
-
-.modal-body {
-  flex: 1;
-  padding: 24px;
-  overflow-y: auto;
-}
-
-.no-patients {
-  text-align: center;
-  padding: 40px 20px;
-}
-
-.no-patients svg {
-  width: 64px;
-  height: 64px;
-  color: #cbd5e0;
-  margin-bottom: 16px;
-}
-
-.no-patients p {
-  color: #718096;
-  margin-bottom: 20px;
-}
-
-.patient-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
+.modal-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid #e2e8f0; }
+.modal-header h3 { font-size: 20px; color: #2d3748; margin: 0; }
+.btn-close { width: 32px; height: 32px; border-radius: 8px; border: none; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
+.btn-close:hover { background: #edf2f7; }
+.btn-close svg { width: 20px; height: 20px; color: #718096; }
+.modal-body { flex: 1; padding: 24px; overflow-y: auto; }
+.no-patients { text-align: center; padding: 40px 20px; }
+.no-patients svg { width: 64px; height: 64px; color: #cbd5e0; margin-bottom: 16px; }
+.no-patients p { color: #718096; margin-bottom: 20px; }
+.patient-list { display: flex; flex-direction: column; gap: 12px; }
 .patient-item {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 16px;
-  border-radius: 12px;
-  border: 2px solid #e2e8f0;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  display: flex; align-items: center; gap: 16px; padding: 16px;
+  border-radius: 12px; border: 2px solid #e2e8f0; cursor: pointer; transition: all 0.3s ease;
 }
-
-.patient-item:hover {
-  border-color: #667eea;
-  background: rgba(102, 126, 234, 0.05);
-  transform: translateX(4px);
-}
-
+.patient-item:hover { border-color: #667eea; background: rgba(102,126,234,0.05); transform: translateX(4px); }
 .patient-avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  font-size: 18px;
-  flex-shrink: 0;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+  color: white; display: flex; align-items: center; justify-content: center;
+  font-weight: 600; font-size: 18px; flex-shrink: 0;
 }
-
-.patient-info {
-  flex: 1;
-}
-
-.patient-name {
-  font-weight: 600;
-  color: #2d3748;
-  font-size: 16px;
-  margin-bottom: 4px;
-}
-
-.patient-detail {
-  color: #718096;
-  font-size: 14px;
-}
-
-.check-icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: rgba(16, 185, 129, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.check-icon svg {
-  width: 20px;
-  height: 20px;
-  color: #10b981;
-}
-
-.modal-footer {
-  padding: 16px 24px;
-  border-top: 1px solid #e2e8f0;
-  background: #f7fafc;
-}
-
-.modal-footer .btn {
-  width: 100%;
-}
+.patient-info { flex: 1; }
+.patient-name { font-weight: 600; color: #2d3748; font-size: 16px; margin-bottom: 4px; }
+.patient-detail { color: #718096; font-size: 14px; }
+.check-icon { width: 32px; height: 32px; border-radius: 50%; background: rgba(16,185,129,0.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.check-icon svg { width: 20px; height: 20px; color: #10b981; }
+.modal-footer { padding: 16px 24px; border-top: 1px solid #e2e8f0; background: #f7fafc; }
+.modal-footer .btn { width: 100%; }
 
 @media (max-width: 768px) {
-  .filters {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  
-  .date-selector {
-    justify-content: center;
-  }
-  
-  .current-date {
-    min-width: auto;
-  }
-  
-  .doctor-header {
-    flex-wrap: wrap;
-  }
-  
-  .fee-tag {
-    width: 100%;
-  }
-  
-  .doctor-actions {
-    flex-direction: column;
-  }
+  .filters { flex-direction: column; align-items: stretch; }
+  .doctor-header { flex-wrap: wrap; }
+  .fee-tag { width: 100%; }
+  .doctor-actions { flex-direction: column; }
+  .date-picker-panel { width: 280px; }
 }
 </style>

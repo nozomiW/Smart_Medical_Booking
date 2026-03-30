@@ -26,7 +26,7 @@ public class FeeConsumer implements RocketMQListener<Map<String, Object>> {
 
     @Override
     public void onMessage(Map<String, Object> message) {
-        Long id = Long.valueOf(message.get("id").toString());
+        String id = message.get("id").toString();
         BigDecimal fee = new BigDecimal(message.get("fee").toString());
         Result result = feeHandler.updateFee(id, fee);
         if (result == Result.SUCCESS) System.out.println("医生" + id + "费用修改为" + fee);

@@ -13,19 +13,16 @@ import java.time.LocalDateTime;
 public class Patient {
 
     @TableId("id")
-    private Long id;
+    private String id;
 
     @TableField("user_id")
-    private Long userId;
+    private String userId;
 
     private String name;
 
     @TableField("id_card")
     private String idCard;
 
-    /**
-     * 性别：0-女, 1-男
-     */
     private Integer gender;
 
     @TableField("birth_date")
@@ -41,5 +38,4 @@ public class Patient {
 
     @TableField("update_time")
     private LocalDateTime updateTime;
-
 }

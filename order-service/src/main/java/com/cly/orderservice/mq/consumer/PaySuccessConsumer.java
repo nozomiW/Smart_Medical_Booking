@@ -18,7 +18,7 @@ import java.util.concurrent.*;
         consumerGroup = "hospital-order-pay-group",
         selectorExpression = MQConstant.Tag.SUCCESS
 )
-public class PaySuccessConsumer implements RocketMQListener<Long> {
+public class PaySuccessConsumer implements RocketMQListener<String> {
 
     private OrderMapper orderMapper;
     private StringRedisTemplate stringRedisTemplate;
@@ -36,7 +36,7 @@ public class PaySuccessConsumer implements RocketMQListener<Long> {
     }
 
     @Override
-    public void onMessage(Long orderId) {
+    public void onMessage(String orderId) {
         // 获取订单以得到 userId
         Order order = orderMapper.selectById(orderId);
         if (order == null) {
@@ -44,13 +44,13 @@ public class PaySuccessConsumer implements RocketMQListener<Long> {
             return;
         }
         
-        Long userId = order.getUserId();
+        String userId = order.getUserId();
         String indexKey = "order:index:" + userId;
         
         // 1. 第一次删除缓存
         String redisKey = "order:detail:" + orderId;
         stringRedisTemplate.delete(redisKey);
-        stringRedisTemplate.delete(indexKey); // 删除列表缓存
+        stringRedisTemplate.delete(indexKey);
 
         int rows = orderMapper.update(null, new LambdaUpdateWrapper<Order>()
                 .eq(Order::getId, orderId)

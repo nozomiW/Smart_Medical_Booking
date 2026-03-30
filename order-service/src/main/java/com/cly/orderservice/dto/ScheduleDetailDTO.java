@@ -6,13 +6,13 @@ import java.time.LocalDate;
 
 @Data
 public class ScheduleDetailDTO {
-    private Long scheduleId;
+    private String scheduleId;
     private LocalDate workDate;
     private Integer availableNum;
     private Integer scheduleStatus;
-    private Long docId;
+    private String docId;
     private String docName;
     private String docTitle;
     private BigDecimal docFee;
-    private Long deptId;
+    private String deptId;
 }

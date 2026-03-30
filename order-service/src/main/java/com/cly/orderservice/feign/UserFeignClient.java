@@ -11,5 +11,5 @@ import java.util.List;
 public interface UserFeignClient {
 
     @GetMapping("/user/patient/list")
-    List<PatientDTO> getPatients(@RequestHeader("X-User-Id") Long userId);
+    List<PatientDTO> getPatients(@RequestHeader("X-User-Id") String userId);
 }

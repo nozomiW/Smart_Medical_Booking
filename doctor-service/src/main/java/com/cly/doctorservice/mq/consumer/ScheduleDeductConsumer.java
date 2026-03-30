@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
         consumerGroup = "hospital-doctor-deduct-group",
         selectorExpression = MQConstant.Tag.DEDUCT
 )
-public class ScheduleDeductConsumer implements RocketMQListener<Long> {
+public class ScheduleDeductConsumer implements RocketMQListener<String> {
 
     private ScheduleMapper scheduleMapper;
 
@@ -23,9 +23,7 @@ public class ScheduleDeductConsumer implements RocketMQListener<Long> {
     }
 
     @Override
-    public void onMessage(Long scheduleId) {
-        // 核心职责：异步保证 Redis 中的扣减最终落入 DB。
-        // 此处不再发送本地 Event 同步缓存，以保护数据库并避免并发场景下的缓存“脏写”回流。
+    public void onMessage(String scheduleId) {
         int rows = scheduleMapper.decreaseAvailableNum(scheduleId);
         if (rows <= 0) {
             System.err.println("Critical Error: DB deduct failed for scheduleId=" + scheduleId + ". Possible over-sell in memory!");

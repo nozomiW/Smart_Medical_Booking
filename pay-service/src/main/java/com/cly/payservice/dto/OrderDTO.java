@@ -6,9 +6,9 @@ import java.time.LocalDateTime;
 
 @Data
 public class OrderDTO {
-    private Long id;
+    private String id;
     private String orderNo;
-    private Long userId;
+    private String userId;
     private BigDecimal amount;
     private Integer status;
     private LocalDateTime createTime;

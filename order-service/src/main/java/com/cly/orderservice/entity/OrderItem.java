@@ -1,6 +1,5 @@
 package com.cly.orderservice.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -12,11 +11,11 @@ import java.time.LocalDate;
 @TableName("ord_order_item")
 public class OrderItem {
 
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    @TableId("id")
+    private String id;
 
     @TableField("order_id")
-    private Long orderId;
+    private String orderId;
 
     @TableField("patient_name")
     private String patientName;
@@ -28,10 +27,10 @@ public class OrderItem {
     private String patientPhone;
 
     @TableField("schedule_id")
-    private Long scheduleId;
+    private String scheduleId;
 
     @TableField("doc_id")
-    private Long docId;
+    private String docId;
 
     @TableField("doc_name")
     private String docName;

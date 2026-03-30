@@ -10,7 +10,7 @@ import java.util.List;
 public interface DoctorService {
 
     List<Doctor> searchOnline();
-    Result updateFee(Long id, BigDecimal fee);
+    Result updateFee(String id, BigDecimal fee);
     Result insertDoctor(Doctor doctor);
 
 }

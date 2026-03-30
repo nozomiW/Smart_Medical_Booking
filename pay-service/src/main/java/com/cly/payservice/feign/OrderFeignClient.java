@@ -9,5 +9,5 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface OrderFeignClient {
 
     @GetMapping("/order/detail")
-    OrderDetailDTO getOrderDetail(@RequestParam("orderId") Long orderId);
+    OrderDetailDTO getOrderDetail(@RequestParam("orderId") String orderId);
 }

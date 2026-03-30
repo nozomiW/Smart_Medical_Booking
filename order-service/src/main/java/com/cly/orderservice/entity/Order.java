@@ -13,13 +13,13 @@ import java.time.LocalDateTime;
 public class Order {
 
     @TableId("id")
-    private Long id;
+    private String id;
 
     @TableField("order_no")
     private String orderNo;
 
     @TableField("user_id")
-    private Long userId;
+    private String userId;
 
     private BigDecimal amount;
 
@@ -30,5 +30,4 @@ public class Order {
 
     @TableField("update_time")
     private LocalDateTime updateTime;
-
 }

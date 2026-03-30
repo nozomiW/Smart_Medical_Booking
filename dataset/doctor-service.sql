@@ -6,8 +6,8 @@ USE `doctor-service`;
 
 -- 1. 医生基础表
 CREATE TABLE `yy_doctor` (
-                             `id` BIGINT PRIMARY KEY COMMENT '医生ID',
-                             `dept_id` BIGINT NOT NULL COMMENT '所属科室ID',
+                             `id` VARCHAR(50) PRIMARY KEY COMMENT '医生 ID',
+                             `dept_id` VARCHAR(50) NOT NULL COMMENT '所属科室 ID',
                              `name` VARCHAR(50) NOT NULL COMMENT '姓名',
                              `title` VARCHAR(20) COMMENT '职称',
                              `fee` DECIMAL(10, 2) NOT NULL DEFAULT 0.00 COMMENT '挂号费',
@@ -17,7 +17,7 @@ CREATE TABLE `yy_doctor` (
 -- 2. 排班规则表
 CREATE TABLE `yy_schedule_rule` (
                                     `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
-                                    `doc_id` BIGINT NOT NULL,
+                                    `doc_id` VARCHAR(50) NOT NULL,
                                     `day_of_week` TINYINT NOT NULL,
                                     `max_count` INT NOT NULL DEFAULT 30,
                                     UNIQUE KEY `uk_doc_day` (`doc_id`, `day_of_week`),
@@ -28,7 +28,7 @@ CREATE TABLE `yy_schedule_rule` (
 -- 3. 每日号源表
 CREATE TABLE `yy_schedule` (
                                `id` BIGINT PRIMARY KEY,
-                               `doc_id` BIGINT NOT NULL,
+                               `doc_id` VARCHAR(50) NOT NULL,
                                `work_date` DATE NOT NULL,
                                `available_num` INT NOT NULL,
                                `status` TINYINT DEFAULT 1,

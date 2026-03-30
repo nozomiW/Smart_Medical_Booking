@@ -24,7 +24,7 @@ public class OrderTimeoutCancelConsumer implements RocketMQListener<Map<String, 
 
     @Override
     public void onMessage(Map<String, Object> message) {
-        Long orderId = (Long) message.get("orderId");
+        String orderId = (String) message.get("orderId");
         String orderNo = (String) message.get("orderNo");
         
         System.out.println("\n========== 订单超时取消消息 ==========");

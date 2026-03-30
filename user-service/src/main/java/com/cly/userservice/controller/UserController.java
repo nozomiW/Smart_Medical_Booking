@@ -38,14 +38,14 @@ public class UserController {
     }
 
     @PostMapping("patient/insert")
-    public String insertPatient(@RequestHeader("X-User-Id") Long userId,
+    public String insertPatient(@RequestHeader("X-User-Id") String userId,
                                 @RequestBody Patient patient) {
         patientService.insertPatient(userId, patient);
         return "添加成功";
     }
 
     @GetMapping("patient/list")
-    public List<Patient> getPatients(@RequestHeader("X-User-Id") Long userId) {
+    public List<Patient> getPatients(@RequestHeader("X-User-Id") String userId) {
         return patientService.getPatients(userId);
     }
 }

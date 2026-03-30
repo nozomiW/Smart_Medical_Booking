@@ -52,7 +52,7 @@ public class OrderProducer {
      * @param orderId 订单 ID
      * @param orderNo 订单号
      */
-    public void produceOrderTimeoutCancel(Long orderId, String orderNo) {
+    public void produceOrderTimeoutCancel(String orderId, String orderNo) {
         Map<String, Object> body = new HashMap<>();
         body.put("orderId", orderId);
         body.put("orderNo", orderNo);

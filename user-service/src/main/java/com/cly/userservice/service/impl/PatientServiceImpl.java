@@ -37,12 +37,12 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     @BusinessLog(value = "添加就诊人", type = "就诊人管理")
-    public void insertPatient(Long userId, Patient patient) {
+    public void insertPatient(String userId, Patient patient) {
         Long count = patientMapper.selectCount(
                 new LambdaQueryWrapper<Patient>().eq(Patient::getUserId, userId));
 
-        // 使用雪花算法生成唯一 ID，避免随机数冲突风险
-        patient.setId(IdWorker.getId());
+        // 使用雪花算法生成唯一 ID，存为字符串避免前端精度丢失
+        patient.setId(IdWorker.getIdStr());
         patient.setUserId(userId);
         patient.setIsDefault(count == 0 ? 1 : 0);
         patient.setCreateTime(LocalDateTime.now());
@@ -64,7 +64,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     @BusinessLog(value = "查询就诊人列表", type = "就诊人管理")
-    public List<Patient> getPatients(Long userId) {
+    public List<Patient> getPatients(String userId) {
         String redisKey = "patient:list:" + userId;
 
         List<Object> cached = stringRedisTemplate.opsForHash().values(redisKey);
@@ -77,7 +77,7 @@ public class PatientServiceImpl implements PatientService {
                 new LambdaQueryWrapper<Patient>().eq(Patient::getUserId, userId));
         if (!list.isEmpty()) {
             Map<String, String> map = list.stream().collect(
-                    Collectors.toMap(p -> p.getId().toString(), JSON::toJSONString));
+                    Collectors.toMap(p -> p.getId(), JSON::toJSONString));
             stringRedisTemplate.opsForHash().putAll(redisKey, map);
             stringRedisTemplate.expire(redisKey, 2, TimeUnit.HOURS);
         }

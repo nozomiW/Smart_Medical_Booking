@@ -51,7 +51,7 @@ public class DoctorServiceImpl implements DoctorService {
         List<Doctor> doctors = doctorMapper.selectDoctorByStatus(1);
         if (!doctors.isEmpty()){
             Map<String, String> doctorStream = doctors.stream().collect(Collectors.toMap(
-                    d -> d.getId().toString(), JSON::toJSONString));
+                    d -> d.getId(), JSON::toJSONString));
             stringRedisTemplate.opsForHash().putAll("doctor:online", doctorStream);
             stringRedisTemplate.expire("doctor:online", 2, TimeUnit.HOURS);
         }
@@ -60,7 +60,7 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     @BusinessLog(value = "更新医生挂号费", type = "医生管理")
-    public Result updateFee(Long id, BigDecimal fee) {
+    public Result updateFee(String id, BigDecimal fee) {
         feeProducer.produceFeeUpdate(id, fee);
         return Result.SUCCESS;
     }

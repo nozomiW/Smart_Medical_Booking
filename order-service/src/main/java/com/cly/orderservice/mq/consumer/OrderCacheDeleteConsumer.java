@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RocketMQMessageListener(
         topic = MQConstant.Topic.ORDER_CACHE_DELETE,
-        consumerGroup = "hospital-order-group",
+        consumerGroup = "hospital-order-cache-delete-group",
         selectorExpression = MQConstant.Tag.DELETE_LATER
 )
 public class OrderCacheDeleteConsumer implements RocketMQListener<String> {

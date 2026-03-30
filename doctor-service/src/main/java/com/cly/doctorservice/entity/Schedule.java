@@ -11,10 +11,10 @@ import java.time.LocalDate;
 public class Schedule {
 
     @TableId("id")
-    private Long id;
+    private String id;
 
     @TableField("doc_id")
-    private Long docId;
+    private String docId;
 
     @TableField("work_date")
     private LocalDate workDate;
