@@ -22,8 +22,12 @@ public class AiController {
      * @return 对话响应
      */
     @PostMapping("/chat")
-    public Result<ChatResponse> chat(@RequestBody ChatRequest request) {
-        log.info("收到对话请求 - message: {}", request.getMessage());
+    public Result<ChatResponse> chat(@RequestBody ChatRequest request,
+                                      @RequestHeader(value = "X-User-Id", required = false) String userId) {
+        log.info("收到对话请求 - message: {}, userId: {}", request.getMessage(), userId);
+        
+        // 设置 userId 到请求中（用于调用业务接口）
+        request.setUserId(userId);
         
         try {
             ChatResponse response = aiService.chat(request);

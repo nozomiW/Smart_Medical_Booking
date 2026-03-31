@@ -1,128 +1,100 @@
 <template>
   <div class="app">
-    <!-- 认证页面不显示导航栏 -->
     <nav v-if="!isAuthPage" class="navbar">
-      <div class="container navbar-content">
+      <div class="nav-inner">
         <div class="logo" @click="router.push('/')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-          </svg>
-          <span>智慧医疗挂号平台</span>
+          <div class="logo-mark">
+            <svg viewBox="0 0 28 28" fill="none">
+              <rect width="28" height="28" rx="8" fill="#0e9e8e"/>
+              <path d="M14 7v14M7 14h14" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <span class="logo-text">智慧医疗</span>
         </div>
+
         <ul class="nav-links">
           <li>
             <router-link to="/" class="nav-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                <polyline points="9 22 9 12 15 12 15 22"/>
-              </svg>
-              <span>首页</span>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/></svg>
+              首页
             </router-link>
           </li>
           <li>
             <router-link to="/doctors" class="nav-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                <circle cx="8.5" cy="7" r="4"/>
-                <line x1="20" y1="8" x2="20" y2="14"/>
-                <line x1="23" y1="11" x2="17" y2="11"/>
-              </svg>
-              <span>医生团队</span>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/></svg>
+              医生团队
             </router-link>
           </li>
           <li v-if="isLoggedIn">
             <router-link to="/bookings" class="nav-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                <polyline points="14 2 14 8 20 8"/>
-                <line x1="16" y1="13" x2="8" y2="13"/>
-                <line x1="16" y1="17" x2="8" y2="17"/>
-                <polyline points="10 9 9 9 8 9"/>
-              </svg>
-              <span>我的预约</span>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg>
+              我的预约
             </router-link>
           </li>
           <li v-if="isLoggedIn">
             <router-link to="/patients" class="nav-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                <circle cx="8.5" cy="7" r="4"/>
-                <line x1="20" y1="8" x2="20" y2="14"/>
-                <line x1="23" y1="11" x2="17" y2="11"/>
-              </svg>
-              <span>我的就诊人</span>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/></svg>
+              就诊人
             </router-link>
           </li>
           <li v-if="isLoggedIn">
             <router-link to="/ai-chat" class="nav-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-              </svg>
-              <span>AI 助手</span>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"/></svg>
+              AI 助手
             </router-link>
           </li>
         </ul>
-        <div class="user-actions">
+
+        <div class="nav-actions">
           <template v-if="!isLoggedIn">
-            <button class="btn btn-outline" @click="router.push('/login')">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
-                <polyline points="10 17 15 12 10 7"/>
-                <line x1="15" y1="12" x2="3" y2="12"/>
-              </svg>
-              登录
-            </button>
-            <button class="btn btn-primary" @click="router.push('/register')">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                <circle cx="8.5" cy="7" r="4"/>
-                <line x1="20" y1="8" x2="20" y2="14"/>
-                <line x1="23" y1="11" x2="17" y2="11"/>
-              </svg>
-              注册
-            </button>
+            <button class="btn-ghost btn-sm" @click="router.push('/login')">登录</button>
+            <button class="btn-accent btn-sm" @click="router.push('/register')">免费注册</button>
           </template>
           <template v-else>
-            <div class="user-menu">
-              <div class="user-info">
-                <div class="avatar">{{ userInitial }}</div>
-                <div class="user-details">
-                  <span class="user-name">{{ userName }}</span>
-                </div>
-              </div>
-              <button class="btn btn-logout" @click="handleLogout" title="退出登录">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-                  <polyline points="16 17 21 12 16 7"/>
-                  <line x1="21" y1="12" x2="9" y2="12"/>
-                </svg>
+            <div class="user-pill">
+              <div class="user-avatar">{{ userInitial }}</div>
+              <span class="user-phone">{{ userName }}</span>
+              <button class="logout-btn" @click="handleLogout" title="退出">
+                <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"/></svg>
               </button>
             </div>
           </template>
         </div>
       </div>
     </nav>
-    <main :class="['main-content', { 'full-height': isAuthPage }]">
+
+    <main class="main" :class="{ 'main-auth': isAuthPage }">
       <router-view />
     </main>
+
     <footer v-if="!isAuthPage" class="footer">
       <div class="container">
-        <p>&copy; 2026 智慧医疗挂号系统 | 为您提供便捷的医疗服务</p>
+        <div class="footer-inner">
+          <div class="footer-brand">
+            <div class="logo-mark small">
+              <svg viewBox="0 0 28 28" fill="none">
+                <rect width="28" height="28" rx="8" fill="#0e9e8e"/>
+                <path d="M14 7v14M7 14h14" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <span>智慧医疗挂号平台</span>
+          </div>
+          <p class="footer-copy">&copy; 2026 Smart Medical Booking. All rights reserved.</p>
+        </div>
       </div>
     </footer>
   </div>
 </template>
 
 <script>
-import { ref, computed, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
+import { computed, onMounted } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 
 export default {
   name: 'App',
   setup() {
     const router = useRouter()
-    const userId = ref(null)
+    const route = useRoute()
 
     const isLoggedIn = computed(() => !!localStorage.getItem('token'))
     const userName = computed(() => {
@@ -131,12 +103,9 @@ export default {
     })
     const userInitial = computed(() => {
       const phone = localStorage.getItem('phone')
-      return phone ? phone.charAt(0) : '用'
+      return phone ? phone.charAt(2) : '用'
     })
-    const isAuthPage = computed(() => {
-      const currentRoute = router.currentRoute.value.path
-      return ['/login', '/register'].includes(currentRoute)
-    })
+    const isAuthPage = computed(() => ['/login', '/register'].includes(route.path))
 
     const handleLogout = () => {
       localStorage.removeItem('token')
@@ -145,18 +114,7 @@ export default {
       router.push('/')
     }
 
-    onMounted(() => {
-      userId.value = localStorage.getItem('userId')
-    })
-
-    return { 
-      isLoggedIn, 
-      userName, 
-      userInitial,
-      isAuthPage,
-      handleLogout,
-      router 
-    }
+    return { isLoggedIn, userName, userInitial, isAuthPage, handleLogout, router }
   }
 }
 </script>
@@ -166,265 +124,207 @@ export default {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: #f7fafc;
 }
 
+/* ── Navbar ── */
 .navbar {
-  background: white;
-  border-bottom: 1px solid #e2e8f0;
-  padding: 0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   position: sticky;
   top: 0;
   z-index: 100;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--gray-200);
 }
 
-.navbar-content {
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 60px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 16px 24px;
+  justify-content: space-between;
+  gap: 20px;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   cursor: pointer;
-  transition: opacity 0.3s ease;
+  flex-shrink: 0;
 }
 
-.logo:hover {
-  opacity: 0.8;
-}
+.logo-mark svg { display: block; }
+.logo-mark.small svg { width: 22px; height: 22px; }
 
-.logo svg {
-  width: 32px;
-  height: 32px;
-  color: #667eea;
-}
-
-.logo span {
-  font-size: 20px;
-  font-weight: 600;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.logo-text {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.02em;
 }
 
 .nav-links {
   display: flex;
   list-style: none;
-  gap: 8px;
+  gap: 2px;
+  flex: 1;
+  justify-content: center;
 }
 
 .nav-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 16px;
-  color: #4a5568;
+  gap: 6px;
+  padding: 7px 14px;
+  color: var(--gray-600);
   text-decoration: none;
+  font-size: 14px;
   font-weight: 500;
-  border-radius: 8px;
-  transition: all 0.3s ease;
+  border-radius: var(--r-md);
+  transition: all var(--t);
+  white-space: nowrap;
 }
 
+.nav-item svg { width: 16px; height: 16px; flex-shrink: 0; }
+
 .nav-item:hover {
-  background: #edf2f7;
-  color: #667eea;
+  color: var(--accent);
+  background: var(--accent-light);
 }
 
 .nav-item.router-link-active {
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-  color: #667eea;
+  color: var(--accent);
+  background: var(--accent-light);
+  font-weight: 600;
 }
 
-.nav-item svg {
-  width: 20px;
-  height: 20px;
-}
-
-.user-actions {
+.nav-actions {
   display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.btn {
-  display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 8px;
-  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.btn-ghost {
+  padding: 7px 16px;
+  border-radius: var(--r-md);
   font-size: 14px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn svg {
-  width: 18px;
-  height: 18px;
-}
-
-.btn-outline {
+  font-weight: 500;
   background: transparent;
-  color: #667eea;
-  border: 2px solid #667eea;
-}
-
-.btn-outline:hover {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border-color: transparent;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-}
-
-.btn-logout {
-  background: transparent;
-  color: #718096;
-  border: 1px solid #e2e8f0;
-  padding: 8px;
-  border-radius: 6px;
+  border: 1.5px solid var(--gray-200);
+  color: var(--gray-700);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all var(--t);
 }
+.btn-ghost:hover { background: var(--gray-100); border-color: var(--gray-300); }
 
-.btn-logout:hover {
-  background: #fed7d7;
-  color: #c53030;
-  border-color: #feb2b2;
-  transform: scale(1.05);
+.btn-accent {
+  padding: 7px 16px;
+  border-radius: var(--r-md);
+  font-size: 14px;
+  font-weight: 600;
+  background: var(--accent);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all var(--t);
+  box-shadow: 0 2px 8px rgba(14,158,142,0.25);
 }
+.btn-accent:hover { background: var(--accent-dark); transform: translateY(-1px); }
 
-.btn-logout svg {
-  width: 20px;
-  height: 20px;
-}
-
-.user-menu {
+.user-pill {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 8px 16px;
-  background: #f7fafc;
-  border-radius: 12px;
-  border: 1px solid #e2e8f0;
+  gap: 8px;
+  padding: 5px 5px 5px 12px;
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--r-full);
 }
 
-.user-info {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.avatar {
-  width: 36px;
-  height: 36px;
+.user-avatar {
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--accent);
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 600;
-  font-size: 14px;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
 }
 
-.user-details {
+.user-phone {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gray-700);
+  font-family: var(--font-mono);
+}
+
+.logout-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--gray-400);
+  cursor: pointer;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--t);
+  padding: 0;
 }
+.logout-btn:hover { background: var(--danger-bg); color: var(--danger); }
 
-.user-name {
-  font-size: 14px;
-  font-weight: 600;
-  color: #2d3748;
-}
-
-.main-content {
+/* ── Main ── */
+.main {
   flex: 1;
   padding: 0;
-  min-height: calc(100vh - 180px);
 }
 
-.main-content.full-height {
+.main-auth {
   min-height: 100vh;
-  padding: 0;
 }
 
+/* ── Footer ── */
 .footer {
+  border-top: 1px solid var(--gray-200);
   background: white;
-  border-top: 1px solid #e2e8f0;
-  padding: 24px;
+  padding: 20px 0;
   margin-top: auto;
 }
 
-.footer p {
-  margin: 0;
-  color: #718096;
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 14px;
-  text-align: center;
+  font-weight: 500;
+  color: var(--gray-600);
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
+.footer-copy {
+  font-size: 13px;
+  color: var(--gray-400);
 }
 
-/* 响应式设计 */
 @media (max-width: 768px) {
-  .navbar-content {
-    flex-direction: column;
-    gap: 16px;
-    padding: 16px;
-  }
-  
-  .nav-links {
-    width: 100%;
-    justify-content: center;
-  }
-  
-  .nav-item {
-    flex-direction: column;
-    text-align: center;
-    gap: 4px;
-    padding: 8px 12px;
-    font-size: 12px;
-  }
-  
-  .user-actions {
-    width: 100%;
-    justify-content: center;
-  }
-  
-  .btn {
-    padding: 8px 16px;
-    font-size: 13px;
-  }
-  
-  .logo span {
-    font-size: 18px;
-  }
-  
-  .logo svg {
-    width: 28px;
-    height: 28px;
-  }
+  .nav-inner { padding: 0 16px; }
+  .nav-links { display: none; }
+  .logo-text { display: none; }
+  .footer-inner { flex-direction: column; text-align: center; }
 }
 </style>

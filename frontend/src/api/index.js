@@ -4,7 +4,7 @@ const API_BASE_URL = 'http://localhost:9001'
 
 const api = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 10000
+  timeout: 120000  // 120 秒，等待 AI 响应
 })
 
 // 请求拦截器 - 添加 JWT token 和 User-Id

@@ -1,79 +1,69 @@
 <template>
-  <div class="login">
-    <div class="login-background">
-      <div class="shape shape-1"></div>
-      <div class="shape shape-2"></div>
-      <div class="shape shape-3"></div>
-    </div>
-    <div class="container">
-      <div class="login-card">
-        <div class="card-header">
-          <div class="logo-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-            </svg>
-          </div>
-          <h2>智慧医疗挂号平台</h2>
-          <p class="subtitle">欢迎回来，请登录您的账号</p>
-        </div>
-        <div v-if="error" class="alert alert-error">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"/>
-            <line x1="12" y1="8" x2="12" y2="12"/>
-            <line x1="12" y1="16" x2="12.01" y2="16"/>
+  <div class="auth-page">
+    <div class="auth-left">
+      <div class="auth-left-content">
+        <div class="brand">
+          <svg viewBox="0 0 28 28" fill="none">
+            <rect width="28" height="28" rx="8" fill="#0e9e8e"/>
+            <path d="M14 7v14M7 14h14" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
           </svg>
+          <span>智慧医疗</span>
+        </div>
+        <h1>欢迎回来</h1>
+        <p>登录后可查看预约记录、管理就诊人信息，享受完整的智慧医疗服务。</p>
+        <ul class="auth-perks">
+          <li v-for="p in perks" :key="p">
+            <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            {{ p }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="auth-right">
+      <div class="auth-card">
+        <div class="auth-card-header">
+          <h2>登录账号</h2>
+          <p>还没有账号？<router-link to="/register" class="auth-link">立即注册</router-link></p>
+        </div>
+
+        <div v-if="error" class="alert alert-error">
+          <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
           {{ error }}
         </div>
-        <form @submit.prevent="handleLogin">
+
+        <form @submit.prevent="handleLogin" class="auth-form">
           <div class="form-group">
-            <label for="phone">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-              </svg>
-              手机号
-            </label>
-            <input 
-              id="phone" 
-              v-model="form.phone" 
-              type="tel" 
-              placeholder="请输入手机号" 
-              required
-              pattern="[0-9]{11}"
-              maxlength="11"
-            >
+            <label for="phone">手机号</label>
+            <div class="input-wrapper">
+              <span class="input-icon">
+                <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+              </span>
+              <input id="phone" v-model="form.phone" type="tel" placeholder="请输入手机号" required maxlength="11">
+            </div>
           </div>
+
           <div class="form-group">
-            <label for="password">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-              </svg>
-              密码
-            </label>
-            <input 
-              id="password" 
-              v-model="form.password" 
-              type="password" 
-              placeholder="请输入密码" 
-              required
-            >
+            <label for="password">密码</label>
+            <div class="input-wrapper">
+              <span class="input-icon">
+                <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg>
+              </span>
+              <input id="password" v-model="form.password" :type="showPwd ? 'text' : 'password'" placeholder="请输入密码" required>
+              <button type="button" class="pwd-toggle" @click="showPwd = !showPwd">
+                <svg v-if="!showPwd" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/></svg>
+                <svg v-else viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z" clip-rule="evenodd"/><path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.064 7 9.542 7 .847 0 1.669-.105 2.454-.303z"/></svg>
+              </button>
+            </div>
           </div>
-          <button type="submit" class="btn btn-primary" :disabled="loading">
+
+          <button type="submit" class="btn-submit" :disabled="loading">
             <span v-if="loading" class="spinner"></span>
-            {{ loading ? '登录中...' : '登录' }}
+            {{ loading ? '登录中…' : '登录' }}
           </button>
         </form>
-        <div class="card-footer">
-          <p class="register-link">
-            还没有账号？
-            <router-link to="/register" class="link">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-              立即注册
-            </router-link>
-          </p>
-        </div>
       </div>
     </div>
   </div>
@@ -91,330 +81,268 @@ export default {
     const form = ref({ phone: '', password: '' })
     const loading = ref(false)
     const error = ref('')
+    const showPwd = ref(false)
+
+    const perks = ['实时号源查询', '一键预约挂号', '就诊人信息管理', '预约记录随时查看']
 
     const handleLogin = async () => {
-      if (!form.value.phone || !form.value.password) {
-        error.value = '请输入手机号和密码'
-        return
-      }
-
+      if (!form.value.phone || !form.value.password) { error.value = '请输入手机号和密码'; return }
       loading.value = true
       error.value = ''
       try {
         const response = await userAPI.login(form.value.phone, form.value.password)
-        // 后端直接返回 JWT token 字符串，不需要解析
         const token = typeof response === 'string' ? response : response.token
         localStorage.setItem('token', token)
-        localStorage.setItem('userId', form.value.phone) // 暂时使用手机号作为 userId
+        localStorage.setItem('userId', form.value.phone)
         localStorage.setItem('phone', form.value.phone)
         router.push('/')
       } catch (err) {
-        error.value = '登录失败，请检查手机号和密码'
-        console.error('登录错误:', err)
+        error.value = '手机号或密码错误，请重试'
       } finally {
         loading.value = false
       }
     }
 
-    return { form, loading, error, handleLogin }
+    return { form, loading, error, showPwd, perks, handleLogin }
   }
 }
 </script>
 
 <style scoped>
-.login {
-  position: relative;
+.auth-page {
+  display: flex;
+  min-height: 100vh;
+  background: var(--surface);
+}
+
+/* Left panel */
+.auth-left {
+  flex: 0 0 42%;
+  background: linear-gradient(145deg, var(--ink) 0%, #1a3a4a 60%, #0b5c52 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 60px 56px;
+  position: relative;
   overflow: hidden;
 }
 
-.login-background {
+.auth-left::before {
+  content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  overflow: hidden;
-}
-
-.shape {
-  position: absolute;
+  width: 500px;
+  height: 500px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  animation: float 20s infinite ease-in-out;
+  background: radial-gradient(circle, rgba(14,158,142,0.2) 0%, transparent 70%);
+  top: -100px;
+  right: -100px;
 }
 
-.shape-1 {
+.auth-left::after {
+  content: '';
+  position: absolute;
   width: 300px;
   height: 300px;
-  top: -150px;
-  left: -150px;
-  animation-delay: 0s;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(14,158,142,0.15) 0%, transparent 70%);
+  bottom: -80px;
+  left: -60px;
 }
 
-.shape-2 {
-  width: 200px;
-  height: 200px;
-  bottom: -100px;
-  right: -100px;
-  animation-delay: 7s;
-}
-
-.shape-3 {
-  width: 250px;
-  height: 250px;
-  top: 50%;
-  right: 10%;
-  animation-delay: 14s;
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
-  }
-  66% {
-    transform: translate(-20px, 30px) scale(0.9);
-  }
-}
-
-.container {
+.auth-left-content {
   position: relative;
   z-index: 1;
-  width: 100%;
-  max-width: 480px;
-  padding: 20px;
+  max-width: 380px;
 }
 
-.login-card {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  padding: 40px;
-  border-radius: 20px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  animation: slideUp 0.5s ease-out;
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 48px;
 }
 
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.brand svg { width: 32px; height: 32px; }
+
+.brand span {
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  letter-spacing: -0.02em;
 }
 
-.card-header {
-  text-align: center;
-  margin-bottom: 30px;
+.auth-left h1 {
+  font-size: 38px;
+  font-weight: 700;
+  color: white;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+  font-family: var(--font-serif);
+  font-style: italic;
 }
 
-.logo-icon {
-  width: 60px;
-  height: 60px;
-  margin: 0 auto 15px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 15px;
+.auth-left p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.7;
+  margin-bottom: 36px;
+}
+
+.auth-perks {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.auth-perks li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.8);
+  font-weight: 500;
+}
+
+.auth-perks li svg { color: var(--accent); flex-shrink: 0; }
+
+/* Right panel */
+.auth-right {
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  padding: 40px 24px;
 }
 
-.logo-icon svg {
-  width: 32px;
-  height: 32px;
+.auth-card {
+  width: 100%;
+  max-width: 420px;
 }
 
-.card-header h2 {
+.auth-card-header {
+  margin-bottom: 36px;
+}
+
+.auth-card-header h2 {
   font-size: 28px;
   font-weight: 700;
-  color: #1a202c;
-  margin: 0 0 8px 0;
+  color: var(--ink);
+  letter-spacing: -0.03em;
+  margin-bottom: 8px;
 }
 
-.subtitle {
-  color: #718096;
+.auth-card-header p {
   font-size: 14px;
-  margin: 0;
+  color: var(--gray-500);
 }
 
-.alert {
-  padding: 12px 16px;
-  border-radius: 8px;
-  margin-bottom: 20px;
+.auth-link {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+.auth-link:hover { text-decoration: underline; }
+
+.auth-form {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  animation: shake 0.3s ease-in-out;
-}
-
-.alert-error {
-  background: #fed7d7;
-  color: #c53030;
-  border: 1px solid #feb2b2;
-}
-
-.alert svg {
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
-}
-
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  75% { transform: translateX(5px); }
+  flex-direction: column;
+  gap: 20px;
 }
 
 .form-group {
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
 }
 
 .form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-600);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.input-wrapper {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-weight: 600;
-  color: #2d3748;
-  margin-bottom: 8px;
-  font-size: 14px;
 }
 
-.form-group label svg {
-  width: 16px;
-  height: 16px;
-  color: #667eea;
+.input-icon {
+  position: absolute;
+  left: 14px;
+  color: var(--gray-400);
+  display: flex;
+  align-items: center;
+  pointer-events: none;
 }
 
-.form-group input {
-  width: 100%;
-  padding: 12px 16px;
-  border: 2px solid #e2e8f0;
-  border-radius: 10px;
+.input-wrapper input {
+  padding-left: 42px;
+  padding-right: 42px;
+  height: 48px;
   font-size: 15px;
-  transition: all 0.3s ease;
+  border-radius: var(--r-md);
+  border: 1.5px solid var(--gray-200);
   background: white;
-  box-sizing: border-box;
-}
-
-.form-group input:focus {
-  outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-}
-
-.form-group input::placeholder {
-  color: #a0aec0;
-}
-
-.btn {
+  transition: all var(--t);
   width: 100%;
-  padding: 14px;
+}
+
+.input-wrapper input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+  outline: none;
+}
+
+.pwd-toggle {
+  position: absolute;
+  right: 12px;
+  background: none;
   border: none;
-  border-radius: 10px;
-  font-size: 16px;
+  color: var(--gray-400);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  transition: color var(--t);
+}
+.pwd-toggle:hover { color: var(--gray-700); }
+
+.btn-submit {
+  height: 50px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: var(--r-md);
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all var(--t);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  box-shadow: var(--shadow-accent);
+  margin-top: 4px;
 }
 
-.btn-primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+.btn-submit:hover:not(:disabled) {
+  background: var(--accent-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 28px rgba(14,158,142,0.32);
 }
 
-.btn-primary:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
-}
-
-.btn-primary:active:not(:disabled) {
-  transform: translateY(0);
-}
-
-.btn-primary:disabled {
+.btn-submit:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-.spinner {
-  width: 18px;
-  height: 18px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-top-color: white;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-.card-footer {
-  margin-top: 24px;
-  text-align: center;
-}
-
-.register-link {
-  color: #718096;
-  font-size: 14px;
-  margin: 0;
-}
-
-.link {
-  color: #667eea;
-  text-decoration: none;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  transition: all 0.3s ease;
-}
-
-.link:hover {
-  color: #764ba2;
-  transform: translateX(3px);
-}
-
-.link svg {
-  width: 16px;
-  height: 16px;
-}
-
-/* 响应式设计 */
-@media (max-width: 480px) {
-  .login-card {
-    padding: 30px 20px;
-  }
-  
-  .card-header h2 {
-    font-size: 24px;
-  }
-  
-  .logo-icon {
-    width: 50px;
-    height: 50px;
-  }
-  
-  .logo-icon svg {
-    width: 28px;
-    height: 28px;
-  }
+@media (max-width: 768px) {
+  .auth-left { display: none; }
+  .auth-right { padding: 40px 20px; }
 }
 </style>

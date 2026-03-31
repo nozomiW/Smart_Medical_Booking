@@ -37,76 +37,146 @@ CREATE TABLE `yy_schedule` (
                                CONSTRAINT `fk_sched_doc` FOREIGN KEY (`doc_id`) REFERENCES `yy_doctor` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
+-- 4. 擅长标签字典表（统一管理所有关键词）
+CREATE TABLE `yy_specialty_dict` (
+                                     `id` BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '主键 ID',
+                                     `name` VARCHAR(100) NOT NULL COMMENT '标签名称',
+                                     `category` VARCHAR(50) DEFAULT NULL COMMENT '所属分类（如：心血管、呼吸等）',
+                                     `sort_order` INT DEFAULT 0 COMMENT '排序权重',
+                                     `is_active` TINYINT DEFAULT 1 COMMENT '是否启用：0-禁用，1-启用',
+                                     `create_time` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                                     `update_time` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+                                     UNIQUE KEY `uk_name` (`name`),
+                                     INDEX `idx_category` (`category`),
+                                     INDEX `idx_sort` (`sort_order`)
+) ENGINE=InnoDB COMMENT='擅长标签字典表';
+
+-- 5. 医生擅长标签关联表
+CREATE TABLE `yy_doctor_specialty` (
+                                       `id` BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '主键 ID',
+                                       `doc_id` VARCHAR(50) NOT NULL COMMENT '医生 ID（外键关联 yy_doctor.id）',
+                                       `specialty_id` BIGINT NOT NULL COMMENT '擅长标签 ID（外键关联 yy_specialty_dict.id）',
+                                       `create_time` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                                       UNIQUE KEY `uk_doc_specialty` (`doc_id`, `specialty_id`),
+                                       INDEX `idx_specialty_id` (`specialty_id`),
+    -- 外键约束：确保擅长标签必须属于存在的医生
+                                       CONSTRAINT `fk_specialty_doc` FOREIGN KEY (`doc_id`) REFERENCES `yy_doctor` (`id`) ON DELETE CASCADE,
+                                       CONSTRAINT `fk_specialty_dict` FOREIGN KEY (`specialty_id`) REFERENCES `yy_specialty_dict` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB COMMENT='医生擅长标签关联表';
+
 
 USE `doctor-service`;
 
-DELIMITER $$
+-- 初始化标签字典数据（按科室分类）
+-- 心血管类
+INSERT INTO `yy_specialty_dict` (`name`, `category`, `sort_order`) VALUES
+('高血压', '心血管', 1), ('冠心病', '心血管', 2), ('心律失常', '心血管', 3), 
+('心力衰竭', '心血管', 4), ('心悸', '心血管', 5);
 
-DROP PROCEDURE IF EXISTS InitDoctorData;
-CREATE PROCEDURE InitDoctorData()
-BEGIN
-    DECLARE i INT DEFAULT 1;
-    DECLARE doc_id BIGINT;
-    DECLARE random_dept INT;
-    DECLARE random_title VARCHAR(20);
-    DECLARE random_fee DECIMAL(10,2);
-    DECLARE day_idx INT;
-    DECLARE work_day INT;
-    DECLARE schedule_id BIGINT;
-    DECLARE base_date DATE DEFAULT '2026-03-25'; -- 设置从明天开始排班
+-- 呼吸类
+INSERT INTO `yy_specialty_dict` (`name`, `category`, `sort_order`) VALUES
+('感冒', '呼吸', 1), ('咳嗽', '呼吸', 2), ('肺炎', '呼吸', 3), 
+('呼吸道感染', '呼吸', 4), ('发热', '呼吸', 5), ('哮喘', '呼吸', 6);
 
-    -- 开启事务保证效率
-    START TRANSACTION;
+-- 消化类
+INSERT INTO `yy_specialty_dict` (`name`, `category`, `sort_order`) VALUES
+('胃炎', '消化', 1), ('胃溃疡', '消化', 2), ('消化不良', '消化', 3), 
+('幽门螺杆菌', '消化', 4), ('肝炎', '消化', 5), ('肝硬化', '消化', 6);
 
-    WHILE i <= 100 DO
-            SET doc_id = 2000 + i; -- 医生ID从2001开始，避开你手动插入的100x
-            SET random_dept = 100 + (i % 10); -- 模拟10个科室 (100-109)
+-- 内分泌类
+INSERT INTO `yy_specialty_dict` (`name`, `category`, `sort_order`) VALUES
+('糖尿病', '内分泌', 1), ('甲状腺疾病', '内分泌', 2), ('肥胖症', '内分泌', 3), 
+('痛风', '内分泌', 4), ('高血脂', '内分泌', 5);
 
-            -- 随机分配职称和挂号费
-            CASE (i % 4)
-                WHEN 0 THEN SET random_title = '首席专家', random_fee = 150.00;
-                WHEN 1 THEN SET random_title = '主任医师', random_fee = 80.00;
-                WHEN 2 THEN SET random_title = '副主任医师', random_fee = 50.00;
-                ELSE SET random_title = '主治医师', random_fee = 30.00;
-                END CASE;
+-- 神经内科类
+INSERT INTO `yy_specialty_dict` (`name`, `category`, `sort_order`) VALUES
+('头痛', '神经内科', 1), ('失眠', '神经内科', 2), ('脑血管病', '神经内科', 3), 
+('头晕', '神经内科', 4), ('癫痫', '神经内科', 5);
 
-            -- 1. 插入医生基础表
-            INSERT INTO `yy_doctor` (`id`, `dept_id`, `name`, `title`, `fee`, `status`)
-            VALUES (doc_id, random_dept, CONCAT('医生_', i), random_title, random_fee, 1);
+-- 插入 5 个科室的医生数据
+-- 科室 101: 心血管内科
+INSERT INTO `yy_doctor` (`id`, `dept_id`, `name`, `title`, `fee`, `status`) VALUES
+('2001', '101', '张志强', '主任医师', 80.00, 1),
+('2002', '101', '李明华', '副主任医师', 50.00, 1),
+('2003', '101', '王晓芳', '主治医师', 30.00, 1);
 
-            -- 2. 为每个医生随机生成 2-3 天的排班规则 (周一至周日)
-            SET work_day = (i % 7) + 1; -- 保证每个医生至少有一天
-            INSERT IGNORE INTO `yy_schedule_rule` (`doc_id`, `day_of_week`, `max_count`)
-            VALUES (doc_id, work_day, 40);
+-- 科室 102: 呼吸内科
+INSERT INTO `yy_doctor` (`id`, `dept_id`, `name`, `title`, `fee`, `status`) VALUES
+('2004', '102', '刘建军', '主任医师', 80.00, 1),
+('2005', '102', '陈静', '副主任医师', 50.00, 1),
+('2006', '102', '赵伟', '主治医师', 30.00, 1);
 
-            -- 额外增加一天排班，增加数据密度
-            INSERT IGNORE INTO `yy_schedule_rule` (`doc_id`, `day_of_week`, `max_count`)
-            VALUES (doc_id, ((work_day + 2) % 7) + 1, 30);
+-- 科室 103: 消化内科
+INSERT INTO `yy_doctor` (`id`, `dept_id`, `name`, `title`, `fee`, `status`) VALUES
+('2007', '103', '孙秀英', '主任医师', 80.00, 1),
+('2008', '103', '周强', '副主任医师', 50.00, 1),
+('2009', '103', '吴敏', '主治医师', 30.00, 1);
 
-            -- 3. 生成未来 7 天的具体号源 (yy_schedule)
-            SET day_idx = 0;
-            WHILE day_idx < 30 DO
-                    SET @target_date = DATE_ADD(base_date, INTERVAL day_idx DAY);
-                    SET @target_week_day = DAYOFWEEK(@target_date) - 1;
-                    IF @target_week_day = 0 THEN SET @target_week_day = 7; END IF;
+-- 科室 104: 内分泌科
+INSERT INTO `yy_doctor` (`id`, `dept_id`, `name`, `title`, `fee`, `status`) VALUES
+('2010', '104', '郑建华', '主任医师', 80.00, 1),
+('2011', '104', '冯丽', '副主任医师', 50.00, 1),
+('2012', '104', '何勇', '主治医师', 30.00, 1);
 
-                    -- 如果当天符合医生的排班规则，则生成号源
-                    IF EXISTS (SELECT 1 FROM `yy_schedule_rule` WHERE `doc_id` = doc_id AND `day_of_week` = @target_week_day) THEN
-                        -- 生成号源ID: 日期(8位) + 医生ID(4位)
-                        SET schedule_id = CAST(CONCAT(DATE_FORMAT(@target_date, '%Y%m%d'), doc_id) AS UNSIGNED);
-                        INSERT INTO `yy_schedule` (`id`, `doc_id`, `work_date`, `available_num`, `status`)
-                        VALUES (schedule_id, doc_id, @target_date, 30, 1);
-                    END IF;
+-- 科室 105: 神经内科
+INSERT INTO `yy_doctor` (`id`, `dept_id`, `name`, `title`, `fee`, `status`) VALUES
+('2013', '105', '高建华', '主任医师', 80.00, 1),
+('2014', '105', '徐红梅', '副主任医师', 50.00, 1),
+('2015', '105', '马超', '主治医师', 30.00, 1);
 
-                    SET day_idx = day_idx + 1;
-                END WHILE;
+-- 插入医生的擅长标签（通过标签名称关联字典表）
+-- 心血管内科医生
+INSERT INTO `yy_doctor_specialty` (`doc_id`, `specialty_id`) VALUES
+('2001', (SELECT id FROM yy_specialty_dict WHERE name='高血压')),
+('2001', (SELECT id FROM yy_specialty_dict WHERE name='冠心病')),
+('2001', (SELECT id FROM yy_specialty_dict WHERE name='心律失常')),
+('2001', (SELECT id FROM yy_specialty_dict WHERE name='心力衰竭')),
+('2002', (SELECT id FROM yy_specialty_dict WHERE name='高血压')),
+('2002', (SELECT id FROM yy_specialty_dict WHERE name='糖尿病')),
+('2002', (SELECT id FROM yy_specialty_dict WHERE name='冠心病')),
+('2003', (SELECT id FROM yy_specialty_dict WHERE name='高血压')),
+('2003', (SELECT id FROM yy_specialty_dict WHERE name='心律失常'));
 
-            SET i = i + 1;
-        END WHILE;
+-- 呼吸内科医生
+INSERT INTO `yy_doctor_specialty` (`doc_id`, `specialty_id`) VALUES
+('2004', (SELECT id FROM yy_specialty_dict WHERE name='感冒')),
+('2004', (SELECT id FROM yy_specialty_dict WHERE name='咳嗽')),
+('2004', (SELECT id FROM yy_specialty_dict WHERE name='肺炎')),
+('2004', (SELECT id FROM yy_specialty_dict WHERE name='呼吸道感染')),
+('2005', (SELECT id FROM yy_specialty_dict WHERE name='发热')),
+('2005', (SELECT id FROM yy_specialty_dict WHERE name='咳嗽')),
+('2005', (SELECT id FROM yy_specialty_dict WHERE name='呼吸道感染')),
+('2006', (SELECT id FROM yy_specialty_dict WHERE name='感冒')),
+('2006', (SELECT id FROM yy_specialty_dict WHERE name='肺炎'));
 
-    COMMIT;
-END$$
+-- 消化内科医生
+INSERT INTO `yy_doctor_specialty` (`doc_id`, `specialty_id`) VALUES
+('2007', (SELECT id FROM yy_specialty_dict WHERE name='胃炎')),
+('2007', (SELECT id FROM yy_specialty_dict WHERE name='胃溃疡')),
+('2007', (SELECT id FROM yy_specialty_dict WHERE name='消化不良')),
+('2007', (SELECT id FROM yy_specialty_dict WHERE name='幽门螺杆菌')),
+('2008', (SELECT id FROM yy_specialty_dict WHERE name='胃炎')),
+('2008', (SELECT id FROM yy_specialty_dict WHERE name='胃溃疡')),
+('2008', (SELECT id FROM yy_specialty_dict WHERE name='肝炎')),
+('2009', (SELECT id FROM yy_specialty_dict WHERE name='消化不良')),
+('2009', (SELECT id FROM yy_specialty_dict WHERE name='胃炎'));
 
-DELIMITER ;
+-- 内分泌科医生
+INSERT INTO `yy_doctor_specialty` (`doc_id`, `specialty_id`) VALUES
+('2010', (SELECT id FROM yy_specialty_dict WHERE name='糖尿病')),
+('2010', (SELECT id FROM yy_specialty_dict WHERE name='高血压')),
+('2010', (SELECT id FROM yy_specialty_dict WHERE name='甲状腺疾病')),
+('2011', (SELECT id FROM yy_specialty_dict WHERE name='糖尿病')),
+('2011', (SELECT id FROM yy_specialty_dict WHERE name='肥胖症')),
+('2012', (SELECT id FROM yy_specialty_dict WHERE name='糖尿病')),
+('2012', (SELECT id FROM yy_specialty_dict WHERE name='痛风'));
 
-CALL InitDoctorData();
+-- 神经内科医生
+INSERT INTO `yy_doctor_specialty` (`doc_id`, `specialty_id`) VALUES
+('2013', (SELECT id FROM yy_specialty_dict WHERE name='头痛')),
+('2013', (SELECT id FROM yy_specialty_dict WHERE name='失眠')),
+('2013', (SELECT id FROM yy_specialty_dict WHERE name='脑血管病')),
+('2014', (SELECT id FROM yy_specialty_dict WHERE name='头痛')),
+('2014', (SELECT id FROM yy_specialty_dict WHERE name='头晕')),
+('2015', (SELECT id FROM yy_specialty_dict WHERE name='失眠')),
+('2015', (SELECT id FROM yy_specialty_dict WHERE name='脑血管病'));

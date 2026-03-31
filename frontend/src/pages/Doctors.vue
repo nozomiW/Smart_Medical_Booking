@@ -1,236 +1,92 @@
 <template>
-  <div class="doctors">
+  <div class="page">
     <div class="container">
-      <h2>医生排班表</h2>
-      
-      <!-- 搜索和日期筛选 -->
-      <div class="filters">
-        <input 
-          v-model="searchQuery" 
-          type="text" 
-          placeholder="搜索医生姓名..."
-          @input="handleSearch"
-        >
-        <div class="date-picker-wrapper">
+      <div class="page-header">
+        <div><p class="section-label">医生排班</p><h2>选择医生</h2></div>
+      </div>
+      <div class="toolbar">
+        <div class="search-wrap">
+          <svg class="search-icon" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/></svg>
+          <input v-model="searchQuery" type="text" placeholder="搜索医生姓名…" class="search-input">
+        </div>
+        <div class="date-nav-wrap">
           <div class="date-nav">
-            <button @click="changeDate(-1)" class="btn-date-nav" :disabled="isPastDate(-1)">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="15 18 9 12 15 6"/>
-              </svg>
+            <button class="date-arrow" @click="changeDate(-1)" :disabled="isPastDate(-1)"><svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></button>
+            <button class="date-display" @click="showDatePicker=!showDatePicker">
+              <svg viewBox="0 0 20 20" fill="currentColor" width="14" height="14"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg>
+              {{ currentDateDisplay }}
             </button>
-            <div class="current-date-display" @click="showDatePicker = !showDatePicker">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                <line x1="16" y1="2" x2="16" y2="6"/>
-                <line x1="8" y1="2" x2="8" y2="6"/>
-                <line x1="3" y1="10" x2="21" y2="10"/>
-              </svg>
-              <span>{{ currentDateDisplay }}</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="6 9 12 15 18 9"/>
-              </svg>
-            </div>
-            <button @click="changeDate(1)" class="btn-date-nav" :disabled="isToday">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="9 18 15 12 9 6"/>
-              </svg>
-            </button>
+            <button class="date-arrow" @click="changeDate(1)" :disabled="isToday"><svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg></button>
           </div>
-          
-          <!-- 日期选择面板 -->
           <div v-if="showDatePicker" class="date-picker-panel">
-            <div class="date-picker-header">
-              <button @click="changeMonth(-1)" class="btn-month-nav" :disabled="isCurrentMonth">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="15 18 9 12 15 6"/>
-                </svg>
-              </button>
-              <span class="month-title">{{ currentMonthTitle }}</span>
-              <button @click="changeMonth(1)" class="btn-month-nav">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="9 18 15 12 9 6"/>
-                </svg>
-              </button>
+            <div class="dp-header">
+              <button class="dp-nav" @click="changeMonth(-1)" :disabled="isCurrentMonth"><svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></button>
+              <span class="dp-month-title">{{ currentMonthTitle }}</span>
+              <button class="dp-nav" @click="changeMonth(1)"><svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg></button>
             </div>
-            <div class="date-picker-grid">
-              <div class="date-picker-weekday">日</div>
-              <div class="date-picker-weekday">一</div>
-              <div class="date-picker-weekday">二</div>
-              <div class="date-picker-weekday">三</div>
-              <div class="date-picker-weekday">四</div>
-              <div class="date-picker-weekday">五</div>
-              <div class="date-picker-weekday">六</div>
-              <div 
-                v-for="day in calendarDays" 
-                :key="day.dateStr"
-                @click="selectDate(day)"
-                :class="['date-picker-day', { 
-                  'is-today': day.isToday, 
-                  'is-selected': isSelectedDate(day),
-                  'is-disabled': day.isPast || day.isFuture,
-                  'is-weekend': day.isWeekend
-                }]"
-              >
-                <span class="day-num">{{ day.day }}</span>
-                <span class="day-label">{{ day.label }}</span>
-              </div>
+            <div class="dp-grid">
+              <div class="dp-weekday" v-for="w in ['日','一','二','三','四','五','六']" :key="w">{{ w }}</div>
+              <div v-for="d in calendarDays" :key="d.dateStr" @click="selectDate(d)"
+                :class="['dp-day',{today:d.isToday,selected:isSelectedDate(d),disabled:d.isPast||d.isFuture,weekend:d.isWeekend}]">{{ d.day }}</div>
             </div>
-            <div class="date-picker-footer">
-              <button @click="selectToday" class="btn-today">今天</button>
-            </div>
+            <div class="dp-footer"><button class="dp-today-btn" @click="selectToday">今天</button></div>
           </div>
         </div>
       </div>
 
-      <!-- 加载中 -->
-      <div v-if="loading" class="loading-container">
-        <div class="loading-spinner"></div>
-        <p>加载中...</p>
+      <div v-if="loading" class="page-loading"><div class="spinner spinner-dark"></div><span>加载排班中…</span></div>
+      <div v-else-if="filteredDoctors.length===0" class="empty-state">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <h3>当日暂无排班</h3><p>请选择其他日期</p>
       </div>
-
-      <!-- 空状态 -->
-      <div v-else-if="filteredDoctors.length === 0" class="empty-state">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="10"/>
-          <line x1="12" y1="8" x2="12" y2="12"/>
-          <line x1="12" y1="16" x2="12.01" y2="16"/>
-        </svg>
-        <p>未找到匹配的医生</p>
-      </div>
-
-      <!-- 医生列表 -->
-      <div v-else class="doctor-list">
-        <div v-for="doctor in filteredDoctors" :key="doctor.scheduleId || doctor.docId" class="doctor-card card">
-          <div class="doctor-header">
-            <div class="avatar">{{ doctor.docName ? doctor.docName.charAt(0) : '?' }}</div>
-            <div class="doctor-info">
-              <h3>{{ doctor.docName || '未知医生' }}</h3>
-              <p class="department">{{ doctor.deptId ? '科室' + doctor.deptId : '科室' }}</p>
-              <p class="title">{{ doctor.docTitle || '' }}</p>
+      <div v-else class="doctor-grid">
+        <div v-for="d in filteredDoctors" :key="d.scheduleId||d.docId" class="doctor-card">
+          <div class="doc-top">
+            <div class="doc-avatar">{{ d.docName?d.docName.charAt(0):'医' }}</div>
+            <div class="doc-info">
+              <div class="doc-name">{{ d.docName||'未知医生' }}</div>
+              <div class="doc-meta"><span class="doc-title-tag">{{ d.docTitle||'主治医师' }}</span><span class="doc-dept">{{ d.deptName||'科室'+d.deptId }}</span></div>
             </div>
-            <div class="fee-tag">
-              <span class="label">挂号费</span>
-              <span class="amount">¥{{ doctor.docFee }}</span>
-            </div>
+            <div class="doc-fee-box"><span class="fee-label">挂号费</span><span class="fee-amount">¥{{ d.docFee }}</span></div>
           </div>
-          
-          <!-- 号源情况 -->
-          <div class="schedule-status">
-            <div class="status-badge" :class="getStatusClass(doctor)">
-              <div class="badge-icon">
-                <svg v-if="getAvailableNum(doctor) > 10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                  <polyline points="22 4 12 14.01 9 11.01"/>
-                </svg>
-                <svg v-else-if="getAvailableNum(doctor) > 0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="12" cy="12" r="10"/>
-                  <line x1="23" y1="1" x2="1" y2="23"/>
-                </svg>
-                <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="12" cy="12" r="10"/>
-                  <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/>
-                </svg>
-              </div>
-              <div class="badge-text">
-                <span class="status-text">{{ getStatusText(doctor) }}</span>
-                <span class="num-text">剩余 {{ getAvailableNum(doctor) }} 个号源</span>
-              </div>
-            </div>
+          <div class="doc-status-row">
+            <span class="num-badge" :class="getStatusClass(d)">{{ getStatusText(d) }}</span>
+            <span class="num-text">剩余 <b>{{ getAvailableNum(d) }}</b> 个</span>
+            <div class="num-track"><div class="num-fill" :class="getStatusClass(d)" :style="getNumFillStyle(d)"></div></div>
           </div>
-
-          <div class="doctor-actions">
-            <button 
-              v-if="isLoggedIn && getAvailableNum(doctor) > 0" 
-              @click="selectDoctor(doctor)"
-              class="btn btn-primary"
-            >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                <polyline points="14 2 14 8 20 8"/>
-                <line x1="16" y1="13" x2="8" y2="13"/>
-                <line x1="16" y1="17" x2="8" y2="17"/>
-                <polyline points="10 9 9 9 8 9"/>
-              </svg>
-              预约挂号
-            </button>
-            <button 
-              v-else-if="isLoggedIn"
-              disabled
-              class="btn btn-disabled"
-            >
-              已满号
-            </button>
-            <router-link 
-              v-else
-              to="/login" 
-              class="btn btn-outline"
-            >
-              登录后预约
-            </router-link>
+          <div class="doc-action">
+            <button v-if="isLoggedIn&&getAvailableNum(d)>0" class="btn-book" @click="selectDoctor(d)">立即预约</button>
+            <button v-else-if="isLoggedIn" class="btn-full" disabled>号源已满</button>
+            <router-link v-else to="/login" class="btn-login-hint">登录后预约</router-link>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 选择就诊人弹窗 -->
     <div v-if="showPatientModal" class="modal-overlay" @click="closePatientModal">
       <div class="modal" @click.stop>
         <div class="modal-header">
           <h3>选择就诊人</h3>
-          <button @click="closePatientModal" class="btn-close">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="18" y1="6" x2="6" y2="18"/>
-              <line x1="6" y1="6" x2="18" y2="18"/>
-            </svg>
-          </button>
+          <button class="btn-close-modal" @click="closePatientModal"><svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></button>
         </div>
         <div class="modal-body">
-          <div v-if="patients.length === 0" class="no-patients">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-              <circle cx="8.5" cy="7" r="4"/>
-              <line x1="20" y1="8" x2="20" y2="14"/>
-              <line x1="23" y1="11" x2="17" y2="11"/>
-            </svg>
-            <p>暂无就诊人信息</p>
-            <button @click="goToAddPatient" class="btn btn-primary">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="12" y1="5" x2="12" y2="19"/>
-                <line x1="5" y1="12" x2="19" y2="12"/>
-              </svg>
-              添加就诊人
-            </button>
+          <div v-if="patients.length===0" class="empty-state" style="padding:24px 0">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+            <h3>暂无就诊人</h3><p>请先添加就诊人</p>
+            <button class="btn-book" style="margin-top:8px" @click="goToAddPatient">去添加</button>
           </div>
-          <div v-else class="patient-list">
-            <div 
-              v-for="patient in patients" 
-              :key="patient.id"
-              @click="confirmBooking(patient)"
-              class="patient-item"
-            >
-              <div class="patient-avatar">{{ patient.name ? patient.name.charAt(0) : '患' }}</div>
-              <div class="patient-info">
-                <div class="patient-name">{{ patient.name || '未知患者' }}</div>
-                <div class="patient-detail">{{ patient.idCard }} · {{ patient.gender === 1 ? '男' : (patient.gender === 0 ? '女' : '未知') }}</div>
+          <div v-else class="patient-pick-list">
+            <div v-for="pt in patients" :key="pt.id" class="patient-pick-item" @click="confirmBooking(pt)">
+              <div class="pick-avatar" :class="pt.gender===1?'male':'female'">{{ (pt.name||'患').charAt(0) }}</div>
+              <div class="pick-info">
+                <div class="pick-name">{{ pt.name }}</div>
+                <div class="pick-sub">{{ maskIdCard(pt.idCard) }} · {{ pt.gender===1?'男':'女' }}</div>
               </div>
-              <div class="check-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="9 11 12 14 22 4"/>
-                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
-                </svg>
-              </div>
+              <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16" class="pick-arrow"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
             </div>
           </div>
         </div>
-        <div v-if="patients.length > 0" class="modal-footer">
-          <button @click="goToAddPatient" class="btn btn-outline">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="12" y1="5" x2="12" y2="19"/>
-              <line x1="5" y1="12" x2="19" y2="12"/>
-            </svg>
-            添加新就诊人
-          </button>
-        </div>
+        <div v-if="patients.length>0" class="modal-footer"><button class="btn-ghost-sm" @click="goToAddPatient">添加新就诊人</button></div>
       </div>
     </div>
   </div>
@@ -240,7 +96,6 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { doctorAPI, userAPI, orderAPI } from '../api'
-
 export default {
   name: 'Doctors',
   setup() {
@@ -255,430 +110,172 @@ export default {
     const showPatientModal = ref(false)
     const pickerMonth = ref(new Date().getMonth())
     const pickerYear = ref(new Date().getFullYear())
-
     const isLoggedIn = computed(() => !!localStorage.getItem('token'))
-
-    const filteredDoctors = computed(() => {
-      return doctors.value.filter(doctor => doctor && doctor.docName && doctor.docName.includes(searchQuery.value))
-    })
-
+    const filteredDoctors = computed(() => doctors.value.filter(d => d&&d.docName&&d.docName.includes(searchQuery.value)))
+    const formatDate = (d) => d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')
     const currentDateDisplay = computed(() => {
-      const date = currentDate.value
-      const today = new Date()
-      const tomorrow = new Date(today)
-      tomorrow.setDate(tomorrow.getDate() + 1)
-      if (date.toDateString() === today.toDateString()) return '今天 (' + formatDate(today) + ')'
-      if (date.toDateString() === tomorrow.toDateString()) return '明天 (' + formatDate(tomorrow) + ')'
-      const weekDays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
-      return date.getMonth() + 1 + '月' + date.getDate() + '日 ' + weekDays[date.getDay()] + ' (' + formatDate(date) + ')'
+      const d=currentDate.value, t=new Date()
+      const tm=new Date(t); tm.setDate(tm.getDate()+1)
+      if (d.toDateString()===t.toDateString()) return '今天'
+      if (d.toDateString()===tm.toDateString()) return '明天'
+      const wk=['周日','周一','周二','周三','周四','周五','周六']
+      return (d.getMonth()+1)+'月'+d.getDate()+'日 '+wk[d.getDay()]
     })
-
-    const currentMonthTitle = computed(() => pickerYear.value + '年' + (pickerMonth.value + 1) + '月')
-
-    const isToday = computed(() => currentDate.value.toDateString() === new Date().toDateString())
-
-    const isCurrentMonth = computed(() => {
-      const now = new Date()
-      return pickerYear.value === now.getFullYear() && pickerMonth.value === now.getMonth()
-    })
-
+    const currentMonthTitle = computed(() => pickerYear.value+'年'+(pickerMonth.value+1)+'月')
+    const isToday = computed(() => currentDate.value.toDateString()===new Date().toDateString())
+    const isCurrentMonth = computed(() => { const n=new Date(); return pickerYear.value===n.getFullYear()&&pickerMonth.value===n.getMonth() })
     const calendarDays = computed(() => {
-      const year = pickerYear.value
-      const month = pickerMonth.value
-      const today = new Date()
-      today.setHours(0, 0, 0, 0)
-      const firstDayWeek = new Date(year, month, 1).getDay()
-      const daysInMonth = new Date(year, month + 1, 0).getDate()
-      const prevMonthLastDay = new Date(year, month, 0).getDate()
-      const days = []
-      for (let i = firstDayWeek - 1; i >= 0; i--) {
-        const day = prevMonthLastDay - i
-        days.push({ day, label: '', isToday: false, isPast: true, isFuture: false, isWeekend: false, dateStr: formatDate(new Date(year, month - 1, day)) })
-      }
-      for (let day = 1; day <= daysInMonth; day++) {
-        const date = new Date(year, month, day)
-        const isTodayFlag = date.toDateString() === today.toDateString()
-        const isPast = date < today
-        days.push({ day, label: isTodayFlag ? '今天' : '', isToday: isTodayFlag, isPast, isFuture: false, isWeekend: date.getDay() === 0 || date.getDay() === 6, dateStr: formatDate(date) })
-      }
-      const remaining = 42 - days.length
-      for (let i = 1; i <= remaining; i++) {
-        const date = new Date(year, month + 1, i)
-        const isPast = date < today
-        days.push({ day: i, label: '', isToday: false, isPast, isFuture: !isPast, isWeekend: date.getDay() === 0 || date.getDay() === 6, dateStr: formatDate(date) })
-      }
+      const y=pickerYear.value, m=pickerMonth.value
+      const today=new Date(); today.setHours(0,0,0,0)
+      const firstDow=new Date(y,m,1).getDay()
+      const daysInMonth=new Date(y,m+1,0).getDate()
+      const prevLast=new Date(y,m,0).getDate()
+      const days=[]
+      for(let i=firstDow-1;i>=0;i--) { const day=prevLast-i; days.push({day,isToday:false,isPast:true,isFuture:false,isWeekend:false,dateStr:formatDate(new Date(y,m-1,day))}) }
+      for(let day=1;day<=daysInMonth;day++) { const dt=new Date(y,m,day); const isT=dt.toDateString()===today.toDateString(); const isP=dt<today&&!isT; days.push({day,isToday:isT,isPast:isP,isFuture:false,isWeekend:dt.getDay()===0||dt.getDay()===6,dateStr:formatDate(dt)}) }
+      const rem=42-days.length
+      for(let i=1;i<=rem;i++) { const dt=new Date(y,m+1,i); days.push({day:i,isToday:false,isPast:dt<today,isFuture:true,isWeekend:false,dateStr:formatDate(dt)}) }
       return days
     })
-
-    const formatDate = (date) => date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0')
-
     const fetchDoctors = async () => {
-      loading.value = true
-      try {
-        const response = await doctorAPI.getScheduleDetail(formatDate(currentDate.value))
-        doctors.value = response || []
-      } catch (error) {
-        console.error('获取医生排班失败:', error)
-      } finally {
-        loading.value = false
-      }
+      loading.value=true
+      try { const r=await doctorAPI.getScheduleDetail(formatDate(currentDate.value)); doctors.value=r||[] }
+      catch(e) { console.error(e) } finally { loading.value=false }
     }
-
-    const changeDate = (days) => {
-      const newDate = new Date(currentDate.value)
-      newDate.setDate(newDate.getDate() + days)
-      const today = new Date()
-      today.setHours(0, 0, 0, 0)
-      if (newDate >= today) {
-        currentDate.value = newDate
-        pickerYear.value = newDate.getFullYear()
-        pickerMonth.value = newDate.getMonth()
-        fetchDoctors()
-      }
+    const changeDate = (n) => {
+      const nd=new Date(currentDate.value); nd.setDate(nd.getDate()+n)
+      const t=new Date(); t.setHours(0,0,0,0)
+      if(nd>=t) { currentDate.value=nd; pickerYear.value=nd.getFullYear(); pickerMonth.value=nd.getMonth(); fetchDoctors() }
     }
-
-    const isPastDate = (days) => {
-      const target = new Date(currentDate.value)
-      target.setDate(target.getDate() + days)
-      const today = new Date()
-      today.setHours(0, 0, 0, 0)
-      return target < today
+    const isPastDate = (n) => { const t=new Date(currentDate.value); t.setDate(t.getDate()+n); const now=new Date(); now.setHours(0,0,0,0); return t<now }
+    const changeMonth = (n) => {
+      let m=pickerMonth.value+n, y=pickerYear.value
+      if(m>11){m=0;y++} else if(m<0){m=11;y--}
+      const now=new Date()
+      if(y>now.getFullYear()||(y===now.getFullYear()&&m>=now.getMonth())) { pickerMonth.value=m; pickerYear.value=y }
     }
-
-    const changeMonth = (months) => {
-      let newMonth = pickerMonth.value + months
-      let newYear = pickerYear.value
-      if (newMonth > 11) { newMonth = 0; newYear++ }
-      else if (newMonth < 0) { newMonth = 11; newYear-- }
-      const now = new Date()
-      if (newYear > now.getFullYear() || (newYear === now.getFullYear() && newMonth >= now.getMonth())) {
-        pickerMonth.value = newMonth
-        pickerYear.value = newYear
-      }
+    const selectDate = (d) => { if(d.isPast||d.isFuture) return; currentDate.value=new Date(d.dateStr); showDatePicker.value=false; fetchDoctors() }
+    const isSelectedDate = (d) => currentDate.value.toDateString()===new Date(d.dateStr).toDateString()
+    const selectToday = () => { const t=new Date(); currentDate.value=t; pickerYear.value=t.getFullYear(); pickerMonth.value=t.getMonth(); showDatePicker.value=false; fetchDoctors() }
+    const getAvailableNum = (d) => d.availableNum||0
+    const getStatusClass = (d) => { const n=getAvailableNum(d); if(n>10) return 'status-ok'; if(n>0) return 'status-low'; return 'status-full' }
+    const getStatusText = (d) => { const n=getAvailableNum(d); if(n>10) return '充足'; if(n>0) return '紧张'; return '已满' }
+    const getNumFillStyle = (d) => {
+      const n=getAvailableNum(d)
+      const max=20
+      const pct=Math.min(100,Math.round(n/max*100))
+      return { width: pct+'%' }
     }
-
-    const selectDate = (day) => {
-      if (day.isPast || day.isFuture) return
-      currentDate.value = new Date(day.dateStr)
-      showDatePicker.value = false
-      fetchDoctors()
+    const maskIdCard = (id) => !id||id.length<5?id:id.substring(0,3)+'****'+id.substring(id.length-2)
+    const fetchPatients = async () => { try { const r=await userAPI.getPatients(); patients.value=r||[] } catch(e){console.error(e)} }
+    const selectDoctor = (d) => { selectedDoctor.value=d; fetchPatients(); showPatientModal.value=true }
+    const closePatientModal = () => { showPatientModal.value=false; selectedDoctor.value=null }
+    const confirmBooking = async (pt) => {
+      if(!selectedDoctor.value) return
+      try { await orderAPI.create(pt.id, selectedDoctor.value.scheduleId); alert('预约成功！'); closePatientModal(); await fetchDoctors() }
+      catch(e) { alert('预约失败：'+(e.response?.data||e.message)) }
     }
-
-    const isSelectedDate = (day) => currentDate.value.toDateString() === new Date(day.dateStr).toDateString()
-
-    const selectToday = () => {
-      const today = new Date()
-      currentDate.value = today
-      pickerYear.value = today.getFullYear()
-      pickerMonth.value = today.getMonth()
-      showDatePicker.value = false
-      fetchDoctors()
-    }
-
-    const handleSearch = () => {}
-    const getAvailableNum = (doctor) => doctor.availableNum || 0
-
-    const getStatusClass = (doctor) => {
-      const n = getAvailableNum(doctor)
-      if (n > 10) return 'status-available'
-      if (n > 0) return 'status-sufficient'
-      return 'status-full'
-    }
-
-    const getStatusText = (doctor) => {
-      const n = getAvailableNum(doctor)
-      if (n > 10) return '充足'
-      if (n > 0) return '紧张'
-      return '已满'
-    }
-
-    const fetchPatients = async () => {
-      try {
-        const response = await userAPI.getPatients()
-        patients.value = response || []
-      } catch (error) {
-        console.error('获取就诊人列表失败:', error)
-      }
-    }
-
-    const selectDoctor = (doctor) => {
-      selectedDoctor.value = doctor
-      fetchPatients()
-      showPatientModal.value = true
-    }
-
-    const closePatientModal = () => {
-      showPatientModal.value = false
-      selectedDoctor.value = null
-    }
-
-    const confirmBooking = async (patient) => {
-      if (!selectedDoctor.value) return
-      try {
-        await orderAPI.create(patient.id, selectedDoctor.value.scheduleId)
-        alert('预约成功!')
-        closePatientModal()
-        await fetchDoctors()
-      } catch (error) {
-        alert('预约失败:' + (error.response?.data || error.message))
-      }
-    }
-
-    const goToAddPatient = () => {
-      router.push('/patients')
-      closePatientModal()
-    }
-
-    onMounted(() => { fetchDoctors() })
-
-    return {
-      doctors, loading, searchQuery, filteredDoctors, handleSearch,
-      currentDate, currentDateDisplay, isToday, changeDate, isLoggedIn,
-      showPatientModal, patients, selectDoctor, closePatientModal,
-      getStatusClass, getStatusText, getAvailableNum,
-      confirmBooking, goToAddPatient, isPastDate,
-      showDatePicker, pickerMonth, pickerYear, currentMonthTitle,
-      isCurrentMonth, calendarDays, selectDate, isSelectedDate,
-      selectToday, changeMonth, formatDate
-    }
+    const goToAddPatient = () => { router.push('/patients'); closePatientModal() }
+    onMounted(fetchDoctors)
+    return { doctors, loading, searchQuery, filteredDoctors, currentDate, currentDateDisplay, isToday,
+      changeDate, isPastDate, isLoggedIn, showPatientModal, patients, selectedDoctor, selectDoctor,
+      closePatientModal, getStatusClass, getStatusText, getAvailableNum, getNumFillStyle, confirmBooking,
+      goToAddPatient, showDatePicker, pickerMonth, pickerYear, currentMonthTitle, isCurrentMonth,
+      calendarDays, selectDate, isSelectedDate, selectToday, changeMonth, maskIdCard }
   }
 }
 </script>
 
 <style scoped>
-.doctors { padding: 40px 0; }
-.doctors h2 { font-size: 28px; color: #2d3748; margin-bottom: 24px; }
+.page { padding: 32px 0 64px; }
+.page-header { margin-bottom: 24px; }
+.page-header h2 { font-size:24px; font-weight:700; color:var(--ink); letter-spacing:-0.03em; margin:0; }
 
-.filters {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 32px;
-  background: white;
-  padding: 20px 24px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+.toolbar {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; margin-bottom: 28px;
+  background: white; padding: 14px 18px;
+  border-radius: var(--r-lg); border: 1px solid var(--gray-200);
+  position: relative;
 }
-.filters input {
-  flex: 1;
-  min-width: 200px;
-  padding: 12px 16px;
-  border: 2px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 15px;
-  transition: all 0.3s ease;
-}
-.filters input:focus { outline: none; border-color: #667eea; box-shadow: 0 0 0 3px rgba(102,126,234,0.1); }
+.search-wrap { position: relative; flex: 1; max-width: 320px; }
+.search-icon { position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--gray-400); pointer-events:none; }
+.search-input { width:100%; padding:9px 12px 9px 36px; border:1.5px solid var(--gray-200); border-radius:var(--r-md); font-size:14px; transition:all var(--t); }
+.search-input:focus { border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-glow); outline:none; }
 
-.date-picker-wrapper { position: relative; }
-.date-nav {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: linear-gradient(135deg,rgba(102,126,234,0.05) 0%,rgba(118,75,162,0.05) 100%);
-  padding: 8px 16px;
-  border-radius: 10px;
-  border: 1px solid #e2e8f0;
-}
-.current-date-display {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  min-width: 180px;
-  justify-content: space-between;
-}
-.current-date-display:hover { border-color: #667eea; background: rgba(102,126,234,0.05); }
-.current-date-display svg { width: 18px; height: 18px; color: #667eea; }
-.current-date-display span { font-weight: 600; color: #2d3748; font-size: 14px; }
+.date-nav-wrap { position: relative; }
+.date-nav { display:flex; align-items:center; gap:4px; }
+.date-arrow { width:34px; height:34px; border:1.5px solid var(--gray-200); background:white; border-radius:var(--r-md); cursor:pointer; display:flex; align-items:center; justify-content:center; color:var(--gray-500); transition:all var(--t); padding:0; }
+.date-arrow:hover:not(:disabled) { border-color:var(--accent); color:var(--accent); }
+.date-arrow:disabled { opacity:0.35; cursor:not-allowed; }
+.date-display { display:flex; align-items:center; gap:8px; padding:8px 16px; border:1.5px solid var(--gray-200); background:white; border-radius:var(--r-md); font-size:14px; font-weight:600; color:var(--ink); cursor:pointer; transition:all var(--t); white-space:nowrap; }
+.date-display:hover { border-color:var(--accent); color:var(--accent); }
 
-.date-picker-panel {
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
-  width: 320px;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 12px 48px rgba(0,0,0,0.15);
-  border: 1px solid #e2e8f0;
-  padding: 20px;
-  z-index: 1000;
-  animation: datePickerSlideIn 0.3s ease-out;
-}
-@keyframes datePickerSlideIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.date-picker-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-.btn-month-nav {
-  width: 32px; height: 32px;
-  border-radius: 8px;
-  border: 1px solid #e2e8f0;
-  background: white;
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: all 0.3s ease;
-}
-.btn-month-nav:hover:not(:disabled) { border-color: #667eea; color: #667eea; }
-.btn-month-nav:disabled { opacity: 0.4; cursor: not-allowed; }
-.btn-month-nav svg { width: 18px; height: 18px; }
-.month-title { font-weight: 600; color: #2d3748; font-size: 16px; }
+.date-picker-panel { position:absolute; top:calc(100% + 8px); right:0; width:300px; background:white; border-radius:var(--r-lg); box-shadow:var(--shadow-lg); border:1px solid var(--gray-200); padding:16px; z-index:50; animation:slideUp 0.18s ease; }
+.dp-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
+.dp-month-title { font-size:15px; font-weight:600; color:var(--ink); }
+.dp-nav { width:30px; height:30px; border:1px solid var(--gray-200); background:white; border-radius:var(--r-sm); cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all var(--t); padding:0; }
+.dp-nav:hover:not(:disabled) { border-color:var(--accent); color:var(--accent); }
+.dp-nav:disabled { opacity:0.35; cursor:not-allowed; }
+.dp-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:2px; margin-bottom:12px; }
+.dp-weekday { text-align:center; font-size:11px; font-weight:600; color:var(--gray-400); padding:4px 0; text-transform:uppercase; }
+.dp-day { aspect-ratio:1; display:flex; align-items:center; justify-content:center; border-radius:var(--r-sm); font-size:13px; font-weight:500; cursor:pointer; transition:all var(--t); color:var(--gray-700); }
+.dp-day:hover:not(.disabled) { background:var(--accent-light); color:var(--accent); }
+.dp-day.today { background:var(--accent-light); color:var(--accent); font-weight:700; }
+.dp-day.selected { background:var(--accent); color:white; font-weight:700; }
+.dp-day.disabled { opacity:0.3; cursor:not-allowed; }
+.dp-day.weekend:not(.disabled):not(.selected) { color:#dc2626; }
+.dp-footer { text-align:center; padding-top:10px; border-top:1px solid var(--gray-100); }
+.dp-today-btn { padding:6px 20px; background:var(--accent); color:white; border:none; border-radius:var(--r-md); font-size:13px; font-weight:600; cursor:pointer; transition:all var(--t); }
+.dp-today-btn:hover { background:var(--accent-dark); }
 
-.date-picker-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 4px; margin-bottom: 16px; }
-.date-picker-weekday { text-align: center; font-size: 12px; color: #718096; padding: 8px 0; font-weight: 500; }
-.date-picker-day {
-  aspect-ratio: 1;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
-}
-.date-picker-day:hover:not(.is-disabled) { background: rgba(102,126,234,0.1); transform: scale(1.05); }
-.date-picker-day.is-today { background: linear-gradient(135deg,rgba(102,126,234,0.1) 0%,rgba(118,75,162,0.1) 100%); border-color: #667eea; }
-.date-picker-day.is-selected { background: linear-gradient(135deg,#667eea 0%,#764ba2 100%); color: white; box-shadow: 0 4px 12px rgba(102,126,234,0.3); }
-.date-picker-day.is-disabled { opacity: 0.4; cursor: not-allowed; }
-.date-picker-day.is-disabled:hover { background: transparent; transform: none; }
-.date-picker-day.is-weekend:not(.is-disabled) { color: #ef4444; }
-.day-num { font-size: 14px; font-weight: 600; }
-.day-label { font-size: 10px; opacity: 0.8; margin-top: 2px; }
-.date-picker-footer { text-align: center; padding-top: 12px; border-top: 1px solid #e2e8f0; }
-.btn-today {
-  padding: 8px 24px;
-  background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
-  color: white; border: none; border-radius: 8px;
-  font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.3s ease;
-}
-.btn-today:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(102,126,234,0.4); }
+.doctor-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:16px; }
+.doctor-card { background:white; border:1px solid var(--gray-200); border-radius:var(--r-lg); padding:20px; transition:all var(--t); }
+.doctor-card:hover { box-shadow:var(--shadow-md); border-color:var(--gray-300); transform:translateY(-2px); }
+.doc-top { display:flex; align-items:flex-start; gap:14px; margin-bottom:16px; }
+.doc-avatar { width:52px; height:52px; border-radius:50%; background:linear-gradient(135deg,var(--accent),#2563eb); color:white; display:flex; align-items:center; justify-content:center; font-size:20px; font-weight:700; flex-shrink:0; }
+.doc-info { flex:1; min-width:0; }
+.doc-name { font-size:16px; font-weight:700; color:var(--ink); margin-bottom:5px; }
+.doc-meta { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.doc-title-tag { font-size:12px; font-weight:600; background:var(--accent-light); color:var(--accent); padding:2px 8px; border-radius:var(--r-full); }
+.doc-dept { font-size:12px; color:var(--gray-500); }
+.doc-fee-box { display:flex; flex-direction:column; align-items:flex-end; flex-shrink:0; }
+.fee-label { font-size:11px; color:var(--gray-400); font-weight:500; margin-bottom:2px; }
+.fee-amount { font-size:20px; font-weight:700; color:var(--ink); letter-spacing:-0.03em; }
 
-.btn-date-nav {
-  width: 36px; height: 36px;
-  border-radius: 8px; border: 1px solid #e2e8f0; background: white;
-  cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;
-}
-.btn-date-nav:hover:not(:disabled) { border-color: #667eea; color: #667eea; transform: scale(1.05); }
-.btn-date-nav:disabled { opacity: 0.4; cursor: not-allowed; }
-.btn-date-nav svg { width: 20px; height: 20px; }
+.doc-status-row { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+.num-badge { display:inline-flex; align-items:center; padding:3px 10px; border-radius:var(--r-full); font-size:12px; font-weight:700; flex-shrink:0; }
+.num-badge.status-ok { background:var(--success-bg); color:var(--success); }
+.num-badge.status-low { background:var(--warning-bg); color:var(--warning); }
+.num-badge.status-full { background:var(--danger-bg); color:var(--danger); }
+.num-text { font-size:13px; color:var(--gray-500); }
+.num-text b { color:var(--ink); }
+.num-track { flex:1; height:4px; background:var(--gray-100); border-radius:var(--r-full); overflow:hidden; }
+.num-fill { height:100%; border-radius:var(--r-full); transition:width 0.4s ease; }
+.num-fill.status-ok { background:var(--success); }
+.num-fill.status-low { background:var(--warning); }
+.num-fill.status-full { background:var(--danger); }
 
-.loading-container { text-align: center; padding: 60px 20px; }
-.loading-spinner {
-  width: 40px; height: 40px;
-  border: 3px solid #e2e8f0; border-top-color: #667eea;
-  border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-.loading-container p { margin-top: 16px; color: #718096; }
+.doc-action {}
+.btn-book { width:100%; padding:11px; background:var(--accent); color:white; border:none; border-radius:var(--r-md); font-size:14px; font-weight:600; cursor:pointer; transition:all var(--t); box-shadow:var(--shadow-accent); }
+.btn-book:hover { background:var(--accent-dark); transform:translateY(-1px); }
+.btn-full { width:100%; padding:11px; background:var(--gray-100); color:var(--gray-400); border:none; border-radius:var(--r-md); font-size:14px; font-weight:500; cursor:not-allowed; }
+.btn-login-hint { display:block; width:100%; padding:11px; text-align:center; border:1.5px solid var(--gray-200); color:var(--gray-600); border-radius:var(--r-md); font-size:14px; font-weight:500; text-decoration:none; transition:all var(--t); }
+.btn-login-hint:hover { border-color:var(--accent); color:var(--accent); background:var(--accent-light); }
 
-.empty-state { text-align: center; padding: 60px 20px; color: #718096; }
-.empty-state svg { width: 64px; height: 64px; margin: 0 auto 16px; opacity: 0.3; }
-
-.doctor-list { display: grid; gap: 20px; }
-.doctor-card {
-  background: white; padding: 24px; border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: all 0.3s ease; border: 1px solid #e2e8f0;
-}
-.doctor-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(102,126,234,0.15); }
-.doctor-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
-.avatar {
-  width: 64px; height: 64px; border-radius: 50%;
-  background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
-  color: white; display: flex; align-items: center; justify-content: center;
-  font-size: 24px; font-weight: bold; flex-shrink: 0;
-}
-.doctor-info { flex: 1; }
-.doctor-info h3 { font-size: 20px; color: #2d3748; margin: 0 0 6px 0; }
-.department { color: #667eea; font-weight: 500; font-size: 14px; margin: 0; }
-.title { color: #718096; font-size: 13px; margin: 0; }
-.fee-tag {
-  display: flex; flex-direction: column; align-items: center;
-  padding: 12px 20px;
-  background: linear-gradient(135deg,rgba(102,126,234,0.05) 0%,rgba(118,75,162,0.05) 100%);
-  border-radius: 12px; border: 1px solid rgba(102,126,234,0.2);
-}
-.fee-tag .label { font-size: 12px; color: #718096; margin-bottom: 4px; }
-.fee-tag .amount { font-size: 20px; font-weight: 700; color: #667eea; }
-.schedule-status { margin-bottom: 20px; }
-.status-badge { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 10px; }
-.status-available { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); }
-.status-sufficient { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3); }
-.status-full { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); }
-.badge-icon { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; }
-.badge-icon svg { width: 24px; height: 24px; }
-.status-available .badge-icon { color: #10b981; }
-.status-sufficient .badge-icon { color: #f59e0b; }
-.status-full .badge-icon { color: #ef4444; }
-.badge-text { display: flex; flex-direction: column; }
-.status-text { font-weight: 600; font-size: 14px; margin-bottom: 2px; }
-.num-text { font-size: 12px; color: #718096; }
-.doctor-actions { display: flex; gap: 12px; }
-.btn {
-  display: inline-flex; align-items: center; justify-content: center;
-  gap: 8px; padding: 12px 24px; border-radius: 10px;
-  font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.3s ease;
-  border: none; text-decoration: none;
-}
-.btn svg { width: 20px; height: 20px; }
-.btn-primary { background: linear-gradient(135deg,#667eea 0%,#764ba2 100%); color: white; box-shadow: 0 4px 12px rgba(102,126,234,0.3); }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(102,126,234,0.4); }
-.btn-outline { background: transparent; color: #667eea; border: 2px solid #667eea; }
-.btn-outline:hover { background: linear-gradient(135deg,#667eea 0%,#764ba2 100%); color: white; }
-.btn-disabled { background: #e2e8f0; color: #a0aec0; cursor: not-allowed; }
-
-.modal-overlay {
-  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center;
-  z-index: 1000; backdrop-filter: blur(4px);
-}
-.modal {
-  background: white; border-radius: 16px;
-  width: 90%; max-width: 500px; max-height: 80vh;
-  overflow: hidden; display: flex; flex-direction: column;
-  animation: modalSlideIn 0.3s ease-out;
-}
-@keyframes modalSlideIn {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.modal-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid #e2e8f0; }
-.modal-header h3 { font-size: 20px; color: #2d3748; margin: 0; }
-.btn-close { width: 32px; height: 32px; border-radius: 8px; border: none; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
-.btn-close:hover { background: #edf2f7; }
-.btn-close svg { width: 20px; height: 20px; color: #718096; }
-.modal-body { flex: 1; padding: 24px; overflow-y: auto; }
-.no-patients { text-align: center; padding: 40px 20px; }
-.no-patients svg { width: 64px; height: 64px; color: #cbd5e0; margin-bottom: 16px; }
-.no-patients p { color: #718096; margin-bottom: 20px; }
-.patient-list { display: flex; flex-direction: column; gap: 12px; }
-.patient-item {
-  display: flex; align-items: center; gap: 16px; padding: 16px;
-  border-radius: 12px; border: 2px solid #e2e8f0; cursor: pointer; transition: all 0.3s ease;
-}
-.patient-item:hover { border-color: #667eea; background: rgba(102,126,234,0.05); transform: translateX(4px); }
-.patient-avatar {
-  width: 48px; height: 48px; border-radius: 50%;
-  background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
-  color: white; display: flex; align-items: center; justify-content: center;
-  font-weight: 600; font-size: 18px; flex-shrink: 0;
-}
-.patient-info { flex: 1; }
-.patient-name { font-weight: 600; color: #2d3748; font-size: 16px; margin-bottom: 4px; }
-.patient-detail { color: #718096; font-size: 14px; }
-.check-icon { width: 32px; height: 32px; border-radius: 50%; background: rgba(16,185,129,0.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.check-icon svg { width: 20px; height: 20px; color: #10b981; }
-.modal-footer { padding: 16px 24px; border-top: 1px solid #e2e8f0; background: #f7fafc; }
-.modal-footer .btn { width: 100%; }
-
-@media (max-width: 768px) {
-  .filters { flex-direction: column; align-items: stretch; }
-  .doctor-header { flex-wrap: wrap; }
-  .fee-tag { width: 100%; }
-  .doctor-actions { flex-direction: column; }
-  .date-picker-panel { width: 280px; }
-}
+.patient-pick-list { display:flex; flex-direction:column; gap:8px; }
+.patient-pick-item { display:flex; align-items:center; gap:14px; padding:14px; border:1.5px solid var(--gray-200); border-radius:var(--r-lg); cursor:pointer; transition:all var(--t); }
+.patient-pick-item:hover { border-color:var(--accent); background:var(--accent-light); }
+.pick-avatar { width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:700; color:white; flex-shrink:0; }
+.pick-avatar.male { background:linear-gradient(135deg,#2563eb,#0e9e8e); }
+.pick-avatar.female { background:linear-gradient(135deg,#db2777,#f59e0b); }
+.pick-info { flex:1; }
+.pick-name { font-size:15px; font-weight:600; color:var(--ink); margin-bottom:3px; }
+.pick-sub { font-size:12px; color:var(--gray-400); font-family:var(--font-mono); }
+.pick-arrow { color:var(--gray-300); flex-shrink:0; }
+.btn-ghost-sm { width:100%; padding:10px; background:transparent; border:1.5px solid var(--gray-200); border-radius:var(--r-md); font-size:14px; font-weight:500; color:var(--gray-600); cursor:pointer; transition:all var(--t); }
+.btn-ghost-sm:hover { border-color:var(--accent); color:var(--accent); }
+.btn-close-modal { background:none; border:none; cursor:pointer; color:var(--gray-400); padding:4px; display:flex; align-items:center; border-radius:var(--r-sm); transition:all var(--t); }
+.btn-close-modal:hover { color:var(--ink); background:var(--gray-100); }
+@media (max-width:768px) { .toolbar { flex-direction:column; align-items:stretch; } .search-wrap { max-width:100%; } .date-picker-panel { right:0; left:0; width:auto; } }
 </style>

@@ -25,4 +25,9 @@ public class ChatRequest {
      * 系统提示词（可选）
      */
     private String systemPrompt;
+
+    /**
+     * 用户 ID（从 JWT Token 中解析，用于调用业务接口）
+     */
+    private String userId;
 }

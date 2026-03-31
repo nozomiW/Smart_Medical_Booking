@@ -9,16 +9,16 @@ spring:
       discovery:
         server-addr: localhost:8848
 
-# AI 配置 - 硅基流动 (SiliconFlow)
+# AI 配置 - 硅基流动代理 (MKEAI)
 ai:
-  # SiliconFlow API Key
-  api-key: sk-xqfeedlachvcovfxcztkgxnzdottviyqatnsuwthluqpuxwe
-  # SiliconFlow API Base URL
-  base-url: https://api.siliconflow.cn/v1
-  # 模型名称（根据您的余额和可用模型选择）
-  model: Qwen/Qwen2.5-7B-Instruct
+  # API Key
+  api-key: sk-0iL6K6MC3Bio7psh1eYVbfKnJ38169nhWmrSUw6ugpBbRdzi
+  # API Base URL
+  base-url: https://tb.api.mkeai.com/v1
+  # 模型名称 - DeepSeek-V3 快速响应，性价比高
+  model: deepseek-v3
   # 超时时间（毫秒）
-  timeout: 30000
+  timeout: 120000
 
 # 日志配置
 logging:

@@ -1,92 +1,64 @@
 <template>
-  <div class="patients-page">
+  <div class="page">
     <div class="container">
       <div class="page-header">
-        <h2>我的就诊人</h2>
-        <button @click="showAddForm = true" class="btn-add">添加就诊人</button>
+        <div><p class="section-label">账户中心</p><h2>我的就诊人</h2></div>
+        <button class="btn-new" @click="openAddForm">添加就诊人</button>
       </div>
-
-      <div v-if="loading" class="loading-state">
-        <div class="spinner"></div>
-        <p>加载中...</p>
+      <div v-if="loading" class="page-loading"><div class="spinner spinner-dark"></div><span>加载中…</span></div>
+      <div v-else-if="patients.length===0" class="empty-state">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+        <h3>暂无就诊人</h3><p>添加就诊人后可快速完成预约挂号</p>
+        <button class="btn-primary-sm" @click="openAddForm">立即添加</button>
       </div>
-
-      <div v-else-if="patients.length === 0" class="empty-state">
-        <p>暂无就诊人信息</p>
-        <button @click="showAddForm = true" class="btn-primary">添加就诊人</button>
-      </div>
-
-      <div v-else class="patients-list">
-        <div v-for="patient in patients" :key="patient.id" class="patient-card">
-          <div class="patient-info">
-            <h3>{{ patient.name }}</h3>
-            <div class="patient-details">
-              <p><span class="label">身份证:</span> {{ maskIdCard(patient.idCard) }}</p>
-              <p><span class="label">性别:</span> {{ patient.gender === 1 ? '男' : (patient.gender === 0 ? '女' : '未知') }}</p>
-              <p><span class="label">年龄:</span> {{ patient.age }}岁</p>
-              <p v-if="patient.phone"><span class="label">电话:</span> {{ patient.phone }}</p>
+      <div v-else class="patients-grid">
+        <div v-for="p in patients" :key="p.id" class="patient-card">
+          <div class="patient-card-top">
+            <div class="patient-avatar" :class="p.gender===1?'male':'female'">{{ (p.name||'患').charAt(0) }}</div>
+            <div class="patient-basic">
+              <div class="patient-name">{{ p.name }}</div>
+              <span class="gender-badge" :class="p.gender===1?'male':'female'">{{ p.gender===1?'男':'女' }}</span>
             </div>
+            <div v-if="p.isDefault===1" class="default-badge">默认</div>
+          </div>
+          <div class="patient-details">
+            <div class="detail-item"><span class="detail-label">身份证</span><span class="detail-val mono">{{ maskIdCard(p.idCard) }}</span></div>
+            <div class="detail-item"><span class="detail-label">年龄</span><span class="detail-val">{{ p.age }} 岁</span></div>
+            <div v-if="p.phone" class="detail-item"><span class="detail-label">电话</span><span class="detail-val mono">{{ p.phone }}</span></div>
           </div>
           <div class="patient-actions">
-            <button @click="editPatient(patient)" class="btn-edit">编辑</button>
-            <button @click="deletePatient(patient.id)" class="btn-delete" :disabled="deletingId === patient.id">
-              {{ deletingId === patient.id ? '删除中...' : '删除' }}
-            </button>
+            <button class="btn-edit" @click="editPatient(p)">编辑</button>
+            <button class="btn-del" @click="deletePatient(p.id)" :disabled="deletingId===p.id">{{ deletingId===p.id?'…':'删除' }}</button>
           </div>
         </div>
       </div>
-
-      <div v-if="error" class="error-message">{{ error }}</div>
+      <div v-if="error" class="toast-error">{{ error }}</div>
     </div>
-
-    <div v-if="showAddForm" class="modal-overlay" @click="closeForm">
+    <div v-if="showForm" class="modal-overlay" @click="closeForm">
       <div class="modal" @click.stop>
         <div class="modal-header">
-          <h3>{{ editingPatient ? '编辑就诊人' : '添加就诊人' }}</h3>
-          <button @click="closeForm" class="btn-close">×</button>
+          <h3>{{ editingPatient?'编辑就诊人':'添加就诊人' }}</h3>
+          <button class="btn-close-modal" @click="closeForm"><svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></button>
         </div>
-
         <form @submit.prevent="submitForm" class="modal-body">
-          <div class="form-group">
-            <label>姓名 <span class="required">*</span></label>
-            <input v-model="form.name" type="text" placeholder="请输入姓名" required>
+          <div class="form-row">
+            <div class="form-group"><label>姓名 <span class="req">*</span></label><input v-model="form.name" type="text" placeholder="真实姓名" required></div>
+            <div class="form-group"><label>年龄 <span class="req">*</span></label><input v-model.number="form.age" type="number" placeholder="年龄" min="0" max="150" required></div>
           </div>
-
+          <div class="form-group"><label>身份证号 <span class="req">*</span></label><input v-model="form.idCard" type="text" placeholder="18 位身份证号" required maxlength="18"></div>
           <div class="form-group">
-            <label>身份证号 <span class="required">*</span></label>
-            <input v-model="form.idCard" type="text" placeholder="请输入身份证号" required>
-          </div>
-
-          <div class="form-group">
-            <label>性别 <span class="required">*</span></label>
+            <label>性别 <span class="req">*</span></label>
             <div class="radio-group">
-              <label class="radio-item">
-                <input v-model.number="form.gender" type="radio" :value="1">
-                <span>男</span>
-              </label>
-              <label class="radio-item">
-                <input v-model.number="form.gender" type="radio" :value="0">
-                <span>女</span>
-              </label>
+              <label class="radio-item" :class="{active:form.gender===1}" @click="form.gender=1">男</label>
+              <label class="radio-item" :class="{active:form.gender===0}" @click="form.gender=0">女</label>
             </div>
           </div>
-
-          <div class="form-group">
-            <label>年龄 <span class="required">*</span></label>
-            <input v-model.number="form.age" type="number" placeholder="请输入年龄" min="0" max="150" required>
-          </div>
-
-          <div class="form-group">
-            <label>联系电话</label>
-            <input v-model="form.phone" type="tel" placeholder="请输入联系电话">
-          </div>
-
-          <div v-if="formError" class="form-error">{{ formError }}</div>
-
+          <div class="form-group"><label>联系电话</label><input v-model="form.phone" type="tel" placeholder="选填" maxlength="11"></div>
+          <div v-if="formError" class="alert alert-error">{{ formError }}</div>
           <div class="form-actions">
-            <button type="button" @click="closeForm" class="btn-cancel">取消</button>
+            <button type="button" class="btn-ghost-form" @click="closeForm">取消</button>
             <button type="submit" class="btn-submit" :disabled="submitting">
-              {{ submitting ? '提交中...' : '提交' }}
+              <span v-if="submitting" class="spinner"></span>{{ submitting?'提交中…':'保存' }}
             </button>
           </div>
         </form>
@@ -98,530 +70,93 @@
 <script>
 import { ref, onMounted } from 'vue'
 import { userAPI } from '../api'
-
 export default {
   name: 'Patients',
   setup() {
     const patients = ref([])
     const loading = ref(false)
     const error = ref('')
-    const showAddForm = ref(false)
+    const showForm = ref(false)
     const submitting = ref(false)
     const formError = ref('')
     const deletingId = ref(null)
     const editingPatient = ref(null)
-
-    const form = ref({
-      name: '',
-      idCard: '',
-      gender: 1,
-      age: '',
-      phone: ''
-    })
-
-    const maskIdCard = (idCard) => {
-      if (!idCard || idCard.length < 5) return idCard
-      return idCard.substring(0, 3) + '****' + idCard.substring(idCard.length - 2)
-    }
-
+    const form = ref({ name:'', idCard:'', gender:1, age:'', phone:'' })
+    const maskIdCard = (id) => !id||id.length<5?id:id.substring(0,3)+'****'+id.substring(id.length-2)
     const fetchPatients = async () => {
-      loading.value = true
-      error.value = ''
-      try {
-        const response = await userAPI.getPatients()
-        patients.value = (response || []).map(patient => ({
-          ...patient,
-          id: patient.id,
-          age: Number(patient.age),
-          gender: Number(patient.gender)
-        }))
-      } catch (err) {
-        error.value = '加载就诊人列表失败'
-        console.error('获取就诊人列表失败:', err)
-      } finally {
-        loading.value = false
-      }
+      loading.value=true; error.value=''
+      try { const r=await userAPI.getPatients(); patients.value=(r||[]).map(p=>({...p,age:Number(p.age),gender:Number(p.gender)})) }
+      catch { error.value='加载失败' } finally { loading.value=false }
     }
-
-    const resetForm = () => {
-      form.value = {
-        name: '',
-        idCard: '',
-        gender: 1,
-        age: '',
-        phone: ''
-      }
-      formError.value = ''
-      editingPatient.value = null
-    }
-
-    const closeForm = () => {
-      showAddForm.value = false
-      resetForm()
-    }
-
-    const editPatient = (patient) => {
-      editingPatient.value = patient
-      form.value = {
-        name: patient.name,
-        idCard: patient.idCard,
-        gender: Number(patient.gender),
-        age: Number(patient.age),
-        phone: patient.phone || ''
-      }
-      showAddForm.value = true
-    }
-
+    const openAddForm = () => { editingPatient.value=null; form.value={name:'',idCard:'',gender:1,age:'',phone:''}; formError.value=''; showForm.value=true }
+    const editPatient = (p) => { editingPatient.value=p; form.value={name:p.name,idCard:p.idCard,gender:Number(p.gender),age:Number(p.age),phone:p.phone||''}; formError.value=''; showForm.value=true }
+    const closeForm = () => { showForm.value=false; editingPatient.value=null }
     const submitForm = async () => {
-      formError.value = ''
-
-      if (!form.value.name || !form.value.idCard || form.value.age === '') {
-        formError.value = '请填写所有必填项'
-        return
-      }
-
-      if (form.value.age < 0 || form.value.age > 150) {
-        formError.value = '年龄必须在0-150之间'
-        return
-      }
-
-      submitting.value = true
-      try {
-        const payload = {
-          name: form.value.name,
-          idCard: form.value.idCard,
-          gender: Number(form.value.gender),
-          age: Number(form.value.age),
-          phone: form.value.phone || ''
-        }
-
-        await userAPI.insertPatient(payload)
-        alert('就诊人信息已保存')
-        closeForm()
-        await fetchPatients()
-      } catch (err) {
-        formError.value = '保存失败，请重试'
-        console.error('保存就诊人失败:', err)
-      } finally {
-        submitting.value = false
-      }
+      formError.value=''
+      if (!form.value.name||!form.value.idCard||form.value.age==='') { formError.value='请填写所有必填项'; return }
+      submitting.value=true
+      try { await userAPI.insertPatient({name:form.value.name,idCard:form.value.idCard,gender:Number(form.value.gender),age:Number(form.value.age),phone:form.value.phone||''}); closeForm(); await fetchPatients() }
+      catch { formError.value='保存失败，请重试' } finally { submitting.value=false }
     }
-
     const deletePatient = async (id) => {
-      if (!confirm('确定要删除此就诊人吗？')) return
-      deletingId.value = id
-      try {
-        alert('删除功能开发中，请联系客服')
-        // 后端实现后使用：await userAPI.deletePatient(id)
-      } catch (err) {
-        alert('删除失败，请重试')
-      } finally {
-        deletingId.value = null
-      }
+      if (!confirm('确定删除？')) return
+      deletingId.value=id
+      try { alert('删除功能开发中') } finally { deletingId.value=null }
     }
-
-    onMounted(() => {
-      fetchPatients()
-    })
-
-    return {
-      patients,
-      loading,
-      error,
-      showAddForm,
-      submitting,
-      formError,
-      deletingId,
-      editingPatient,
-      form,
-      maskIdCard,
-      closeForm,
-      editPatient,
-      submitForm,
-      deletePatient
-    }
+    onMounted(fetchPatients)
+    return { patients, loading, error, showForm, submitting, formError, deletingId, editingPatient, form, maskIdCard, openAddForm, editPatient, closeForm, submitForm, deletePatient }
   }
 }
 </script>
 
 <style scoped>
-.patients-page {
-  padding: 24px 0;
-  min-height: calc(100vh - 180px);
-}
-
-.container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 16px;
-}
-
-.page-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-}
-
-.page-header h2 {
-  font-size: 24px;
-  color: #2d3748;
-  margin: 0;
-}
-
-.btn-add {
-  padding: 8px 16px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn-add:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-}
-
-.loading-state {
-  text-align: center;
-  padding: 40px 20px;
-}
-
-.spinner {
-  width: 32px;
-  height: 32px;
-  border: 3px solid #e2e8f0;
-  border-top-color: #667eea;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-  margin: 0 auto;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-.loading-state p {
-  margin-top: 12px;
-  color: #718096;
-  font-size: 14px;
-}
-
-.empty-state {
-  text-align: center;
-  padding: 40px 20px;
-  background: white;
-  border-radius: 8px;
-}
-
-.empty-state p {
-  color: #718096;
-  margin-bottom: 16px;
-}
-
-.btn-primary {
-  display: inline-block;
-  padding: 10px 24px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-}
-
-.patients-list {
-  display: grid;
-  gap: 16px;
-}
-
-.patient-card {
-  background: white;
-  border-radius: 8px;
-  padding: 16px;
-  border: 1px solid #e2e8f0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: all 0.3s ease;
-}
-
-.patient-card:hover {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.patient-info h3 {
-  font-size: 16px;
-  color: #2d3748;
-  margin: 0 0 12px 0;
-  font-weight: 600;
-}
-
-.patient-details {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 12px;
-}
-
-.patient-details p {
-  font-size: 13px;
-  color: #718096;
-  margin: 0;
-}
-
-.label {
-  font-weight: 600;
-  color: #4a5568;
-}
-
-.patient-actions {
-  display: flex;
-  gap: 8px;
-}
-
-.btn-edit,
-.btn-delete {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-}
-
-.btn-edit {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-}
-
-.btn-edit:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-}
-
-.btn-delete {
-  background: transparent;
-  color: #ef4444;
-  border: 1px solid #ef4444;
-}
-
-.btn-delete:hover:not(:disabled) {
-  background: #ef4444;
-  color: white;
-}
-
-.btn-delete:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.error-message {
-  padding: 12px 16px;
-  background: rgba(239, 68, 68, 0.1);
-  color: #c53030;
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  border-radius: 6px;
-  font-size: 14px;
-  margin-top: 16px;
-}
-
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-.modal {
-  background: white;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 500px;
-  max-height: 90vh;
-  overflow-y: auto;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  border-bottom: 1px solid #e2e8f0;
-}
-
-.modal-header h3 {
-  font-size: 18px;
-  color: #2d3748;
-  margin: 0;
-}
-
-.btn-close {
-  width: 32px;
-  height: 32px;
-  border: none;
-  background: transparent;
-  font-size: 24px;
-  color: #718096;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn-close:hover {
-  color: #2d3748;
-}
-
-.modal-body {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.form-group label {
-  font-size: 14px;
-  font-weight: 600;
-  color: #2d3748;
-}
-
-.required {
-  color: #ef4444;
-}
-
-.form-group input {
-  padding: 10px 12px;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
-  font-size: 14px;
-  transition: all 0.3s ease;
-}
-
-.form-group input:focus {
-  outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-}
-
-.radio-group {
-  display: flex;
-  gap: 20px;
-}
-
-.radio-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.radio-item input {
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-}
-
-.form-error {
-  padding: 10px 12px;
-  background: rgba(239, 68, 68, 0.1);
-  color: #c53030;
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  border-radius: 6px;
-  font-size: 13px;
-}
-
-.form-actions {
-  display: flex;
-  gap: 12px;
-  margin-top: 8px;
-}
-
-.btn-cancel,
-.btn-submit {
-  flex: 1;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn-cancel {
-  background: #e2e8f0;
-  color: #4a5568;
-}
-
-.btn-cancel:hover {
-  background: #cbd5e0;
-}
-
-.btn-submit {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-}
-
-.btn-submit:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-}
-
-.btn-submit:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-@media (max-width: 768px) {
-  .page-header {
-    flex-direction: column;
-    gap: 12px;
-    align-items: flex-start;
-  }
-
-  .patient-card {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-
-  .patient-details {
-    grid-template-columns: 1fr;
-  }
-
-  .patient-actions {
-    width: 100%;
-  }
-
-  .btn-edit,
-  .btn-delete {
-    flex: 1;
-  }
-}
+.page { padding: 32px 0 64px; }
+.page-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:32px; }
+.page-header h2 { font-size:24px; font-weight:700; color:var(--ink); letter-spacing:-0.03em; margin:0; }
+.btn-new { display:inline-flex; align-items:center; gap:6px; padding:9px 18px; background:var(--accent); color:white; border-radius:var(--r-md); font-size:14px; font-weight:600; border:none; cursor:pointer; transition:all var(--t); box-shadow:var(--shadow-accent); }
+.btn-new:hover { background:var(--accent-dark); transform:translateY(-1px); }
+.btn-primary-sm { display:inline-flex; align-items:center; padding:9px 20px; background:var(--accent); color:white; border-radius:var(--r-md); font-size:14px; font-weight:600; border:none; cursor:pointer; transition:all var(--t); }
+.patients-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:16px; }
+.patient-card { background:white; border:1px solid var(--gray-200); border-radius:var(--r-lg); padding:20px; transition:all var(--t); }
+.patient-card:hover { box-shadow:var(--shadow-md); border-color:var(--gray-300); }
+.patient-card-top { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+.patient-avatar { width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:20px; font-weight:700; color:white; flex-shrink:0; }
+.patient-avatar.male { background:linear-gradient(135deg,#2563eb,#0e9e8e); }
+.patient-avatar.female { background:linear-gradient(135deg,#db2777,#f59e0b); }
+.patient-basic { flex:1; min-width:0; }
+.patient-name { font-size:16px; font-weight:600; color:var(--ink); margin-bottom:4px; }
+.gender-badge { display:inline-block; padding:2px 8px; border-radius:var(--r-full); font-size:11px; font-weight:600; }
+.gender-badge.male { background:#dbeafe; color:#1d4ed8; }
+.gender-badge.female { background:#fce7f3; color:#be185d; }
+.default-badge { margin-left:auto; padding:3px 10px; background:var(--accent-light); color:var(--accent); border-radius:var(--r-full); font-size:11px; font-weight:700; flex-shrink:0; }
+.patient-details { display:flex; flex-direction:column; gap:8px; margin-bottom:14px; padding:12px; background:var(--gray-50); border-radius:var(--r-md); }
+.detail-item { display:flex; justify-content:space-between; align-items:center; }
+.detail-label { font-size:12px; color:var(--gray-400); font-weight:500; }
+.detail-val { font-size:13px; color:var(--gray-700); font-weight:500; }
+.mono { font-family:var(--font-mono); font-size:12px; }
+.patient-actions { display:flex; gap:8px; }
+.btn-edit { flex:1; padding:8px; background:var(--accent-light); color:var(--accent); border:none; border-radius:var(--r-md); font-size:13px; font-weight:600; cursor:pointer; transition:all var(--t); }
+.btn-edit:hover { background:var(--accent); color:white; }
+.btn-del { flex:1; padding:8px; background:white; color:var(--danger); border:1.5px solid rgba(220,38,38,0.2); border-radius:var(--r-md); font-size:13px; font-weight:600; cursor:pointer; transition:all var(--t); }
+.btn-del:hover:not(:disabled) { background:var(--danger); color:white; }
+.btn-del:disabled { opacity:0.5; cursor:not-allowed; }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.form-group { display:flex; flex-direction:column; gap:6px; margin-bottom:14px; }
+.form-group label { font-size:12px; font-weight:700; color:var(--gray-500); text-transform:uppercase; letter-spacing:0.05em; }
+.req { color:var(--danger); }
+.form-group input { height:44px; font-size:14px; border-radius:var(--r-md); border:1.5px solid var(--gray-200); padding:0 14px; transition:all var(--t); width:100%; }
+.form-group input:focus { border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-glow); outline:none; }
+.radio-group { display:flex; gap:8px; }
+.radio-item { flex:1; padding:9px; text-align:center; border:1.5px solid var(--gray-200); border-radius:var(--r-md); font-size:14px; font-weight:500; color:var(--gray-600); cursor:pointer; transition:all var(--t); user-select:none; }
+.radio-item.active { border-color:var(--accent); background:var(--accent-light); color:var(--accent); font-weight:600; }
+.form-actions { display:flex; gap:10px; margin-top:4px; }
+.btn-ghost-form { flex:1; padding:11px; background:var(--gray-100); color:var(--gray-600); border:none; border-radius:var(--r-md); font-size:14px; font-weight:500; cursor:pointer; transition:all var(--t); }
+.btn-ghost-form:hover { background:var(--gray-200); }
+.btn-submit { flex:2; padding:11px; background:var(--accent); color:white; border:none; border-radius:var(--r-md); font-size:14px; font-weight:600; cursor:pointer; transition:all var(--t); display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:var(--shadow-accent); }
+.btn-submit:hover:not(:disabled) { background:var(--accent-dark); }
+.btn-submit:disabled { opacity:0.6; cursor:not-allowed; }
+.btn-close-modal { background:none; border:none; cursor:pointer; color:var(--gray-400); padding:4px; display:flex; align-items:center; border-radius:var(--r-sm); transition:all var(--t); }
+.btn-close-modal:hover { color:var(--ink); background:var(--gray-100); }
+.toast-error { position:fixed; bottom:24px; right:24px; background:var(--danger); color:white; padding:12px 20px; border-radius:var(--r-md); font-size:14px; font-weight:500; z-index:300; box-shadow:var(--shadow-lg); }
+@media (max-width:600px) { .form-row { grid-template-columns:1fr; } }
 </style>
