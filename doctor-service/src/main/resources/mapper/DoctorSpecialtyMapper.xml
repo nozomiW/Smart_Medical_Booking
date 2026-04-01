@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cly.doctorservice.mapper.DoctorSpecialtyMapper">
+
+    <resultMap id="BaseResultMap" type="com.cly.doctorservice.entity.DoctorSpecialty">
+        <id column="id" property="id"/>
+        <result column="doc_id" property="docId"/>
+        <result column="specialty_id" property="specialtyId"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <!-- 根据医生 ID 删除所有标签关联 -->
+    <delete id="deleteByDocId">
+        DELETE FROM yy_doctor_specialty WHERE doc_id = #{docId}
+    </delete>
+
+    <!-- 批量插入医生标签关联 -->
+    <insert id="batchInsert">
+        INSERT INTO yy_doctor_specialty (doc_id, specialty_id, create_time)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.docId}, #{item.specialtyId}, NOW())
+        </foreach>
+    </insert>
+
+    <!-- 查询拥有某个标签的所有医生 ID -->
+    <select id="selectDoctorIdsBySpecialtyId" resultType="java.lang.String">
+        SELECT doc_id FROM yy_doctor_specialty WHERE specialty_id = #{specialtyId}
+    </select>
+
+    <!-- 查询拥有某些标签的医生 ID（匹配指定数量以上） -->
+    <select id="selectDoctorIdsBySpecialtyIds" resultType="java.lang.String">
+        SELECT doc_id
+        FROM yy_doctor_specialty
+        WHERE specialty_id IN
+        <foreach collection="list" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        GROUP BY doc_id
+        HAVING COUNT(DISTINCT specialty_id) >= #{minMatch}
+    </select>
+
+</mapper>

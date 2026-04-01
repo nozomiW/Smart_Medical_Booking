@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cly.doctorservice.mapper.SpecialtyDictMapper">
+
+    <resultMap id="BaseResultMap" type="com.cly.doctorservice.entity.SpecialtyDict">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="category" property="category"/>
+        <result column="sort_order" property="sortOrder"/>
+        <result column="is_active" property="isActive"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <!-- 查询所有启用的标签 -->
+    <select id="selectActiveSpecialties" resultMap="BaseResultMap">
+        SELECT id, name, category, sort_order, is_active, create_time, update_time
+        FROM yy_specialty_dict
+        WHERE is_active = 1
+        ORDER BY category, sort_order
+    </select>
+
+    <!-- 按分类查询标签 -->
+    <select id="selectByCategory" resultMap="BaseResultMap">
+        SELECT id, name, category, sort_order, is_active, create_time, update_time
+        FROM yy_specialty_dict
+        WHERE category = #{category} AND is_active = 1
+        ORDER BY sort_order
+    </select>
+
+    <!-- 模糊搜索标签 -->
+    <select id="selectByKeyword" resultMap="BaseResultMap">
+        SELECT id, name, category, sort_order, is_active, create_time, update_time
+        FROM yy_specialty_dict
+        WHERE name LIKE CONCAT('%', #{keyword}, '%') AND is_active = 1
+        ORDER BY sort_order
+    </select>
+
+    <!-- 查询医生擅长的所有标签 -->
+    <select id="selectByDoctorId" resultMap="BaseResultMap">
+        SELECT s.id, s.name, s.category, s.sort_order, s.is_active, s.create_time, s.update_time
+        FROM yy_specialty_dict s
+        INNER JOIN yy_doctor_specialty ds ON s.id = ds.specialty_id
+        WHERE ds.doc_id = #{docId} AND s.is_active = 1
+        ORDER BY s.sort_order
+    </select>
+
+    <!-- 根据标签名称批量查询 -->
+    <select id="selectByNames" resultMap="BaseResultMap">
+        SELECT id, name, category, sort_order, is_active, create_time, update_time
+        FROM yy_specialty_dict
+        WHERE name IN
+        <foreach collection="list" item="name" open="(" separator="," close=")">
+            #{name}
+        </foreach>
+        AND is_active = 1
+    </select>
+
+</mapper>
