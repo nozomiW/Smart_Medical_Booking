@@ -26,9 +26,12 @@ public class ScheduleDeductConsumer implements RocketMQListener<String> {
 
     @Override
     public void onMessage(String scheduleId) {
+        log.info("[消息] 扣减号源库存 - scheduleId: {}", scheduleId);
         int rows = scheduleMapper.decreaseAvailableNum(scheduleId);
         if (rows <= 0) {
-            log.error("Critical Error: DB deduct failed for scheduleId={}. Possible over-sell in memory!", scheduleId);
+            log.error("[错误] DB 扣减号源失败 - scheduleId: {}，可能出现超卖！", scheduleId);
+        } else {
+            log.info("[成功] DB 扣减号源成功 - scheduleId: {}, 影响行数：{}", scheduleId, rows);
         }
     }
 }

@@ -74,13 +74,21 @@ public class AiService {
                 log.info("工具执行完成 - 成功：{}, 消息：{}", 
                         toolResult.get("success"), toolResult.get("message"));
                 
-                // 如果有数据，简要说明数据量
+                // 打印返回的数据详情
                 Object data = toolResult.get("data");
                 if (data != null) {
                     if (data instanceof List) {
-                        log.info("返回数据：共 {} 条记录", ((List<?>) data).size());
+                        List<?> list = (List<?>) data;
+                        log.info("返回数据：共 {} 条记录", list.size());
+                        // 打印前几条数据的简要信息
+                        for (int i = 0; i < Math.min(list.size(), 3); i++) {
+                            log.info("  [{}] {}", i + 1, formatItem(list.get(i)));
+                        }
+                        if (list.size() > 3) {
+                            log.info("  ...还有 {} 条记录", list.size() - 3);
+                        }
                     } else {
-                        log.info("返回数据：{}", data.getClass().getSimpleName());
+                        log.info("返回数据：{}", formatItem(data));
                     }
                 }
                 log.info("========== AI 工具调用结束 ==========");
@@ -207,6 +215,18 @@ public class AiService {
                     if (sid == null || sid.isEmpty()) return errorResult("scheduleId 参数缺失");
                     return mcpToolService.getScheduleDetail(sid);
                 }
+                case "get_doctor_schedule": {
+                    String did = params.get("doctorId");
+                    String date = params.get("workDate");
+                    if (did == null || did.isEmpty()) return errorResult("doctorId 参数缺失");
+                    if (date == null || date.isEmpty()) return errorResult("workDate 参数缺失");
+                    return mcpToolService.getDoctorSchedule(did, date);
+                }
+                case "get_schedules_by_date": {
+                    String date = params.get("workDate");
+                    if (date == null || date.isEmpty()) return errorResult("workDate 参数缺失");
+                    return mcpToolService.getSchedulesByDate(date);
+                }
                 case "create_order": {
                     String pid = params.get("patientId");
                     String sid = params.get("scheduleId");
@@ -263,8 +283,8 @@ public class AiService {
         }
         if (item instanceof DoctorFeignClient.ScheduleDTO) {
             DoctorFeignClient.ScheduleDTO s = (DoctorFeignClient.ScheduleDTO) item;
-            return String.format("排班ID:%s 医生:%s 科室:%s 日期:%s 余号:%d",
-                    s.getId(), s.getDoctorName(), s.getDeptName(), s.getWorkDate(),
+            return String.format("排班 ID:%s 医生:%s 科室 ID:%s 日期:%s 余号:%d",
+                    s.getScheduleId(), s.getDocName(), s.getDeptId(), s.getWorkDate(),
                     s.getAvailableNum() != null ? s.getAvailableNum() : 0);
         }
         if (item instanceof OrderFeignClient.OrderDTO) {
@@ -306,9 +326,27 @@ public class AiService {
         String now = java.time.LocalDateTime.now().format(
                 java.time.format.DateTimeFormatter.ofPattern("yyyy 年 MM 月 dd 日 HH:mm"));
         return base +
+                "### 核心执行策略（优先级最高）\n" +
+                "1. **静默调用原则**：\n" +
+                "   - 凡是满足工具调用条件时，你的回复内容【只能】是 TOOL 指令。\n" +
+                "   - 严禁包含任何前缀、后缀、解释、礼貌用语（如“好的”、“请稍等”）。\n" +
+                "   - 违反此项将导致系统解析失败。\n" +
+                "\n" +
+                "2. **主动探测原则**：\n" +
+                "   - 如果用户说“帮我挂号”但没说给谁挂，禁止询问，直接调用 `TOOL: get_patient_list`。\n" +
+                "   - 如果用户选了医生但没说哪天，禁止询问，直接调用 `TOOL: get_doctor_schedule`（默认传明天）。\n" +
+                "\n" +
+                "3. **二次确认原则（安全红线）**：\n" +
+                "   - 在调用 `create_order` 之前，必须先用自然语言列出【预约摘要】：\n" +
+                "     * 就诊人：[姓名]\n" +
+                "     * 医生：[姓名] (科室)\n" +
+                "     * 日期：[yyyy-mm-dd]\n" +
+                "     * 费用：[金额]\n" +
+                "   - 询问用户：“信息确认无误吗？确认后我将为您下单。”\n" +
+                "   - 只有用户回答“确认”、“下单”、“可以”时，下一轮才输出 `TOOL: create_order(...)`。" +
             "\n\n【当前时间】" + now +
-            "\n\n【【【核心要求】】】当你需要查询信息或执行操作时，**必须直接输出工具调用指令**，绝对不要说'正在查询'、'请稍等'、'我将...'这类废话！"
-            + "\n系统会自动调用工具并返回结果，然后你再用自然语言向用户解释结果。"
+            "\n\n【【【⚠️核心要求⚠️】】】当你判断需要调用工具时，判断时更倾向于使用工具，必须直接输出工具调用指令，等系统会自动调用工具并返回结果，当你接收到的是" +
+                "工具返回的信息时，你联系刚才的内容用自然语言向用户解释结果，如果内容太多，可以举例展示说明"
             + "\n**错误示例**：'我将为您查询医生信息，请稍等' ❌"
             + "\n**正确做法**：直接输出 TOOL: search_doctors() ✅"
             +
@@ -316,18 +354,25 @@ public class AiService {
             + "\nTOOL: 工具名 (参数 1=值 1，参数 2=值 2)"
             + "\n例如：TOOL: search_doctors()"
             + "\n注意：TOOL 指令必须大写，并且单独占一行，不要添加任何其他说明文字。"
-            +
-            "\n\n【可用工具】"
+            + "\n\n【可用工具】"
             + "\n1. TOOL: get_patient_list - 获取用户的就诊人列表（不需要参数）"
             + "\n2. TOOL: search_doctors() - 查询所有在线医生列表（无参数，返回全部医生）"
             + "\n   注意：此工具不带参数，返回所有科室的医生。如果用户提到特定科室，你需要从返回结果中找到该科室的医生。"
             + "\n   示例：TOOL: search_doctors()"
-            + "\n3. TOOL: get_schedule_detail(scheduleId=日期 + 医生 ID) - 查询某个排班的详细信息"
-            + "\n   scheduleId 格式说明：yyyymmdd+ 医生 ID，其中 yyyyMMdd 是预约日期，医生 ID 从医生列表中获取"
-            + "\n   例如：今天是 2026 年 3 月 31 日，如果要预约明天 (4 月 1 日)、医生 ID 为 2001 的排班，则 scheduleId=20260401+2001"
-            + "\n   示例：TOOL: get_schedule_detail(scheduleId=20260401+2001)"
-            + "\n4. TOOL: create_order(patientId=就诊人 ID,scheduleId=日期 + 医生 ID) - 创建挂号订单"
-            + "\n   示例：TOOL: create_order(patientId=123,scheduleId=20260401+2001)"
+            + "\n3. TOOL: get_schedule_detail(scheduleId) - 查询某个排班的详细信息"
+            + "\n   ⚠️【重要】scheduleId 来自于get_doctor_schedule或者是get_schedules_by_date不要编造"
+            + "\n4. TOOL: get_doctor_schedule(doctorId=医生 ID,workDate=日期) - 查询某个医生在某日期的排班详情"
+            + "\n   用途：当用户指定了医生和日期时使用，返回该医生在该日期的排班信息"
+            + "\n   ⚠️【重要】doctorId 必须从 search_doctors 返回的医生列表中获取，workDate 格式必须是 yyyy-mm-dd"
+            + "\n   示例：TOOL: get_doctor_schedule(doctorId=2001,workDate=2026-04-02)"
+            + "\n5. TOOL: get_schedules_by_date(workDate=日期) - 查询某个日期的所有医生排班详情"
+            + "\n   用途：当用户想知道某天有哪些医生出诊时使用，返回该日期的所有排班信息"
+            + "\n   ⚠️【重要】workDate 格式必须是 yyyy-mm-dd，例如 2026-04-01"
+            + "\n   示例：TOOL: get_schedules_by_date(workDate=2026-04-01)"
+            + "\n6. TOOL: create_order(patientId=就诊人 ID,scheduleId) - 创建挂号订单"
+            + "\n   ⚠️【重要】patientId 必须从 get_patient_list 返回的就诊人列表中获取 **绝对不能编造！**"
+            + "\n   ⚠️【重要】scheduleId 来自于get_doctor_schedule或者是get_schedules_by_date不要编造"
+            + "\n   示例：TOOL: create_order(patientId=xxx,scheduleId)"
             +
             "\n\n【使用规则】"
             + "\n- 每次只能调用一个工具，TOOL 指令必须单独占一行"
@@ -335,16 +380,20 @@ public class AiService {
             + "\n- 调用工具后，系统会返回结果，然后你再用自然语言向用户解释结果并引导下一步"
             + "\n- 绝对不要在一条消息中连续输出多个 TOOL 指令"
             + "\n- 如果用户的问题需要多个步骤，先完成第一步，等待系统返回后再进行下一步"
+            + "\n- 系统设计中挂号时间不区分具体时分秒，单位只是天"
             + "\n- 当用户说要查询某科室医生时，立即调用 TOOL: search_doctors(),不要说'正在查询'等话语"
+            + "\n- **关键参数（医生 ID、就诊人 ID、排班 ID）必须从之前工具调用的返回结果中获取，严禁编造任何 ID！**"
             +
             "\n\n【标准挂号流程】"
             + "\n第 1 步：用户说要挂某科室 -> 立即调用 TOOL: search_doctors()"
             + "\n第 2 步：系统返回所有医生后，你从中找出该科室的医生名单，告知用户有哪些医生，询问想挂哪位医生的号以及日期"
             + "\n第 3 步：用户选择医生和日期后 -> 调用 TOOL: get_schedule_detail(scheduleId=日期 + 医生 ID)"
-            + "\n   注意：日期格式为 yyyymmdd，要根据当前日期计算用户要的日期。如今天是 2026-03-31，明天就是 20260401"
+            + "\n   ⚠️ 注意：日期格式为 yyyy-mm-dd，要根据当前日期计算用户要的日期。如今天是 2026-03-31，明天就是 2026-04-01"
+            + "\n   ⚠️ 医生 ID 必须从第 2 步返回的医生列表中获取，不能编造！"
             + "\n第 4 步：系统返回排班详情后，展示余号等信息，并询问是否有就诊人 -> 调用 TOOL: get_patient_list"
             + "\n第 5 步：用户确认就诊人后 -> 调用 TOOL: create_order(patientId=xxx,scheduleId=xxx)"
-            + "\n第 6 步：系统返回订单信息后，告知用户挂号成功并提供订单详情";
+            + "\n   ⚠️ patientId 必须从第 4 步返回的就诊人列表中获取，不能编造！"
+            + "\n第 6 步：系统返回订单信息后，告知用户挂号成功";
     }
 
     // ── 工具方法 ────────────────────────────────────────────────────────

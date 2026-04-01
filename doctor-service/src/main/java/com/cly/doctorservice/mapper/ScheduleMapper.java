@@ -12,6 +12,7 @@ import java.util.List;
 @Mapper
 public interface ScheduleMapper extends BaseMapper<Schedule> {
     List<Schedule> findByDocAndDate(@Param("docId") String docId, @Param("workDate") LocalDate workDate);
+    ScheduleDetailDTO findDetailByDocAndDate(@Param("docId") String docId, @Param("workDate") LocalDate workDate);
     List<Schedule> findByDeptAndDate(@Param("deptId") String deptId, @Param("workDate") LocalDate workDate);
     int decreaseAvailableNum(@Param("id") String id);
     int increaseAvailableNum(@Param("id") String id, @Param("num") int num);

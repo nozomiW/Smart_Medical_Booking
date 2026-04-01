@@ -5,6 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -24,6 +25,18 @@ public interface DoctorFeignClient {
      */
     @GetMapping("/doctor/schedule/detail/id")
     ScheduleDTO getScheduleDetailById(@RequestParam String scheduleId);
+
+    /**
+     * 根据医生 ID 和日期查询排班详情
+     */
+    @GetMapping("/doctor/schedule/detail/doctor-date")
+    ScheduleDTO getScheduleDetailByDoctorAndDate(@RequestParam String doctorId, @RequestParam String workDate);
+
+    /**
+     * 按日期查询所有医生的排班详情
+     */
+    @GetMapping("/doctor/schedule/detail/db")
+    List<ScheduleDTO> getSchedulesByDate(@RequestParam String workDate);
 
     /**
      * 医生 DTO
@@ -54,27 +67,27 @@ public interface DoctorFeignClient {
      * 排班详情 DTO
      */
     class ScheduleDTO {
-        private Long id;
+        private Long scheduleId; // 修改为 scheduleId 与后端一致
         private String docId;
-        private String doctorName;
-        private String title;
-        private String deptName;
-        private Double fee;
+        private String docName;
+        private String docTitle;
+        private String deptId;
+        private BigDecimal docFee;
         private String workDate;
         private Integer availableNum;
 
-        public Long getId() { return id; }
-        public void setId(Long id) { this.id = id; }
+        public Long getScheduleId() { return scheduleId; }
+        public void setScheduleId(Long scheduleId) { this.scheduleId = scheduleId; }
         public String getDocId() { return docId; }
         public void setDocId(String docId) { this.docId = docId; }
-        public String getDoctorName() { return doctorName; }
-        public void setDoctorName(String doctorName) { this.doctorName = doctorName; }
-        public String getTitle() { return title; }
-        public void setTitle(String title) { this.title = title; }
-        public String getDeptName() { return deptName; }
-        public void setDeptName(String deptName) { this.deptName = deptName; }
-        public Double getFee() { return fee; }
-        public void setFee(Double fee) { this.fee = fee; }
+        public String getDocName() { return docName; }
+        public void setDocName(String docName) { this.docName = docName; }
+        public String getDocTitle() { return docTitle; }
+        public void setDocTitle(String docTitle) { this.docTitle = docTitle; }
+        public String getDeptId() { return deptId; }
+        public void setDeptId(String deptId) { this.deptId = deptId; }
+        public BigDecimal getDocFee() { return docFee; }
+        public void setDocFee(BigDecimal docFee) { this.docFee = docFee; }
         public String getWorkDate() { return workDate; }
         public void setWorkDate(String workDate) { this.workDate = workDate; }
         public Integer getAvailableNum() { return availableNum; }

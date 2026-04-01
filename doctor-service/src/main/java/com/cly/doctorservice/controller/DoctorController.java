@@ -76,6 +76,12 @@ public class DoctorController {
         return scheduleService.findDetailByDateDb(LocalDate.parse(workDate));
     }
 
+    // 按医生和日期查询排班详情
+    @GetMapping("schedule/detail/doctor-date")
+    public ScheduleDetailDTO findScheduleDetailByDoctorAndDate(@RequestParam String doctorId, @RequestParam String workDate) {
+        return scheduleService.findDetailByDocAndDate(doctorId, LocalDate.parse(workDate));
+    }
+
     // 按排班ID查单条排班详情
     @GetMapping("schedule/detail/id")
     public ScheduleDetailDTO findScheduleDetailById(@RequestParam String scheduleId) {

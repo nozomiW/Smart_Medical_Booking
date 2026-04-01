@@ -16,7 +16,7 @@ public interface OrderFeignClient {
      * 创建订单
      */
     @PostMapping("/order/create")
-    Result<OrderDTO> createOrder(
+    String createOrder(
         @RequestParam String patientId,
         @RequestParam String scheduleId,
         @RequestHeader("X-User-Id") String userId

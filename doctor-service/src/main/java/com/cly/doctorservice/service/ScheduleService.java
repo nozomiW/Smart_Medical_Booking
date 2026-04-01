@@ -15,6 +15,8 @@ public interface ScheduleService {
 
     String findDetailByDate(LocalDate workDate);
 
+    ScheduleDetailDTO findDetailByDocAndDate(String docId, LocalDate workDate);
+
     List<ScheduleDetailDTO> findDetailByDateDb(LocalDate workDate);
 
     ScheduleDetailDTO findDetailById(String scheduleId);

@@ -2,7 +2,7 @@
 ### 登录后将返回的 token 填入下方变量
 
 @gateway = http://localhost:9001
-@token = eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIyMDM4MjQ0OTg4NjMwNTgxMjQ5IiwiaWF0IjoxNzc0Nzk5NzA1LCJleHAiOjE3NzQ4ODYxMDV9.ASrW2zYLGQeSaBRdTA6w2emtFN_ffpotbBcG0DDi7QJsFne2gDgqlN_GkzrQbdCH
+@token = eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIyMDM5MTg1NTg0NDU1MTI3MDQyIiwiaWF0IjoxNzc1MDE0NzA1LCJleHAiOjE3NzUxMDExMDV9.qdMDMmlhQ68TYIqaQFPkPVSvGFq30yGvWdKw8SFH_VXmzXfBy80lXl8f7jbEqQ5r
 
 ### =========================================================
 ###  1. 用户认证与基础信息
@@ -13,8 +13,8 @@ POST {{gateway}}/user/register
 Content-Type: application/json
 
 {
-  "phone": "13542748103",
-  "password": "123456"
+  "phone": "13542748100",
+  "password": "1346798520"
 }
 
 ### 1.2 登录（成功后复制返回的 token 填入上方 @token）
@@ -22,7 +22,7 @@ POST {{gateway}}/user/login
 Content-Type: application/json
 
 {
-  "phone": "13542748103",
+  "phone": "13542748100",
   "password": "1346798520"
 }
 
@@ -136,7 +136,7 @@ GET {{gateway}}/doctor/schedule/detail?workDate=2026-03-26
 Authorization: Bearer {{token}}
 
 ### 3.2 查询某日所有排班号源 (Redis 缓存架构，填入下方 scheduleId)
-GET {{gateway}}/doctor/schedule/detail?workDate=2026-04-09
+GET {{gateway}}/doctor/schedule/detail?workDate=2026-04-02
 Authorization: Bearer {{token}}
 
 ### 3.3 查看某个具体排班的实时库存和详情

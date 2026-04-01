@@ -94,13 +94,13 @@ public class McpToolService {
             log.info("[MCP 工具] 开始调用 Feign 接口 getScheduleDetailById({})", scheduleId);
             DoctorFeignClient.ScheduleDTO schedule = doctorFeignClient.getScheduleDetailById(scheduleId);
             log.info("[MCP 工具] Feign 调用返回：{}", schedule != null ? 
-                    String.format("医生=%s，日期=%s，余号=%d", schedule.getDoctorName(), schedule.getWorkDate(), schedule.getAvailableNum()) : "null");
+                    String.format("医生=%s，日期=%s，余号=%d", schedule.getDocName(), schedule.getWorkDate(), schedule.getAvailableNum()) : "null");
             if (schedule != null) {
                 result.put("success", true);
                 result.put("data", schedule);
                 result.put("message", "获取成功");
                 log.info("[MCP 工具] 查询成功：医生={}, 日期={}, 余号={}", 
-                        schedule.getDoctorName(), schedule.getWorkDate(), schedule.getAvailableNum());
+                        schedule.getDocName(), schedule.getWorkDate(), schedule.getAvailableNum());
             } else {
                 result.put("success", false);
                 result.put("message", "排班不存在");
@@ -119,28 +119,82 @@ public class McpToolService {
      * 工具 4: 创建订单（核心功能）
      */
     public Map<String, Object> createOrder(String userId, String patientId, String scheduleId) {
-        log.info("[MCP 工具] 创建订单 - userId: {}, patientId: {}, scheduleId: {}", 
-                userId, patientId, scheduleId);
+        log.info("[MCP 工具] 创建订单 - userId: {}, patientId: {}, scheduleId: {}", userId, patientId, scheduleId);
         Map<String, Object> result = new HashMap<>();
         
         try {
-            Result<OrderFeignClient.OrderDTO> res = orderFeignClient.createOrder(patientId, scheduleId, userId);
-            if (res != null && res.getCode() == 200) {
-                OrderFeignClient.OrderDTO order = res.getData();
+            String orderResult = orderFeignClient.createOrder(patientId, scheduleId, userId);
+            // 去除可能的引号和空格
+            if (orderResult != null && orderResult.replaceAll("\"", "").trim().equals("SUCCESS")) {
                 result.put("success", true);
-                result.put("data", order);
-                result.put("message", String.format("挂号成功！订单号：%s，金额：%.2f 元", 
-                        order.getOrderNo(), order.getAmount()));
+                result.put("message", "挂号成功！订单已创建");
+                log.info("[MCP 工具] 创建订单成功");
             } else {
                 result.put("success", false);
-                result.put("message", res != null ? res.getMessage() : "创建失败");
+                result.put("message", "创建订单失败");
+                log.warn("[MCP 工具] 创建订单失败：{}", orderResult);
             }
         } catch (Exception e) {
-            log.error("[MCP 工具] 创建订单失败", e);
+            log.error("[MCP 工具] 创建订单失败 - userId: {}, patientId: {}, scheduleId: {}", 
+                    userId, patientId, scheduleId, e);
             result.put("success", false);
             result.put("message", "系统异常：" + e.getMessage());
         }
         
+        return result;
+    }
+
+    /**
+     * 工具 5: 根据医生 ID 和日期查询排班详情
+     */
+    public Map<String, Object> getDoctorSchedule(String doctorId, String workDate) {
+        log.info("[MCP 工具] 查询医生某日排班 - doctorId: {}, workDate: {}", doctorId, workDate);
+        Map<String, Object> result = new HashMap<>();
+
+        try {
+            DoctorFeignClient.ScheduleDTO schedule = doctorFeignClient.getScheduleDetailByDoctorAndDate(doctorId, workDate);
+            if (schedule != null) {
+                result.put("success", true);
+                result.put("data", schedule);
+                result.put("message", "获取成功");
+            } else {
+                result.put("success", false);
+                result.put("message", "该医生在所选日期没有排班");
+            }
+        } catch (Exception e) {
+            log.error("[MCP 工具] 查询医生排班失败", e);
+            result.put("success", false);
+            result.put("message", "系统异常：" + e.getMessage());
+        }
+
+        return result;
+    }
+
+    /**
+     * 工具 6: 按日期查询所有医生的排班详情
+     */
+    public Map<String, Object> getSchedulesByDate(String workDate) {
+        log.info("[MCP 工具] 查询某日所有医生排班 - workDate: {}", workDate);
+        Map<String, Object> result = new HashMap<>();
+
+        try {
+            List<DoctorFeignClient.ScheduleDTO> schedules = doctorFeignClient.getSchedulesByDate(workDate);
+            if (schedules != null && !schedules.isEmpty()) {
+                result.put("success", true);
+                result.put("data", schedules);
+                result.put("message", String.format("找到 %d 条排班记录", schedules.size()));
+                log.info("[MCP 工具] 查询成功：{}条排班", schedules.size());
+            } else {
+                result.put("success", false);
+                result.put("message", "该日期暂无排班信息");
+                log.warn("[MCP 工具] 查询结果：该日期暂无排班");
+            }
+        } catch (Exception e) {
+            log.error("[MCP 工具] 查询日期排班失败 - workDate: {}", workDate, e);
+            result.put("success", false);
+            result.put("message", "系统异常：" + e.getMessage());
+        }
+
         return result;
     }
 }

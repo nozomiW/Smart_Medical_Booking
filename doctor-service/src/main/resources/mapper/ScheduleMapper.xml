@@ -12,6 +12,25 @@
           AND work_date = #{workDate}
     </select>
 
+    <!-- 查询某天某医生的号源详情 -->
+    <select id="findDetailByDocAndDate" resultType="com.cly.doctorservice.dto.ScheduleDetailDTO">
+        SELECT
+            s.id          AS scheduleId,
+            s.work_date   AS workDate,
+            s.available_num AS availableNum,
+            s.status      AS scheduleStatus,
+            d.id          AS docId,
+            d.name        AS docName,
+            d.title       AS docTitle,
+            d.fee         AS docFee,
+            d.dept_id     AS deptId
+        FROM yy_schedule s
+            JOIN yy_doctor d ON d.id = s.doc_id
+        WHERE s.doc_id = #{docId}
+          AND s.work_date = #{workDate}
+        LIMIT 1
+    </select>
+
     <!-- 查询某天某科室下所有医生的号源（联表） -->
     <select id="findByDeptAndDate" resultType="com.cly.doctorservice.entity.Schedule">
         SELECT s.*

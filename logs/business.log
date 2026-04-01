@@ -15748,3 +15748,757 @@ java.lang.RuntimeException: 手机号或密码错误
 2026-04-01T08:54:25.745+08:00  INFO 25960 --- [order-service] [http-nio-9004-exec-3] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
 2026-04-01T08:54:25.745+08:00  INFO 25960 --- [order-service] [http-nio-9004-exec-3] c.c.o.aspect.BusinessLogAspect           : 执行耗时：6ms
 2026-04-01T08:54:25.745+08:00  INFO 25960 --- [order-service] [http-nio-9004-exec-3] c.c.o.aspect.BusinessLogAspect           : 执行状态：成功
+2026-04-01T09:55:24.969+08:00  INFO 28536 --- [doctor-service] [http-nio-9002-exec-1] c.c.d.aspect.BusinessLogAspect           : [业务] 排班查询 - ScheduleServiceImpl.findDetailByDate - 查询排班详情（缓存优化）
+2026-04-01T09:55:25.286+08:00  INFO 28536 --- [doctor-service] [http-nio-9002-exec-1] c.c.d.aspect.BusinessLogAspect           : [业务完成] 耗时：317ms - 状态：成功
+2026-04-01T09:55:28.122+08:00  INFO 28536 --- [doctor-service] [http-nio-9002-exec-2] c.c.d.aspect.BusinessLogAspect           : [业务] 排班查询 - ScheduleServiceImpl.findDetailByDate - 查询排班详情（缓存优化）
+2026-04-01T09:55:29.561+08:00  INFO 10812 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T09:55:29.561+08:00  INFO 10812 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : 时间：2026-04-01 09:55:29.561
+2026-04-01T09:55:29.561+08:00  INFO 10812 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : 接口：GET /order/list
+2026-04-01T09:55:29.561+08:00  INFO 10812 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : 类名：OrderServiceImpl.getOrders
+2026-04-01T09:55:29.561+08:00  INFO 10812 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : 业务描述：查询用户订单列表
+2026-04-01T09:55:29.561+08:00  INFO 10812 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : 业务类型：订单查询
+2026-04-01T09:55:29.562+08:00  INFO 10812 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : 请求参数：["2038898433272295426"]
+2026-04-01T09:55:29.923+08:00  INFO 10812 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T09:55:29.923+08:00  INFO 10812 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : 执行耗时：361ms
+2026-04-01T09:55:29.923+08:00  INFO 10812 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : 执行状态：成功
+2026-04-01T09:55:30.110+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T09:55:30.110+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 时间：2026-04-01 09:55:30.110
+2026-04-01T09:55:30.110+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 接口：GET /user/patient/list
+2026-04-01T09:55:30.110+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 类名：PatientServiceImpl.getPatients
+2026-04-01T09:55:30.110+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 业务描述：查询就诊人列表
+2026-04-01T09:55:30.110+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 业务类型：就诊人管理
+2026-04-01T09:55:30.114+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 请求参数：["2038898433272295426"]
+2026-04-01T09:55:30.587+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T09:55:30.587+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 执行耗时：471ms
+2026-04-01T09:55:30.587+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 执行状态：成功
+2026-04-01T09:55:30.655+08:00  INFO 10812 --- [order-service] [http-nio-9004-exec-2] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T09:55:30.655+08:00  INFO 10812 --- [order-service] [http-nio-9004-exec-2] c.c.o.aspect.BusinessLogAspect           : 时间：2026-04-01 09:55:30.655
+2026-04-01T09:55:30.655+08:00  INFO 10812 --- [order-service] [http-nio-9004-exec-2] c.c.o.aspect.BusinessLogAspect           : 接口：GET /order/list
+2026-04-01T09:55:30.655+08:00  INFO 10812 --- [order-service] [http-nio-9004-exec-2] c.c.o.aspect.BusinessLogAspect           : 类名：OrderServiceImpl.getOrders
+2026-04-01T09:55:30.655+08:00  INFO 10812 --- [order-service] [http-nio-9004-exec-2] c.c.o.aspect.BusinessLogAspect           : 业务描述：查询用户订单列表
+2026-04-01T09:55:30.655+08:00  INFO 10812 --- [order-service] [http-nio-9004-exec-2] c.c.o.aspect.BusinessLogAspect           : 业务类型：订单查询
+2026-04-01T09:55:30.655+08:00  INFO 10812 --- [order-service] [http-nio-9004-exec-2] c.c.o.aspect.BusinessLogAspect           : 请求参数：["2038898433272295426"]
+2026-04-01T09:55:30.661+08:00  INFO 10812 --- [order-service] [http-nio-9004-exec-2] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T09:55:30.661+08:00  INFO 10812 --- [order-service] [http-nio-9004-exec-2] c.c.o.aspect.BusinessLogAspect           : 执行耗时：6ms
+2026-04-01T09:55:30.661+08:00  INFO 10812 --- [order-service] [http-nio-9004-exec-2] c.c.o.aspect.BusinessLogAspect           : 执行状态：成功
+2026-04-01T09:55:32.643+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-2] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T09:55:32.643+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-2] c.c.u.aspect.BusinessLogAspect           : 时间：2026-04-01 09:55:32.643
+2026-04-01T09:55:32.643+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-2] c.c.u.aspect.BusinessLogAspect           : 接口：GET /user/patient/list
+2026-04-01T09:55:32.643+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-2] c.c.u.aspect.BusinessLogAspect           : 类名：PatientServiceImpl.getPatients
+2026-04-01T09:55:32.643+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-2] c.c.u.aspect.BusinessLogAspect           : 业务描述：查询就诊人列表
+2026-04-01T09:55:32.643+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-2] c.c.u.aspect.BusinessLogAspect           : 业务类型：就诊人管理
+2026-04-01T09:55:32.644+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-2] c.c.u.aspect.BusinessLogAspect           : 请求参数：["2038898433272295426"]
+2026-04-01T09:55:32.648+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-2] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T09:55:32.648+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-2] c.c.u.aspect.BusinessLogAspect           : 执行耗时：4ms
+2026-04-01T09:55:32.648+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-2] c.c.u.aspect.BusinessLogAspect           : 执行状态：成功
+2026-04-01T09:55:38.222+08:00  INFO 28536 --- [doctor-service] [http-nio-9002-exec-3] c.c.d.aspect.BusinessLogAspect           : [业务] 医生查询 - DoctorServiceImpl.searchOnline - 查询在线医生列表
+2026-04-01T09:59:03.581+08:00  INFO 28536 --- [doctor-service] [http-nio-9002-exec-9] c.c.d.aspect.BusinessLogAspect           : [业务] 医生查询 - DoctorServiceImpl.searchOnline - 查询在线医生列表
+2026-04-01T09:59:30.377+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-4] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T09:59:30.377+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-4] c.c.u.aspect.BusinessLogAspect           : 时间：2026-04-01 09:59:30.377
+2026-04-01T09:59:30.377+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-4] c.c.u.aspect.BusinessLogAspect           : 接口：GET /user/patient/list
+2026-04-01T09:59:30.377+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-4] c.c.u.aspect.BusinessLogAspect           : 类名：PatientServiceImpl.getPatients
+2026-04-01T09:59:30.377+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-4] c.c.u.aspect.BusinessLogAspect           : 业务描述：查询就诊人列表
+2026-04-01T09:59:30.377+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-4] c.c.u.aspect.BusinessLogAspect           : 业务类型：就诊人管理
+2026-04-01T09:59:30.377+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-4] c.c.u.aspect.BusinessLogAspect           : 请求参数：["2038898433272295426"]
+2026-04-01T09:59:30.380+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-4] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T09:59:30.380+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-4] c.c.u.aspect.BusinessLogAspect           : 执行耗时：2ms
+2026-04-01T09:59:30.380+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-4] c.c.u.aspect.BusinessLogAspect           : 执行状态：成功
+2026-04-01T10:01:17.827+08:00  INFO 10812 --- [order-service] [http-nio-9004-exec-4] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T10:01:17.827+08:00  INFO 10812 --- [order-service] [http-nio-9004-exec-4] c.c.o.aspect.BusinessLogAspect           : 时间：2026-04-01 10:01:17.827
+2026-04-01T10:01:17.827+08:00  INFO 10812 --- [order-service] [http-nio-9004-exec-4] c.c.o.aspect.BusinessLogAspect           : 接口：GET /order/list
+2026-04-01T10:01:17.827+08:00  INFO 10812 --- [order-service] [http-nio-9004-exec-4] c.c.o.aspect.BusinessLogAspect           : 类名：OrderServiceImpl.getOrders
+2026-04-01T10:01:17.827+08:00  INFO 10812 --- [order-service] [http-nio-9004-exec-4] c.c.o.aspect.BusinessLogAspect           : 业务描述：查询用户订单列表
+2026-04-01T10:01:17.827+08:00  INFO 10812 --- [order-service] [http-nio-9004-exec-4] c.c.o.aspect.BusinessLogAspect           : 业务类型：订单查询
+2026-04-01T10:01:17.827+08:00  INFO 10812 --- [order-service] [http-nio-9004-exec-4] c.c.o.aspect.BusinessLogAspect           : 请求参数：["2038898433272295426"]
+2026-04-01T10:01:17.841+08:00  INFO 10812 --- [order-service] [http-nio-9004-exec-4] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T10:01:17.841+08:00  INFO 10812 --- [order-service] [http-nio-9004-exec-4] c.c.o.aspect.BusinessLogAspect           : 执行耗时：14ms
+2026-04-01T10:01:17.841+08:00  INFO 10812 --- [order-service] [http-nio-9004-exec-4] c.c.o.aspect.BusinessLogAspect           : 执行状态：成功
+2026-04-01T10:01:51.367+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-6] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T10:01:51.367+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-6] c.c.u.aspect.BusinessLogAspect           : 时间：2026-04-01 10:01:51.367
+2026-04-01T10:01:51.367+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-6] c.c.u.aspect.BusinessLogAspect           : 接口：GET /user/patient/list
+2026-04-01T10:01:51.367+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-6] c.c.u.aspect.BusinessLogAspect           : 类名：PatientServiceImpl.getPatients
+2026-04-01T10:01:51.367+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-6] c.c.u.aspect.BusinessLogAspect           : 业务描述：查询就诊人列表
+2026-04-01T10:01:51.367+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-6] c.c.u.aspect.BusinessLogAspect           : 业务类型：就诊人管理
+2026-04-01T10:01:51.367+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-6] c.c.u.aspect.BusinessLogAspect           : 请求参数：["2038898433272295426"]
+2026-04-01T10:01:51.371+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-6] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T10:01:51.371+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-6] c.c.u.aspect.BusinessLogAspect           : 执行耗时：4ms
+2026-04-01T10:01:51.371+08:00  INFO 29792 --- [user-service] [http-nio-9003-exec-6] c.c.u.aspect.BusinessLogAspect           : 执行状态：成功
+2026-04-01T10:33:21.272+08:00  INFO 33068 --- [doctor-service] [http-nio-9002-exec-1] c.c.d.aspect.BusinessLogAspect           : [业务] 医生查询 - DoctorServiceImpl.searchOnline - 查询在线医生列表
+2026-04-01T10:33:21.579+08:00  INFO 33068 --- [doctor-service] [http-nio-9002-exec-1] c.c.d.aspect.BusinessLogAspect           : [业务完成] 耗时：307ms - 状态：成功
+2026-04-01T10:33:49.855+08:00  INFO 30896 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T10:33:49.855+08:00  INFO 30896 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 时间：2026-04-01 10:33:49.855
+2026-04-01T10:33:49.855+08:00  INFO 30896 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 接口：GET /user/patient/list
+2026-04-01T10:33:49.855+08:00  INFO 30896 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 类名：PatientServiceImpl.getPatients
+2026-04-01T10:33:49.855+08:00  INFO 30896 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 业务描述：查询就诊人列表
+2026-04-01T10:33:49.855+08:00  INFO 30896 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 业务类型：就诊人管理
+2026-04-01T10:33:49.858+08:00  INFO 30896 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 请求参数：["2038898433272295426"]
+2026-04-01T10:33:50.259+08:00  INFO 30896 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T10:33:50.260+08:00  INFO 30896 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 执行耗时：401ms
+2026-04-01T10:33:50.260+08:00  INFO 30896 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 执行状态：成功
+2026-04-01T10:39:40.241+08:00  INFO 33068 --- [doctor-service] [http-nio-9002-exec-6] c.c.d.aspect.BusinessLogAspect           : [业务] 医生查询 - DoctorServiceImpl.searchOnline - 查询在线医生列表
+2026-04-01T10:44:51.467+08:00  INFO 30356 --- [doctor-service] [http-nio-9002-exec-1] c.c.d.aspect.BusinessLogAspect           : [业务] 医生查询 - DoctorServiceImpl.searchOnline - 查询在线医生列表
+2026-04-01T10:44:51.837+08:00  INFO 30356 --- [doctor-service] [http-nio-9002-exec-1] c.c.d.aspect.BusinessLogAspect           : [业务完成] 耗时：368ms - 状态：成功
+2026-04-01T10:51:21.146+08:00  INFO 30356 --- [doctor-service] [http-nio-9002-exec-3] c.c.d.aspect.BusinessLogAspect           : [业务] 医生查询 - DoctorServiceImpl.searchOnline - 查询在线医生列表
+2026-04-01T11:02:25.083+08:00  INFO 30356 --- [doctor-service] [http-nio-9002-exec-7] c.c.d.aspect.BusinessLogAspect           : [业务] 医生查询 - DoctorServiceImpl.searchOnline - 查询在线医生列表
+2026-04-01T11:10:03.128+08:00  INFO 28016 --- [doctor-service] [http-nio-9002-exec-2] c.c.d.aspect.BusinessLogAspect           : [业务] 医生查询 - DoctorServiceImpl.searchOnline - 查询在线医生列表
+2026-04-01T11:10:03.456+08:00  INFO 28016 --- [doctor-service] [http-nio-9002-exec-2] c.c.d.aspect.BusinessLogAspect           : [业务完成] 耗时：328ms - 状态：成功
+2026-04-01T11:21:18.231+08:00  INFO 28016 --- [doctor-service] [http-nio-9002-exec-7] c.c.d.aspect.BusinessLogAspect           : [业务] 医生查询 - DoctorServiceImpl.searchOnline - 查询在线医生列表
+2026-04-01T11:37:21.068+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T11:37:21.068+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 时间：2026-04-01 11:37:21.068
+2026-04-01T11:37:21.068+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 接口：POST /user/register
+2026-04-01T11:37:21.068+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 类名：UserServiceImpl.register
+2026-04-01T11:37:21.068+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 业务描述：用户注册
+2026-04-01T11:37:21.068+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 业务类型：用户认证
+2026-04-01T11:37:21.072+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 请求参数：["13542748103","123456"]
+2026-04-01T11:37:21.638+08:00 ERROR 27256 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 业务执行异常：手机号已注册
+
+java.lang.RuntimeException: 手机号已注册
+	at com.cly.userservice.service.impl.UserServiceImpl.register(UserServiceImpl.java:40) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:82) ~[spring-aop-7.0.5.jar:7.0.5]
+	at com.cly.userservice.aspect.BusinessLogAspect.around(BusinessLogAspect.java:75) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:648) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:630) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:70) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:168) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:96) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719) ~[spring-aop-7.0.5.jar:7.0.5]
+	at com.cly.userservice.service.impl.UserServiceImpl$$SpringCGLIB$$0.register(<generated>) ~[classes/:na]
+	at com.cly.userservice.controller.UserController.register(UserController.java:31) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:903) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:649) ~[tomcat-embed-core-11.0.18.jar:6.1]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.18.jar:6.1]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1779) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2026-04-01T11:37:21.641+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T11:37:21.641+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 执行耗时：569ms
+2026-04-01T11:37:21.641+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 执行状态：失败
+2026-04-01T11:37:22.546+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-2] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T11:37:22.546+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-2] c.c.u.aspect.BusinessLogAspect           : 时间：2026-04-01 11:37:22.546
+2026-04-01T11:37:22.546+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-2] c.c.u.aspect.BusinessLogAspect           : 接口：POST /user/login
+2026-04-01T11:37:22.546+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-2] c.c.u.aspect.BusinessLogAspect           : 类名：UserServiceImpl.login
+2026-04-01T11:37:22.546+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-2] c.c.u.aspect.BusinessLogAspect           : 业务描述：用户登录
+2026-04-01T11:37:22.546+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-2] c.c.u.aspect.BusinessLogAspect           : 业务类型：用户认证
+2026-04-01T11:37:22.546+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-2] c.c.u.aspect.BusinessLogAspect           : 请求参数：["13542748103","1346798520"]
+2026-04-01T11:37:22.556+08:00 ERROR 27256 --- [user-service] [http-nio-9003-exec-2] c.c.u.aspect.BusinessLogAspect           : 业务执行异常：手机号或密码错误
+
+java.lang.RuntimeException: 手机号或密码错误
+	at com.cly.userservice.service.impl.UserServiceImpl.login(UserServiceImpl.java:29) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:82) ~[spring-aop-7.0.5.jar:7.0.5]
+	at com.cly.userservice.aspect.BusinessLogAspect.around(BusinessLogAspect.java:75) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:648) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:630) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:70) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:168) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:96) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719) ~[spring-aop-7.0.5.jar:7.0.5]
+	at com.cly.userservice.service.impl.UserServiceImpl$$SpringCGLIB$$0.login(<generated>) ~[classes/:na]
+	at com.cly.userservice.controller.UserController.login(UserController.java:37) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:903) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:649) ~[tomcat-embed-core-11.0.18.jar:6.1]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.18.jar:6.1]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1779) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2026-04-01T11:37:22.558+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-2] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T11:37:22.558+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-2] c.c.u.aspect.BusinessLogAspect           : 执行耗时：12ms
+2026-04-01T11:37:22.558+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-2] c.c.u.aspect.BusinessLogAspect           : 执行状态：失败
+2026-04-01T11:37:27.480+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-3] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T11:37:27.480+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-3] c.c.u.aspect.BusinessLogAspect           : 时间：2026-04-01 11:37:27.480
+2026-04-01T11:37:27.480+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-3] c.c.u.aspect.BusinessLogAspect           : 接口：POST /user/login
+2026-04-01T11:37:27.480+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-3] c.c.u.aspect.BusinessLogAspect           : 类名：UserServiceImpl.login
+2026-04-01T11:37:27.480+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-3] c.c.u.aspect.BusinessLogAspect           : 业务描述：用户登录
+2026-04-01T11:37:27.480+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-3] c.c.u.aspect.BusinessLogAspect           : 业务类型：用户认证
+2026-04-01T11:37:27.480+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-3] c.c.u.aspect.BusinessLogAspect           : 请求参数：["13542748103","1346798520"]
+2026-04-01T11:37:27.485+08:00 ERROR 27256 --- [user-service] [http-nio-9003-exec-3] c.c.u.aspect.BusinessLogAspect           : 业务执行异常：手机号或密码错误
+
+java.lang.RuntimeException: 手机号或密码错误
+	at com.cly.userservice.service.impl.UserServiceImpl.login(UserServiceImpl.java:29) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:82) ~[spring-aop-7.0.5.jar:7.0.5]
+	at com.cly.userservice.aspect.BusinessLogAspect.around(BusinessLogAspect.java:75) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:648) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:630) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:70) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:168) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:96) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719) ~[spring-aop-7.0.5.jar:7.0.5]
+	at com.cly.userservice.service.impl.UserServiceImpl$$SpringCGLIB$$0.login(<generated>) ~[classes/:na]
+	at com.cly.userservice.controller.UserController.login(UserController.java:37) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:903) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:649) ~[tomcat-embed-core-11.0.18.jar:6.1]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.18.jar:6.1]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1779) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2026-04-01T11:37:27.485+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-3] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T11:37:27.485+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-3] c.c.u.aspect.BusinessLogAspect           : 执行耗时：5ms
+2026-04-01T11:37:27.485+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-3] c.c.u.aspect.BusinessLogAspect           : 执行状态：失败
+2026-04-01T11:37:39.676+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-4] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T11:37:39.676+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-4] c.c.u.aspect.BusinessLogAspect           : 时间：2026-04-01 11:37:39.676
+2026-04-01T11:37:39.676+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-4] c.c.u.aspect.BusinessLogAspect           : 接口：POST /user/register
+2026-04-01T11:37:39.676+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-4] c.c.u.aspect.BusinessLogAspect           : 类名：UserServiceImpl.register
+2026-04-01T11:37:39.676+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-4] c.c.u.aspect.BusinessLogAspect           : 业务描述：用户注册
+2026-04-01T11:37:39.676+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-4] c.c.u.aspect.BusinessLogAspect           : 业务类型：用户认证
+2026-04-01T11:37:39.676+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-4] c.c.u.aspect.BusinessLogAspect           : 请求参数：["13542748103","123456"]
+2026-04-01T11:37:39.681+08:00 ERROR 27256 --- [user-service] [http-nio-9003-exec-4] c.c.u.aspect.BusinessLogAspect           : 业务执行异常：手机号已注册
+
+java.lang.RuntimeException: 手机号已注册
+	at com.cly.userservice.service.impl.UserServiceImpl.register(UserServiceImpl.java:40) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:82) ~[spring-aop-7.0.5.jar:7.0.5]
+	at com.cly.userservice.aspect.BusinessLogAspect.around(BusinessLogAspect.java:75) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:648) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:630) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:70) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:168) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:96) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719) ~[spring-aop-7.0.5.jar:7.0.5]
+	at com.cly.userservice.service.impl.UserServiceImpl$$SpringCGLIB$$0.register(<generated>) ~[classes/:na]
+	at com.cly.userservice.controller.UserController.register(UserController.java:31) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:903) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:649) ~[tomcat-embed-core-11.0.18.jar:6.1]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.18.jar:6.1]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1779) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2026-04-01T11:37:39.681+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-4] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T11:37:39.681+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-4] c.c.u.aspect.BusinessLogAspect           : 执行耗时：5ms
+2026-04-01T11:37:39.681+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-4] c.c.u.aspect.BusinessLogAspect           : 执行状态：失败
+2026-04-01T11:37:49.246+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-5] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T11:37:49.247+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-5] c.c.u.aspect.BusinessLogAspect           : 时间：2026-04-01 11:37:49.246
+2026-04-01T11:37:49.247+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-5] c.c.u.aspect.BusinessLogAspect           : 接口：POST /user/login
+2026-04-01T11:37:49.247+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-5] c.c.u.aspect.BusinessLogAspect           : 类名：UserServiceImpl.login
+2026-04-01T11:37:49.247+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-5] c.c.u.aspect.BusinessLogAspect           : 业务描述：用户登录
+2026-04-01T11:37:49.247+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-5] c.c.u.aspect.BusinessLogAspect           : 业务类型：用户认证
+2026-04-01T11:37:49.247+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-5] c.c.u.aspect.BusinessLogAspect           : 请求参数：["13542748103","123456"]
+2026-04-01T11:37:49.253+08:00 ERROR 27256 --- [user-service] [http-nio-9003-exec-5] c.c.u.aspect.BusinessLogAspect           : 业务执行异常：手机号或密码错误
+
+java.lang.RuntimeException: 手机号或密码错误
+	at com.cly.userservice.service.impl.UserServiceImpl.login(UserServiceImpl.java:29) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:82) ~[spring-aop-7.0.5.jar:7.0.5]
+	at com.cly.userservice.aspect.BusinessLogAspect.around(BusinessLogAspect.java:75) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:648) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:630) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:70) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:168) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:96) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719) ~[spring-aop-7.0.5.jar:7.0.5]
+	at com.cly.userservice.service.impl.UserServiceImpl$$SpringCGLIB$$0.login(<generated>) ~[classes/:na]
+	at com.cly.userservice.controller.UserController.login(UserController.java:37) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:903) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:649) ~[tomcat-embed-core-11.0.18.jar:6.1]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.18.jar:6.1]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1779) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2026-04-01T11:37:49.253+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-5] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T11:37:49.253+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-5] c.c.u.aspect.BusinessLogAspect           : 执行耗时：6ms
+2026-04-01T11:37:49.253+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-5] c.c.u.aspect.BusinessLogAspect           : 执行状态：失败
+2026-04-01T11:38:04.209+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-6] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T11:38:04.209+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-6] c.c.u.aspect.BusinessLogAspect           : 时间：2026-04-01 11:38:04.209
+2026-04-01T11:38:04.209+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-6] c.c.u.aspect.BusinessLogAspect           : 接口：POST /user/register
+2026-04-01T11:38:04.209+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-6] c.c.u.aspect.BusinessLogAspect           : 类名：UserServiceImpl.register
+2026-04-01T11:38:04.209+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-6] c.c.u.aspect.BusinessLogAspect           : 业务描述：用户注册
+2026-04-01T11:38:04.209+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-6] c.c.u.aspect.BusinessLogAspect           : 业务类型：用户认证
+2026-04-01T11:38:04.209+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-6] c.c.u.aspect.BusinessLogAspect           : 请求参数：["13542748103","1346798520"]
+2026-04-01T11:38:04.214+08:00 ERROR 27256 --- [user-service] [http-nio-9003-exec-6] c.c.u.aspect.BusinessLogAspect           : 业务执行异常：手机号已注册
+
+java.lang.RuntimeException: 手机号已注册
+	at com.cly.userservice.service.impl.UserServiceImpl.register(UserServiceImpl.java:40) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:82) ~[spring-aop-7.0.5.jar:7.0.5]
+	at com.cly.userservice.aspect.BusinessLogAspect.around(BusinessLogAspect.java:75) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:648) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:630) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:70) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:168) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:96) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719) ~[spring-aop-7.0.5.jar:7.0.5]
+	at com.cly.userservice.service.impl.UserServiceImpl$$SpringCGLIB$$0.register(<generated>) ~[classes/:na]
+	at com.cly.userservice.controller.UserController.register(UserController.java:31) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:903) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:649) ~[tomcat-embed-core-11.0.18.jar:6.1]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.18.jar:6.1]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1779) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2026-04-01T11:38:04.214+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-6] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T11:38:04.214+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-6] c.c.u.aspect.BusinessLogAspect           : 执行耗时：5ms
+2026-04-01T11:38:04.214+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-6] c.c.u.aspect.BusinessLogAspect           : 执行状态：失败
+2026-04-01T11:38:24.218+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-7] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T11:38:24.218+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-7] c.c.u.aspect.BusinessLogAspect           : 时间：2026-04-01 11:38:24.218
+2026-04-01T11:38:24.218+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-7] c.c.u.aspect.BusinessLogAspect           : 接口：POST /user/register
+2026-04-01T11:38:24.219+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-7] c.c.u.aspect.BusinessLogAspect           : 类名：UserServiceImpl.register
+2026-04-01T11:38:24.219+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-7] c.c.u.aspect.BusinessLogAspect           : 业务描述：用户注册
+2026-04-01T11:38:24.219+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-7] c.c.u.aspect.BusinessLogAspect           : 业务类型：用户认证
+2026-04-01T11:38:24.219+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-7] c.c.u.aspect.BusinessLogAspect           : 请求参数：["13542748100","1346798520"]
+2026-04-01T11:38:24.240+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-7] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T11:38:24.240+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-7] c.c.u.aspect.BusinessLogAspect           : 执行耗时：21ms
+2026-04-01T11:38:24.240+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-7] c.c.u.aspect.BusinessLogAspect           : 执行状态：成功
+2026-04-01T11:38:25.688+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-8] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T11:38:25.688+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-8] c.c.u.aspect.BusinessLogAspect           : 时间：2026-04-01 11:38:25.688
+2026-04-01T11:38:25.688+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-8] c.c.u.aspect.BusinessLogAspect           : 接口：POST /user/login
+2026-04-01T11:38:25.688+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-8] c.c.u.aspect.BusinessLogAspect           : 类名：UserServiceImpl.login
+2026-04-01T11:38:25.688+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-8] c.c.u.aspect.BusinessLogAspect           : 业务描述：用户登录
+2026-04-01T11:38:25.689+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-8] c.c.u.aspect.BusinessLogAspect           : 业务类型：用户认证
+2026-04-01T11:38:25.689+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-8] c.c.u.aspect.BusinessLogAspect           : 请求参数：["13542748100","1346798520"]
+2026-04-01T11:38:25.728+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-8] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T11:38:25.728+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-8] c.c.u.aspect.BusinessLogAspect           : 执行耗时：39ms
+2026-04-01T11:38:25.728+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-8] c.c.u.aspect.BusinessLogAspect           : 执行状态：成功
+2026-04-01T11:38:49.067+08:00  INFO 28016 --- [doctor-service] [http-nio-9002-exec-5] c.c.d.aspect.BusinessLogAspect           : [业务] 排班查询 - ScheduleServiceImpl.findDetailByDate - 查询排班详情（缓存优化）
+2026-04-01T11:44:27.349+08:00  INFO 28016 --- [doctor-service] [http-nio-9002-exec-7] c.c.d.aspect.BusinessLogAspect           : [业务] 医生查询 - DoctorServiceImpl.searchOnline - 查询在线医生列表
+2026-04-01T14:33:01.466+08:00  INFO 28016 --- [doctor-service] [http-nio-9002-exec-5] c.c.d.aspect.BusinessLogAspect           : [业务] 医生查询 - DoctorServiceImpl.searchOnline - 查询在线医生列表
+2026-04-01T14:45:19.934+08:00  INFO 28016 --- [doctor-service] [http-nio-9002-exec-8] c.c.d.aspect.BusinessLogAspect           : [业务] 医生查询 - DoctorServiceImpl.searchOnline - 查询在线医生列表
+2026-04-01T14:46:37.185+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-10] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T14:46:37.185+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-10] c.c.u.aspect.BusinessLogAspect           : 时间：2026-04-01 14:46:37.185
+2026-04-01T14:46:37.185+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-10] c.c.u.aspect.BusinessLogAspect           : 接口：GET /user/patient/list
+2026-04-01T14:46:37.185+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-10] c.c.u.aspect.BusinessLogAspect           : 类名：PatientServiceImpl.getPatients
+2026-04-01T14:46:37.185+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-10] c.c.u.aspect.BusinessLogAspect           : 业务描述：查询就诊人列表
+2026-04-01T14:46:37.185+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-10] c.c.u.aspect.BusinessLogAspect           : 业务类型：就诊人管理
+2026-04-01T14:46:37.185+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-10] c.c.u.aspect.BusinessLogAspect           : 请求参数：["2038898433272295426"]
+2026-04-01T14:46:37.722+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-10] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T14:46:37.722+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-10] c.c.u.aspect.BusinessLogAspect           : 执行耗时：537ms
+2026-04-01T14:46:37.722+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-10] c.c.u.aspect.BusinessLogAspect           : 执行状态：成功
+2026-04-01T14:47:05.128+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T14:47:05.129+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : 时间：2026-04-01 14:47:05.128
+2026-04-01T14:47:05.129+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : 接口：POST /order/create
+2026-04-01T14:47:05.129+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : 类名：OrderServiceImpl.createOrder
+2026-04-01T14:47:05.129+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : 业务描述：创建订单（MQ 异步）
+2026-04-01T14:47:05.129+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : 业务类型：订单管理
+2026-04-01T14:47:05.129+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : 请求参数：["2038898433272295426","2038898583751340033","177508800002002"]
+2026-04-01T14:47:05.344+08:00  INFO 28016 --- [doctor-service] [http-nio-9002-exec-2] c.c.d.aspect.BusinessLogAspect           : [业务] 挂号下单 - ScheduleServiceImpl.deductAvailableNum - 扣减号源库存
+2026-04-01T14:47:05.449+08:00  INFO 28016 --- [doctor-service] [http-nio-9002-exec-2] c.c.d.aspect.BusinessLogAspect           : [业务完成] 耗时：105ms - 状态：成功
+2026-04-01T14:47:05.536+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T14:47:05.536+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 时间：2026-04-01 14:47:05.536
+2026-04-01T14:47:05.536+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 接口：GET /user/patient/list
+2026-04-01T14:47:05.536+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 类名：PatientServiceImpl.getPatients
+2026-04-01T14:47:05.536+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 业务描述：查询就诊人列表
+2026-04-01T14:47:05.536+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 业务类型：就诊人管理
+2026-04-01T14:47:05.536+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 请求参数：["2038898433272295426"]
+2026-04-01T14:47:05.557+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T14:47:05.557+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 执行耗时：21ms
+2026-04-01T14:47:05.557+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 执行状态：成功
+2026-04-01T14:47:05.974+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T14:47:05.974+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : 执行耗时：845ms
+2026-04-01T14:47:05.974+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : 执行状态：成功
+2026-04-01T14:47:50.617+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-2] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T14:47:50.617+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-2] c.c.o.aspect.BusinessLogAspect           : 时间：2026-04-01 14:47:50.617
+2026-04-01T14:47:50.617+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-2] c.c.o.aspect.BusinessLogAspect           : 接口：GET /order/list
+2026-04-01T14:47:50.617+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-2] c.c.o.aspect.BusinessLogAspect           : 类名：OrderServiceImpl.getOrders
+2026-04-01T14:47:50.617+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-2] c.c.o.aspect.BusinessLogAspect           : 业务描述：查询用户订单列表
+2026-04-01T14:47:50.617+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-2] c.c.o.aspect.BusinessLogAspect           : 业务类型：订单查询
+2026-04-01T14:47:50.617+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-2] c.c.o.aspect.BusinessLogAspect           : 请求参数：["2038898433272295426"]
+2026-04-01T14:47:50.819+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-2] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T14:47:50.819+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-2] c.c.o.aspect.BusinessLogAspect           : 执行耗时：202ms
+2026-04-01T14:47:50.819+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-2] c.c.o.aspect.BusinessLogAspect           : 执行状态：成功
+2026-04-01T14:56:01.192+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-5] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T14:56:01.192+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-5] c.c.o.aspect.BusinessLogAspect           : 时间：2026-04-01 14:56:01.192
+2026-04-01T14:56:01.192+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-5] c.c.o.aspect.BusinessLogAspect           : 接口：GET /order/list
+2026-04-01T14:56:01.192+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-5] c.c.o.aspect.BusinessLogAspect           : 类名：OrderServiceImpl.getOrders
+2026-04-01T14:56:01.192+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-5] c.c.o.aspect.BusinessLogAspect           : 业务描述：查询用户订单列表
+2026-04-01T14:56:01.192+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-5] c.c.o.aspect.BusinessLogAspect           : 业务类型：订单查询
+2026-04-01T14:56:01.192+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-5] c.c.o.aspect.BusinessLogAspect           : 请求参数：["2038898433272295426"]
+2026-04-01T14:56:01.210+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-5] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T14:56:01.210+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-5] c.c.o.aspect.BusinessLogAspect           : 执行耗时：18ms
+2026-04-01T14:56:01.210+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-5] c.c.o.aspect.BusinessLogAspect           : 执行状态：成功
+2026-04-01T14:56:01.905+08:00  INFO 28016 --- [doctor-service] [http-nio-9002-exec-5] c.c.d.aspect.BusinessLogAspect           : [业务] 排班查询 - ScheduleServiceImpl.findDetailByDate - 查询排班详情（缓存优化）
+2026-04-01T14:56:03.183+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-6] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T14:56:03.184+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-6] c.c.o.aspect.BusinessLogAspect           : 时间：2026-04-01 14:56:03.184
+2026-04-01T14:56:03.184+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-6] c.c.o.aspect.BusinessLogAspect           : 接口：GET /order/list
+2026-04-01T14:56:03.184+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-6] c.c.o.aspect.BusinessLogAspect           : 类名：OrderServiceImpl.getOrders
+2026-04-01T14:56:03.184+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-6] c.c.o.aspect.BusinessLogAspect           : 业务描述：查询用户订单列表
+2026-04-01T14:56:03.184+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-6] c.c.o.aspect.BusinessLogAspect           : 业务类型：订单查询
+2026-04-01T14:56:03.184+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-6] c.c.o.aspect.BusinessLogAspect           : 请求参数：["2038898433272295426"]
+2026-04-01T14:56:03.190+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-6] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T14:56:03.190+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-6] c.c.o.aspect.BusinessLogAspect           : 执行耗时：6ms
+2026-04-01T14:56:03.190+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-6] c.c.o.aspect.BusinessLogAspect           : 执行状态：成功
+2026-04-01T14:56:03.545+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-4] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T14:56:03.545+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-4] c.c.u.aspect.BusinessLogAspect           : 时间：2026-04-01 14:56:03.545
+2026-04-01T14:56:03.546+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-4] c.c.u.aspect.BusinessLogAspect           : 接口：GET /user/patient/list
+2026-04-01T14:56:03.546+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-4] c.c.u.aspect.BusinessLogAspect           : 类名：PatientServiceImpl.getPatients
+2026-04-01T14:56:03.546+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-4] c.c.u.aspect.BusinessLogAspect           : 业务描述：查询就诊人列表
+2026-04-01T14:56:03.546+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-4] c.c.u.aspect.BusinessLogAspect           : 业务类型：就诊人管理
+2026-04-01T14:56:03.546+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-4] c.c.u.aspect.BusinessLogAspect           : 请求参数：["2038898433272295426"]
+2026-04-01T14:56:03.549+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-4] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T14:56:03.549+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-4] c.c.u.aspect.BusinessLogAspect           : 执行耗时：3ms
+2026-04-01T14:56:03.549+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-4] c.c.u.aspect.BusinessLogAspect           : 执行状态：成功
+2026-04-01T14:56:08.678+08:00  INFO 28016 --- [doctor-service] [http-nio-9002-exec-6] c.c.d.aspect.BusinessLogAspect           : [业务] 医生查询 - DoctorServiceImpl.searchOnline - 查询在线医生列表
+2026-04-01T14:57:12.372+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-6] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T14:57:12.372+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-6] c.c.u.aspect.BusinessLogAspect           : 时间：2026-04-01 14:57:12.372
+2026-04-01T14:57:12.372+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-6] c.c.u.aspect.BusinessLogAspect           : 接口：GET /user/patient/list
+2026-04-01T14:57:12.372+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-6] c.c.u.aspect.BusinessLogAspect           : 类名：PatientServiceImpl.getPatients
+2026-04-01T14:57:12.372+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-6] c.c.u.aspect.BusinessLogAspect           : 业务描述：查询就诊人列表
+2026-04-01T14:57:12.372+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-6] c.c.u.aspect.BusinessLogAspect           : 业务类型：就诊人管理
+2026-04-01T14:57:12.372+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-6] c.c.u.aspect.BusinessLogAspect           : 请求参数：["2038898433272295426"]
+2026-04-01T14:57:12.374+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-6] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T14:57:12.374+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-6] c.c.u.aspect.BusinessLogAspect           : 执行耗时：2ms
+2026-04-01T14:57:12.374+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-6] c.c.u.aspect.BusinessLogAspect           : 执行状态：成功
+2026-04-01T14:57:36.456+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-8] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T14:57:36.456+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-8] c.c.o.aspect.BusinessLogAspect           : 时间：2026-04-01 14:57:36.456
+2026-04-01T14:57:36.456+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-8] c.c.o.aspect.BusinessLogAspect           : 接口：POST /order/create
+2026-04-01T14:57:36.456+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-8] c.c.o.aspect.BusinessLogAspect           : 类名：OrderServiceImpl.createOrder
+2026-04-01T14:57:36.456+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-8] c.c.o.aspect.BusinessLogAspect           : 业务描述：创建订单（MQ 异步）
+2026-04-01T14:57:36.456+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-8] c.c.o.aspect.BusinessLogAspect           : 业务类型：订单管理
+2026-04-01T14:57:36.456+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-8] c.c.o.aspect.BusinessLogAspect           : 请求参数：["2038898433272295426","2038898583751340033","177508800002008"]
+2026-04-01T14:57:36.460+08:00  INFO 28016 --- [doctor-service] [http-nio-9002-exec-8] c.c.d.aspect.BusinessLogAspect           : [业务] 挂号下单 - ScheduleServiceImpl.deductAvailableNum - 扣减号源库存
+2026-04-01T14:57:36.480+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-7] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T14:57:36.480+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-7] c.c.u.aspect.BusinessLogAspect           : 时间：2026-04-01 14:57:36.480
+2026-04-01T14:57:36.480+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-7] c.c.u.aspect.BusinessLogAspect           : 接口：GET /user/patient/list
+2026-04-01T14:57:36.480+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-7] c.c.u.aspect.BusinessLogAspect           : 类名：PatientServiceImpl.getPatients
+2026-04-01T14:57:36.480+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-7] c.c.u.aspect.BusinessLogAspect           : 业务描述：查询就诊人列表
+2026-04-01T14:57:36.480+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-7] c.c.u.aspect.BusinessLogAspect           : 业务类型：就诊人管理
+2026-04-01T14:57:36.480+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-7] c.c.u.aspect.BusinessLogAspect           : 请求参数：["2038898433272295426"]
+2026-04-01T14:57:36.481+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-7] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T14:57:36.481+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-7] c.c.u.aspect.BusinessLogAspect           : 执行耗时：1ms
+2026-04-01T14:57:36.481+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-7] c.c.u.aspect.BusinessLogAspect           : 执行状态：成功
+2026-04-01T14:57:36.499+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-8] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T14:57:36.499+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-8] c.c.o.aspect.BusinessLogAspect           : 执行耗时：43ms
+2026-04-01T14:57:36.499+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-8] c.c.o.aspect.BusinessLogAspect           : 执行状态：成功
+2026-04-01T14:57:54.688+08:00  INFO 28016 --- [doctor-service] [http-nio-9002-exec-2] c.c.d.aspect.BusinessLogAspect           : [业务] 排班查询 - ScheduleServiceImpl.findDetailByDate - 查询排班详情（缓存优化）
+2026-04-01T14:57:55.737+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-9] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T14:57:55.737+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-9] c.c.o.aspect.BusinessLogAspect           : 时间：2026-04-01 14:57:55.737
+2026-04-01T14:57:55.737+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-9] c.c.o.aspect.BusinessLogAspect           : 接口：GET /order/list
+2026-04-01T14:57:55.737+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-9] c.c.o.aspect.BusinessLogAspect           : 类名：OrderServiceImpl.getOrders
+2026-04-01T14:57:55.737+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-9] c.c.o.aspect.BusinessLogAspect           : 业务描述：查询用户订单列表
+2026-04-01T14:57:55.737+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-9] c.c.o.aspect.BusinessLogAspect           : 业务类型：订单查询
+2026-04-01T14:57:55.737+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-9] c.c.o.aspect.BusinessLogAspect           : 请求参数：["2038898433272295426"]
+2026-04-01T14:57:55.822+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-9] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T14:57:55.822+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-9] c.c.o.aspect.BusinessLogAspect           : 执行耗时：85ms
+2026-04-01T14:57:55.822+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-9] c.c.o.aspect.BusinessLogAspect           : 执行状态：成功
+2026-04-01T14:57:58.070+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-10] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T14:57:58.070+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-10] c.c.o.aspect.BusinessLogAspect           : 时间：2026-04-01 14:57:58.070
+2026-04-01T14:57:58.070+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-10] c.c.o.aspect.BusinessLogAspect           : 接口：GET /order/list
+2026-04-01T14:57:58.070+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-10] c.c.o.aspect.BusinessLogAspect           : 类名：OrderServiceImpl.getOrders
+2026-04-01T14:57:58.070+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-10] c.c.o.aspect.BusinessLogAspect           : 业务描述：查询用户订单列表
+2026-04-01T14:57:58.070+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-10] c.c.o.aspect.BusinessLogAspect           : 业务类型：订单查询
+2026-04-01T14:57:58.070+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-10] c.c.o.aspect.BusinessLogAspect           : 请求参数：["2038898433272295426"]
+2026-04-01T14:57:58.075+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-10] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T14:57:58.075+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-10] c.c.o.aspect.BusinessLogAspect           : 执行耗时：5ms
+2026-04-01T14:57:58.076+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-10] c.c.o.aspect.BusinessLogAspect           : 执行状态：成功
+2026-04-01T14:57:58.654+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T14:57:58.654+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : 时间：2026-04-01 14:57:58.654
+2026-04-01T14:57:58.655+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : 接口：GET /order/list
+2026-04-01T14:57:58.655+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : 类名：OrderServiceImpl.getOrders
+2026-04-01T14:57:58.655+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : 业务描述：查询用户订单列表
+2026-04-01T14:57:58.655+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : 业务类型：订单查询
+2026-04-01T14:57:58.655+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : 请求参数：["2038898433272295426"]
+2026-04-01T14:57:58.660+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T14:57:58.660+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : 执行耗时：5ms
+2026-04-01T14:57:58.661+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-1] c.c.o.aspect.BusinessLogAspect           : 执行状态：成功
+2026-04-01T14:57:59.146+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-2] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T14:57:59.146+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-2] c.c.o.aspect.BusinessLogAspect           : 时间：2026-04-01 14:57:59.146
+2026-04-01T14:57:59.146+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-2] c.c.o.aspect.BusinessLogAspect           : 接口：GET /order/list
+2026-04-01T14:57:59.146+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-2] c.c.o.aspect.BusinessLogAspect           : 类名：OrderServiceImpl.getOrders
+2026-04-01T14:57:59.146+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-2] c.c.o.aspect.BusinessLogAspect           : 业务描述：查询用户订单列表
+2026-04-01T14:57:59.146+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-2] c.c.o.aspect.BusinessLogAspect           : 业务类型：订单查询
+2026-04-01T14:57:59.146+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-2] c.c.o.aspect.BusinessLogAspect           : 请求参数：["2038898433272295426"]
+2026-04-01T14:57:59.151+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-2] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T14:57:59.151+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-2] c.c.o.aspect.BusinessLogAspect           : 执行耗时：5ms
+2026-04-01T14:57:59.151+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-2] c.c.o.aspect.BusinessLogAspect           : 执行状态：成功
+2026-04-01T14:58:36.055+08:00  INFO 28016 --- [doctor-service] [http-nio-9002-exec-3] c.c.d.aspect.BusinessLogAspect           : [业务] 排班查询 - ScheduleServiceImpl.findDetailByDate - 查询排班详情（缓存优化）
+2026-04-01T14:58:37.255+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-10] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T14:58:37.255+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-10] c.c.u.aspect.BusinessLogAspect           : 时间：2026-04-01 14:58:37.255
+2026-04-01T14:58:37.255+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-10] c.c.u.aspect.BusinessLogAspect           : 接口：GET /user/patient/list
+2026-04-01T14:58:37.255+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-10] c.c.u.aspect.BusinessLogAspect           : 类名：PatientServiceImpl.getPatients
+2026-04-01T14:58:37.255+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-10] c.c.u.aspect.BusinessLogAspect           : 业务描述：查询就诊人列表
+2026-04-01T14:58:37.255+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-10] c.c.u.aspect.BusinessLogAspect           : 业务类型：就诊人管理
+2026-04-01T14:58:37.255+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-10] c.c.u.aspect.BusinessLogAspect           : 请求参数：["2038898433272295426"]
+2026-04-01T14:58:37.259+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-10] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T14:58:37.259+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-10] c.c.u.aspect.BusinessLogAspect           : 执行耗时：4ms
+2026-04-01T14:58:37.259+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-10] c.c.u.aspect.BusinessLogAspect           : 执行状态：成功
+2026-04-01T14:58:38.791+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-4] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T14:58:38.791+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-4] c.c.o.aspect.BusinessLogAspect           : 时间：2026-04-01 14:58:38.791
+2026-04-01T14:58:38.791+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-4] c.c.o.aspect.BusinessLogAspect           : 接口：POST /order/create
+2026-04-01T14:58:38.791+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-4] c.c.o.aspect.BusinessLogAspect           : 类名：OrderServiceImpl.createOrder
+2026-04-01T14:58:38.792+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-4] c.c.o.aspect.BusinessLogAspect           : 业务描述：创建订单（MQ 异步）
+2026-04-01T14:58:38.792+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-4] c.c.o.aspect.BusinessLogAspect           : 业务类型：订单管理
+2026-04-01T14:58:38.792+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-4] c.c.o.aspect.BusinessLogAspect           : 请求参数：["2038898433272295426","2038898583751340033","177500160002008"]
+2026-04-01T14:58:38.795+08:00  INFO 28016 --- [doctor-service] [http-nio-9002-exec-5] c.c.d.aspect.BusinessLogAspect           : [业务] 挂号下单 - ScheduleServiceImpl.deductAvailableNum - 扣减号源库存
+2026-04-01T14:58:38.810+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作开始 ==========
+2026-04-01T14:58:38.810+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 时间：2026-04-01 14:58:38.810
+2026-04-01T14:58:38.810+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 接口：GET /user/patient/list
+2026-04-01T14:58:38.810+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 类名：PatientServiceImpl.getPatients
+2026-04-01T14:58:38.810+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 业务描述：查询就诊人列表
+2026-04-01T14:58:38.810+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 业务类型：就诊人管理
+2026-04-01T14:58:38.810+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 请求参数：["2038898433272295426"]
+2026-04-01T14:58:38.812+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T14:58:38.812+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 执行耗时：2ms
+2026-04-01T14:58:38.812+08:00  INFO 27256 --- [user-service] [http-nio-9003-exec-1] c.c.u.aspect.BusinessLogAspect           : 执行状态：成功
+2026-04-01T14:58:38.838+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-4] c.c.o.aspect.BusinessLogAspect           : ========== 业务操作结束 ==========
+2026-04-01T14:58:38.838+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-4] c.c.o.aspect.BusinessLogAspect           : 执行耗时：46ms
+2026-04-01T14:58:38.838+08:00  INFO 11344 --- [order-service] [http-nio-9004-exec-4] c.c.o.aspect.BusinessLogAspect           : 执行状态：成功
+2026-04-01T14:58:39.519+08:00  INFO 28016 --- [doctor-service] [http-nio-9002-exec-7] c.c.d.aspect.BusinessLogAspect           : [业务] 排班查询 - ScheduleServiceImpl.findDetailByDate - 查询排班详情（缓存优化）

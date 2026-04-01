@@ -256,6 +256,19 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
+    public ScheduleDetailDTO findDetailByDocAndDate(String docId, LocalDate workDate) {
+        ScheduleDetailDTO detail = scheduleMapper.findDetailByDocAndDate(docId, workDate);
+        if (detail != null) {
+            String numKey = "schedule:num:" + detail.getScheduleId();
+            String realNum = stringRedisTemplate.opsForValue().get(numKey);
+            if (realNum != null) {
+                detail.setAvailableNum(Integer.parseInt(realNum));
+            }
+        }
+        return detail;
+    }
+
+    @Override
     public List<ScheduleDetailDTO> findDetailByDateDb(LocalDate workDate) {
         return scheduleMapper.findDetailByDate(workDate);
     }
